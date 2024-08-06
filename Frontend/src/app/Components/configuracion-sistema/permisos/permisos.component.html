@@ -1,0 +1,87 @@
+<!-- Container-fluid starts-->
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body" >
+                    <div class="row">
+                        <h3>Lista de usuarios</h3>
+                        <div class="row">
+                            <p-listbox [options]="PersonalData" [(ngModel)]="selectedUser"
+                                optionLabel="personal" [virtualScroll]="true" [filter]="true"
+                                [virtualScrollItemSize]="50" [metaKeySelection]="false" [showToggleAll]="true"
+                                (onClick)="GetModulo($event)"></p-listbox>
+                        </div>
+                   <!--      <p-tabView styleClass="tabview-custom">
+                            <p-tabPanel>
+                                <ng-template pTemplate="header">
+                                    <i class="pi pi-calendar"></i>
+                                    <span>Usuarios</span>
+                                </ng-template>
+                                <div class="row">
+                                    <p-listbox [options]="PersonalData" [(ngModel)]="selectedUser"
+                                        optionLabel="Personal" [virtualScroll]="true" [filter]="true"
+                                        [virtualScrollItemSize]="50" [metaKeySelection]="false" [showToggleAll]="true"
+                                        (onClick)="GetModulo($event)"></p-listbox>
+                                </div>
+                            </p-tabPanel>
+                           <p-tabPanel header="Header II">
+                                <ng-template pTemplate="header">
+                                    <i class="pi pi-user"></i>
+                                    <span>Roles</span>
+                                </ng-template>
+                                <div class="row">
+                                    <p-listbox [options]="RolData" [(ngModel)]="selectedRol" optionLabel="Titulo"
+                                        [filter]="true" (onClick)="GetModulo($event)">
+                                    </p-listbox>
+                                </div>
+                            </p-tabPanel>  -->
+<!--
+                        </p-tabView> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <p-toolbar>
+                            <div class="p-toolbar-group-start">
+                                <!-- <button pButton icon="pi pi-plus" class="mr-2"></button>
+                                <button pButton icon="pi pi-print" class="mr-2"></button>
+                                <button pButton icon="pi pi-upload"></button> -->
+                                <p-button label="Expandir" severity="warning" (click)="expandAll()" [style]="{'margin':'5px'}"></p-button>
+                                <p-button label="Contraer" severity="danger"  (click)="collapseAll()" [style]="{'margin':'5px'}"></p-button>
+                                <p-button label="Quitar Permisos" severity="danger" *ngIf="cPersCod !== ''"  (click)="DeletePermisos()" [style]="{'margin':'5px'}"></p-button>
+                             <!--    <button pButton severity="warning" label="Expandir" class="mr-2" (click)="expandAll()"></button>
+                                <button pButton severity="secondary" label="Contraer" class="mr-2" (click)="collapseAll()"></button> -->
+                                <!--
+                                <button type="button" class="btn btn-primary" (click)="expandAll()">Expandir</button>
+                            <button type="button" class="btn btn-danger" (click)="collapseAll()">Contraer</button> -->
+                            </div>
+                            <div class="p-toolbar-group-center">
+                                <span class="p-input-icon-left">
+                                    <p-button label="Guardar" ></p-button>
+                                </span>
+                            </div>
+
+                        </p-toolbar>
+                        <div class="mb-3">
+
+                        </div>
+                        <p-tree [value]="MenuData" selectionMode="checkbox" class="w-full md:w-40rem"  [filter]="true"
+                            filterMode="strict" (onNodeCollapse)="true" [(selection)]="selectedMenuData"
+                             (onNodeSelect)="selectedMenuData"
+                            Class="width: 47rem !important;"></p-tree>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 

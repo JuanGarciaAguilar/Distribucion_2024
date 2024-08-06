@@ -1,0 +1,54 @@
+<div class="layout-topbar">
+    <a class="layout-topbar-logo" routerLink="" style="justify-content: space-around;">
+        <!--  <img src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" alt="logo"> -->
+        <img src="assets/layout/images/cajalogo.png" alt="logo">
+        <!--    <span></span> -->
+    </a>
+
+    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button"
+        (click)="layoutService.showProfileSidebar()">
+        <i class="pi-sign-out"></i>
+    </button>
+
+    <div #topbarmenu class="layout-topbar-menu"
+        [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+
+        <div style="margin: 10px" (click)="op.toggle($event)">
+            <i class="pi pi-bell mr-4 p-text-secondary" pBadge style="font-size: 2rem"  ></i>
+        </div>
+
+
+        <p-overlayPanel #op [showCloseIcon]="true">
+            <span> <b>Notificaciones</b> </span>
+            <hr style="border-top: solid #077aed;border-width: 4px 0 0 0;margin: 0.5rem;">
+            <a class="py-2 px-3 flex gap-2 cursor-pointer hover:text-primary" *ngFor="let row of NotificacionData">
+                <div class="flex align-items-center justify-content-center border-1 border-circle border-transparent bg-blue-100 text-500"
+                    style="height: 30px; width: 30px;">
+                    <i class="pi pi-check-circle text-lg text-blue-500"></i>
+                </div>
+                <div>
+                    <h6 class="m-0 font-semibold"> {{row.descripcion}} </h6><span
+                        class="text-sm text-700"> {{row.fecha}}</span>
+                </div>
+                <!-- <div>
+                    <h6 class="m-0 font-semibold"> Order <span>#2254</span> is placed </h6><span
+                        class="text-sm text-700">Total Amount of <span class="font-semibold">$34.50</span></span>
+                </div> -->
+            </a>
+         <!--    <hr style="border-top: solid #077aed;border-width: 4px 0 0 0;margin: 0.5rem;"> -->
+        </p-overlayPanel>
+        <div style="margin: 10px">
+            <span>{{Personal}}</span>
+        </div>
+
+
+        <button class="p-link layout-topbar-button" (click)="CerrarSesion()">
+            <i class="pi pi-sign-out"></i>
+        </button>
+
+    </div>
+</div>

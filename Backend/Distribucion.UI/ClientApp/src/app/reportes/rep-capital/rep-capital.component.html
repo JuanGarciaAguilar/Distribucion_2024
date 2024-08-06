@@ -1,0 +1,194 @@
+<div class="container" id="seleccioncliente">
+  <h3 class="title">Capital</h3>
+  <hr />
+  <a><h4 class="subtitle" (click)="changeShowEfectivo()">Efectivo: {{efectivo | currency: "S/ ":2}}</h4></a>
+  <br />
+
+  <div *ngIf="showEfectivo === true">
+    <h5 class="subtitle">Amortizaciones</h5>
+    <div class="col-md-12 border" style="margin: 1rem auto;padding: 0px;">
+      <kendo-grid [data]="dataTempAmortizacionDeuda">
+
+        <kendo-grid-column field="sectorName" title="Sector" width="100" [headerStyle]="{'font-weight': 'bold'}">
+        </kendo-grid-column>
+
+        <kendo-grid-column title="Monto" width="100" [headerStyle]="{'font-weight': 'bold'}">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            <p>{{dataItem.amortizacion | currency: "S/ ":2}}</p>
+          </ng-template>
+        </kendo-grid-column>
+
+      </kendo-grid>
+    </div>
+
+    <h5 class="subtitle">Gastos</h5>
+    <div class="col-md-12 border" style="margin: 1rem auto;padding: 0px;">
+      <kendo-grid [data]="dataTempGastos">
+
+        <kendo-grid-column title="Fecha" width="100">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            {{dataItem.fechaInicio | date: 'dd-MM-yyyy'}} - {{dataItem.fechaFinal | date: 'dd-MM-yyyy'}}
+          </ng-template>
+          <ng-template kendoGridFooterTemplate>
+            TOTAL
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="gastoTotal" title="Monto" width="100">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            <p>{{dataItem.gastoTotal | currency: "S/ ":2}}</p>
+          </ng-template>
+          <ng-template kendoGridFooterTemplate>
+            {{totalGastos | currency: "S/ ":2}}
+          </ng-template>
+        </kendo-grid-column>
+
+      </kendo-grid>
+    </div>
+  </div>
+
+  <a><h4 class="subtitle" (click)="changeShowCredito()">Créditos: {{credito | currency: "S/ ":2}}</h4></a>
+  <div *ngIf="showCredito === true" class="col-md-12 border" style="margin: 1rem auto;padding: 0px;">
+    <kendo-grid [data]="dataTempAmortizacionDeuda">
+
+      <kendo-grid-column field="sectorName" title="Sector" width="100" [headerStyle]="{'font-weight': 'bold'}">
+      </kendo-grid-column>
+
+      <kendo-grid-column title="Créditos otorgados" width="100" [headerStyle]="{'font-weight': 'bold'}">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <p>{{dataItem.deudaActualizada | currency: "S/ ":2}}</p>
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+
+  </div>
+  <br />
+  <!--<h4 class="subtitle">Efectivo y Créditos</h4>
+
+  <div class="col-md-12 border" style="margin: 1rem auto;padding: 0px;">
+    <kendo-grid [data]="dataTempAmortizacionDeuda">
+
+      <kendo-grid-column field="sectorName" title="Sector" width="100" [headerStyle]="{'font-weight': 'bold'}">
+      </kendo-grid-column>
+
+      <kendo-grid-column title="Efectivo" width="100" [headerStyle]="{'font-weight': 'bold'}">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <p>{{dataItem.amortizacion | currency: "S/ ":2}}</p>
+        </ng-template>
+      </kendo-grid-column>
+
+      <kendo-grid-column title="Créditos otorgados" width="100" [headerStyle]="{'font-weight': 'bold'}">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <p>{{dataItem.deudaActualizada | currency: "S/ ":2}}</p>
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+
+  </div>-->
+
+  <a><h4 class="subtitle" (click)="changeShowProductos()">Productos: {{totalStock | currency: "S/ ":2}}</h4></a>
+
+  <!--<div class="col-md-12 border" style="margin: 1rem auto;">
+    <form class="cuadros-group">
+      <div class="input-group">
+        <input type="date" name="desde" #FInicio class="active" value="{{today | date:'yyyy-MM-dd'}}"/>
+        <label>Desde:</label>
+      </div>
+      <div class="input-group">
+        <input type="date" name="hasta" #FFin  class="active" value="{{today | date:'yyyy-MM-dd'}}"/>
+        <label>Hasta:</label>
+      </div>
+      <button (click)="listaStock(FInicio.value,FFin.value)">Filtrar</button>
+    </form>
+  </div>-->
+  <div *ngIf="showProductos === true">
+    <div class="col-md-12 border" style="margin: 1rem auto;    padding: 0px;">
+
+      <kendo-grid [data]="reporteStockKendo"
+                  [groupable]="{ enabled: false, showFooter: true}"
+                  [group]="groups">
+
+        <kendo-grid-column field="productParentName" title="Categoria" width="100" [headerStyle]="{'font-weight': 'bold'}" [hidden]="true">
+        </kendo-grid-column>
+
+        <kendo-grid-column field="productName" title="Producto" width="100" [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+        </kendo-grid-column>
+
+        <kendo-grid-column field="unidadMedida" title="Unidad Medida" width="100" [headerStyle]="{'font-weight': 'bold'}">
+        </kendo-grid-column>
+
+        <kendo-grid-column field="cantidadActualStock" title="Stock Actual" width="100" [headerStyle]="{'font-weight': 'bold'}">
+        </kendo-grid-column>
+
+        <!--<kendo-grid-column field="costoUnitarioCompra" title="Costo x unidad" width="100" [headerStyle]="{'font-weight': 'bold'}">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            {{dataItem.costoUnitarioCompra | currency: "S/ ":3}}
+          </ng-template>
+        </kendo-grid-column>-->
+        <!--<kendo-grid-column field="costoCompra" title="Subtotal" width="100" [headerStyle]="{'font-weight': 'bold'}">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            {{dataItem.costoCompra | currency: "S/ ":2}}
+          </ng-template>
+        </kendo-grid-column>-->
+        <!--<kendo-grid-column field="costoFleteUnitario" title="Flete x unidad" width="100" [headerStyle]="{'font-weight': 'bold'}">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            {{dataItem.costoFleteUnitario | currency: "S/ ":2}}
+          </ng-template>
+        </kendo-grid-column>-->
+        <!--<kendo-grid-column field="costoFlete" title="Costo Flete" width="100" [headerStyle]="{'font-weight': 'bold'}">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            {{dataItem.costoFlete | currency: "S/ ":2}}
+          </ng-template>
+        </kendo-grid-column>-->
+
+        <kendo-grid-column field="costoUnitarioTotal" title="Costo x unidad Total" width="100" [headerStyle]="{'font-weight': 'bold'}">
+          ld
+          lT
+          <ng-template kendoGridCellTemplate let-dataItem>
+            {{dataItem.costoUnitarioTotal | currency: "S/ ":2}}
+          </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column field="valorTotal" title="Valor Total" width="100" [headerStyle]="{'font-weight': 'bold'}">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            {{dataItem.valorTotal | currency: "S/ ":2}}
+          </ng-template>
+          <ng-template kendoGridGroupFooterTemplate
+                       let-group="group"
+                       let-aggregates>
+            {{aggregates["valorTotal"].sum | currency: "S/ ":2}}
+          </ng-template>
+        </kendo-grid-column>
+      </kendo-grid>
+
+    </div>
+  </div>
+
+  <div class="row" style="text-align:center">
+    <h3>Capital Total: {{dataTempTotalCapital | currency: "S/ ":2}}</h3>
+  </div>
+
+  <hr />
+  <!--
+  <a><h4 class="subtitle" (click)="changeShowProveedores()">Proveedores</h4></a>
+  <div *ngIf="showProveedores === true">
+    <div class="col-md-12 border" style="margin: 1rem auto;padding: 0px;">
+      <kendo-grid [data]="dataTempSaldoDeposito">
+
+        <kendo-grid-column field="proveedorName" title="Proveedor" width="100" [headerStyle]="{'font-weight': 'bold'}">
+        </kendo-grid-column>
+
+        <kendo-grid-column field="saldoDeposito" title="Saldo por Pagar" width="100" [headerStyle]="{'font-weight': 'bold'}">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            <p>{{dataItem.saldoDeposito | currency: "S/ ":2}}<span *ngIf="dataItem.saldoDeposito < 0">  (A favor)</span></p>
+          </ng-template>
+        </kendo-grid-column>
+      </kendo-grid>
+    </div>
+  </div>
+  <hr />
+  <br />
+  <div class="row" style="text-align:center">
+    <h3>Total General: {{totalGeneral | currency: "S/ ":2}}</h3>
+  </div>
+      -->
+</div>

@@ -1,0 +1,50 @@
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\appsettings.json
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.API.deps.json
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.API.runtimeconfig.json
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.API.runtimeconfig.dev.json
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.API.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.API.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Common.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Entidades.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Interfaces.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Repositorio.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Servicios.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Entidades.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Interfaces.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Servicios.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Common.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Repositorio.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.csproj.AssemblyReference.cache
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.GeneratedMSBuildEditorConfig.editorconfig
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.AssemblyInfoInputs.cache
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.AssemblyInfo.cs
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.csproj.CoreCompileInputs.cache
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.csproj.CopyComplete
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.genruntimeconfig.cache
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\appsettings.json
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.API.deps.json
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.API.runtimeconfig.json
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.API.runtimeconfig.dev.json
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.API.dll
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.API.pdb
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Common.dll
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Entidades.dll
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Interfaces.dll
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Repositorio.dll
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Servicios.dll
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Entidades.pdb
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Interfaces.pdb
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Servicios.pdb
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Common.pdb
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\bin\Release\netcoreapp2.0\Distribucion.Repositorio.pdb
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.csproj.AssemblyReference.cache
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.GeneratedMSBuildEditorConfig.editorconfig
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.AssemblyInfoInputs.cache
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.AssemblyInfo.cs
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.csproj.CoreCompileInputs.cache
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\obj\Release\netcoreapp2.0\Distribu.6E0E4911.Up2Date
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.dll
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.pdb
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.API\obj\Release\netcoreapp2.0\Distribucion.API.genruntimeconfig.cache

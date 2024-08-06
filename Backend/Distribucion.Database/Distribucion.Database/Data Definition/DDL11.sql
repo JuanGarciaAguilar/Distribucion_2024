@@ -1,0 +1,2 @@
+﻿ALTER TABLE Usuario ADD Tipo NVARCHAR(20)
+

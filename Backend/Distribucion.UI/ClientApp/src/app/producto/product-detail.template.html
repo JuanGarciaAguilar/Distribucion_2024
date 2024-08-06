@@ -1,0 +1,107 @@
+<!--<div class="showrow" >
+  <kendo-grid [data]="productDetail"
+              [pageSize]="10"
+              [pageable]="true"
+              [scrollable]="'none'">
+    <kendo-grid-column field="productName" title="Product Name" width="500">
+    </kendo-grid-column>
+    <kendo-grid-column field="unidadMedidad" title="Unidad de Medida" width="250">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <p *ngFor="let a of equivalenciaproductoDetail | filter: 'productId' : dataItem.productId ">{{ a.unidadBase }}</p>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="" width="200">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <button (click)="enviarEditarProducto(dataItem.productId,dataItem.productName);">Editar</button>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="" width="200">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <button data-toggle="modal" (click)="envioID(dataItem.productId,false);openMod('modal-el-productos') ">Eliminar</button>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+  </div>
+
+
+  <div class="modal modal-eliminar-productos" id="modal-el-productos">
+    <div class="cd-popup-container">
+      <p>Eliminar producto</p>
+      <form class="flex">
+        <div style="width: 100%;margin-bottom: 2rem;">
+          <input type="hidden" #idProducto value="{{idProduc}}" placeholder="Id producto" />
+          <input type="hidden" #padre value="{{pPadre}}" />
+          <h4>Seguro que desea eliminar este producto?</h4>
+        </div>
+      </form>
+      <ul class="cd-buttons">
+        <li><a (click)="Eliminar(idProducto.value,padre.value); closeMod('modal-el-productos')">Aceptar</a></li>
+        <li><a (click)="closeMod('modal-el-productos')">Cancelar</a></li>
+      </ul>
+      <a (click)="closeMod('modal-el-productos')" class="cd-popup-close img-replace">Close</a>
+    </div>
+  </div>
+
+  <div class="modal modal-editar-productos" id="modal-ed-productos">
+    <div class="cd-popup-container">
+      <input type="hidden" class="form-control col-12" #id value="{{idEProd}}" />
+      <p>Editar producto</p>
+      <div style="width: 100%;margin-bottom: 2rem;">
+        <div class="input-group">
+          <input type="text" onblur="checkInput(this)" class="form-control col-12" #nombre value="{{nombEProd}}" />
+          <label style="color:black">
+            Nombre
+          </label>
+        </div>
+      </div>
+      <div class="col-md-12 border reg-compras-det" style="padding:0px;margin:1rem 0px">
+        <table border="0" cellpadding="0" cellspacing="0" class="tbl-content">
+          <thead style="text-align:center">
+            <tr>
+              <th style="width: auto;border-style: none;">Unidad Medida</th>
+              <th style="width: auto;border-style: none;">Cantidad de Unidades</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of equivalenciaproductotabla; let i = index; " style="text-align: center;">
+              <td [hidden]="true">{{o.equivalenciaId}}</td>
+              <td>{{o.unidadBase}}</td>
+              <td>{{o.cantidadObjetos}}</td>
+              <td><a (click)="eliminarProducto(o.equivalenciaId);"><i class="icon-delete"></i></a></td>
+            </tr>
+          </tbody>
+          <tfoot style="text-align:center">
+            <tr>
+              <td>
+                <select class="form-control col-12" style="width:100%;border: solid 1px lightgray;" [(ngModel)]="uMedida" name="uMedida" onblur="checkInput(this)" required>
+                  <option value="Bolsa">Bolsa</option>
+                  <option value="Caja">Caja</option>
+                  <option value="Paquete">Paquete</option>
+                  <option value="Saco">Saco</option>
+                  <option value="Jaba">Jaba</option>
+                  <option value="Unidad">Unidad</option>
+                </select>
+              </td>
+              <td>
+                <input type="text" style="border: solid 1px lightgray;" class="form-control col-12" [(ngModel)]="cantObj" name="cantObj" onblur="checkInput(this)">
+              </td>
+              <td>
+                <button style="margin:5px 0 5px 0" class="btn btn-warning" (click)="addToDetallesArray();">+</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+        <div class="alert alert-{{level}} alert-dismissible fade show" *ngIf="visible" role="alert">
+          {{content}}
+          <button type="button" (click)="ocultarMensaje()" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      <ul class="cd-buttons">
+        <li><a (click)="editarProducto(id.value,nombre.value);closeMod('modal-ed-productos')">Aceptar</a></li>
+        <li><a (click)="cancelar();closeMod('modal-ed-productos')">Cancelar</a></li>
+      </ul>
+      <a (click)="closeMod('modal-ed-productos')" class="cd-popup-close img-replace">Close</a>
+    </div>
+  </div>-->

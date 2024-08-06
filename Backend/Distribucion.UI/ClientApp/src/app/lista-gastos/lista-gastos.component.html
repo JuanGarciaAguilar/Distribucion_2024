@@ -1,0 +1,180 @@
+<!--<div class="emp-form">
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a routerLink="/menu/gastos">Gastos</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Historial de Gastos Registrados</li>
+  </ol>
+</nav>
+
+<h5 class="p-3 mb-2 bg-primary text-white">Modificar / Eliminar registro de gastos</h5>
+<br />
+<!--</div>-->
+<div class="container" id="seleccioncliente">
+  <h3 class="title">Historial de Gastos Registrados</h3>
+  <div class="border" style="padding:0px">
+    <kendo-grid [data]="gastosKendo" [pageable]="true" [pageSize]="pageSize" [skip]="skip" (pageChange)="pageChange($event)">
+
+      <kendo-grid-column field="fechaInicio" title="Fecha Inicio" width="65">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          {{dataItem.fechaInicio | date: 'EEE dd-MM-yyyy'}}
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="fechaFinal" title="Fecha Fin" width="100">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          {{dataItem.fechaFinal | date: 'EEE dd-MM-yyyy'}}
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="gastoTotal" title="Monto" width="100"></kendo-grid-column>
+      <kendo-grid-column title="" field="index" width="85">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <button style="margin:5px" class="btn btn-warning" (click)="getGastoTemporal(dataItem.gastoSemanalId, dataItem.fechaInicio, dataItem.fechaFinal, dataItem.gastoTotal, dataItem.gastoSemanalTabla); openMod('modal-gasto-editar'); checkInput(newInsumo); checkInput(newMonto);"><img src="https://cdn4.iconfinder.com/data/icons/markerstyle_icons/PNG/16px/pencil.png" alt="X"></button>
+          <a (click)="guardarId(dataItem.gastoSemanalId); openMod('modal-gasto-eliminar')"><i class="icon-delete" style="font-size:20px"></i></a>
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+
+  </div>
+</div>
+
+<!-- Modal Editar-->
+<div class="modal" id="modal-gasto-editar">
+  <div class="modal-box">
+    <div class="cd-popup-container">
+      <p style="padding: 1em;">Monto Total de Gasto: {{gastoTemporal.gastoTotal | currency: "S/":2 }}</p>
+      <div style="background: white; margin: auto 16px; border-radius: 17px; padding-top: 10px">
+        <div class="input-group">
+          <input type="date" #fInicio name="fInicioModal" (change)="captureNewFechaInicio(fInicio.value); revisarFechaGastos(fInicio.value, fFin.value); revisarFechasEntreSi(fInicio.value, fFin.value); enableBtnEnviar();"
+                 class="form-control active"
+                 [ngModel]="fInicioModal | date:'yyyy-MM-dd'"
+                 [value]="gastoTemporal.fechaInicio | date:'yyyy-MM-dd'">
+          <label>Desde:</label>
+        </div>
+        <div class="input-group">
+          <input type="date" #fFin name="fFinModal" (change)="captureNewFechaFin(fFin.value); revisarFechaGastos(fInicio.value, fFin.value);  revisarFechasEntreSi(fInicio.value, fFin.value); enableBtnEnviar();"
+                 class="form-control active"
+                 [ngModel]="fFinModal | date:'yyyy-MM-dd'"
+                 [value]="gastoTemporal.fechaFinal | date:'yyyy-MM-dd'">
+          <label>Hasta:</label>
+        </div>
+        <div>
+          <div class="alert alert-warning  fade show" *ngIf="!validFechas1 && fInicioModal != null && fFinModal != null" role="alert">
+            La fecha inicial no puede ser mayor a la final o tener valores vacíos.
+          </div>
+          <div class="alert alert-warning  fade show" *ngIf="!validFechas2 && fInicioModal != null && fFinModal != null" role="alert">
+            Las fechas se encuentran en un rango de fechas existente.
+          </div>
+          <div class="alert alert-warning  fade show" *ngIf="rangeDateExceed && fInicioModal != null && fFinModal != null" role="alert">
+            La fecha final no se encuentra en la misma semana que la fecha de inicio.
+          </div>
+        </div>
+      </div>
+      <div style="margin: 25px 10px;background: white;border-radius: 17px;">
+
+        <kendo-grid [data]="gastosDetalleKendo" [pageable]="true" [pageSize]="pageSizeDetalle" [skip]="skipDetalle" (pageChange)="pageChangeDetalle($event)">
+
+          <kendo-grid-column field="insumo" title="Insumo" width="65"></kendo-grid-column>
+          <kendo-grid-column field="gasto" title="Monto" width="100"></kendo-grid-column>
+          <kendo-grid-column field="comentario" title="Comentario" width="100"></kendo-grid-column>
+          <kendo-grid-column title="" field="index" width="85">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <a (click)="deleteDetalleFromTempData(dataItem.gastoSemanalDetalleId)" style="font-weight:bold"><i class="icon-delete" style="font-size:20px"></i></a>
+            </ng-template>
+          </kendo-grid-column>
+        </kendo-grid>
+
+
+        <!--<table border="0" cellpadding="0" cellspacing="0" class="tbl-content" style="vertical-align:middle">
+          <thead>
+            <tr>
+              <th>Insumo</th>
+              <th>Monto</th>
+              <th>Comentario</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let d of gastoTemporal.gastoSemanalTabla" style="text-align:center">
+              <td>{{d.insumo}}</td>
+              <td>{{d.gasto | currency: "S/ ":2}}</td>
+              <td>{{d.comentario}}</td>
+              <td>
+                <a (click)="deleteDetalleFromTempData(d.gastoSemanalDetalleId)" style="font-weight:bold"><i class="icon-delete" style="font-size:20px"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>-->
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <div class="input-group" style="width: 28%">
+          <select [class]="txtClass" class="form-control" (change)="checkDetalle()" [(ngModel)]="newInsumo" aria-placeholder="Seleccione tipo de gasto" onblur="checkInput(this)">
+            <option value="Diesel">Diesel</option>
+            <option value="Ayudante">Ayudante</option>
+            <option value="Casa">Casa</option>
+            <option value="Sunat">Sunat</option>
+            <option value="Otros">Otros</option>
+          </select>
+          <label>Tipo de Gasto</label>
+        </div>
+        <div class="input-group" style="width: 15%">
+          <input [class]="txtClass" style="width: 100%;" type="number" [(ngModel)]="newMonto" #newMon (change)="checkVacio(newMon.value)" (keyup)="checkDetalle()" onblur="checkInput(this)">
+          <label>Monto:</label>
+        </div>
+        <div class="input-group" style="width: 25%">
+          <input [class]="txtClass" style="width: 100%;" type="text" [(ngModel)]="newcomme"  (keyup)="checkDetalle()" onblur="checkInput(this)">
+          <label>Comentario:</label>
+        </div>
+        <div class="input-group" style="width: 10%;    float: right;">
+          <button [disabled]="estadoBoton1" (click)="addDetalleToArrayTemp(); checkInput(newInsumo); checkInput(newMonto);" style="font-weight:bold;margin:0px"><i class="icon-delete" style="font-size:20px"></i></button>
+        </div>
+      </div>
+      <ul class="cd-buttons">
+        <li><a (click)="updateData(); closeMod('modal-gasto-editar')"><button [disabled]="estadoBoton2" >Guardar</button></a></li>
+        <li><a (click)="closeMod('modal-gasto-editar')">Cancelar</a></li>
+      </ul>
+      <a (click)="closeMod('modal-gasto-editar')" class="cd-popup-close img-replace">Close</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Eliminar-->
+<div class="modal" id="modal-gasto-eliminar">
+  <div class="cd-popup-container">
+   
+    <p>¿Desea eliminar el gasto?</p>
+    <ul class="cd-buttons">
+      <li><a (click)="deleteGastoById(); closeMod('modal-gasto-eliminar');">Si</a></li>
+      <li><a (click)="closeMod('modal-gasto-eliminar')">No</a></li>
+    </ul>
+    <a (click)="closeMod('modal-gasto-eliminar')" class="cd-popup-close img-replace">Close</a>
+  </div>
+</div>
+
+<div>
+  <div class="sweet-overlay" tabindex="-1" style="opacity: 0; display: none;">
+  </div>
+  <div class="sweet-alert hideSweetAlert" tabindex="-1" data-has-cancel-button="false" data-allow-ouside-click="false" data-has-done-function="false" style="display: none; margin-top: -176px; opacity: -0.01;">
+    <div class="icon error" style="display: block;">
+      <span class="x-mark"><span class="line left"></span><span class="line right"></span></span>
+    </div>
+    <div class="icon warning" style="display: none;">
+      <span class="body"></span> <span class="dot"></span>
+    </div>
+    <div class="icon info" style="display: none;">
+    </div>
+    <div class="icon success" style="display: none;">
+      <span class="line tip"></span> <span class="line long"></span>
+      <div class="placeholder">
+      </div>
+      <div class="fix"></div>
+    </div>
+    <div class="icon custom" style="display: none;"></div>
+    <h2>Cancelled</h2>
+    <p style="display: block;">Your imaginary file is safe :)</p>
+    <button class="cancel" tabindex="-1" style="display: none; box-shadow: none;">Cancel</button>
+    <button class="confirm" tabindex="-1" style="display: none; box-shadow: none;">OK</button>
+    <button class="btn w-xs btn-info" tabindex="-1" style="display:none;  box-shadow: none;">Cerrar</button>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+
+<div class="container" id="seleccioncliente">
+  <div>
+    <h3>{{nombreSector}} - Deuda Total: {{sumaDeuda | currency: "S/":2}} </h3>
+  </div>
+  <div class="flex">
+    <div class="search">
+      <input class="input100" id="name" [(ngModel)]="searchString" name="searchString" placeholder="Buscar cliente" style="width:95%; padding: 10px; margin-top:8px" type="text" />
+    </div>
+    <button (click)="botonBuscar()">Buscar</button>
+  </div>
+  <div class="border">
+
+    <kendo-grid [data]="tablaClientes | filter : 'clienteName' : searchString" [height]="440">
+
+      <kendo-grid-column field="clienteName" title="Nombre" width="160" [style]="{'text-align':'left'}"></kendo-grid-column>
+      <kendo-grid-column field="deudaActualizada" title="Deuda Acumulada" width="95">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          {{dataItem.deudaActualizada | currency: "S/ ":2}}
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column width="45">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <a class="modal-trigger" data-modal="modal-productos" (click)="pasaDataPago(dataItem.clienteId, dataItem.clienteName, dataItem.deudaActualizada); openMod('modal-Pago');" title="Pagar deuda">
+            <i _ngcontent-c1="" class="icon-venta"></i>
+          </a>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column width="45">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <a routerLink="/menu/lista-productos/{{sect}}/{{dataItem.clienteId}}" (click)="getCliente(dataItem)" title="Registrar venta">
+            <i _ngcontent-c1="" class="icon-canasta"></i>
+          </a>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column width="45">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <a routerLink="/menu/historial-ventas/{{sect}}/{{dataItem.clienteId}}" (click)="getCliente(dataItem)" title="Historial de ventas">
+            <i _ngcontent-c1="" class="icon-historial"></i>
+          </a>
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+
+  </div>
+</div>
+
+
+<div class="modal" id="modal-Pago">
+  <div class="cd-popup-container">
+    
+    <p>Deuda acumulada de <b>{{nombreClientePago}}</b>: <b>{{deudaActualizada | currency: "S/ ":2}}</b></p>
+    <div class="input-group" style="width:30%;padding: 8px; margin-bottom: 3rem;">
+      <input type="hidden" #idCliente value="{{idClientePago}}" />
+      <input type="number" #monto [(ngModel)]="importePago" (keyup)="comprobarImporte(importePago)" onblur="checkInput(this)" />
+      <label style="width: 100%;">Importe S/</label>
+    </div>
+    <ul class="cd-buttons">
+      <li><a><button style="margin:0px; width:100%; height:100%; cursor:pointer;" (click)="actualizaDeuda(idCliente.value,monto.value); closeMod('modal-Pago')" [disabled]="actualizarIsDisabled">Actualizar</button></a></li>
+      <li><a (click)="closeMod('modal-Pago')">No</a></li>
+    </ul>
+    <a (click)="closeMod('modal-Pago')" class="cd-popup-close img-replace">Close</a>
+  </div>
+
+</div>

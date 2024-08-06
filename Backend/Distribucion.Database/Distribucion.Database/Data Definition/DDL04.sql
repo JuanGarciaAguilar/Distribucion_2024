@@ -1,0 +1,1 @@
+﻿ALTER TABLE Usuario ADD [UserState] [BIT] DEFAULT 1 -- 1:activo , 0: inactivo

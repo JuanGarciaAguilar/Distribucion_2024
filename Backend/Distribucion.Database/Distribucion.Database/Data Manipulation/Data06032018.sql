@@ -1,0 +1,17 @@
+﻿INSERT INTO Producto (ProductId,ProductName,UnidadMedidad,ProductParentId,ProductLevel)
+VALUES(2,'Arroz','Bolsa',0,0)
+INSERT into Cliente(ClienteId,ClienteName,ClienteAddress,ClientePhone,SectorId)
+values(2,'Fredy Carranza','Av. America #567','902345875',1)
+update Sector set SectorName = 'ENACE' 
+insert into Sector(SectorId,SectorName) values(2,'Negritos')
+insert into Sector(SectorId,SectorName) values(3,'Talara Baja')
+insert into Sector(SectorId,SectorName) values(4,'Talara Alta')
+
+insert into Producto(ProductId,ProductName,UnidadMedidad,ProductParentId,ProductLevel)
+values(3,'Paisa','Bolsa',2,1)
+insert into Producto(ProductId,ProductName,UnidadMedidad,ProductParentId,ProductLevel)
+values(4,'Costeño','Bolsa',2,1)
+insert into Producto(ProductId,ProductName,UnidadMedidad,ProductParentId,ProductLevel)
+values(5,'Don Vittorio','Bolsa',1,1)
+insert into Producto(ProductId,ProductName,UnidadMedidad,ProductParentId,ProductLevel)
+values(6,'Angel','Bolsa',1,1)

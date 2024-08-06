@@ -1,0 +1,22 @@
+.form-control {
+  width: 100%
+}
+
+.inputedit {
+  text-align: center;
+  font-family: Raleway;
+  font-size: 14px;
+}
+
+.noinputedit {
+  pointer-events: none;
+  background: transparent;
+  border: 0;
+}
+
+.inputeditable {
+  pointer-events: auto;
+  background: white;
+  border: solid 1px lightgray;
+}
+

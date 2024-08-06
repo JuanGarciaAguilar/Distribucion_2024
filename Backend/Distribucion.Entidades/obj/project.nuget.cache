@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "K7PeJVisbKCyNmfQ7CWgxkD7jXZ69TH00lG6Si0ipVq8zSot7rxarY/2dYXB64/T5XK63nrQEkXPujG8XRxmVA==",
+  "success": true,
+  "projectFilePath": "E:\\Proyectos 2024\\Distribucion Backend_ok\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\microsoft.netcore.app\\2.0.0\\microsoft.netcore.app.2.0.0.nupkg.sha512",
+    "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.0.0\\microsoft.netcore.dotnetapphost.2.0.0.nupkg.sha512",
+    "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\microsoft.netcore.dotnethostpolicy\\2.0.0\\microsoft.netcore.dotnethostpolicy.2.0.0.nupkg.sha512",
+    "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\microsoft.netcore.dotnethostresolver\\2.0.0\\microsoft.netcore.dotnethostresolver.2.0.0.nupkg.sha512",
+    "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

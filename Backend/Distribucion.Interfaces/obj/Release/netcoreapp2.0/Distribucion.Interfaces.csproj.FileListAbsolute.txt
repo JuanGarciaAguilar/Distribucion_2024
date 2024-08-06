@@ -1,0 +1,26 @@
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\bin\Release\netcoreapp2.0\Distribucion.Interfaces.deps.json
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\bin\Release\netcoreapp2.0\Distribucion.Interfaces.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\bin\Release\netcoreapp2.0\Distribucion.Interfaces.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\bin\Release\netcoreapp2.0\Distribucion.Entidades.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\bin\Release\netcoreapp2.0\Distribucion.Entidades.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.csproj.AssemblyReference.cache
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.GeneratedMSBuildEditorConfig.editorconfig
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.AssemblyInfoInputs.cache
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.AssemblyInfo.cs
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.csproj.CoreCompileInputs.cache
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.csproj.CopyComplete
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.pdb
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\bin\Release\netcoreapp2.0\Distribucion.Interfaces.deps.json
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\bin\Release\netcoreapp2.0\Distribucion.Interfaces.dll
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\bin\Release\netcoreapp2.0\Distribucion.Interfaces.pdb
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\bin\Release\netcoreapp2.0\Distribucion.Entidades.dll
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\bin\Release\netcoreapp2.0\Distribucion.Entidades.pdb
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.csproj.AssemblyReference.cache
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.GeneratedMSBuildEditorConfig.editorconfig
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.AssemblyInfoInputs.cache
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.AssemblyInfo.cs
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.csproj.CoreCompileInputs.cache
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribu.C021804E.Up2Date
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.dll
+D:\PROYECTOS\DISTRIBUCION\Distribucion Backend_ok\Distribucion.Interfaces\obj\Release\netcoreapp2.0\Distribucion.Interfaces.pdb

@@ -1,0 +1,30 @@
+th, td {
+  border-color: rgba(0,0,0,.08)
+}
+
+thead th {
+  text-align: center;
+}
+
+th {
+  font-weight: bold;
+}
+
+td {
+  text-align:center;
+  border-width: 0 0 1px 1px;
+}
+
+tr:last-child td {
+  border-bottom-width: 1px;
+}
+
+.cuadros-group {
+  margin: 0 auto;
+}
+
+  .cuadros-group button {
+    height: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+  }

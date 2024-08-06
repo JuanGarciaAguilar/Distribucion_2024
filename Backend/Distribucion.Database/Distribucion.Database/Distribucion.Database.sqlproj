@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Distribucion.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{778f6dd5-9c50-40fb-bef9-340093c4db47}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Distribucion.Database</RootNamespace>
+    <AssemblyName>Distribucion.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Stored procedure" />
+    <Folder Include="Data Manipulation" />
+    <Folder Include="Data Definition" />
+    <Folder Include="Type" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Sector.sql" />
+    <None Include="Data Manipulation\InitialData.sql" />
+    <Build Include="Tables\Producto.sql" />
+    <Build Include="Tables\tblCliente.sql" />
+    <None Include="Stored procedure\mobile_GetCliente.sql" />
+    <None Include="Data Definition\DDL02.sql" />
+    <Build Include="Tables\tblOperacion.sql" />
+    <Build Include="Stored procedure\distribucion_Producto_GetAll.sql" />
+    <Build Include="Stored procedure\distribucion_Sector_GetAll.sql" />
+    <Build Include="Tables\Cliente.sql" />
+    <Build Include="Tables\Compra.sql" />
+    <Build Include="Tables\CompraDetalle.sql" />
+    <Build Include="Tables\GastosSemanales.sql" />
+    <Build Include="Tables\Proveedor.sql" />
+    <Build Include="Tables\Stock.sql" />
+    <Build Include="Tables\Venta.sql" />
+    <Build Include="Stored procedure\distribucion_Cliente_GetAll.sql" />
+    <Build Include="Stored procedure\distribucion_GastoSemanal_Insert.sql" />
+    <Build Include="Stored procedure\distribucion_CompraDetalle_GetByCompraId.sql" />
+    <Build Include="Stored procedure\distribucion_GastoSemanalDetalle_GetByGastoId.sql" />
+    <Build Include="Stored procedure\distribucion_Proveedor_GetAll.sql" />
+    <Build Include="Stored procedure\distribucion_Stock_GetAll.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_GetAll.sql" />
+    <Build Include="Tables\GastoSemanalDetalle.sql" />
+    <Build Include="Stored procedure\distribucion_GastoSemanal_GetAll.sql" />
+    <Build Include="Stored procedure\distribucion_Producto_DeleteHijo.sql" />
+    <Build Include="Stored procedure\distribucion_Producto_DeletePadre.sql" />
+    <Build Include="Stored procedure\distribucion_Producto_InsertHijo.sql" />
+    <Build Include="Stored procedure\distribucion_Producto_InsertPadre.sql" />
+    <Build Include="Stored procedure\distribucion_Producto_UpdateHijo.sql" />
+    <Build Include="Stored procedure\distribucion_Producto_UpdatePadre.sql" />
+    <Build Include="Stored procedure\distribucion_Cliente_Delete.sql" />
+    <Build Include="Stored procedure\distribucion_Cliente_Insert.sql" />
+    <Build Include="Stored procedure\distribucion_Cliente_Update.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_Insert.sql" />
+    <Build Include="Tables\Usuario.sql" />
+    <Build Include="Stored procedure\distribucion_Usuario_GetAll.sql" />
+    <Build Include="Stored procedure\distribucion_Usuario_Insert.sql" />
+    <Build Include="Stored procedure\distribucion_Usuario_Update.sql" />
+    <Build Include="Stored procedure\distribucion_Usuario_Delete.sql" />
+    <Build Include="Stored procedure\distribucion_Stock_RefreshStockActual.sql" />
+    <Build Include="Stored procedure\distribucion_Cliente_GetById.sql" />
+    <Build Include="Stored procedure\distribucion_Cliente_GetBySector.sql" />
+    <Build Include="Stored procedure\distribucion_Compra_Delete.sql" />
+    <Build Include="Stored procedure\distribucion_Compra_GetAll.sql" />
+    <Build Include="Stored procedure\distribucion_Compra_Insert.sql" />
+    <Build Include="Stored procedure\distribucion_Compra_Update.sql" />
+    <Build Include="Stored procedure\distribucion_CompraDetalle_DeleteById.sql" />
+    <Build Include="Stored procedure\distribucion_GastoSemanal_Delete.sql" />
+    <Build Include="Stored procedure\distribucion_GastoSemanal_GetById.sql" />
+    <Build Include="Stored procedure\distribucion_GastoSemanal_Update.sql" />
+    <Build Include="Stored procedure\distribucion_Stock_InsertCompra.sql" />
+    <Build Include="Stored procedure\distribucion_Stock_InsertVenta.sql" />
+    <Build Include="Stored procedure\distribucion_Stock_UpdateStockById.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_GetByCliente.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_GetByClienteFecha.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_GetByClienteProducto.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_GetByClienteProductoFecha.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_GetByFecha.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_GetById.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_GetByProducto.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_GetByProductoFecha.sql" />
+    <Build Include="Stored procedure\distribucion_Stock_GetDataById.sql" />
+    <Build Include="Stored procedure\distribucion_Stock_AsignarGasto.sql" />
+    <Build Include="Stored procedure\distribucion_Stock_RefreshAllGastos.sql" />
+    <Build Include="Stored procedure\distribucion_CompraDetalle_GetSaldoAnterior.sql" />
+    <Build Include="Stored procedure\distribucion_Stock_GetTotalCapital.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_GetDeudaActualizada.sql" />
+    <Build Include="Stored procedure\distribucion_Reporte_GetCompraDetalle.sql" />
+    <Build Include="Stored procedure\distribucion_Reporte_GetAmortizacionDeuda.sql" />
+    <Build Include="Tables\Role.sql" />
+    <Build Include="Tables\UserRole.sql" />
+    <Build Include="Stored procedure\Distribucion_Usuario_GetByRole.sql" />
+    <Build Include="Type\CompraDetalleTipo.sql" />
+    <Build Include="Stored procedure\distribucion_Reporte_GananciaByProducto.sql" />
+    <Build Include="Type\GastoSemanalDetalleTipo.sql" />
+    <Build Include="Type\GastoSemanalDetalleType.sql" />
+    <Build Include="Type\ReporteGananciaTipo.sql" />
+    <Build Include="Type\ventaDetalleTipo.sql" />
+    <Build Include="Stored procedure\distribucion_Cliente_ActualizaPago.sql" />
+    <None Include="Data Definition\DDL07.sql" />
+    <None Include="Data Definition\DDL08.sql" />
+    <Build Include="Stored procedure\distribucion_Reporte_GastosSemanales.sql" />
+    <Build Include="Stored procedure\distribucion_Usuario_Login.sql" />
+    <Build Include="Stored procedure\distribucion_Role_Insert.sql" />
+    <Build Include="Stored procedure\distribucion_Role_Update.sql" />
+    <Build Include="Stored procedure\distribucion_Role_Delete.sql" />
+    <Build Include="Stored procedure\distribucion_Role_GetAll.sql" />
+    <Build Include="Stored procedure\distribucion_Role_GetActives.sql" />
+    <None Include="Tables\User.sql" />
+    <Build Include="Type\ReporteVentaTipo.sql" />
+    <Build Include="Stored procedure\distribucion_Reporte_Ventas.sql" />
+    <None Include="Data Manipulation\insertDataProductos.sql" />
+    <Build Include="Stored procedure\distribucion_Cliente_GetDeudaByClient.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_EliminacionVenta.sql" />
+    <Build Include="Stored procedure\distribucion_Stock_Set_Expenses.sql" />
+    <None Include="Stored procedure\mobile_GetReporteDetallado.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_GetDeudaTotalByCliente.sql" />
+    <Build Include="Stored procedure\distribucion_Reporte_SaldoDeposito.sql" />
+    <Build Include="Stored procedure\distribucion_Reporte_Cierre_Diario.sql" />
+    <Build Include="Stored procedure\distribucion_Reporte_Cierre_Diario_Cabecera.sql" />
+    <Build Include="Stored procedure\distribucion_Producto_Padre_GetAll.sql" />
+    <Build Include="Stored procedure\distribucion_rep_venta_sector.sql" />
+    <Build Include="Type\ProductoDetalleTipo.sql" />
+    <Build Include="Stored procedure\distribucion_rep_venta_subrante.sql" />
+    <Build Include="Stored procedure\distribucion_GastoSemanal_GetUntilToday.sql" />
+    <Build Include="Tables\ProductRelevance.sql" />
+    <Build Include="Stored procedure\distribucion_Cliente_TotalBySector.sql" />
+    <Build Include="Stored procedure\distribucion_CompraDetalle_RefreshSaldoAnterior.sql" />
+    <Build Include="Stored procedure\distribucion_Reporte_GetEfectivo.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_RefreshDeudas.sql" />
+    <Build Include="Stored procedure\distribucion_Gasto_TotalPeriodo.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_RefreshDeudas_Last10.sql" />
+    <Build Include="Stored procedure\distribucion_Fix_Manual_CantidadCompra_DetalleCompraId.sql" />
+    <Build Include="Stored procedure\distribucion_Proveedor_Insert.sql" />
+    <Build Include="Stored procedure\distribucion_Proveedor_Update.sql" />
+    <Build Include="Stored procedure\distribucion_Proveedor_Delete.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_Reserva.sql" />
+    <Build Include="Stored procedure\distribucion_Reporte_EstadoFinanciero.sql" />
+    <Build Include="Data Definition\DDL11.sql" />
+    <Build Include="Stored procedure\distribucion_Sector_Insert.sql" />
+    <Build Include="Stored procedure\distribucion_Sector_Update.sql" />
+    <Build Include="Stored procedure\distribucion_Sector_Delete.sql" />
+    <Build Include="Stored procedure\distribucion_UnidadMedida_GetAll.sql" />
+    <Build Include="Stored procedure\distribucion_UnidadMedida_Insert.sql" />
+    <Build Include="Stored procedure\distribucion_UnidadMedida_Update.sql" />
+    <Build Include="Data Definition\DDL12.sql" />
+    <Build Include="Type\ventasDetalleTipo.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_Update.sql" />
+    <Build Include="Stored procedure\distribucion_Venta_GetDeudaByCliente.sql" />
+    <Build Include="Stored procedure\distribucion_CompraDetalle_Update.sql" />
+    <Build Include="Stored procedure\distribucion_CompraDetalle_Insert.sql" />
+    <Build Include="Stored procedure\distribucion_Reporte_GetEfectivo_All.sql" />
+    <Build Include="Stored procedure\distribucion_Reporte_Pagos.sql" />
+    <Build Include="Stored procedure\distribucion_Stock_GetAll-Fechas.sql" />
+    <Build Include="Stored procedure\distribucion_Reserva_GetAll_1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data Definition\DDL01.sql" />
+    <None Include="Data Manipulation\Data05032018.sql" />
+    <None Include="Data Manipulation\Data06032018.sql" />
+    <None Include="Data Definition\DDL03.sql" />
+    <None Include="Data Definition\DDL04.sql" />
+    <None Include="Data Manipulation\Data21032018.sql" />
+    <None Include="Data Manipulation\Data31032018.sql" />
+    <None Include="Data Definition\DDL05.sql" />
+    <None Include="Data Definition\DDL06.sql" />
+    <None Include="Stored procedure\distribucion_User_Insert.sql" />
+    <None Include="Stored procedure\distribucion_User_Update.sql" />
+    <None Include="Stored procedure\distribucion_User_Delete.sql" />
+    <Build Include="Stored procedure\distribucion_User_GetAll.sql" />
+    <Build Include="Stored procedure\distribucion_User_PasswordChange.sql" />
+    <None Include="Stored procedure\distribucion_UserRole_Update.sql" />
+    <None Include="Stored procedure\distribucion_UserRole_Insert.sql" />
+    <None Include="Stored procedure\distribucion_UserRole_Delete.sql" />
+    <None Include="Stored procedure\distribucion_UserRole_GetAll.sql" />
+    <None Include="Stored procedure\distribucion_UserRole_GetByRole.sql" />
+    <Build Include="Stored procedure\distribucion_Role_ChangeActiveState.sql" />
+    <None Include="Stored procedure\distribucion_User_Login.sql" />
+    <None Include="Stored procedure\distribucion_UserRole_DeleteRole.sql" />
+    <None Include="Stored procedure\distribucion_UserRole_DeleteUser.sql" />
+    <None Include="Stored procedure\distribucion_User_GetActive.sql" />
+    <Build Include="Stored procedure\distribucion_User_ChangeActiveState.sql" />
+    <None Include="Data Manipulation\Data15052018-InsertNONProduct.sql" />
+    <None Include="Data Definition\DDL09.sql" />
+    <None Include="Data Definition\DDL10.sql" />
+    <Build Include="Stored procedure\Distribucion_ObtenerEquivalencia.sql" />
+    <Build Include="Tables\Equivalencia.sql" />
+    <Build Include="Type\EquivalenciaDetalleTipo.sql" />
+    <Build Include="Stored procedure\Distribucion_ValidarCliente.sql" />
+    <Build Include="Stored procedure\distribucion_Compra_Confirmar.sql" />
+    <Build Include="Stored procedure\distribucion_Compra_Producto_Delete.sql" />
+    <Build Include="Stored procedure\Distribucion_ValidarProducto.sql" />
+    <Build Include="Stored procedure\Distribucion_ValidarUsuario.sql" />
+    <Build Include="Stored procedure\distribucion_Equivalencia_Delete.sql" />
+    <Build Include="Stored procedure\distribucion_ValidarCategoria.sql" />
+    <None Include="Data Manipulation\Delete_All_Transactions.sql" />
+    <None Include="Data Definition\DDL13.sql" />
+    <None Include="Data Definition\DDL14.sql" />
+    <None Include="Data Definition\DDL15.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Distribucion.Database.refactorlog" />
+  </ItemGroup>
+</Project>

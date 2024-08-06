@@ -1,0 +1,25 @@
+.modal-el {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgb(0,0,0);
+  background: rgba(0,0,0,.8);
+  overflow: auto;
+}
+.modal-el,
+.modal-box {
+  z-index: 900;
+}
+
+.close-modal-el {
+  text-align: right;
+  cursor: pointer;
+  color: black;
+  float: right;
+}
+.button-tree-view{
+  margin:5px;
+}

@@ -1,0 +1,90 @@
+<div class="container">
+  <h3 class="title">Reporte de Gastos</h3>
+  <br />
+  <div class="col-md-12 border" style="margin:0 auto">
+    <form class="cuadros-group" [formGroup]="frm" style="padding-left:1%; padding-right:1%">
+      <div class="input-group">
+        <input class="form-control active" formControlName="fInicio" type="date" [(ngModel)]="repGastosFechaInicio" required />
+        <label>Desde:</label>
+      </div>
+      <div class="input-group">
+        <input class="form-control active" formControlName="fFin" type="date" [(ngModel)]="repGastosFechaFin" required />
+        <label>Hasta:</label>
+      </div>
+      <button type="submit" [disabled]="!frm.valid" (click)="getReporte(repGastosFechaInicio, repGastosFechaFin)" >Filtrar</button>
+      <h4><span>Total Gastos: {{totalMonto | currency: "S/":2}}</span></h4>
+    </form>
+  </div>
+
+  <kendo-grid [data]="reporteGastosKendo"
+              [pageable]="true"
+              [pageSize]="pageSize"
+              [skip]="skip"
+              (pageChange)="pageChange($event)"
+              [height]="400"
+              >
+
+    <kendo-grid-column field="fechaInicio" title="Fecha Inicio" width="130" [headerStyle]="{'font-weight': 'bold'}">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <p>{{dataItem.fechaInicio | date: 'EEE dd-MM-yyyy'}}</p>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="fechaFinal" title="Fecha Fin" width="130" [headerStyle]="{'font-weight': 'bold'}">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <p>{{dataItem.fechaFinal | date: 'EEE dd-MM-yyyy'}}</p>
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column="column">
+        Totales:
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="diesel" title="Diesel" width="100" [headerStyle]="{'font-weight': 'bold'}">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{dataItem.diesel | currency: "S/":2}}
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column="column">
+        {{totalDiesel | currency: "S/":2}}
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="ayudante" title="Ayudante" width="100" [headerStyle]="{'font-weight': 'bold'}">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{dataItem.ayudante | currency: "S/":2}}
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column="column">
+        {{totalAyudante | currency: "S/":2}}
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="casa" title="Casa" width="100" [headerStyle]="{'font-weight': 'bold'}">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{dataItem.casa | currency: "S/":2}}
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column="column">
+        {{totalCasa | currency: "S/":2}}
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="otros" title="Otros" width="100" [headerStyle]="{'font-weight': 'bold'}">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{dataItem.otros | currency: "S/":2}}
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column="column">
+        {{totalOtros | currency: "S/":2}}
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="sunat" title="Sunat" width="100" [headerStyle]="{'font-weight': 'bold'}">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{dataItem.sunat | currency: "S/":2}}
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column="column">
+        {{totalSunat | currency: "S/":2}}
+      </ng-template>
+    </kendo-grid-column>
+
+  </kendo-grid>
+
+</div>
+

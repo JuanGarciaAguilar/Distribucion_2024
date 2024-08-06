@@ -1,0 +1,30 @@
+<header></header>
+<div class="container-wrapper">
+  <div class="container">
+
+    <div class="col-md-12 center">
+      <div class="form-panel">
+        <h4>MODULO DISTRIBUCION v1.6</h4>
+        <div class="form-content">
+          <form id="login-form">
+            <div class="form-group">
+              <label for="email">Usuario</label>
+              <input type="email" id="email" name="email" autofocus #email required="required" />
+            </div>
+            <div class="form-group" >
+              <label for="password">Contraseña</label>
+              <input type="password" #passw name="pass" required="required" />
+            </div>
+            <button type="submit" class="login" (keyup.enter)="login(email.value,passw.value)" (click)="login(email.value,passw.value)">INGRESAR</button>
+            <div class="alert alert-{{level}} alert-dismissible fade show" *ngIf="visible" role="alert">
+              {{content}}
+              <button type="button" (click)="ocultarMensaje()" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

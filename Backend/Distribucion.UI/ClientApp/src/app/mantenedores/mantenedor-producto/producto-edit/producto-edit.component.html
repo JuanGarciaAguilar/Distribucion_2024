@@ -1,0 +1,240 @@
+<div class="container">
+  <h3 class="title">{{nomProd}}</h3>
+  <div class="border">
+
+    <form [formGroup]="frm">
+      <div>
+        <input type="hidden" class="form-control col-12" value="{{idProd}}" />
+        <h4 style="margin-bottom:2rem;text-align:left">Agregar Producto a la Categoría: {{nomProd}}</h4>
+        <div class="input-group" style="margin:0px auto;width: 20%;">
+          <input type="text" onblur="checkInput(this)" class="form-control col-12" [(ngModel)]="producto.productName" #productN formControlName="productN"> <label style="color:black">
+            Nombre del Producto
+          </label>
+          <button type="submit" (click)="AgregarProducto();" [disabled]="!frm.valid">Registrar</button>
+        </div>
+        <div class="alert alert-{{level}} alert-dismissible fade show" *ngIf="visible" role="alert">
+          {{content}}
+          <button type="button" (click)="ocultarMensaje()" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="border reg-compras-det" style="padding:0px;margin:2rem auto">
+
+    <kendo-grid [data]="productDetailKendo"
+                [pageSize]="pageSize"
+                [skip]="skip"
+                (pageChange)="pageChange($event)"
+                [pageable]="true">
+      <kendo-grid-column field="productName" title="Nombre Producto" width="200"></kendo-grid-column>
+      <kendo-grid-column title="Unidad de Medida" width="220">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <p *ngFor="let a of equivalenciaproductoDetail | filter: 'productId' : dataItem.productId ">{{ a.unidadBase }}</p>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column title="" width="80">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <a tooltip title="Editar" class="btn btn-warning button-tree-view" (click)="enviarEditarProducto(dataItem.productId,dataItem.productName);"><img src="https://cdn4.iconfinder.com/data/icons/markerstyle_icons/PNG/16px/pencil.png"></a>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column title="" width="80">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <a tooltip title="Eliminar" class="btn btn-warning button-tree-view" (click)="envioID(dataItem.productId,true);openMod('modal-el-productos');"><i class="icon-delete"></i></a>
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+  </div>
+</div>
+
+<div class="modal" id="modal-el-productos">
+  <div class="cd-popup-container">
+    <input type="hidden" #idProducto [(ngModel)]="idProduc" placeholder="Id producto" />
+    <p>¿Desea eliminar este producto?</p>
+    <ul class="cd-buttons">
+      <li><a (click)="Eliminar(idProducto.value); closeMod('modal-el-productos')">Si</a></li>
+      <li><a (click)="closeMod('modal-el-productos');">No</a></li>
+    </ul>
+    <a (click)="closeMod('modal-modal-el-productos')" class="cd-popup-close img-replace">Close</a>
+  </div>
+</div>
+
+
+<div class="modal modal-editar-productos" id="modal-ed-productos">
+  <div class="cd-popup-container">
+    <input type="hidden" class="form-control col-12" #id value="{{idEProd}}" />
+    <input type="hidden" #estadopr value="{{estadoPr}}" />
+    <p>Editar producto</p>
+    <div style="width: 100%;margin-bottom: 2rem;">
+      <div class="input-group">
+        <input type="text" onblur="checkInput(this)" class="form-control col-12 active" #nombre value="{{nombEProd}}" />
+        <label style="color:black">
+          Nombre
+        </label>
+      </div>
+    </div>
+
+    <div class="border">
+
+      <kendo-grid [data]="productEditDetailKendo"
+                  [pageSize]="pageSizeEdit"
+                  [skip]="skipEdit"
+                  (pageChange)="pageChangeEdit($event)"
+                  [pageable]="true">
+
+        <kendo-grid-column title="Unidad Medida" width="65">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            <select class="form-control active noselectedit" [ngClass]="{'selectedit':dataItem.bloq === false}" [(ngModel)]="dataItem.unidadBase">
+              <option value="{{dataItem.unidadBase}}">{{dataItem.unidadBase}}</option>
+              <option value="Bolsa">Bolsa</option>
+              <option value="Caja">Caja</option>
+              <option value="Paquete">Paquete</option>
+              <option value="Saco">Saco</option>
+              <option value="Jaba">Jaba</option>
+              <option value="Unidad">Unidad</option>
+              <option value="Bandeja">Bandeja</option>
+            </select>
+          </ng-template>
+          <ng-template kendoGridFooterTemplate let-column>
+            <select class="form-control col-12" style="width:100%;border: solid 1px lightgray;" (change)="verificarCamposLlenosEditar()" [(ngModel)]="uMedida" name="uMedida" onblur="checkInput(this)" required>
+              <option value="Bolsa">Bolsa</option>
+              <option value="Caja">Caja</option>
+              <option value="Paquete">Paquete</option>
+              <option value="Saco">Saco</option>
+              <option value="Jaba">Jaba</option>
+              <option value="Unidad">Unidad</option>
+              <option value="Bandeja">Bandeja</option>
+              <option value="Kg">Kg</option>
+              <option value="Balde">Balde</option>
+              <option value="Bidon">Bidon</option>
+              <option value="Litros">Litros</option>
+            </select>
+          </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column title="Cantidad Unidades" width="65">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" class="form-control active noinputdedit" [ngClass]="{'inputedit':dataItem.bloq === false}" [(ngModel)]="dataItem.cantidadObjetos" name="cantidadObjetos" />
+          </ng-template>
+          <ng-template kendoGridFooterTemplate let-column>
+            <input type="text" style="border: solid 1px lightgray;" class="form-control col-12" [(ngModel)]="cantObj" name="cantObj" (keyup)="verificarCamposLlenosEditar()">
+          </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column title="Flete Unitario" width="65">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" class="form-control active noinputdedit" [ngClass]="{'inputedit':dataItem.bloq === false}" [(ngModel)]="dataItem.fleteUnitario" name="fleteUnitario" />
+          </ng-template>
+          <ng-template kendoGridFooterTemplate let-column>
+            <input type="text" style="border: solid 1px lightgray;" class="form-control col-12" [(ngModel)]="fleteUnit" name="fleteUnit" (keyup)="verificarCamposLlenosEditar()">
+          </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column width="85">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            <button [ngStyle]="{'display':dataItem.bloq === true ? 'block' : 'none'}" style="margin:0;float: left;" (click)="editarEquivalencia(dataItem.equivalenciaId);"><img src="https://cdn4.iconfinder.com/data/icons/markerstyle_icons/PNG/16px/pencil.png"></button>
+            <button [ngStyle]="{'display':dataItem.bloq === false ? 'block' : 'none'}" style="margin:0;float: left;" class="btn btn-danger" (click)="editToDetallesArray(dataItem.equivalenciaId,dataItem.unidadBase,dataItem.cantidadObjetos)">V</button>
+            <button style="margin:0" (click)="eliminarEquivalencia(dataItem.equivalenciaId);"><i class="icon-delete"></i></button>
+          </ng-template>
+          <ng-template kendoGridFooterTemplate let-column>
+            <button style="margin:5px 0 5px 0" class="btn btn-warning" [disabled]="addArrayValidator" (click)="addToDetallesArray('new');">+</button>
+          </ng-template>
+        </kendo-grid-column>
+
+
+
+      </kendo-grid>
+
+
+      <!--<table border="0" cellpadding="0" cellspacing="0" class="tbl-content" style="vertical-align:middle;table-layout: inherit; 1px solid darkgray; border-radius: 10px;">
+        <thead class="thead-dark">
+          <tr>
+            <th style="width: auto;border-style: none;">Unidad Medida</th>
+            <th style="width: auto;border-style: none;">Cantidad de Unidades</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let o of equivalenciaproductotabla; let i = index; " style="text-align: center;">
+            <td [hidden]="true">{{o.equivalenciaId}}</td>
+            <td>
+              <select class="form-control active noselectedit" [ngClass]="{'selectedit':o.bloq === false}" #unidadBase>
+                <option value="{{o.unidadBase}}">{{o.unidadBase}}</option>
+                <option value="Bolsa">Bolsa</option>
+                <option value="Caja">Caja</option>
+                <option value="Paquete">Paquete</option>
+                <option value="Saco">Saco</option>
+                <option value="Jaba">Jaba</option>
+                <option value="Unidad">Unidad</option>
+              </select>
+            </td>
+            <td><input type="text" class="form-control active noinputdedit" [ngClass]="{'inputedit':o.bloq === false}" #cantidadobjetos value="{{o.cantidadObjetos}}" /></td>
+
+            <td [ngStyle]="{'display':o.bloq === true ? 'block' : 'none'}"><a (click)="editarEquivalencia(o.equivalenciaId);"><img src="https://cdn4.iconfinder.com/data/icons/markerstyle_icons/PNG/16px/pencil.png"></a></td>
+            <td [ngStyle]="{'display':o.bloq === false ? 'block' : 'none'}"><button style="margin:0" class="btn btn-danger" (click)="editToDetallesArray(o.equivalenciaId,unidadBase.value,cantidadobjetos.value)">V</button></td>
+            <td><a (click)="eliminarEquivalencia(o.equivalenciaId);"><i class="icon-delete"></i></a></td>
+          </tr>
+        </tbody>
+        <tfoot style="text-align:center">
+          <tr>
+            <td>
+              <select class="form-control col-12" style="width:100%;border: solid 1px lightgray;" [(ngModel)]="uMedida" name="uMedida" onblur="checkInput(this)" required>
+                <option value="Bolsa">Bolsa</option>
+                <option value="Caja">Caja</option>
+                <option value="Paquete">Paquete</option>
+                <option value="Saco">Saco</option>
+                <option value="Jaba">Jaba</option>
+                <option value="Unidad">Unidad</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" style="border: solid 1px lightgray;" class="form-control col-12" [(ngModel)]="cantObj" name="cantObj" onblur="checkInput(this)">
+            </td>
+            <td>
+              <button style="margin:5px 0 5px 0" class="btn btn-warning" (click)="addToDetallesArray(estadopr.value);">+</button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>-->
+      <div class="alert alert-{{level}} alert-dismissible fade show" *ngIf="visible" role="alert">
+        {{content}}
+        <button type="button" (click)="ocultarMensaje()" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    <ul class="cd-buttons">
+      <li><a (click)="editarProducto(id.value,nombre.value)">Aceptar</a></li>
+      <li><a (click)="cancelar();closeMod('modal-ed-productos')">Cancelar</a></li>
+    </ul>
+    <a (click)="closeMod('modal-ed-productos')" class="cd-popup-close img-replace">Close</a>
+  </div>
+</div>
+
+<div>
+  <div class="sweet-overlay" tabindex="-1" style="opacity: 0; display: none;">
+  </div>
+  <div class="sweet-alert hideSweetAlert" tabindex="-1" data-has-cancel-button="false" data-allow-ouside-click="false" data-has-done-function="false" style="display: none; margin-top: -176px; opacity: -0.01;">
+    <div class="icon error" style="display: block;">
+      <span class="x-mark"><span class="line left"></span><span class="line right"></span></span>
+    </div>
+    <div class="icon warning" style="display: none;">
+      <span class="body"></span> <span class="dot"></span>
+    </div>
+    <div class="icon info" style="display: none;">
+    </div>
+    <div class="icon success" style="display: none;">
+      <span class="line tip"></span> <span class="line long"></span>
+      <div class="placeholder">
+      </div>
+      <div class="fix"></div>
+    </div>
+    <div class="icon custom" style="display: none;"></div>
+    <h2>Cancelled</h2>
+    <p style="display: block;">Your imaginary file is safe :)</p>
+    <button class="cancel" tabindex="-1" style="display: none; box-shadow: none;">Cancel</button>
+    <button class="confirm"  tabindex="-1" style="display: none; box-shadow: none;">OK</button>
+    <button class="btn w-xs btn-info" tabindex="-1" style="display:none;  box-shadow: none;">Cerrar</button>
+  </div>
+</div>

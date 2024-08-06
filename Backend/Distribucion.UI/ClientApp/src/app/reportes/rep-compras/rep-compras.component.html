@@ -1,0 +1,143 @@
+<div class="container">
+  <h3 class="title">Reporte de Compras</h3>
+
+  <br />
+  <div class="col-md-12 border" style="margin:0 auto">
+    <form [formGroup]="frm" class="cuadros-group" style="padding-left:1%; padding-right:1%">
+      <div class="input-group">
+        <input class="form-control active" formControlName="fechaInicio" type="date" [(ngModel)]="fInicio" required />
+        <label>Desde:</label>
+      </div>
+      <div class="input-group">
+        <input class="form-control active" type="date" formControlName="fechaFin" [(ngModel)]="fFin" required />
+        <label>Hasta:</label>
+      </div>
+      
+      <div class="input-group">
+        <select formControlName="proveedor" [(ngModel)]="nProveedor" aria-placeholder="Seleccione proveedor" onblur="checkInput(this)" style="padding:4px 0px">
+          <option value="undefined">Todos los Proveedores</option>
+          <option *ngFor="let prov of dataTempProveedores" value="{{prov.proveedorName}}">{{prov.proveedorName}}</option>
+        </select>
+        <label>
+          Proveedor:
+        </label>
+      </div>
+      <button type="submit" (click)="getReporte()">Filtrar</button>
+    </form>
+  </div>
+
+  <kendo-grid [data]="reporteComprasKendo"
+              [pageSize]="state.take"
+              [skip]="state.skip"
+              [sortable]="true"
+              [sort]="state.sort"
+              [group]="state.group"
+              [pageable]="true"
+              [groupable]="false"
+              (dataStateChange)="dataStateChange($event)"
+              [height]="510">
+
+
+    <kendo-grid-column field="fechaCompra" title="Fecha Compra" width="130"
+                       [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <p>{{dataItem.fechaCompra | date: 'EEE dd-MM-yyyy'}}</p>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="fechaEntrega" title="Fecha Entrega" width="130"
+                       [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <p>{{dataItem.fechaEntrega | date: 'EEE dd-MM-yyyy'}}</p>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="proveedorName" title="Proveedor" width="180" *ngIf="false"
+                       [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+    </kendo-grid-column>
+
+    <kendo-grid-column field="productName" title="Producto" width="150"
+                       [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+    </kendo-grid-column>
+
+    <kendo-grid-column field="cantidadCompra" title="Cant." width="90"
+                       [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+    </kendo-grid-column>
+
+    <kendo-grid-column field="unidadMedida" title="U. M." width="90"
+                       [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+    </kendo-grid-column>
+
+    <!--<kendo-grid-column field="pesoCompra" title="Peso (Kg)" width="90"
+                     [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+    </kendo-grid-column>-->
+
+    <kendo-grid-column field="precioUnitario" title="Precio Unitario" width="110"
+                      [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <p>{{dataItem.precioUnitario | currency: "S/":2}}</p>
+    </ng-template>
+
+    </kendo-grid-column>
+
+    <kendo-grid-column field="precioCompra" title="Costo Total" width="110"
+                        [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <p>{{dataItem.precioCompra | currency: "S/":2}}</p>
+      </ng-template>
+
+    </kendo-grid-column>
+
+    <kendo-grid-column field="totalDeposito" title="Amortización" width="110"
+                        [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <p>{{dataItem.totalDeposito | currency: "S/":2}}</p>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="saldoDeposito" title="Saldo" width="110"
+                        [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <p>{{dataItem.saldoDeposito | currency: "S/":2}}</p>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="documentoCompra" title="Documento" width="180"
+                        [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+    </kendo-grid-column>
+
+    <kendo-grid-column field="origenCompra" title="Origen de Compra" width="110"
+                       [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <p>{{dataItem.origenCompra == 1 ? "Trujillo" : dataItem.origenCompra == 2 ? "Talara": dataItem.origenCompra == 3 ? "Piura" : "Chiclayo"}}</p>
+      </ng-template>
+    </kendo-grid-column>
+    <!--<kendo-grid-column field="cantidadBuenEstado" title="Buen estado" width="100"
+                     [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+    </kendo-grid-column>
+
+    <kendo-grid-column field="cantidadMalEstado" title="Mal estado" width="100"
+                       [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+    </kendo-grid-column>-->
+    <!--<kendo-grid-column field="usuarioId" title="Usuario" width="180"
+                       [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+
+    </kendo-grid-column>-->
+
+  </kendo-grid>
+</div>

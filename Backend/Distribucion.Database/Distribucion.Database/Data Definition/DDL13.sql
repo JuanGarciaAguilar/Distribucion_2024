@@ -1,0 +1,2 @@
+﻿ALTER TABLE Compra ADD Observacion NVARCHAR(100)
+

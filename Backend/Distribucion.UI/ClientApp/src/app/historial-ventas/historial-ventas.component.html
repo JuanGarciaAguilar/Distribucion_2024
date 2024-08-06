@@ -1,0 +1,98 @@
+<div class="container" id="seleccioncliente">
+  <h3 class="title">Historial de ventas</h3>
+  <br />
+  <h4 class="subtitle">{{cliente1.clienteName}}</h4>
+  <br />
+  <div class="col-md-12 border" style="padding: 0px">
+    <kendo-grid [data]="historialVentasKendo"
+                [pageable]="true"
+                [pageSize]="pageSize"
+                [skip]="skip"
+                (pageChange)="pageChange($event)"
+                [height]="460">
+
+      <kendo-grid-column title="Fecha venta" width="100"
+                         [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <p>{{dataItem.fechaVenta | date: 'EEE dd-MM-yyyy'}}</p>
+        </ng-template>
+      </kendo-grid-column>
+
+      <kendo-grid-column title="Nombre Producto" width="120"
+                         [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <p *ngIf="dataItem.productId != null">{{dataItem.productId.productName}}</p>
+          <p *ngIf="dataItem.productId == null">Pago de deuda</p>
+        </ng-template>
+      </kendo-grid-column>
+
+      <kendo-grid-column field="cantidadVenta" title="Cantidad" width="85"
+                         [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+      </kendo-grid-column>
+
+      <kendo-grid-column field="unidadMedida" title="Unidad Medida" width="85"
+                         [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+      </kendo-grid-column>
+
+      <!--<kendo-grid-column field="pesoVenta" title="Peso" width="80"
+                         [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+      </kendo-grid-column>-->
+
+      <kendo-grid-column title="Precio" width="90">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <p>{{dataItem.precioIngresadoVenta/dataItem.cantidadVenta | currency:"S/":2}}</p>
+        </ng-template>
+      </kendo-grid-column>
+
+      <!--<kendo-grid-column title="Precio real" width="100"
+                         [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <p>{{dataItem.precioRealVenta | currency:"S/":2}}</p>
+        </ng-template>
+      </kendo-grid-column>-->
+
+      <kendo-grid-column title="Total" width="90"
+                         [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <p>{{dataItem.precioIngresadoVenta | currency:"S/":2}}</p>
+        </ng-template>
+      </kendo-grid-column>
+
+      <kendo-grid-column title="Amortización" width="115"
+                         [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <p>{{dataItem.amortizacion | currency:"S/":2}}</p>
+        </ng-template>
+      </kendo-grid-column>
+
+      <kendo-grid-column title="Deuda actualizada" width="100"
+                         [headerStyle]="{'white-space': 'normal','overflow-wrap': 'break-word','vertical-align': 'middle', 'font-weight': 'bold'}">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <p>{{dataItem.deudaActualizada | currency:"S/":2}}</p>
+        </ng-template>
+      </kendo-grid-column>
+
+      <kendo-grid-column title="" width="55">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <button (click)="enviaId(dataItem.ventaId);openMod('modal-eliminar') " style="margin:0">X</button>
+        </ng-template>
+      </kendo-grid-column>
+
+    </kendo-grid>
+    
+  </div>
+</div>
+
+
+
+<div class="modal modal-el" id="modal-eliminar">
+  <div class="cd-popup-container">
+    <input type="hidden" #idVenta [(ngModel)]="idVentaEl" placeholder="Id producto" />
+    <p>¿Desea eliminar esta venta?</p>
+    <ul class="cd-buttons">
+      <li><a (click)="eliminar(idVenta.value); closeMod('modal-eliminar')">Si</a></li>
+      <li><a (click)="closeMod('modal-eliminar');">No</a></li>
+    </ul>
+    <a (click)="closeMod('modal-eliminar')" class="cd-popup-close img-replace">Close</a>
+  </div>
+</div>

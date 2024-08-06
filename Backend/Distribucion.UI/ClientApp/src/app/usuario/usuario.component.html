@@ -1,0 +1,125 @@
+<!--<div class="modal" id="modal-productos">
+  <div class="cd-popup-container">
+    <input type="hidden" #IDU [(ngModel)]="usuario.userID" />
+    <p>¿Desea eliminar este usuario?</p>
+    <ul class="cd-buttons">
+      <li><a (click)="eliminar(IDU.value);closeMod('modal-productos');">Si</a></li>
+      <li><a (click)="closeMod('modal-productos');">No</a></li>
+    </ul>
+    <a (click)="closeMod('modal-productos')" class="cd-popup-close img-replace">Close</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="flex">
+    <div class="col-md-12 border">
+      <form [formGroup]="frm">
+        <div class="cuadros-group">
+
+          <input type="hidden" [(ngModel)]="usuario.userID" [ngModelOptions]="{standalone: true}">
+          <div class="input-group">
+            <input id="name" [class]="txtClass" formControlName="name" #name required [(ngModel)]="usuario.fullName" onblur="checkInput(this)" type="text">
+            <label for="producto">
+              Nombre
+            </label>
+          </div>
+          <div class="input-group" [hidden]="passwordElement">
+
+            <input [class]="txtClass" formControlName="pass" [(ngModel)]="usuario.password" [pattern]="usuario.rpassword" onblur="checkInput(this)" type="password">
+            <label for="producto">
+              Password
+              <small *ngIf="usuario.password!=usuario.rpassword" style="color:red; font-size:8px; vertical-align:top">*Password no coincide</small>
+            </label>
+
+          </div>
+          <div class="input-group" [hidden]="passwordElement">
+
+            <input [class]="txtClass" formControlName="rpass" [(ngModel)]="usuario.rpassword" [pattern]="usuario.password" onblur="checkInput(this)" type="password">
+            <label for="producto">
+              Repetir password
+              <small *ngIf="usuario.password!=usuario.rpassword" style="color:red; font-size:8px; vertical-align:top">*Password no coincide</small>
+            </label>
+
+          </div>
+          <div class="input-group">
+            <input [class]="txtClass" onblur="checkInput(this)" type="email" [email]="true" formControlName="email" [(ngModel)]="usuario.email">
+            <label for="producto">
+              Email
+            </label>
+          </div>
+          <div class="input-group">
+            <input [class]="txtClass" formControlName="telefono" [(ngModel)]="usuario.phone" onblur="checkInput(this)" type="number">
+            <label for="producto">
+              Telefono
+            </label>
+          </div>
+          <div class="input-group">
+            <select [class]="txtClass" class="form-control col-12" formControlName="rol" [(ngModel)]="usuario.roleDescription" onblur="checkInput(this)">
+              <option value="">Selecciona un usuario</option>
+              <option value="Usuario">Usuario</option>
+              <option value="Administrador">Administrador</option>
+            </select>
+            <label for="producto">
+              Rol
+            </label>
+          </div>
+        </div>
+        <div class="alert alert-{{level}} alert-dismissible fade show" *ngIf="visible" role="alert">
+          {{content}}
+          <button type="button" (click)="ocultarMensaje()" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <button [disabled]="!frm.valid" (click)="ingresarUsuario()">Registrar</button>
+        <button type="submit" [disabled]="!frm.valid" (click)="cancelar(); checkInput(usuario.fullName); checkInput(usuario.password); checkInput(usuario.rpassword); checkInput(usuario.email); checkInput(usuario.phone); checkInput(usuario.roleDescription);">Cancelar</button>
+      </form>
+    </div>
+  </div>
+  <br />
+  <div class="flex">
+    <div class="search">
+      <input class="input100" name="name" [(ngModel)]="searchString" placeholder="Buscar usuario" style="width:95%; padding: 10px" type="text" />
+
+    </div>
+  </div>
+  <div class="col-md-12 border" style="padding:0px">
+    <table border="0" cellpadding="0" cellspacing="0" class="tbl-content">
+      <thead>
+        <tr>
+          <th style="width:23%">Nombre</th>
+          <th style="width:26%">Email</th>
+          <th style="width:20%">Telefono</th>
+          <th style="width:17%">Rol</th>
+          <th style="width:7%"></th>
+          <th style="width:7%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of dataTempUsuario | filter : 'fullName' : searchString ; let i = index">
+          <td hidden="hidden">
+            {{i+1}}
+          </td>
+          <td>
+            {{usuario.fullName}}
+          </td>
+          <td>
+            {{usuario.email}}
+          </td>
+          <td>
+            {{usuario.phone}}
+          </td>
+          <td>
+            {{usuario.roleDescription}}
+          </td>
+          <td>
+            <a (click)="editar(usuario.userID,usuario.fullName,usuario.email,usuario.phone,usuario.roleDescription);
+                    checkInput(usuario.fullName); checkInput(usuario.email); checkInput(usuario.phone); checkInput(usuario.roleDescription);"><i class="icon-delete"></i></a>
+          </td>
+          <td>
+            <a (click)="enviarID(usuario.userID);openModal('modal-productos');"><i class="icon-delete"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>-->

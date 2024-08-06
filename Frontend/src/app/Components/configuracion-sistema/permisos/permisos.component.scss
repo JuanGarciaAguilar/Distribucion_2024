@@ -1,0 +1,32 @@
+:host ::ng-deep  .p-tabview .p-tabview-nav li {
+    margin-right: 0;
+    padding: 0 100px 0 100px;
+}
+
+.box {
+    padding: 10px 50px 10px 50px;
+    border: solid 1px;
+
+}
+
+:host ::ng-deep .p-scroller {
+
+    height: 403px;
+}
+
+
+
+:host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+
+    border-radius: 12px;
+}
+
+:host ::ng-deep  .p-scroller {
+    position: relative;
+    overflow: auto;
+    contain: strict;
+    transform: translateZ(0);
+    will-change: scroll-position;
+    outline: 0 none;
+    height: 520px !important;
+}

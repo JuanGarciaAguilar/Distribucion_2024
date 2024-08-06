@@ -1,0 +1,86 @@
+<!--<div class="container">
+  <div class="flex">
+    <div class="col-md-12 border">
+      <form [formGroup]="frm">
+        <div class="cuadros-group">
+          <input type="hidden" [(ngModel)]="cliente.clienteId" value="{{cliente.clienteId}}" [ngModelOptions]="{standalone: true}">
+
+          <div class="input-group" style="grid-column: 2;">
+            <input [class]="txtClass" formControlName="cName" #cName autofocus [(ngModel)]="cliente.clienteName" value="{{cliente.clienteName}}" required onblur="checkInput(this)" type="text">
+            <label for="producto">
+              Nombre<span *ngIf="cliente.clienteName == null || cliente.clienteName == ''" class="alert-validation">*</span>
+            </label>
+          </div>
+          <div class="input-group">
+            <input [class]="txtClass" formControlName="cPhone" [(ngModel)]="cliente.clientePhone" value="{{cliente.clientePhone}}" onblur="checkInput(this)" type="tel" (keyup)="noLetrasPlus($event, cliente.clientePhone)">
+            <label for="producto">
+              Telefono
+            </label>
+          </div>
+          <div class="input-group">
+            <select [class]="txtClass" formControlName="cSector" class="form-control col-12" [(ngModel)]="cliente.sectorId" onblur="checkInput(this)">
+              <option value="" disabled style="display:none"></option>
+              <option value="1">ENACE</option>
+              <option value="5">Negritos</option>
+              <option value="3">Talara alta</option>
+              <option value="4">Talara baja</option>
+            </select>
+            <label for="producto">
+              Sector<span *ngIf="cliente.sectorId == null" class="alert-validation">*</span>
+            </label>
+          </div>
+          <div class="input-group">
+            <input [class]="txtClass" formControlName="cAddress" [(ngModel)]="cliente.clienteAddress" value="{{cliente.clienteAddress}}" onblur="checkInput(this)" type="text">
+            <label for="producto">
+              Direccion
+            </label>
+          </div>
+        </div>
+        <div class="alert alert-{{level}} alert-dismissible fade show" *ngIf="visible" role="alert">
+          {{content}}
+          <button type="button" (click)="ocultarMensaje()" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <button type="submit" [disabled]="!frm.valid" (click)="ingresarCliente(); checkInput(cliente.clienteName); checkInput(cliente.clientePhone); checkInput(cliente.sectorId); checkInput(cliente.clienteAddress);">Registrar</button>
+        <button type="submit" (click)="cancelar(); checkInput(cliente.clienteName); checkInput(cliente.clientePhone); checkInput(cliente.sectorId); checkInput(cliente.clienteAddress);">Cancelar</button>
+      </form>
+    </div>
+  </div>
+  <br />
+  <div class="flex">
+    <div class="search">
+      <input class="input100" [(ngModel)]="searchString" name="searchString" placeholder="Buscar cliente" style="width:95%; padding: 10px" type="text" />
+
+    </div>
+  </div>
+  <div class="col-md-12 border" style="margin-top: 2rem; padding: 0px">
+    <table border="0" cellpadding="0" cellspacing="0" class="tbl-content">
+      <thead>
+        <tr>
+          <th style="width: 30%;">Nombre</th>
+          <th style="width: 30%;">Direccion</th>
+          <th style="width: 20%;">Telefono</th>
+          <th style="width: 20%;"> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of dataTempClientes | filter : 'clienteName' : searchString ; let i = index">
+          <td style="vertical-align:middle;">
+            {{client.clienteName}}
+          </td>
+          <td style="vertical-align:middle;">
+            {{client.clienteAddress}}
+          </td>
+          <td style="vertical-align:middle;">
+            {{client.clientePhone}}
+          </td>
+          <td>
+            <button class="btn btn-danger" style="margin:0" (click)="Editar(client.clienteId,client.clienteName,client.clienteAddress,client.clientePhone,client.sectorId);
+                    checkInput(cliente.clienteName); checkInput(cliente.clientePhone); checkInput(cliente.sectorId); checkInput(cliente.clienteAddress);">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>-->

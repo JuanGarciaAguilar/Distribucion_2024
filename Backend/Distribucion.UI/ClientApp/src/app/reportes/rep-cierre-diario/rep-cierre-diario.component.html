@@ -1,0 +1,150 @@
+<div class="container">
+  <h3 class="title">Reporte Diario</h3>
+  <br />
+  <div class="col-md-12 border" style="margin:0 auto">
+    <form [formGroup]="frm" class="cuadros-group" style="padding-left:1%; padding-right:1%">
+      <div class="input-group">
+        <input class="form-control active" formControlName="fechaInicio" type="date" [(ngModel)]="fInicio" required />
+        <label>Fecha:</label>
+      </div>
+      <div class="input-group">
+        <select formControlName="cSector" class="form-control col-12" [(ngModel)]="cSector" onblur="checkInput(this)">
+          <option value="" disabled style="display:none"></option>
+          <option *ngFor="let s of sector" value="{{s.sectorId}}">{{s.sectorName}}</option>
+        </select>
+        <label>
+          Sector
+          <span *ngIf="cSector == null" class="alert-validation">*</span>
+        </label>
+      </div>
+      <button type="submit" (click)="getReporte()">Filtrar</button>
+      <div class="input-group" style="grid-column:1">
+        <p style="font-size: 18px;font-weight: bold;">Saldo Inicial: S/{{totalSaldoAnterior | number: '0.2-2'}}</p>
+      </div>
+      <div class="input-group">
+        <p style="font-size: 18px;font-weight: bold;">Venta Total: S/{{totalVenta | number: '0.2-2'}}</p>
+      </div>
+      <div class="input-group">
+        <p style="font-size: 18px;font-weight: bold;">Amortización Total: S/{{totalAmortizacion | number: '0.2-2'}}</p>
+      </div>
+      <div class="input-group">
+        <p style="font-size: 18px;font-weight: bold;">Saldo Final: S/{{saldo | number: '0.2-2'}}</p>
+      </div>
+    </form>
+  </div>
+
+  <!--<table style="display: block; overflow:scroll">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th *ngFor="let c of columns">{{c.title}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cli of clientes | filter : 'sectorId' : cSector">
+        <td style="border:solid 1px">{{cli.clienteName}}</td>
+        <td style="border:solid 1px" *ngFor="let c of columns">
+          <span *ngFor="let d of reporteCierreDiarioKendo">
+            <span *ngIf="c.title == (d.productParentName + ' Cant.') && cli.clienteId == d.clienteId && d.unidadMedida == 'Unidades'">{{d.valor}}</span>
+            <span *ngIf="c.title == (d.productParentName + ' S/') && cli.clienteId == d.clienteId && d.unidadMedida == 'Soles'">{{d.valor | number:'0.0-2'}}</span>
+            <span *ngIf="c.title == 'Saldo Anterior' && cli.clienteId == d.clienteId && d.productParentName == null">{{d.deudaActualizada | number:'0.0-2'}}</span>
+            <span *ngIf="c.title == 'Total' && cli.clienteId == d.clienteId && d.productParentName == null">{{d.total | number:'0.0-2'}}</span>
+            <span *ngIf="c.title == 'Amortizacion' && cli.clienteId == d.clienteId && d.productParentName == null">{{d.amortizacion | number:'0.0-2'}}</span>
+            <span *ngIf="c.title == 'Saldo' && cli.clienteId == d.clienteId && d.productParentName == null">{{d.saldo | number:'0.0-2'}}</span>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>-->
+
+  <kendo-grid [data]="clientes" [height]="560">
+    <kendo-grid-column *ngFor="let column of columns | filter : 'title' : 'Cliente' "
+                       field="{{column.field}}"
+                       title="{{column.title}}"
+                       width="{{column.width}}"
+                       [headerStyle]="{'font-size': '12px'}"
+                       [style]="{'font-size': '12px'}"
+                       [locked]="true">
+      <ng-template kendoGridCellTemplate let-dataItem let-column="column">
+        <span *ngIf="column.field == 'clienteName'">{{dataItem.clienteName}}</span>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column-group *ngFor="let padre of kendoHeaderGroup"
+                             title="{{padre.productName}}"
+                             width="1">
+      <kendo-grid-column-group *ngFor="let hijo of columns | filter : 'headerGroup' : padre.productName"
+                               title="{{hijo.title}}"
+                               width="1">
+        <kendo-grid-column *ngFor="let column of cantSol"
+                           field="{{column.field}}"
+                           title="{{column.title}}"
+                           width="{{column.width}}"
+                           [headerStyle]="{'font-size': '12px'}"
+                           [style]="{'font-size': '12px'}">
+          <ng-template kendoGridCellTemplate let-dataItem let-column="column">
+            <div *ngFor="let d of reporteCierreDiarioKendo | filter : 'clienteName' : dataItem.clienteName">
+              <span *ngIf="hijo.title == d.productParentName && column.field == 'cant' && dataItem.clienteId == d.clienteId && d.unidadMedida == 'Unidades'">{{d.valor | number:'0.0-3'}}</span>
+              <span *ngIf="hijo.title == d.productParentName && column.field == 'sol' && dataItem.clienteId == d.clienteId && d.unidadMedida == 'Soles'">{{d.valor | currency: "S/ ":2}}</span>
+              <!--<span *ngIf="column.title == (d.productParentName + ' Cant.') && dataItem.clienteId == d.clienteId && d.unidadMedida == 'Unidades'">{{d.valor | number:'0.0-3'}}</span>
+              <span *ngIf="column.title == (d.productParentName + ' S/') && dataItem.clienteId == d.clienteId && d.unidadMedida == 'Soles'">{{d.valor | currency: "S/ ":2}}</span>-->
+            </div>
+          </ng-template>
+        </kendo-grid-column>
+      </kendo-grid-column-group>
+    </kendo-grid-column-group>
+
+    <kendo-grid-column *ngFor="let column of columns | filter : 'field' : 'deudaActualizada' "
+                       field="{{column.field}}"
+                       title="{{column.title}}"
+                       width="{{column.width}}"
+                       [headerStyle]="{'font-size': '12px'}"
+                       [style]="{'font-size': '12px'}">
+      <ng-template kendoGridCellTemplate let-dataItem let-column="column">
+        <div *ngFor="let d of reporteCierreDiarioKendo | filter : 'clienteName' : dataItem.clienteName">
+          <span *ngIf="column.title == 'Saldo Anterior' && dataItem.clienteId == d.clienteId && d.productParentName == null">{{d.deudaActualizada | currency: "S/ ":2}}</span>
+        </div>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column *ngFor="let column of columns | filter : 'field' : 'total' "
+                       field="{{column.field}}"
+                       title="{{column.title}}"
+                       width="{{column.width}}"
+                       [headerStyle]="{'font-size': '12px'}"
+                       [style]="{'font-size': '12px'}">
+      <ng-template kendoGridCellTemplate let-dataItem let-column="column">
+        <div *ngFor="let d of reporteCierreDiarioKendo | filter : 'clienteName' : dataItem.clienteName">
+          <span *ngIf="column.title == 'Total' && dataItem.clienteId == d.clienteId && d.productParentName == null">{{d.total | currency: "S/ ":2}}</span>
+        </div>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column *ngFor="let column of columns | filter : 'field' : 'amortizacion' "
+                       field="{{column.field}}"
+                       title="{{column.title}}"
+                       width="{{column.width}}"
+                       [headerStyle]="{'font-size': '12px'}"
+                       [style]="{'font-size': '12px'}">
+      <ng-template kendoGridCellTemplate let-dataItem let-column="column">
+        <div *ngFor="let d of reporteCierreDiarioKendo | filter : 'clienteName' : dataItem.clienteName">
+          <span *ngIf="column.title == 'Amortizacion' && dataItem.clienteId == d.clienteId && d.productParentName == null">{{d.amortizacion | currency: "S/ ":2}}</span>
+        </div>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column *ngFor="let column of columns | filter : 'field' : 'saldo' "
+                       field="{{column.field}}"
+                       title="{{column.title}}"
+                       width="{{column.width}}"
+                       [headerStyle]="{'font-size': '12px'}"
+                       [style]="{'font-size': '12px'}">
+      <ng-template kendoGridCellTemplate let-dataItem let-column="column">
+        <div *ngFor="let d of reporteCierreDiarioKendo | filter : 'clienteName' : dataItem.clienteName">
+          <span *ngIf="column.title == 'Saldo' && dataItem.clienteId == d.clienteId && d.productParentName == null">{{d.saldo | currency: "S/ ":2}}</span>
+        </div>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+
+</div>

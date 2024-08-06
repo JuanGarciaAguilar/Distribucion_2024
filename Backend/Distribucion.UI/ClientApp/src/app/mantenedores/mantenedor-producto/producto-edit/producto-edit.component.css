@@ -1,0 +1,43 @@
+.noinputdedit, .inputedit, .noselectedit, .selectedit {
+  width: 100%;
+  text-align: center;
+  font-family: Raleway;
+  font-size: 14px;
+}
+.noinputdedit {
+  pointer-events: none;
+  background: transparent;
+  border: 0;
+}
+
+.inputedit {
+  width: 80%;
+  pointer-events: auto;
+  border: solid 1px lightgray;
+  background: white;
+}
+
+.noselectedit {
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  pointer-events: none;
+  padding: 0 0 0 20px;
+}
+
+
+.selectedit {
+  border: solid 1px lightgray;
+  -webkit-appearance: menulist;
+  pointer-events: auto;
+  background: white;
+}
+
+
+.tbl-content tbody td {
+  border-top: solid 1px #9b9b9b;
+}
+
+.tbl-content td{
+  border-top: none;
+}

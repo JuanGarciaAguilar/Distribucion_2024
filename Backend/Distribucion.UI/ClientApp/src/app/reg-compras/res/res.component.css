@@ -1,0 +1,21 @@
+.row {
+  padding-left: 2%;
+  margin-bottom: 1%;
+}
+
+.col-md-2 {
+  margin-top: 7px;
+}
+
+.col-md-5 {
+  text-align: left;
+}
+
+h4 {
+  text-align: left;
+}
+@media (min-width: 768px) {
+  .cuadros-group {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}

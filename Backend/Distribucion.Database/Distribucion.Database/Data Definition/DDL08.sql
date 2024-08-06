@@ -1,0 +1,6 @@
+﻿ALTER TABLE Compra ADD UsuarioId NVARCHAR(100) 
+ALTER TABLE Compra ADD CONSTRAINT FK_UsuarioId_C FOREIGN KEY (UsuarioId)     
+    REFERENCES Usuario (UserID)  
+
+ALTER TABLE CompraDetalle
+ALTER COLUMN CostoFleteItemCompra DECIMAL(18,3)

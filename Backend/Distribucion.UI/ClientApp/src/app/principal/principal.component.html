@@ -1,0 +1,32 @@
+  <div class="container-wrapper principal">
+    <div class="container">
+      <h4>Bienvenido, {{usuarioV.fullName}}.</h4>
+      <div class="cuadros-group">
+        <div class="cuadros">
+          <i class="icon-venta"></i><br /><br />
+          <p>Registro de ventas, revisa y pago de deudas</p><br /><br />
+          <a class="menu-button" routerLink="/menu/ventas">Entrar</a>
+        </div>
+        <div class="cuadros" *ngIf="isAdmin">
+          <i class="icon-compras"></i><br /><br />
+          <p>Registro e historial de compras de productos</p><br /><br />
+          <a class="menu-button" routerLink="/menu/compras">Entrar</a>
+        </div>
+        <div class="cuadros" *ngIf="isAdmin">
+          <i class="icon-reportes"></i><br /><br />
+          <p>Registro e historial de gastos semanales</p><br /><br />
+          <a class="menu-button" routerLink="/menu/gastos">Entrar</a>
+        </div>
+        <div class="cuadros" *ngIf="isAdmin">
+          <i class="icon-venta"></i><br /><br />
+          <p>Reporte de compras, ventas, gastos</p><br /><br />
+          <a class="menu-button" routerLink="/menu/reportes">Entrar</a>
+        </div>
+        <div class="cuadros" *ngIf="isAdmin">
+          <i class="icon-venta"></i><br /><br />
+          <p>Mantenedor de clientes, usuarios y productos</p><br /><br />
+          <a class="menu-button" routerLink="/menu/mantenedores">Entrar</a>
+        </div>
+      </div>
+    </div>
+  </div>

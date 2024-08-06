@@ -1,0 +1,311 @@
+
+<div class="col-md-12 border" style="margin-top:2rem">
+  <h4 style="text-align:left">
+    <button class="btn btn-success" (click)="backComponent('lista-compras/list','modal-cambiar-seccion-s')" style="margin:0 5px 0 0"> < Regresar </button>
+    Detalle de Compra Seleccionada para Modificar
+  </h4>
+
+  <form class="cuadros-group">
+    <input type="hidden" [(ngModel)]="idCompra" name="idCompra" class="form-control active" />
+    <div class="input-group">
+      <input type="date" name="fCompra" [ngModel]="fCompra | date:'yyyy-MM-dd'" [value]="currentCompraObj.fechaCompra | date:'yyyy-MM-dd'" class="form-control active" disabled onblur="checkInput(this)" style="background-color:gainsboro;padding:2px">
+      <label for="nombrePV" class="label-produc">
+        Fecha de Compra
+      </label>
+    </div>
+    <div class="input-group">
+      <input type="date" name="fEntrega" [ngModel]="fEntrega | date:'yyyy-MM-dd'" [value]="currentCompraObj.fechaEntrega | date:'yyyy-MM-dd'" class="form-control active" disabled onblur="checkInput(this)" style="background-color:gainsboro;padding:2px">
+      <label for="nombrePV" class="label-produc">
+        Fecha de Entrega
+      </label>
+    </div>
+
+    <div class="input-group">
+      <select onblur="checkInput(this)" [(ngModel)]="origenCompra" name="origenCompra" class="form-control active" style="padding: 4px 36px;">
+        <option disabled selected value="0" style="display:none"></option>
+        <option value="1">Trujillo</option>
+        <option value="2">Talara</option>
+      </select>
+      <label for="nombrePV" class="label-produc">
+        Origen de la Compra
+      </label>
+    </div>
+
+    <div class="input-group">
+      <input type="number" [(ngModel)]="totalCompra" name="totalCompra" class="form-control active" disabled onblur="checkInput(this)" style="background: gainsboro;">
+      <label for="nombrePV" class="label-produc">
+        Total de la Compra (S/):
+      </label>
+    </div>
+
+    <div class="input-group">
+      <input type="number" [(ngModel)]="fleteCompra" name="fleteCompra" class="form-control active" disabled onblur="checkInput(this)" style="background: gainsboro;">
+      <label for="nombrePV" class="label-produc">
+        Costo del Flete (S/):
+      </label>
+    </div>
+
+  </form>
+</div>
+
+
+<div class="col-md-12 border" style="margin-top: 2rem; padding: 0px;">
+
+  <kendo-grid [data]="compraeditKendo" [pageable]="true" [pageSize]="pageSize" [skip]="skip" (pageChange)="pageChange($event)">
+
+    <kendo-grid-column title="Proveedor" width="85">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <p *ngFor="let prov of dataTempProveedor | filter : 'proveedorId' : dataItem.proveedorId ">{{prov.proveedorName}}</p>
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column>
+        <select class="form-control" aria-placeholder="Seleccione proveedor" [(ngModel)]="proveedor" (change)="getSaldoAnterior();">
+          <option value="" disabled>Seleccione un proveedor</option>
+          <option *ngFor="let prov of dataTempProveedor" value="{{prov.proveedorId}}">{{prov.proveedorName}}</option>
+        </select>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column  title="Producto" width="85">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <!--<p>{{dataItem.fechaEntrega | date: 'dd-MM-yyyy'}}</p>-->
+        <p *ngFor="let prod of dataTempProducto | filter : 'productId' : dataItem.productId ">{{prod.productName}}</p>
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column>
+        <select class="form-control" [(ngModel)]="producto" aria-placeholder="Seleccione producto" (change)="getSaldoAnterior();obtenerEquivalencia(productoidnew.value)" #productoidnew>
+          <option value="" disabled>Seleccione un producto</option>
+          <option *ngFor="let prod of dataTempProducto |  filter : 'productLevel' : '1'" value="{{prod.productId}}">{{prod.productName}}</option>
+        </select>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column title="Cantidad" width="70">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input class="form-control active noinputdedit" type="number" min="0" [(ngModel)]="dataItem.cantidadCompra" name="cantidadCompra" [ngClass]="{'inputedit':dataItem.btnEstado === true}" (change)="setCostoTotalEditarCantidad(dataItem.detalleCompraId, dataItem.cantidadCompra); calcularSaldoeditar(dataItem.detalleCompraId,dataItem.precioCompra,dataItem.totalDeposito);"/>
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column>
+        <input type="number" min="0" [(ngModel)]="cantidad" [disabled]="peso>0" [ngModelOptions]="{standalone: true}" class="form-control" (change)="setCostoTotalCantidad(cantidad); setSaldoAnterior(); calcularSaldo(precio,totalDeposito);">
+      </ng-template>
+    </kendo-grid-column>
+
+
+    <kendo-grid-column  title="Unidad Medida" width="80">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <select class="form-control active noselectedit" [ngClass]="{'selectedit':dataItem.btnEstado === true}" [(ngModel)]="dataItem.unidadMedida">
+          <option value="{{dataItem.unidadMedida}}">{{dataItem.unidadMedida}}</option>
+          <option *ngFor="let subum of equivalenciaFilter" value="{{subum.unidadBase}}">{{subum.unidadBase}}</option>
+        </select>
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column>
+        <select class="form-control"  name="unidadMedida" [(ngModel)]="unidadMedida" aria-placeholder="Seleccione Unidad Medida">
+          <option *ngFor="let subum of equivalenciaFilter" value="{{subum.unidadBase}}">{{subum.unidadBase}}</option>
+        </select>
+      </ng-template>
+    </kendo-grid-column>
+
+
+    <!--<kendo-grid-column  title="Peso" width="65">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input type="number" class="form-control active noinputdedit" [(ngModel)]="dataItem.pesoCompra" name="pesoCompra" />
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column>
+        <input type="number" min="0" [(ngModel)]="peso" [disabled]="cantidad>0" [ngModelOptions]="{standalone: true}" class="form-control">
+      </ng-template>
+    </kendo-grid-column>-->
+
+
+    <kendo-grid-column  title="Precio Unitario" width="65">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input type="number" class="form-control active noinputdedit" [(ngModel)]="dataItem.precioUnitario" name="precioUnitario" [ngClass]="{'inputedit':dataItem.btnEstado === true}" (change)="setCostoTotalEditar(dataItem.detalleCompraId, dataItem.precioUnitario); calcularSaldoeditar(dataItem.detalleCompraId,dataItem.precioCompra,dataItem.totalDeposito);" />
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column>
+        <input type="number" min="0" [(ngModel)]="precioUnitario" class="form-control" (change)="setCostoTotal(precioUnitario); setSaldoAnterior(); calcularSaldo(precio,totalDeposito);">
+      </ng-template>
+    </kendo-grid-column>
+
+
+    <kendo-grid-column  title="Total" width="65">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input type="number" class="form-control active noinputdedit" [(ngModel)]="dataItem.precioCompra" name="precioCompra" [ngClass]="{'inputedit':dataItem.btnEstado === true}" (change)="calcularSaldoeditar(dataItem.detalleCompraId,dataItem.precioCompra,dataItem.totalDeposito);" />
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column>
+        <input type="number" min="0" [(ngModel)]="precio" class="form-control" (change)="setSaldoAnterior(); calcularSaldo(precio,totalDeposito);">
+      </ng-template>
+    </kendo-grid-column>
+
+    
+    <kendo-grid-column  title="Amortización" width="100">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input type="number" class="form-control active noinputdedit" [(ngModel)]="dataItem.totalDeposito" name="totalDeposito" [ngClass]="{'inputedit':dataItem.btnEstado === true}" (change)="calcularSaldoeditar(dataItem.detalleCompraId,dataItem.precioCompra,dataItem.totalDeposito);" />
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column>
+        <input type="number" min="0"  [(ngModel)]="totalDeposito" class="form-control" (change)="setSaldoAnterior(); calcularSaldo(precio,totalDeposito);">
+      </ng-template>
+    </kendo-grid-column>
+
+
+    <kendo-grid-column  title="Saldo" width="65">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input type="number" class="form-control active noinputdedit" [(ngModel)]="dataItem.saldoDeposito" name="saldoDeposito" />
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column>
+        <input type="number" [(ngModel)]="saldoDeposito" name="saldoDeposito" [ngModelOptions]="{standalone: true}" class="form-control" disabled>
+      </ng-template>
+    </kendo-grid-column>
+
+
+    <kendo-grid-column title="Flete Unitario" width="65">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <span *ngIf="!dataItem.btnEstado" class="form-control active noinputdedit">{{dataItem.costoFleteItemCompra / dataItem.cantidadCompra}}</span>
+        <input *ngIf="dataItem.btnEstado" type="number" class="form-control active noinputdedit" (ngModelChange)="fleteTempEdit = $event" [ngModel]="dataItem.costoFleteItemCompra / dataItem.cantidadCompra" name="costoFleteItemCompra" [ngClass]="{'inputedit':dataItem.btnEstado === true}" />
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column>
+        <input type="number" min="0" (ngModelChange)="fleteTempNew = $event" [ngModel]="fleteUnitario / cantidad" name="fleteUnitario" [ngModelOptions]="{standalone: true}" class="form-control">
+      </ng-template>
+    </kendo-grid-column>
+
+
+    <kendo-grid-column title="Doc. compra" width="65">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input type="text" class="form-control active noinputdedit" [(ngModel)]="dataItem.documentoCompra" name="documentoCompra" [ngClass]="{'inputedit':dataItem.btnEstado === true}" />
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column>
+        <input type="text" [(ngModel)]="documentoCompra" name="documentoCompra" [ngModelOptions]="{standalone: true}" class="form-control">
+      </ng-template>
+    </kendo-grid-column>
+
+
+    <kendo-grid-column  width="85">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <button [ngStyle]="{'display':dataItem.btnEstado === true ? 'block' : 'none'}" style="margin:0;float: left;" class="btn btn-danger" (click)="editToDetallesArray(dataItem.detalleCompraId,dataItem.cantidadCompra,dataItem.unidadMedida,dataItem.precioUnitario,dataItem.precioCompra,dataItem.totalDeposito,dataItem.saldoDeposito,dataItem.costoFleteItemCompra,dataItem.documentoCompra)">V</button>
+        <button [ngStyle]="{'display':dataItem.btnEstado === true ? 'none' : 'block'}" style="margin:0;float: left;" class="btn btn-danger" (click)="envioCompraIdEd(dataItem.detalleCompraId)">E</button>
+        <button style="margin:0" class="btn btn-danger" (click)="envioCompraIdEl(dataItem.detalleCompraId);openMod('modal-el-item-compra')">X</button>
+      </ng-template>
+      <ng-template kendoGridFooterTemplate let-column>
+        <button style="margin:5px 0 5px 0" class="btn btn-warning" (click)="addToDetallesArray();">+</button>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+
+
+  <!--<table border="0" cellpadding="0" cellspacing="0" class="tbl-content" style="vertical-align:middle">
+   
+    <tfoot style="text-align:center">
+
+      <tr [formGroup]="form">
+        <td>
+          <select class="form-control" formControlName="prov" [(ngModel)]="proveedor" aria-placeholder="Seleccione proveedor" (change)="getSaldoAnterior();">
+            <option value="" disabled>Seleccione un proveedor</option>
+            <option *ngFor="let prov of dataTempProveedor" value="{{prov.proveedorId}}">{{prov.proveedorName}}</option>
+          </select>
+        </td>
+        <td>
+          <select class="form-control" formControlName="prod" [(ngModel)]="producto" aria-placeholder="Seleccione producto" (change)="getSaldoAnterior();obtenerEquivalencia(productoidnew.value)" #productoidnew>
+            <option value="" disabled>Seleccione un producto</option>
+            <option *ngFor="let prod of dataTempProducto |  filter : 'productLevel' : '1'" value="{{prod.productId}}">{{prod.productName}}</option>
+          </select>
+        </td>
+        <td>
+          <input type="number" min="0" [(ngModel)]="cantidad" [disabled]="peso>0" [ngModelOptions]="{standalone: true}" class="form-control" (change)="calcularMalEstado();">
+        </td>
+        <td>
+          <select class="form-control" formControlName="unidadmedida" name="unidadMedida" [(ngModel)]="unidadMedida" aria-placeholder="Seleccione Unidad Medida">
+            <option *ngFor="let subum of equivalenciaFilter" value="{{subum.unidadBase}}">{{subum.unidadBase}}</option>
+          </select>
+        </td>
+        <td>
+          <input type="number" min="0" [(ngModel)]="peso" [disabled]="cantidad>0" [ngModelOptions]="{standalone: true}" class="form-control" (change)="calcularMalEstado();">
+        </td>
+        <td>
+          <input type="number" min="0" formControlName="prec" [(ngModel)]="precio" class="form-control" (change)="setSaldoAnterior(); calcularSaldo();" style="text-align:right;">
+        </td>
+        <td>
+          <input type="number" min="0" formControlName="totalDep" [(ngModel)]="totalDeposito" class="form-control" (change)="setSaldoAnterior(); calcularSaldo();" style="text-align:right;">
+        </td>
+        <td>
+          <input type="number" [(ngModel)]="saldoDeposito" name="saldoDeposito" [ngModelOptions]="{standalone: true}" class="form-control" disabled style="text-align:right;">
+        </td>
+        <td>
+          <input type="number" min="0" [(ngModel)]="fleteUnitario" name="fleteUnitario" [ngModelOptions]="{standalone: true}" class="form-control" disabled style="text-align:right;">
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="documentoCompra" name="documentoCompra" [ngModelOptions]="{standalone: true}" class="form-control">
+        </td>
+        <td>
+          <button style="margin:5px 0 5px 0" [disabled]="!form.valid" class="btn btn-warning" (click)="addToDetallesArray();">+</button>
+        </td>
+      </tr>
+    </tfoot>
+  </table>-->
+</div>
+
+<br />
+<div style="text-align:center">
+  <button style="margin:0" class="btn btn-success" (click)="openMod('modal-compra-editar')">Guardar cambios</button>
+</div>
+
+
+<div class="modal" id="modal-cambiar-seccion-s">
+  <div class="cd-popup-container">
+
+    <p>¿Seguro que desea cambiar de sección?</p>
+    <ul class="cd-buttons">
+      <li><a (click)="cambiarSeccion(); closeMod('modal-cambiar-seccion-s')">Si</a></li>
+      <li><a (click)="closeMod('modal-cambiar-seccion-s')">No</a></li>
+    </ul>
+    <a (click)="closeMod('modal-cambiar-seccion-s')" class="cd-popup-close img-replace">Close</a>
+  </div>
+</div>
+
+<div class="modal" id="modal-compra-editar">
+  <div class="cd-popup-container">
+
+    <p>¿Desea confirmar la compra?</p>
+    <ul class="cd-buttons">
+      <li><a (click)="guardarCambios(); closeMod('modal-compra-editar')">Si</a></li>
+      <li><a (click)="closeMod('modal-compra-editar')">No</a></li>
+    </ul>
+    <a (click)="closeMod('modal-compra-editar')" class="cd-popup-close img-replace">Close</a>
+  </div>
+</div>
+
+
+<div class="modal" id="modal-el-item-compra">
+  <div class="cd-popup-container">
+    <input type="hidden" #cdid [(ngModel)]="compraDetId" [ngModelOptions]="{standalone: true}" />
+    <p>¿Desea eliminar este producto?</p>
+    <ul class="cd-buttons">
+      <li><a (click)="deleteDetalleFromArray(cdid.value); closeMod('modal-el-item-compra')">Si</a></li>
+      <li><a (click)="closeMod('modal-el-item-compra')">No</a></li>
+    </ul>
+    <a (click)="closeMod('modal-el-item-compra')" class="cd-popup-close img-replace">Close</a>
+  </div>
+</div>
+
+
+
+<div>
+  <div class="sweet-overlay" tabindex="-1" style="opacity: 0; display: none;">
+  </div>
+  <div class="sweet-alert hideSweetAlert" tabindex="-1" data-has-cancel-button="false" data-allow-ouside-click="false" data-has-done-function="false" style="display: none; margin-top: -176px; opacity: -0.01;">
+    <div class="icon error" style="display: block;">
+      <span class="x-mark"><span class="line left"></span><span class="line right"></span></span>
+    </div>
+    <div class="icon warning" style="display: none;">
+      <span class="body"></span> <span class="dot"></span>
+    </div>
+    <div class="icon info" style="display: none;">
+    </div>
+    <div class="icon success" style="display: none;">
+      <span class="line tip"></span> <span class="line long"></span>
+      <div class="placeholder">
+      </div>
+      <div class="fix"></div>
+    </div>
+    <div class="icon custom" style="display: none;"></div>
+    <h2>Cancelled</h2>
+    <p style="display: block;">Your imaginary file is safe :)</p>
+    <button class="cancel" tabindex="-1" style="display: none; box-shadow: none;">Cancel</button>
+    <button class="confirm" tabindex="-1" style="display: none; box-shadow: none;">OK</button>
+    <button class="btn w-xs btn-info" tabindex="-1" style="display:none;  box-shadow: none;">Cerrar</button>
+  </div>
+</div>

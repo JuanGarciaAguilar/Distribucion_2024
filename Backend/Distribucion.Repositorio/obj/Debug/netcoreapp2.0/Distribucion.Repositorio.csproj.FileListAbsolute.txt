@@ -1,0 +1,135 @@
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.deps.json
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.pdb
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.AssemblyReference.cache
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.GeneratedMSBuildEditorConfig.editorconfig
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfoInputs.cache
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfo.cs
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CoreCompileInputs.cache
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CopyComplete
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+G:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.deps.json
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.dll
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.dll
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.dll
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.pdb
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.pdb
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.pdb
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.AssemblyReference.cache
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.GeneratedMSBuildEditorConfig.editorconfig
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfoInputs.cache
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfo.cs
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CoreCompileInputs.cache
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CopyComplete
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.deps.json
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.dll
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.dll
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.dll
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.pdb
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.pdb
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.pdb
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfoInputs.cache
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfo.cs
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CoreCompileInputs.cache
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CopyComplete
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+D:\REPOSITORIO - DISTRIBUCION\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csprojAssemblyReference.cache
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.deps.json
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.dll
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.dll
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.dll
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.pdb
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.pdb
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.pdb
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csprojAssemblyReference.cache
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CoreCompileInputs.cache
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfoInputs.cache
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfo.cs
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CopyComplete
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+E:\PROYECTOS\Distribucion 2023\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.deps.json
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CoreCompileInputs.cache
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfoInputs.cache
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfo.cs
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CopyComplete
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_1\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csprojAssemblyReference.cache
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.deps.json
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.AssemblyReference.cache
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.GeneratedMSBuildEditorConfig.editorconfig
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfoInputs.cache
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfo.cs
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CoreCompileInputs.cache
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.sourcelink.json
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribu.E7B79FE6.Up2Date
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.deps.json
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.pdb
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.AssemblyReference.cache
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.GeneratedMSBuildEditorConfig.editorconfig
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfoInputs.cache
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfo.cs
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CoreCompileInputs.cache
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.sourcelink.json
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribu.E7B79FE6.Up2Date
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+E:\PROYECTOS\Distribucion 2023\Repositorio-Distribucion\Distribucion Funcionando\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.deps.json
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.dll
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.dll
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.dll
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Common.pdb
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Entidades.pdb
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.pdb
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.AssemblyReference.cache
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.GeneratedMSBuildEditorConfig.editorconfig
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfoInputs.cache
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.AssemblyInfo.cs
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CoreCompileInputs.cache
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.csproj.CopyComplete
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Repositorio\obj\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
