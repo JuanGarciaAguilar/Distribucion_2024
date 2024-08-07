@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 import { ProductosComponent } from './Productos/Productos.component';
 import { MantenedoresRoutingModule } from './Mantenedores-routing.module';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
@@ -8,7 +8,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
-
+import { DropdownModule } from 'primeng/dropdown';
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,6 +21,8 @@ import { DialogModule } from 'primeng/dialog';
     FormsModule,
     DialogModule,
     ReactiveFormsModule,
+    DropdownModule,
+    ToastModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [ProductosComponent]

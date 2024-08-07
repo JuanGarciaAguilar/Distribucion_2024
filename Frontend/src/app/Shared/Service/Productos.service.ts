@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';   
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { GlobalConstants } from '../Models/GlobalConstants';
 import { Observable } from "rxjs";
@@ -21,20 +21,20 @@ export class ProductosService {
   }
 
   InsertaCategoria(product: ProductoEntity): any {
-    return this._http.post(GlobalConstants.Producto + 'Producto/InsertCategoria', product, this._auth.getHeader());
+    return this._http.post(GlobalConstants.Producto + 'InsertCategoria', product, this._auth.getHeader());
   }
 
-  postInsertaProducto(producto : ProductoEntity): any {
-    return this._http.post(GlobalConstants.Producto + 'Producto/InsertProducto', producto,  this._auth.getHeader());
+  InsertaProducto(producto : ProductoEntity): any {
+    return this._http.post(GlobalConstants.Producto + 'InsertProducto', producto,  this._auth.getHeader());
   }
 
 
-  postActualizaCategoria(product: ProductoEntity): any {
-    return this._http.post(GlobalConstants.Producto + 'Producto/UpdateCategoria', product,  this._auth.getHeader());
+  ActualizaCategoria(product: ProductoEntity): any {
+    return this._http.post(GlobalConstants.Producto + 'UpdateCategoria', product,  this._auth.getHeader());
   }
 
-  postActualizaProducto(product: ProductoEntity): any {
-    return this._http.post(GlobalConstants.Producto + 'Producto/UpdateProducto', product,  this._auth.getHeader());
+  ActualizaProducto(product: ProductoEntity): any {
+    return this._http.post(GlobalConstants.Producto + 'UpdateProducto', product,  this._auth.getHeader());
   }
 
   postEliminaCategoria(idProducto:number): any {
