@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+5sYumYuowUFcBVqraz2kBj8q/FUuvP0sI7K3mIAw/BZ0zCn1ZySyYMPS3pyXdb7YpbdfccUQIVPi6Z4VLX4aw==",
+  "dgSpecHash": "pA46TNBPr1f0Rh4jn/fCPi/DuTQuULnXHz+nSPByvaxNFgWkeNMkricUlgXFHbyJLpFKsFFskk/vRthAFOgSOQ==",
   "success": true,
-  "projectFilePath": "E:\\Proyectos 2024\\Distribucion Backend_ok\\Distribucion.Repositorio\\Distribucion.Repositorio.csproj",
+  "projectFilePath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\Distribucion.Repositorio.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\dapper\\1.50.4\\dapper.1.50.4.nupkg.sha512",
     "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\microsoft.netcore.app\\2.0.0\\microsoft.netcore.app.2.0.0.nupkg.sha512",

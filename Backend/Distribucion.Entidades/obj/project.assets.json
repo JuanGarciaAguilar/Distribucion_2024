@@ -682,11 +682,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Proyectos 2024\\Distribucion Backend_ok\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
+      "projectUniqueName": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
       "projectName": "Distribucion.Entidades",
-      "projectPath": "E:\\Proyectos 2024\\Distribucion Backend_ok\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
+      "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
       "packagesPath": "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\",
-      "outputPath": "E:\\Proyectos 2024\\Distribucion Backend_ok\\Distribucion.Entidades\\obj\\",
+      "outputPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,88 +1,114 @@
 <p-breadcrumb class="max-w-full" [model]="items" [home]="home" />
 <div class="row">
   <div class="col">
-
     <div class="card">
-      <p-table #dt1 [value]="dataTempProduct" dataKey="productId" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading"
-        [paginator]="true" [globalFilterFields]="['productName']" styleClass="p-datatable-striped">
+      <p-table #dt1 [value]="productos" rowGroupMode="rowspan" groupRowsBy="grupo" sortField="grupo" sortMode="single" [scrollable]="true"
+        scrollHeight="600px" [globalFilterFields]="['productName','grupo']" [rows]="10" [paginator]="true">
         <ng-template pTemplate="caption">
           <div class="flex">
-
-            <span class="p-input-icon-left ml-auto">
-
-              <input type="text" type="text" [(ngModel)]="searchValue" class="form-control" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar Categoria">
+            <button class="btn btn-info" (click)="ModalCategoria_Open()">Agregar Categoria</button>
+            <span class="ml-auto">
+              <input type="text" type="text" [(ngModel)]="searchValue" class="form-control" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                placeholder="Buscar Categoria">
             </span>
           </div>
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th style="min-width:30rem">
+            <th>#</th>
+            <th>
+              <div style="min-width:5rem" class="text-center">
+                CATEGORIA
+              </div>
+            </th>
+            <th style="min-width:15rem">
               <div class="text-center">
-                Categoria
+                PRODUCTO
               </div>
             </th>
             <th style="min-width:5rem">
               <div class="text-center">
-                Editar
+                EDITAR
               </div>
             </th>
             <th style="min-width:5rem">
               <div class="text-center">
-                Ver
+                EQUIVALENCIA
               </div>
             </th>
             <th style="min-width:5rem">
               <div class="text-center">
-                Eliminar
+                ELIMINAR
               </div>
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-Producto>
+        <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex" let-rowgroup="rowgroup" let-rowspan="rowspan">
           <tr>
+            <td>{{rowIndex + 1}}</td>
+            <td *ngIf="rowgroup" [attr.rowspan]="rowspan">
+              <span class="font-bold ml-2" (click)="ModalCategoria_Open(customer)" style="cursor: pointer">{{customer.grupo}}</span>
+            </td>
+            <td class="text-center">{{customer.productName}}</td>
             <td class="text-center">
-              {{ Producto.productName }}
+              <button pButton icon="pi pi-pencil" style="border-radius: 50%;width: 30px;height: 30px;background: grey;" pTooltip="Editar ProductoDescripcion"
+                (click)="SelectedItem(customer)"></button>
             </td>
             <td class="text-center">
-              <button pButton icon="pi pi-pencil" style="border-radius: 50%;width: 30px;height: 30px;background: grey;"></button>
+              <button pButton icon="pi pi-eye" style="border-radius: 50%;width: 30px;height: 30px;background: mediumblue;" pTooltip="Ver Equivalencias"></button>
             </td>
             <td class="text-center">
-              <button pButton icon="pi pi-eye"  style="border-radius: 50%;width: 30px;height: 30px;background: mediumblue;"></button>
+              <button pButton icon="pi pi-trash" style="border-radius: 50%;width: 30px;height: 30px;background: red;" pTooltip="Eliminar Producto"></button>
             </td>
-            <td class="text-center">
-              <button pButton icon="pi pi-trash" style="border-radius: 50%;width: 30px;height: 30px;background: red;"></button>
-            </td>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-          <tr>
-            <td colspan="7">No customers found.</td>
           </tr>
         </ng-template>
       </p-table>
-
-
     </div>
-
-
   </div>
 
   <div class="col-4">
-
     <div class="card">
-      <div class="card-title">Productos</div>
       <div class="card-body">
-        <div class="container">
-          <span>
-            <b> Nombre de la categoria:</b>
-          </span>
-          <br>
-          <input type="text" class="form-control" placeholder="Ingresar nombre de la categoria">
-          <div style="padding-top: 5px">
-            <button class="btn btn-primary">Guardar</button>
+        <div class="flex flex-column gap-2">
+          <label>
+            <b>Categoria:</b>
+          </label>
+          <input [(ngModel)]="Categoria" class="form-control" disabled />
+        </div>
+        <div class="flex flex-column gap-2">
+          <label>
+            <b>Producto:</b>
+          </label>
+          <input [(ngModel)]="ProductoDescripcion" class="form-control" />
+        </div>
+        <div class="row" style="padding-top: 10px">
+          <div class="col flex flex-column">
+            <button class="btn btn-{{Color}}" (click)=Operacion_Producto()>{{TitleButton}}</button>
+          </div>
+          <div class="col flex flex-column">
+            <button class="btn btn-info" (click)="CleaningFields()">Cancelar</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+
+  <p-dialog header="Agregando Categoria" [modal]="true" [(visible)]="ModalCategoria" [style]="{ width: '25rem' }" [closable]="false">
+
+    <div class="flex flex-column gap-2">
+      <label>
+        <b>Categoria:</b>
+      </label>
+      <input [(ngModel)]="Categoria" class="form-control" />
+    </div>
+
+    <div class="row" style="padding-top: 10px">
+      <div class="col flex flex-column">
+        <button class="btn btn-{{Color}}" (click)="Operacion_Categoria()">{{TitleButton}}</button>
+      </div>
+      <div class="col flex flex-column">
+        <button class="btn btn-info" (click)="CleaningFields()">Cancelar</button>
+      </div>
+    </div>
+  </p-dialog>

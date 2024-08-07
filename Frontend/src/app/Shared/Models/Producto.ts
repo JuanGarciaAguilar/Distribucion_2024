@@ -1,7 +1,7 @@
 import { Equivalencia } from "./equivalencia";
 import { CierreDiarioReportHeader } from './cierre-diario.report';
 
-export class Producto {
+export class ProductoEntity {
   productId?: number;
   productName?: string;
   productImage?: string;
@@ -19,4 +19,12 @@ export class Producto {
 
   //helpers
   hijos?: CierreDiarioReportHeader[];
+
+  categoria?: categoriaEntity;
+}
+
+
+export class categoriaEntity{
+  productId?: number;
+  productName?: string;
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "X3oNyu4fcPqCgoeJAPlrHC9eP8xOJyw4AJb3hEgBnl3WLJitJfskYKFpi1DNZh8XzVS9eAe0VFRa8EiN1KxuHQ==",
+  "dgSpecHash": "WIYMA8EIUb2y8Ljjlt5oylWRzGW0sQY0FYnH+VrRj4LC4zbH+RCO45k3rOgfz1Ldf5CgLgsC38ox2IeKINSu+Q==",
   "success": true,
-  "projectFilePath": "E:\\Proyectos 2024\\Distribucion Backend_ok\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj",
+  "projectFilePath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\microsoft.netcore.app\\2.0.0\\microsoft.netcore.app.2.0.0.nupkg.sha512",
     "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.0.0\\microsoft.netcore.dotnetapphost.2.0.0.nupkg.sha512",

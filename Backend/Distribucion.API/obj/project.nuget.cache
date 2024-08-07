@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ahxcQ+Sq7u9xDsVnheSlP6CZzlmyZv5bWXMrCzC/Ry33hOrTGzi7FEUFtR1H9rOzIavbrgqIxlmotxeFLbaFIA==",
+  "dgSpecHash": "LSxREBfdURx3I/Wf0WjWqqQwQsskrYg8hsFqQtGK5x0WO8AoHG2QQ1z/bh30TUmFQm1xl/sQM7dfqFQFlTzcJg==",
   "success": true,
-  "projectFilePath": "E:\\Proyectos 2024\\Distribucion Backend_ok\\Distribucion.API\\Distribucion.API.csproj",
+  "projectFilePath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.API\\Distribucion.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\bouncycastle\\1.8.9\\bouncycastle.1.8.9.nupkg.sha512",
     "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\dapper\\1.50.4\\dapper.1.50.4.nupkg.sha512",

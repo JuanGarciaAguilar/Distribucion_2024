@@ -1,5 +1,5 @@
 export class CierreDiarioReport {
-    fechaVenta: Date;
+    //fechaVenta?: Date;
     sectorName?: any;
     clienteId?: number;
     clienteName?: string;

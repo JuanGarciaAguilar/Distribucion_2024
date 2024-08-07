@@ -6,6 +6,8 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   imports: [
@@ -14,7 +16,10 @@ import { InputTextModule } from 'primeng/inputtext'
     BreadcrumbModule,
     TableModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    FormsModule,
+    DialogModule,
+    ReactiveFormsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [ProductosComponent]
