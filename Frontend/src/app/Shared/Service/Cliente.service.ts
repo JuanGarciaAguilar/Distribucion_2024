@@ -13,7 +13,7 @@ export class ClienteService {
   constructor() { }
 
 
-  getclientesBySector(id : number) {
+  getclientesBySector(id : string) {
     return this._http.get<ClienteModel[]>(GlobalConstants.Cliente_nt + 'clientesBySector/' + id);
   }
 

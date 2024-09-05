@@ -1,10 +1,11 @@
- 
+
 import { inject, Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { GlobalConstants } from '../Models/GlobalConstants';
 import { HttpClient } from '@angular/common/http';
 import { VentasModel } from '../Models/VentasModel';
 import { CierreDiarioReport, CierreDiarioReportHeader } from '../Models/cierre-diario.report';
+import { ReservaDia } from '../Models/reserva-diamodel';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,7 @@ getVentasById(ventaid : number) {
   return this._http.get<VentasModel[]>(GlobalConstants.Ventas + 'VentasById/' + ventaid, this._auth.getHeader());
 }
 getreservas() {
-  return this._http.get<VentasModel[]>(GlobalConstants.Ventas + 'Reservas', this._auth.getHeader());
+  return this._http.get<ReservaDia[]>(GlobalConstants.Ventas + 'Reservas', this._auth.getHeader());
 }
 
 getListaPagosByCliente(idCliente : number) {
@@ -81,6 +82,11 @@ postEliminaVenta(ventaId : number): any {
 postDeleteVentaAll(ventaId : number): any {
   return this._http.get(GlobalConstants.Ventas + 'DeleteVentaAll/' + ventaId, this._auth.getHeader());
 }
+
+
+getReservasByFecha(fecha:Date ): any {
+    return this._http.get<ReservaDia[]>(GlobalConstants.Ventas + 'ReservasByFechas/' +fecha);
+  }
 
 
 }

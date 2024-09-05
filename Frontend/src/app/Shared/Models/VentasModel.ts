@@ -1,6 +1,8 @@
 import { ProductoEntity } from './Producto'
 import { ReservaDia } from './reserva-diamodel';
 
+
+
 export class VentasModel {
 
   idVenta?: number;
@@ -38,7 +40,7 @@ export class VentaEntity {
   cantidadMinima?: number;
   isReserva?: boolean;
   Observacion?: string;
-  UsuarioId?: string;  
+  UsuarioId?: string;
   adelanto?: string;
   private constructor() {
   }
@@ -84,4 +86,7 @@ export class VentaEntity {
 
     return r;
   } */
+
+
+
 }

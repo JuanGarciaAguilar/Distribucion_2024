@@ -21,3 +21,89 @@ $gutter: 1rem; //for primeflex grid system JUGA
     padding-bottom: 6px;
     /* align-items: end; */
 }
+.card {
+    background: var(--surface-card);
+    border: 1px solid var(--surface-border);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+    border-radius: 12px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: white;
+    text-align-last: center;
+
+}
+
+.card-title {
+    margin-bottom: var(--bs-card-title-spacer-y);
+    color: var(--bs-card-title-color);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 5px;
+}
+
+/*    div > span {
+   text-align: center !important;
+   padding-top: 50px;
+} */
+
+.card-footer {
+
+    color: var(--bs-card-cap-color);
+    background-color: var(--bs-card-cap-bg);
+    border-top: var(--bs-card-border-width) solid var(--bs-card-border-color);
+    background: darkslategrey;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 5px;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+    text-align: left;
+    padding: 1rem 1rem;
+    border: 1px solid #dfe7ef;
+    border-width: 0 0 1px 0;
+    font-weight: 700;
+    color: #708da9;
+    background: #eff3f8;
+    transition: box-shadow 0.2s;
+    background: darkslategrey;
+    color: white;
+    padding: 0px;
+}
+
+.p-datatable .p-datatable-header {
+    background: #eff3f8;
+    color: #708da9;
+    border: 1px solid #dfe7ef;
+    border-width: 1px 0 1px 0;
+    padding: 1rem 1rem;
+    font-weight: 700;
+    background: darkslategrey;
+    padding: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+
+.p-paginator {
+    background: #ffffff;
+    color: #708da9;
+    border: solid #f6f9fc;
+    border-width: 0;
+    padding: 0.5rem 1rem;
+    border-radius: 0px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: darkslategrey;
+}
+
+
+.p-datatable>.p-datatable-wrapper {
+    overflow: auto;
+    border: 1px solid darkgreen;
+}
+.p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+    background: #edf6f6;
+}

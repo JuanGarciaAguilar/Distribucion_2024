@@ -1,101 +1,89 @@
 <p-breadcrumb class="max-w-full" [model]="items" [home]="home" />
 
+<div style="padding-top: 5px;">
+
+    <div class="card" style="padding: 0px; ">
+
+        <div class="card-body">
+            <p-tabView>
+                <p-tabPanel header="Lista Clientes">
+                    <p-table #dt1 [value]="ClienteBySectorData" dataKey="id" styleClass="p-datatable-striped" [rows]="9"
+                        [rowsPerPageOptions]="[8, 25, 50]" [loading]="loading" [paginator]="true"
+                        [globalFilterFields]="['clienteName']">
+                        <ng-template pTemplate="caption">
 
 
-<div class="card" style="padding: 0px; ">
+                            <div class="row">
+                                <div class="col" style="padding: 5px 8px 2px 18px;">
+                                    <input class="form-control" type="text" [(ngModel)]="searchValue"
+                                        style="height: 90%; padding: 5px;"
+                                        (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                        placeholder="Buscar Cliente" />
+                                </div>
+                                <div class="col"></div>
+                                <div class="col"></div>
+                            </div>
 
-  <div class="card-body">
-    <p-tabView>
-      <p-tabPanel header="Lista Clientes">
-        <p-table #dt1 [value]="customers" dataKey="id" styleClass="p-datatable-striped" [rows]="10"
-          [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
-          [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']">
-          <ng-template pTemplate="caption">
-            <div class="flex">
-             
-              <span class="p-input-icon-left ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" [(ngModel)]="searchValue"
-                  (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
-              </span>
-            </div>
-          </ng-template>
-          <ng-template pTemplate="header">
-            <tr>
-              <th style="min-width:15rem">
-                <div class="flex align-items-center">
-                  Cliente
-                </div>
-              </th>
-              <th style="min-width:15rem">
-                <div class="flex align-items-center">
-                  Deuda Acumulada
-                </div>
-              </th>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="min-width:25rem">Cliente</th>
+                                <th style="min-width:15rem">Deuda Acumulada</th>
+                                <th style="min-width:15rem">Pagar Deuda</th>
+                                <th style="min-width:10rem" class="text-center">Registrar</th>
+                                <th style="min-width:10rem" class="text-center">Hist. Ventas</th>
+                                <th style="min-width:10rem" class="text-center">Hist. Reservas</th>
+                                <th style="min-width:10rem" class="text-center">Anulaciones</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-row>
+                            <tr>
+                                <td>
+                                    {{ row.clienteName }}
+                                </td>
+                                <td class="text-center">
+                                    S/. {{ row.deudaActualizada| currency: "S/. ":2 }}
+                                </td>
+                                <td class="text-center">
+                                    <button
+                                        style="border-radius: 50%;background: red; border: 1px solid red;color:  white;">
+                                        <li class="pi pi-money-bill"></li>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button
+                                        style="border-radius: 50%;background: darkslateblue; border: 1px solid darkslateblue;color:  white;">
+                                        <li class="pi pi-shopping-cart"></li>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button
+                                        style="border-radius: 50%;background: gray; border: 1px solid gray;color:  white;">
+                                        <li class="pi pi-history"></li>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button
+                                        style="border-radius: 50%;background: gray; border: 1px solid gray;color:  white;">
+                                        <li class="pi pi-history"></li>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button
+                                        style="border-radius: 50%;background: gray; border: 1px solid gray;color:  white;">
+                                        <li class="pi pi-history"></li>
+                                    </button>
+                                </td>
 
-              <th style="min-width:15rem">
-                <div class="flex align-items-center">
-                  Pagar Deuda
-                </div>
-              </th>
-
-              <th style="min-width:15rem">
-                <div class="flex align-items-center">
-                  Registrar
-                </div>
-              </th>
-
-              <th style="min-width:15rem">
-                <div class="flex align-items-center">
-                  Hist. Ventas
-                </div>
-              </th>
-              <th style="min-width:15rem">
-                <div class="flex align-items-center">
-                  Hist. Reservas
-                </div>
-              </th>
-
-              <th style="min-width:15rem">
-                <div class="flex align-items-center">
-                  Anulaciones
-                </div>
-              </th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-row>
-            <tr>
-              <td>
-                {{ row.clienteName }}
-              </td>
-              <td>
-                {{ row.deudaActualizada| currency: "S/ ":2 }}
-              </td>
-              <td>
-                {{ row.sumaDeuda | currency: "S/":2 }}
-              </td>
-              <td>
-                <button>p</button>
-              </td>
-              <td>
-                <button>p</button>
-              </td>
-              <td>
-                <button>p</button>
-              </td>
-              <td>
-                <button>p</button>
-              </td>
-
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-            <tr>
-              <td colspan="7">No hay clientes en este sector.</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </p-tabPanel>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="7">No hay clientes en este sector.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
 
 
 
@@ -119,14 +107,109 @@
 
 
 
-      <p-tabPanel header="Reservas del dia">
-        <p>
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium...
-        </p>
-      </p-tabPanel>
+                <p-tabPanel header="Reservas del dia">
+                    <p-table #dt1 [value]="ReservasData" dataKey="id" styleClass="p-datatable-striped" [rows]="9"
+                        [rowsPerPageOptions]="[8, 25, 50]" [loading]="loading" [paginator]="true"
+                        [globalFilterFields]="['clienteName']">
+                        <ng-template pTemplate="caption">
 
-    </p-tabView>
+                            <div class="row">
+                                <div class="col" style="padding: 5px 8px 2px 18px;">
+                                    <input class="form-control" type="date" [(ngModel)]="Buscar"
+                                        style="height: 90%; padding: 5px;" />
+                                </div>
+                                <div class="col" style="padding: 5px;">
+                                    <button style="height: 90%; padding: 5px;" class="btn btn-primary">Buscar</button>
+                                    </div>
+                                <div class="col" style="padding: 5px;"><button style="height: 90%; padding: 5px;" class="btn btn-primary">Ver total de productos</button></div>
+                                <div class="col" style="padding: 5px;" ><button style="height: 90%; padding: 5px;" class="btn btn-primary">Confirmar todo</button></div>
+                            </div>
 
-  </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="min-width:10rem" class="text-center">Fecha Reserva</th>
+                                <th style="min-width:10rem" class="text-center">Fecha Venta</th>
+                                <th style="min-width:10rem" class="text-center">Cliente</th>
+                                <th style="min-width:10rem" class="text-center">Producto</th>
+                                <th style="min-width:10rem" class="text-center">Cantidad</th>
+                                <th style="min-width:10rem" class="text-center">Unidad Medida</th>
+                                <th style="min-width:10rem" class="text-center">Precio</th>
+                                <th style="min-width:10rem" class="text-center">Total</th>
+                                <th style="min-width:10rem" class="text-center">Amortizacion</th>
+                                <th style="min-width:10rem" class="text-center">Observacion</th>
+                                <th style="min-width:5rem" class="text-center">Confirmar</th>
+                                <th style="min-width:5rem" class="text-center">Editar</th>
+                                <th style="min-width:5rem" class="text-center">Rechazar</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-row>
+                            <tr>
+                                <td>
+                                    {{ row.fechaReserva }}
+                                </td>
+                                <td class="text-center">
+                                    S/. {{ row.deudaActualizada| currency: "S/. ":2 }}
+                                </td>
+                                <td class="text-center">
+                                    S/. {{ row.deudaActualizada| currency: "S/. ":2 }}
+                                </td>
+                                <td class="text-center">
+                                    S/. {{ row.deudaActualizada| currency: "S/. ":2 }}
+                                </td>
+                                <td class="text-center">
+                                    S/. {{ row.deudaActualizada| currency: "S/. ":2 }}
+                                </td>
+                                <td class="text-center">
+                                    S/. {{ row.deudaActualizada| currency: "S/. ":2 }}
+                                </td>
+                                <td class="text-center">
+                                    S/. {{ row.deudaActualizada| currency: "S/. ":2 }}
+                                </td>
+                                <td class="text-center">
+                                    S/. {{ row.deudaActualizada| currency: "S/. ":2 }}
+                                </td>
+                                <td class="text-center">
+                                    S/. {{ row.deudaActualizada| currency: "S/. ":2 }}
+                                </td>
+                                <td class="text-center">
+                                    S/. {{ row.deudaActualizada| currency: "S/. ":2 }}
+                                </td>
+
+                                <td class="text-center">
+                                    <button
+                                        style="border-radius: 50%;background: gray; border: 1px solid gray;color:  white;">
+                                        <li class="pi pi-history"></li>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button
+                                        style="border-radius: 50%;background: gray; border: 1px solid gray;color:  white;">
+                                        <li class="pi pi-history"></li>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button
+                                        style="border-radius: 50%;background: gray; border: 1px solid gray;color:  white;">
+                                        <li class="pi pi-history"></li>
+                                    </button>
+                                </td>
+
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="7">No hay clientes en este sector.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+
+            </p-tabView>
+
+        </div>
+
+    </div>
 
 </div>
