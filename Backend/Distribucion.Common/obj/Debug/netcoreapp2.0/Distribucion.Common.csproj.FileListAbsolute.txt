@@ -77,3 +77,14 @@ E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Common\obj\Debug\netcorea
 E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Common\obj\Debug\netcoreapp2.0\Distribucion.Common.csproj.CoreCompileInputs.cache
 E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Common\obj\Debug\netcoreapp2.0\Distribucion.Common.dll
 E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Common\obj\Debug\netcoreapp2.0\Distribucion.Common.pdb
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Common\bin\Debug\netcoreapp2.0\Distribucion.Common.deps.json
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Common\bin\Debug\netcoreapp2.0\Distribucion.Common.dll
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Common\bin\Debug\netcoreapp2.0\Distribucion.Common.pdb
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Common\obj\Debug\netcoreapp2.0\Distribucion.Common.csproj.AssemblyReference.cache
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Common\obj\Debug\netcoreapp2.0\Distribucion.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Common\obj\Debug\netcoreapp2.0\Distribucion.Common.AssemblyInfoInputs.cache
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Common\obj\Debug\netcoreapp2.0\Distribucion.Common.AssemblyInfo.cs
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Common\obj\Debug\netcoreapp2.0\Distribucion.Common.csproj.CoreCompileInputs.cache
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Common\obj\Debug\netcoreapp2.0\Distribucion.Common.sourcelink.json
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Common\obj\Debug\netcoreapp2.0\Distribucion.Common.dll
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Common\obj\Debug\netcoreapp2.0\Distribucion.Common.pdb

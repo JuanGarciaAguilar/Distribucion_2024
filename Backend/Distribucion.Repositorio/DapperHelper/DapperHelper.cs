@@ -14,9 +14,9 @@ namespace Distribucion.Repositorio.DapperHelper
     {
         string sqlConnection =
            //   "Data Source=35.232.181.31;TrustServerCertificate=true;Initial Catalog=Distribucion;User ID=sqlserver;Password=g@rcia";
-           "Data Source=.;Initial Catalog=distribuciondb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        //"Data Source=localhost;Initial Catalog=distribuciondbNew;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        //"Server = tcp:dbserverglobal.database.windows.net,1433;Initial Catalog = Distribucion_DEV; Persist Security Info=False;User ID = carlos; Password = Sectest1; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30";
+          // "Data Source=.;Initial Catalog=distribuciondb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+       // "Data Source=localhost;Initial Catalog=distribuciondbNew;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        "Server = tcp:dbserverglobal.database.windows.net,1433;Initial Catalog = Distribucion_DEV; Persist Security Info=False;User ID = carlos; Password = Sectest1; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30";
 
 
         /// <summary>

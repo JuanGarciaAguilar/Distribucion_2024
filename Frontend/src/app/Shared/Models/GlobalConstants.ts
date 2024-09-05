@@ -10,9 +10,13 @@ export class GlobalConstants {
     //? -------------------------------------------------
     
     //? -- -------ENTORNO DESARROLLO--------------------
-    static API: string = 'http://localhost:51629/api/';
-    static DOMINIO: string = 'http://localhost:51629/';
+/*     static API: string = 'http://localhost:51629/api/';
+    static DOMINIO: string = 'http://localhost:51629/'; */
     //? ------------------------------------------------
+ //? -- -------ENTORNO produccion--------------------
+    protected API: string = 'http://distribuye-dis-go-api.azurewebsites.net/api/';
+    static API: string = 'http://distribuye-dis-go-api.azurewebsites.net/api/';
+ //? ------------------------------------------------
 
     public static ControlInterno: string = GlobalConstants.API + 'Control/';
     public static Constantes: string = GlobalConstants.API + 'Constantes/';
@@ -31,6 +35,10 @@ export class GlobalConstants {
 
     
     public static Producto: string = GlobalConstants.API + 'Producto/';
+    public static Ventas: string = GlobalConstants.API + 'Venta/';
+    public static Sector: string = GlobalConstants.API + 'Sector/';
+    public static Cliente_nt: string = GlobalConstants.API + 'Cliente_nt/';
+    public static Cliente: string = GlobalConstants.API + 'Cliente/';
 }
 
 

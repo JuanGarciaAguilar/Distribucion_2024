@@ -33,7 +33,8 @@ const routes: Routes = [
 
             { path: '', loadChildren: () => import('../app/Components/dashboard/dashboard.module').then(m => m.DashboardModule) },
             { path: 'Accesos', loadChildren: () => import('../app/Components/configuracion-sistema/configuracion-sistema.module').then(m => m.ConfiguracionSistemaModule)},
-            { path: 'Mantenedores', loadChildren: () => import('../app/Components/Mantenedores/Mantenedores.module').then(m => m.MantenedoresModule)}
+            { path: 'Mantenedores', loadChildren: () => import('../app/Components/Mantenedores/Mantenedores.module').then(m => m.MantenedoresModule)},
+            { path: 'Ventas', loadChildren: () => import('../app/Components/Ventas/ventas.module').then(m => m.VentasModule)}
         ]
     },
     //{ path: 'Dashboard', loadChildren: () => import('../app/Components/dashboard/dashboard.module').then(m => m.DashboardModule) },

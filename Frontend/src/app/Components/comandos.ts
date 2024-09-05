@@ -1,0 +1,1 @@
+//ng g m Components/ventas/ventas --routing --flat

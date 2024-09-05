@@ -178,12 +178,18 @@
       },
       "Distribucion.Common/1.0.0": {
         "runtime": {
-          "Distribucion.Common.dll": {}
+          "Distribucion.Common.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Distribucion.Entidades/1.0.0": {
         "runtime": {
-          "Distribucion.Entidades.dll": {}
+          "Distribucion.Entidades.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Distribucion.Interfaces/1.0.0": {
@@ -191,7 +197,10 @@
           "Distribucion.Entidades": "1.0.0"
         },
         "runtime": {
-          "Distribucion.Interfaces.dll": {}
+          "Distribucion.Interfaces.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

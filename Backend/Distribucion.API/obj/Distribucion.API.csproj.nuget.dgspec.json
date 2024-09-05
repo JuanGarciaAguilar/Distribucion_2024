@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.API\\Distribucion.API.csproj": {}
+    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.API\\Distribucion.API.csproj": {}
   },
   "projects": {
-    "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.API\\Distribucion.API.csproj": {
+    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.API\\Distribucion.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.API\\Distribucion.API.csproj",
+        "projectUniqueName": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.API\\Distribucion.API.csproj",
         "projectName": "Distribucion.API",
-        "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.API\\Distribucion.API.csproj",
+        "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.API\\Distribucion.API.csproj",
         "packagesPath": "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\",
-        "outputPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.API\\obj\\",
+        "outputPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,20 +26,21 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp2.0": {
             "targetAlias": "netcoreapp2.0",
             "projectReferences": {
-              "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
-                "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj"
+              "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
+                "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj"
               },
-              "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj": {
-                "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj"
+              "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj": {
+                "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj"
               },
-              "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Servicios\\Distribucion.Servicios.csproj": {
-                "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Servicios\\Distribucion.Servicios.csproj"
+              "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Servicios\\Distribucion.Servicios.csproj": {
+                "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Servicios\\Distribucion.Servicios.csproj"
               }
             }
           }
@@ -48,6 +49,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -95,22 +101,23 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj": {
+    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj",
+        "projectUniqueName": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj",
         "projectName": "Distribucion.Common",
-        "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj",
+        "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj",
         "packagesPath": "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\",
-        "outputPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Common\\obj\\",
+        "outputPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -125,6 +132,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -137,6 +145,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -156,22 +169,23 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
+    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
+        "projectUniqueName": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
         "projectName": "Distribucion.Entidades",
-        "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
+        "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
         "packagesPath": "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\",
-        "outputPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\obj\\",
+        "outputPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -186,6 +200,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -198,6 +213,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -217,22 +237,23 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj": {
+    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj",
+        "projectUniqueName": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj",
         "projectName": "Distribucion.Interfaces",
-        "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj",
+        "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj",
         "packagesPath": "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\",
-        "outputPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\obj\\",
+        "outputPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -247,14 +268,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp2.0": {
             "targetAlias": "netcoreapp2.0",
             "projectReferences": {
-              "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
-                "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj"
+              "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
+                "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj"
               }
             }
           }
@@ -263,6 +285,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -282,22 +309,23 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\Distribucion.Repositorio.csproj": {
+    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\Distribucion.Repositorio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\Distribucion.Repositorio.csproj",
+        "projectUniqueName": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\Distribucion.Repositorio.csproj",
         "projectName": "Distribucion.Repositorio",
-        "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\Distribucion.Repositorio.csproj",
+        "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\Distribucion.Repositorio.csproj",
         "packagesPath": "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\",
-        "outputPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\obj\\",
+        "outputPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -312,20 +340,21 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp2.0": {
             "targetAlias": "netcoreapp2.0",
             "projectReferences": {
-              "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj": {
-                "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj"
+              "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj": {
+                "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj"
               },
-              "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
-                "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj"
+              "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
+                "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj"
               },
-              "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj": {
-                "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj"
+              "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj": {
+                "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj"
               }
             }
           }
@@ -334,6 +363,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -357,22 +391,23 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Servicios\\Distribucion.Servicios.csproj": {
+    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Servicios\\Distribucion.Servicios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Servicios\\Distribucion.Servicios.csproj",
+        "projectUniqueName": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Servicios\\Distribucion.Servicios.csproj",
         "projectName": "Distribucion.Servicios",
-        "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Servicios\\Distribucion.Servicios.csproj",
+        "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Servicios\\Distribucion.Servicios.csproj",
         "packagesPath": "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\",
-        "outputPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Servicios\\obj\\",
+        "outputPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Servicios\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -387,20 +422,21 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp2.0": {
             "targetAlias": "netcoreapp2.0",
             "projectReferences": {
-              "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
-                "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj"
+              "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
+                "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj"
               },
-              "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj": {
-                "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj"
+              "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj": {
+                "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj"
               },
-              "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\Distribucion.Repositorio.csproj": {
-                "projectPath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\Distribucion.Repositorio.csproj"
+              "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\Distribucion.Repositorio.csproj": {
+                "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Repositorio\\Distribucion.Repositorio.csproj"
               }
             }
           }
@@ -409,6 +445,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -428,11 +469,12 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

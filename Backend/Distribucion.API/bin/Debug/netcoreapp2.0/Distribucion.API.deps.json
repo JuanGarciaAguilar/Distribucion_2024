@@ -4482,7 +4482,10 @@
       },
       "Distribucion.Common/1.0.0": {
         "runtime": {
-          "Distribucion.Common.dll": {}
+          "Distribucion.Common.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         },
         "compile": {
           "Distribucion.Common.dll": {}
@@ -4490,7 +4493,10 @@
       },
       "Distribucion.Entidades/1.0.0": {
         "runtime": {
-          "Distribucion.Entidades.dll": {}
+          "Distribucion.Entidades.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         },
         "compile": {
           "Distribucion.Entidades.dll": {}
@@ -4501,7 +4507,10 @@
           "Distribucion.Entidades": "1.0.0"
         },
         "runtime": {
-          "Distribucion.Interfaces.dll": {}
+          "Distribucion.Interfaces.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         },
         "compile": {
           "Distribucion.Interfaces.dll": {}
@@ -4515,7 +4524,10 @@
           "Distribucion.Interfaces": "1.0.0"
         },
         "runtime": {
-          "Distribucion.Repositorio.dll": {}
+          "Distribucion.Repositorio.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         },
         "compile": {
           "Distribucion.Repositorio.dll": {}
@@ -4528,7 +4540,10 @@
           "Distribucion.Repositorio": "1.0.0"
         },
         "runtime": {
-          "Distribucion.Servicios.dll": {}
+          "Distribucion.Servicios.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         },
         "compile": {
           "Distribucion.Servicios.dll": {}

@@ -191,3 +191,29 @@ E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.API\obj\Debug\netcoreapp2
 E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.API\obj\Debug\netcoreapp2.0\Distribucion.API.dll
 E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.API\obj\Debug\netcoreapp2.0\Distribucion.API.pdb
 E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.API\obj\Debug\netcoreapp2.0\Distribucion.API.genruntimeconfig.cache
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\appsettings.json
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.API.deps.json
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.API.runtimeconfig.json
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.API.runtimeconfig.dev.json
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.API.dll
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.API.pdb
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.Common.dll
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.Entidades.dll
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.dll
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.dll
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.Servicios.dll
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.Entidades.pdb
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.Interfaces.pdb
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.Servicios.pdb
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.Common.pdb
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\bin\Debug\netcoreapp2.0\Distribucion.Repositorio.pdb
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\obj\Debug\netcoreapp2.0\Distribucion.API.csproj.AssemblyReference.cache
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\obj\Debug\netcoreapp2.0\Distribucion.API.GeneratedMSBuildEditorConfig.editorconfig
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\obj\Debug\netcoreapp2.0\Distribucion.API.AssemblyInfoInputs.cache
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\obj\Debug\netcoreapp2.0\Distribucion.API.AssemblyInfo.cs
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\obj\Debug\netcoreapp2.0\Distribucion.API.csproj.CoreCompileInputs.cache
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\obj\Debug\netcoreapp2.0\Distribucion.API.sourcelink.json
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\obj\Debug\netcoreapp2.0\Distribu.6E0E4911.Up2Date
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\obj\Debug\netcoreapp2.0\Distribucion.API.dll
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\obj\Debug\netcoreapp2.0\Distribucion.API.pdb
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.API\obj\Debug\netcoreapp2.0\Distribucion.API.genruntimeconfig.cache

@@ -1,3 +1,5 @@
 is_global = true
 build_property.RootNamespace = Distribucion.Common
-build_property.ProjectDir = E:\Repositorios_GitHub\Distribucion\Distribucion_2024\Backend\Distribucion.Common\
+build_property.ProjectDir = E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Common\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

@@ -77,3 +77,14 @@ E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Entidades\obj\Debug\netco
 E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Entidades\obj\Debug\netcoreapp2.0\Distribucion.Entidades.csproj.CoreCompileInputs.cache
 E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Entidades\obj\Debug\netcoreapp2.0\Distribucion.Entidades.dll
 E:\Proyectos 2024\Distribucion Backend_ok\Distribucion.Entidades\obj\Debug\netcoreapp2.0\Distribucion.Entidades.pdb
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Entidades\bin\Debug\netcoreapp2.0\Distribucion.Entidades.deps.json
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Entidades\bin\Debug\netcoreapp2.0\Distribucion.Entidades.dll
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Entidades\bin\Debug\netcoreapp2.0\Distribucion.Entidades.pdb
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Entidades\obj\Debug\netcoreapp2.0\Distribucion.Entidades.csproj.AssemblyReference.cache
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Entidades\obj\Debug\netcoreapp2.0\Distribucion.Entidades.GeneratedMSBuildEditorConfig.editorconfig
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Entidades\obj\Debug\netcoreapp2.0\Distribucion.Entidades.AssemblyInfoInputs.cache
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Entidades\obj\Debug\netcoreapp2.0\Distribucion.Entidades.AssemblyInfo.cs
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Entidades\obj\Debug\netcoreapp2.0\Distribucion.Entidades.csproj.CoreCompileInputs.cache
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Entidades\obj\Debug\netcoreapp2.0\Distribucion.Entidades.sourcelink.json
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Entidades\obj\Debug\netcoreapp2.0\Distribucion.Entidades.dll
+E:\Repositorios GitHub\Distribucion_2024\Backend\Distribucion.Entidades\obj\Debug\netcoreapp2.0\Distribucion.Entidades.pdb

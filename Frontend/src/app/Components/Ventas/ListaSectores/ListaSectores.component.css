@@ -1,0 +1,37 @@
+ .card {
+     background: var(--surface-card);
+     border: 1px solid var(--surface-border);
+     padding: 2rem;
+     margin-bottom: 2rem;
+     box-shadow: var(--card-shadow);
+     border-radius: 12px;
+     border-top-left-radius: 8px;
+     border-top-right-radius: 8px;
+     color: white; 
+     text-align-last: center;
+  
+ }
+
+ .card-title {
+     margin-bottom: var(--bs-card-title-spacer-y);
+     color: var(--bs-card-title-color);
+     border-top-left-radius: 8px;
+     border-top-right-radius: 8px;
+     padding: 5px;
+ }
+
+    div > span {
+    text-align: center !important;
+    padding-top: 50px;
+ }
+
+ .card-footer {
+
+     color: var(--bs-card-cap-color);
+     background-color: var(--bs-card-cap-bg);
+     border-top: var(--bs-card-border-width) solid var(--bs-card-border-color);
+     background: darkslateblue;
+     border-bottom-left-radius: 8px;
+     border-bottom-right-radius: 8px;
+     padding: 5px;
+ }

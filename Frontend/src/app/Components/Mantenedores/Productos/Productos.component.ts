@@ -31,7 +31,7 @@ export class ProductosComponent implements OnInit {
     home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
     items: MenuItem[] = [
         { label: 'Categoria Productos' },
-    ];;
+    ];
     constructor() { }
 
     ngOnInit() {

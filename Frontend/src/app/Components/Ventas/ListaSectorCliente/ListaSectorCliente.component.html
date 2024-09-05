@@ -1,0 +1,132 @@
+<p-breadcrumb class="max-w-full" [model]="items" [home]="home" />
+
+
+
+<div class="card" style="padding: 0px; ">
+
+  <div class="card-body">
+    <p-tabView>
+      <p-tabPanel header="Lista Clientes">
+        <p-table #dt1 [value]="customers" dataKey="id" styleClass="p-datatable-striped" [rows]="10"
+          [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
+          [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']">
+          <ng-template pTemplate="caption">
+            <div class="flex">
+             
+              <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" [(ngModel)]="searchValue"
+                  (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="min-width:15rem">
+                <div class="flex align-items-center">
+                  Cliente
+                </div>
+              </th>
+              <th style="min-width:15rem">
+                <div class="flex align-items-center">
+                  Deuda Acumulada
+                </div>
+              </th>
+
+              <th style="min-width:15rem">
+                <div class="flex align-items-center">
+                  Pagar Deuda
+                </div>
+              </th>
+
+              <th style="min-width:15rem">
+                <div class="flex align-items-center">
+                  Registrar
+                </div>
+              </th>
+
+              <th style="min-width:15rem">
+                <div class="flex align-items-center">
+                  Hist. Ventas
+                </div>
+              </th>
+              <th style="min-width:15rem">
+                <div class="flex align-items-center">
+                  Hist. Reservas
+                </div>
+              </th>
+
+              <th style="min-width:15rem">
+                <div class="flex align-items-center">
+                  Anulaciones
+                </div>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-row>
+            <tr>
+              <td>
+                {{ row.clienteName }}
+              </td>
+              <td>
+                {{ row.deudaActualizada| currency: "S/ ":2 }}
+              </td>
+              <td>
+                {{ row.sumaDeuda | currency: "S/":2 }}
+              </td>
+              <td>
+                <button>p</button>
+              </td>
+              <td>
+                <button>p</button>
+              </td>
+              <td>
+                <button>p</button>
+              </td>
+              <td>
+                <button>p</button>
+              </td>
+
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="7">No hay clientes en este sector.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <p-tabPanel header="Reservas del dia">
+        <p>
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium...
+        </p>
+      </p-tabPanel>
+
+    </p-tabView>
+
+  </div>
+
+</div>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LSxREBfdURx3I/Wf0WjWqqQwQsskrYg8hsFqQtGK5x0WO8AoHG2QQ1z/bh30TUmFQm1xl/sQM7dfqFQFlTzcJg==",
+  "dgSpecHash": "dWdsbgEWk8Y=",
   "success": true,
-  "projectFilePath": "E:\\Repositorios_GitHub\\Distribucion\\Distribucion_2024\\Backend\\Distribucion.API\\Distribucion.API.csproj",
+  "projectFilePath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.API\\Distribucion.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\bouncycastle\\1.8.9\\bouncycastle.1.8.9.nupkg.sha512",
     "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\dapper\\1.50.4\\dapper.1.50.4.nupkg.sha512",
@@ -322,10 +322,60 @@
   ],
   "logs": [
     {
+      "code": "NU1902",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"Microsoft.AspNetCore.All\" 2.0.5 tiene una vulnerabilidad de gravedad moderada conocida, https://github.com/advisories/GHSA-3m2r-q8x3-xmf7",
+      "libraryId": "Microsoft.AspNetCore.All",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"Microsoft.AspNetCore.All\" 2.0.5 tiene una vulnerabilidad de gravedad moderada conocida, https://github.com/advisories/GHSA-cgpw-2gph-2r9g",
+      "libraryId": "Microsoft.AspNetCore.All",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"Microsoft.NETCore.App\" 2.0.0 tiene una vulnerabilidad de gravedad alta conocida, https://github.com/advisories/GHSA-7mfr-774f-w5r9",
+      "libraryId": "Microsoft.NETCore.App",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"System.Data.SqlClient\" 4.4.2 tiene una vulnerabilidad de gravedad moderada conocida, https://github.com/advisories/GHSA-8g2p-5pqh-5jmc",
+      "libraryId": "System.Data.SqlClient",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"System.Data.SqlClient\" 4.4.2 tiene una vulnerabilidad de gravedad alta conocida, https://github.com/advisories/GHSA-98g6-xh36-x2p7",
+      "libraryId": "System.Data.SqlClient",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    },
+    {
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"BouncyCastle 1.8.9\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "message": "El paquete \"BouncyCastle 1.8.9\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "BouncyCastle",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"
@@ -335,7 +385,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"HtmlRenderer.Core 1.5.0.5\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "message": "El paquete \"HtmlRenderer.Core 1.5.0.5\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "HtmlRenderer.Core",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"
@@ -345,7 +395,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"HtmlRenderer.PdfSharp 1.5.0.6\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "message": "El paquete \"HtmlRenderer.PdfSharp 1.5.0.6\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "HtmlRenderer.PdfSharp",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"
@@ -355,7 +405,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"iTextSharp 5.5.13.3\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "message": "El paquete \"iTextSharp 5.5.13.3\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "iTextSharp",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"
@@ -365,7 +415,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"Microsoft.AspNet.WebApi.Core 5.3.0\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "message": "El paquete \"Microsoft.AspNet.WebApi.Core 5.3.0\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "Microsoft.AspNet.WebApi.Core",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"
@@ -375,7 +425,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"PDFsharp 1.32.3057\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "message": "El paquete \"PDFsharp 1.32.3057\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "PDFsharp",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"
