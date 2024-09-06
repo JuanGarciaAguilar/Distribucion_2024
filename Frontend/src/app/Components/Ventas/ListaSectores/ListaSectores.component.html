@@ -1,17 +1,15 @@
 <p-breadcrumb class="max-w-full" [model]="items" [home]="home" />
 
-
-
 <div class="row">
     <div class="col-sm-6 col-lg-3" *ngFor="let row of SectorData" style="padding: 10px;">
-
         <div class="card" style="padding: 0px; ">
-            <div class="card-title" style="background: darkslateblue">
+            <div class="card-title" style="background: darkslategrey">
+                <p-skeleton height="2rem" *ngIf="row.sectorName ==''" styleClass="p-mb-2"></p-skeleton>
                 <span class="text-center"> {{row.sectorName}}</span>
             </div>
             <div class="card-body">
                 <h6> <b>
-                        <p class="card-text text-danger text-center">{{row.deuda[0].deudaTotal | currency:"S/":2}}</p>
+                        <p class="card-text text-danger text-center">{{row.deuda | number :'1.2-2'}}</p>
                     </b>
                 </h6>
             </div>
@@ -21,4 +19,10 @@
         </div>
     </div>
 
+   <p-dialog  [closable]="false" [modal]="true" [(visible)]="Loading" [style]="{ width: '25rem' }">
+        <div class="loader" style="width: 100%;">
+            <span class="loader-text">Cargando Informacion ... Espere porfavor</span>
+              <span class="load"></span>
+          </div>
+    </p-dialog>
 </div>

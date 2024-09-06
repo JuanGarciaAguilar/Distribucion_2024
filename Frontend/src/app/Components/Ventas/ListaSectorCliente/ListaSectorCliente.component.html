@@ -42,12 +42,12 @@
                                     {{ row.clienteName }}
                                 </td>
                                 <td class="text-center">
-                                    S/. {{ row.deudaActualizada| currency: "S/. ":2 }}
+                                    S/. {{ row.deudaActualizada | number: '1.2-2'  }}
                                 </td>
                                 <td class="text-center">
-                                    <button
+                                    <button (click)="ModalAdelantoOpen(row)"
                                         style="border-radius: 50%;background: red; border: 1px solid red;color:  white;">
-                                        <li class="pi pi-money-bill"></li>
+                                        <li class="pi pi-money-bill" ></li>
                                     </button>
                                 </td>
                                 <td class="text-center">
@@ -120,9 +120,11 @@
                                 </div>
                                 <div class="col" style="padding: 5px;">
                                     <button style="height: 90%; padding: 5px;" class="btn btn-primary">Buscar</button>
-                                    </div>
-                                <div class="col" style="padding: 5px;"><button style="height: 90%; padding: 5px;" class="btn btn-primary">Ver total de productos</button></div>
-                                <div class="col" style="padding: 5px;" ><button style="height: 90%; padding: 5px;" class="btn btn-primary">Confirmar todo</button></div>
+                                </div>
+                                <div class="col" style="padding: 5px;"><button style="height: 90%; padding: 5px;"
+                                        class="btn btn-primary">Ver total de productos</button></div>
+                                <div class="col" style="padding: 5px;"><button style="height: 90%; padding: 5px;"
+                                        class="btn btn-primary">Confirmar todo</button></div>
                             </div>
 
                         </ng-template>
@@ -213,3 +215,37 @@
     </div>
 
 </div>
+
+
+
+<p-dialog [closable]="false" [modal]="true" [(visible)]="PagoDeudaModal" [style]="{ width: '25rem' }">
+    <div>
+        Deuda acumulada de <b>{{nombreClientePago}}</b>: <h4> <b>{{deudaActualizada | currency: "S/ ":2}}</b></h4>
+    </div>
+
+    <div class="align-items-center gap-3 mb-3">
+        <label class="font-semibold w-6rem">Fecha Pago:</label>
+        <input type="datetime-local" class="form-control" [(ngModel)]="FechaPago" autocomplete="off" />
+    </div>
+    <div class="align-items-center gap-3 mb-3">
+        <label class="font-semibold w-6rem">Monto:</label>
+        <input type="number" class="form-control" [(ngModel)]="monto" autocomplete="off" />
+    </div>
+
+    <div class="align-items-center gap-3 mb-3">
+        <label class="font-semibold w-6rem">Observacion:</label>
+        <input type="text" class="form-control" [(ngModel)]="observacion" autocomplete="off" />
+    </div>
+    <div class="gap-2">
+        <div class="row">
+            <div class="col text-center"><button class="btn btn-primary" (click)="InsertPagoAdelanto()">Guardar</button></div>
+            <div class="col text-center"><button class="btn btn-danger" (click)="ModalAdelantoClose()">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</p-dialog>
+
+<p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
+        [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" position="bottom-right"
+        key="Notificacion" />

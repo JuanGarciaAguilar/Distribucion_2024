@@ -13,22 +13,31 @@ import { ToastModule } from 'primeng/toast';
 import { ListaSectoresComponent } from './ListaSectores/ListaSectores.component';
 import { ListaSectorClienteComponent } from './ListaSectorCliente/ListaSectorCliente.component';
 import { TabViewModule } from 'primeng/tabview';
+import { SkeletonModule } from 'primeng/skeleton';
+import { HistorialVentasComponent } from './HistorialVentas/HistorialVentas.component';
+import { HistorialReservaComponent } from './HistorialReserva/HistorialReserva.component';
+import { HistorialAnulacionesComponent } from './HistorialAnulaciones/HistorialAnulaciones.component';
 
 @NgModule({
-  declarations: [ListaSectoresComponent,ListaSectorClienteComponent],
+  declarations: [ListaSectoresComponent
+                ,ListaSectorClienteComponent
+                ,HistorialVentasComponent
+                ,HistorialReservaComponent
+                ,HistorialAnulacionesComponent],
   imports: [
-    CommonModule,
-    VentasRoutingModule,
-    BreadcrumbModule,
-    TableModule,
-    ButtonModule,
-    InputTextModule,
-    FormsModule,
-    DialogModule,
-    ReactiveFormsModule,
-    DropdownModule,
-    TabViewModule,
-    ToastModule
+                CommonModule,
+                VentasRoutingModule,
+                BreadcrumbModule,
+                TableModule,
+                ButtonModule,
+                InputTextModule,
+                FormsModule,
+                DialogModule,
+                ReactiveFormsModule,
+                DropdownModule,
+                TabViewModule,
+                ToastModule,
+                SkeletonModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

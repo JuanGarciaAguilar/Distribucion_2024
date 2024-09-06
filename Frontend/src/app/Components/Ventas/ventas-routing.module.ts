@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListaSectoresComponent } from './ListaSectores/ListaSectores.component';
 import { ListaSectorClienteComponent } from './ListaSectorCliente/ListaSectorCliente.component';
+import { HistorialVentasComponent } from './HistorialVentas/HistorialVentas.component';
+import { HistorialReservaComponent } from './HistorialReserva/HistorialReserva.component';
+import { HistorialAnulacionesComponent } from './HistorialAnulaciones/HistorialAnulaciones.component';
 
 const routes: Routes = [
   {
@@ -14,6 +17,18 @@ const routes: Routes = [
           {
             path:'SectorCliente/:id',
             component: ListaSectorClienteComponent
+          },
+          {
+            path:'HistorialVentas',
+            component: HistorialVentasComponent
+          },
+          {
+            path:'HistorialReservas',
+            component: HistorialReservaComponent
+          },
+          {
+            path:'HistorialAnulaciones',
+            component: HistorialAnulacionesComponent
           }
       ],
 
