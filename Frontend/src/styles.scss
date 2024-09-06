@@ -30,8 +30,8 @@ $gutter: 1rem; //for primeflex grid system JUGA
     border-radius: 12px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    color: white;
-    text-align-last: center;
+    //color: white;
+   // text-align-last: center;
 
 }
 
@@ -41,6 +41,7 @@ $gutter: 1rem; //for primeflex grid system JUGA
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     padding: 5px;
+    background: darkslategrey;
 }
 
 /*    div > span {
@@ -92,7 +93,7 @@ $gutter: 1rem; //for primeflex grid system JUGA
     color: #708da9;
     border: solid #f6f9fc;
     border-width: 0;
-    padding: 0.5rem 1rem;
+    padding: 0rem;
     border-radius: 0px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -106,4 +107,45 @@ $gutter: 1rem; //for primeflex grid system JUGA
 }
 .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
     background: #edf6f6;
+}
+
+
+.p-dropdown {
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+    /* height: 60%; */
+    height: 33px;
+    width: 100%;
+}
+
+
+.p-dropdown .p-dropdown-label.p-placeholder {
+    color: #708da9;
+    padding-top: 5px;
+}
+
+//centrar select de primeng
+ol, ul {
+    padding-left: 0rem;
+}
+
+
+.p-dropdown-label {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    flex: 1 1 auto;
+    width: 1%;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    padding-top: 5px;
+}
+
+.p-dropdown-panel .p-dropdown-header .p-dropdown-filter {
+    padding-right: 1.75rem;
+    margin-right: -1.75rem;
+    height: 30px;
 }

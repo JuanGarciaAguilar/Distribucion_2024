@@ -94,10 +94,7 @@ export class AuthService {
     }
 
     SetToken(token: string) {
-        console.log('token',token);
-
         localStorage.setItem('token', token);
-        
     }
 
     RemoveToken() {
@@ -169,4 +166,23 @@ export class AuthService {
         }),
     };
 } */
+
+
+
+
+
+
+
+
+
+
+
+    SetVentasData(Data: any) {
+        localStorage.setItem('VentasData', JSON.stringify(Data));
+    }
+
+    GetVentasData() {
+        let data =  JSON.parse(localStorage.getItem('VentasData')!);
+        return data;
+    }
 }

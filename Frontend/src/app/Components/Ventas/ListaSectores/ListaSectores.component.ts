@@ -8,7 +8,7 @@ import { VentasService } from 'src/app/Shared/Service/ventas.service';
   selector: 'app-ListaSectores',
   templateUrl: './ListaSectores.component.html',
   styleUrls: ['./ListaSectores.component.css'],
-  
+
 })
 export class ListaSectoresComponent implements OnInit {
 
@@ -31,13 +31,9 @@ export class ListaSectoresComponent implements OnInit {
 
   async GetListaSectores() {
     await this._SectorService.getListaSector().subscribe((Sectores: any) => {
-
       this._ClienteService.getDeudaClientesBySector().subscribe((Deudas: any) => {
-    
         for (let row of Sectores) {
-        
           let deuda:any = Deudas.filter((f: any) => f.sector == row.sectorName);
-
           for(let item of deuda){
             if (item.deudaTotal == 0){
               row.deuda = 0;
@@ -45,13 +41,8 @@ export class ListaSectoresComponent implements OnInit {
             else{
               row.deuda = item.deudaTotal;
             }
-           
           }
-
-          
         }
-
-
         this.SectorData = Sectores;
        this.Loading = false;
       });

@@ -1,0 +1,145 @@
+<p-breadcrumb class="max-w-full" [model]="items" [home]="home" />
+
+
+<div style="padding-top: 5px;">
+
+    <div class="card">
+
+        <div class="card-title" style="color: white;padding-bottom: 0px;padding-top: 10px;">
+            <div class="container" style="display: flex;">
+                <h5 style="color: white;padding-right: 10px;"> Deuda acumulada de </h5> <b
+                    style="color: white;padding-right: 10px;">{{'juan garcia afular' | uppercase}}</b>
+                <span style="color: white;padding-right: 10px;">es de:</span> <b>{{0}}</b>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <form>
+                        <div class="mb-3">
+                            <b>Fecha Venta:</b>
+                            <input type="datetime-local" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <b>Precio (S/.):</b>
+                            <input type="number" class="form-control" placeholder="Ingrese Precio">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <form>
+                        <div class="mb-3">
+                            <b>Producto:</b>
+                            <p-dropdown [options]="cities" optionLabel="name" [filter]="true"
+                                placeholder="Select a City">
+                                <ng-template let-country pTemplate="item">
+                                    <div style="padding-left: 4px;">
+                                        <div>{{ country.name }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </div>
+                        <div class="mb-3">
+                            <b>Total (S/.):</b>
+                            <input type="text" class="form-control" placeholder="0" disabled>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <form>
+                        <div class="mb-3">
+                            <b>Unidad Medida:</b>
+                            <p-dropdown [options]="cities" optionLabel="name" [filter]="true"
+                                placeholder="Select a City">
+                                <ng-template let-country pTemplate="item">
+                                    <div style="padding-left: 4px;">
+                                        <div>{{ country.name }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </div>
+                        <div class="mb-3">
+                            <b>Amortizacion(S/.):</b>
+                            <input type="number" class="form-control" placeholder="Ingrese Amortizacion">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <form>
+                        <div class="mb-3">
+                            <b>Cantidad:</b>
+                            <input type="number" class="form-control" placeholder="Ingrese Cantidad">
+                        </div>
+                        <div class="mb-3">
+                            <b>Observacion:</b>
+                            <input type="text" class="form-control" placeholder="Ingrese Observacion">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <form>
+                        <div class="mb-3">
+                            <b>Stock Actual:</b>
+                            <input type="number" class="form-control" placeholder="0" disabled>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <form>
+                        <div class="mb-3">
+                            <b>Costo (S/.):</b>
+                            <input type="text" class="form-control" placeholder="0" disabled>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer" style="padding: 0px;">
+            <div class="row">
+                <div class="col text-center" style="    padding: 0.6rem;"><button class="btn btn-primary">Agregar
+                        Ventas</button></div>
+                <!--  <div class="col text-center" style="    padding: 0.6rem;">
+                     <button
+                        class="btn btn-danger">Cancelar</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <p-table [value]="products" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
+            [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-striped" class="p-datatable-sm">
+            <ng-template pTemplate="caption">
+
+                <div class="text-center" style="color: white;">
+                   Lista de productos
+                </div>
+
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="text-center">Producto</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">U.M</th>
+                    <th class="text-center">Precio</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-center">Amortizacion</th>
+                    <th class="text-center">Deuda Actua</th>
+                    <th class="text-center">Observacion</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td>{{ product.code }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.quantity }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

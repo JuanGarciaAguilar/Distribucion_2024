@@ -23,7 +23,7 @@ export class ListaSectorClienteComponent implements OnInit {
     private _messageService = inject(MessageService);
 
     constructor() { }
-    
+
     home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
     items: MenuItem[] = [{ label: 'Lista de sectores' }];
 
@@ -134,6 +134,28 @@ export class ListaSectorClienteComponent implements OnInit {
                 ,life: 5000
             });
         }
+    }
+    GoMantenimientoVentas(Data : any){
+        this._Router.navigate(['/Ventas/MantenimientoVenta']);
+        this._auth.SetVentasData(Data);
+    }
+    GoHistorialVentas(Data : any){
+       /*   this._Router.navigate(['/Ventas/HistorialVentas'], {
+            queryParams: { id: Data.ventaId },MantenimientoVenta
+          }); */
+
+          this._Router.navigate(['/Ventas/HistorialVentas']);
+          this._auth.SetVentasData(Data);
+    }
+
+    GoHistorialReservas(Data : any){
+        this._Router.navigate(['/Ventas/HistorialReservas']);
+        this._auth.SetVentasData(Data);
+    }
+
+    GoHistorialAnulaciones(Data : any){
+        this._Router.navigate(['/Ventas/HistorialAnulaciones']);
+        this._auth.SetVentasData(Data);
     }
 
     CleanFields() {
