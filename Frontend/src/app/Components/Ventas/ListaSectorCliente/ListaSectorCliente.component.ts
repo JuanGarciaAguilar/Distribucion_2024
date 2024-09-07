@@ -27,11 +27,11 @@ export class ListaSectorClienteComponent implements OnInit {
     items: MenuItem[] = [
         { icon: 'pi pi-home', route: '/' },
         { label: 'Ventas por sector', route: '/Ventas/Sectores' },
-        { label: 'Clientes por sector'}
+        { label: 'Clientes por sector' }
     ];
 
 
-    loading: boolean = false;
+    loading: boolean = true;
 
     searchValue: string | undefined;
     PagoDeudaModal: boolean = false;
@@ -50,6 +50,7 @@ export class ListaSectorClienteComponent implements OnInit {
             .getclientesBySector(sector!)
             .subscribe((data: any) => {
                 this.ClienteBySectorData = data;
+                this.loading = false;
             });
     }
 
@@ -98,10 +99,10 @@ export class ListaSectorClienteComponent implements OnInit {
         if (this.FechaPago == '' || this.monto === 0 || this.observacion === '') {
             this._messageService.add({
                 severity: 'error'
-                ,summary: 'Notificacion'
-                ,detail: 'Campos Vacios, llene los campos correctamente'
-                ,key: 'Notificacion'
-                ,life: 5000
+                , summary: 'Notificacion'
+                , detail: 'Campos Vacios, llene los campos correctamente'
+                , key: 'Notificacion'
+                , life: 5000
             });
             return
         }
@@ -120,10 +121,10 @@ export class ListaSectorClienteComponent implements OnInit {
                     (data: any) => {
                         this._messageService.add({
                             severity: 'success'
-                            ,summary: 'Notificacion'
-                            ,detail: 'Pago procesado correctamente'
-                            ,key: 'Notificacion'
-                            ,life: 5000
+                            , summary: 'Notificacion'
+                            , detail: 'Pago procesado correctamente'
+                            , key: 'Notificacion'
+                            , life: 5000
                         });
                         this.ModalAdelantoClose();
                         this.GetClientesBySector();
@@ -132,32 +133,34 @@ export class ListaSectorClienteComponent implements OnInit {
         } catch (error: any) {
             this._messageService.add({
                 severity: 'error'
-                ,summary: 'Notificacion'
-                ,detail: error
-                ,key: 'Notificacion'
-                ,life: 5000
+                , summary: 'Notificacion'
+                , detail: error
+                , key: 'Notificacion'
+                , life: 5000
             });
         }
     }
-    GoMantenimientoVentas(Data : any){
+    GoMantenimientoVentas(Data: any) {
         this._Router.navigate(['/Ventas/MantenimientoVenta']);
         this._auth.SetVentasData(Data);
     }
-    GoHistorialVentas(Data : any){
-       /*   this._Router.navigate(['/Ventas/HistorialVentas'], {
-            queryParams: { id: Data.ventaId },MantenimientoVenta
-          }); */
+    GoHistorialVentas(Data: any) {
+        /*   this._Router.navigate(['/Ventas/HistorialVentas'], {
+             queryParams: { id: Data.ventaId },MantenimientoVenta
+           }); */
 
-          this._Router.navigate(['/Ventas/HistorialVentas']);
-          this._auth.SetVentasData(Data);
+        this._Router.navigate(['/Ventas/HistorialVentas']);
+        this._auth.SetVentasData(Data);
+
+
     }
 
-    GoHistorialReservas(Data : any){
+    GoHistorialReservas(Data: any) {
         this._Router.navigate(['/Ventas/HistorialReservas']);
         this._auth.SetVentasData(Data);
     }
 
-    GoHistorialAnulaciones(Data : any){
+    GoHistorialAnulaciones(Data: any) {
         this._Router.navigate(['/Ventas/HistorialAnulaciones']);
         this._auth.SetVentasData(Data);
     }

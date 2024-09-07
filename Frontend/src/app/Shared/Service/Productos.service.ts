@@ -45,4 +45,8 @@ export class ProductosService {
   postEliminaProducto(idProducto:number): any {
     return this._http.get(GlobalConstants.Producto + 'Producto/DeleteProducto/' + idProducto,  this._auth.getHeader());
   }
+
+  getListaEquivalencia(): any {
+    return this._http.get(GlobalConstants.Producto + 'Equivalencia');
+  }
 }

@@ -1,10 +1,7 @@
 <p-breadcrumb class="max-w-full" [model]="items" [home]="home" />
 
-
 <div style="padding-top: 5px;">
-
     <div class="card">
-
         <div class="card-title" style="color: white;padding-bottom: 0px;padding-top: 10px;">
             <div class="container" style="display: flex;">
                 <h5 style="color: white;padding-right: 10px;"> Deuda acumulada de </h5> <b
@@ -14,85 +11,95 @@
         </div>
 
         <div class="card-body">
-            <div class="row">
+            <div class="row" [formGroup]="_FormGroup">
                 <div class="col-md-2">
-                    <form>
-                        <div class="mb-3">
-                            <b>Fecha Venta:</b>
-                            <input type="datetime-local" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <b>Precio (S/.):</b>
-                            <input type="number" class="form-control" [(ngModel)]="precioPV" placeholder="Ingrese Precio">
-                        </div>
 
-                    </form>
+                    <div class="mb-3">
+                        <b>Fecha Venta:</b>
+                        <input type="datetime-local" [(ngModel)]="FechaVenta" formControlName="FechaVenta"
+                            class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <b>Precio (S/.):</b>
+                        <input type="number" class="form-control" [(ngModel)]="precioPV" formControlName="precioPV"
+                            (change)="calcularTotal(); actualizarDeudaActualizada()" placeholder="Ingrese Precio">
+                    </div>
+
                 </div>
                 <div class="col-md-2">
-                    <form>
-                        <div class="mb-3">
-                            <b>Producto:</b>
-                            <p-dropdown [options]="cities" optionLabel="name" [filter]="true"  [(ngModel)]="producto"
-                                placeholder="Select a City">
-                                <ng-template let-country pTemplate="item">
-                                    <div style="padding-left: 4px;">
-                                        <div>{{ country.name }}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
-                        </div>
-                        <div class="mb-3">
-                            <b>Total (S/.):</b>
-                            <input type="text" class="form-control" [(ngModel)]="totalPV" placeholder="0" disabled>
-                        </div>
-                    </form>
+
+                    <div class="mb-3">
+                        <b>Producto:</b>
+                        <p-dropdown [options]="ProductosData" optionLabel="productName" [filter]="true" filterBy="productName" (onChange)="seleccionaProducto()"
+                            [(ngModel)]="productoSelected" formControlName="productoSelected" placeholder="Selecciona Producto">
+                            <ng-template let-row pTemplate="item">
+                                <div style="padding-left: 4px;">
+                                    <div>{{ row.productName }}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+                    <div class="mb-3">
+                        <b>Total (S/.):</b>
+                        <input type="text" class="form-control" [(ngModel)]="totalPV" formControlName="totalPV"
+                            placeholder="0" (change)="actualizarDeudaActualizada()" disabled>
+                    </div>
+
                 </div>
                 <div class="col-md-2">
-                    <form>
-                        <div class="mb-3">
-                            <b>Unidad Medida:</b>
-                            <p-dropdown [options]="cities" optionLabel="name" [filter]="true" [(ngModel)]="unidadDeMedida"
-                                placeholder="Select a City">
-                                <ng-template let-country pTemplate="item">
-                                    <div style="padding-left: 4px;">
-                                        <div>{{ country.name }}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
-                        </div>
-                        <div class="mb-3">
-                            <b>Amortizacion(S/.):</b>
-                            <input type="number" class="form-control" [(ngModel)]="amortizacion" placeholder="Ingrese Amortizacion">
-                        </div>
-                    </form>
+
+                    <div class="mb-3">
+                        <b>Unidad Medida:</b>
+                        <p-dropdown [options]="EquivalenciaDataFilter" optionLabel="unidadBase" [filter]="true" filterBy="unidadBase" [(ngModel)]="unidadMedidaSelected"
+                            formControlName="unidadMedidaSelected" (onChange)="cambiarStockUnidadMedida();cargar()"
+                            placeholder="Selecciona Unidad Medida">
+                            <ng-template let-country pTemplate="item">
+                                <div style="padding-left: 4px;">
+                                    <div>{{ country.unidadBase }}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+                    <div class="mb-3">
+                        <b>Amortizacion(S/.):</b>
+                        <input type="number" class="form-control" [(ngModel)]="amortizacion"
+                            formControlName="amortizacion" placeholder="Ingrese Amortizacion"
+                            (change)="actualizarDeudaActualizada()">
+                    </div>
+
                 </div>
                 <div class="col-md-2">
-                    <form>
-                        <div class="mb-3">
-                            <b>Cantidad:</b>
-                            <input type="number" class="form-control" [(ngModel)]="cantidadPV" placeholder="Ingrese Cantidad">
-                        </div>
-                        <div class="mb-3">
-                            <b>Observacion:</b>
-                            <input type="text" class="form-control"  [(ngModel)]="observacion" placeholder="Ingrese Observacion">
-                        </div>
-                    </form>
+
+                    <div class="mb-3">
+                        <b>Cantidad:</b>
+                        <input type="number" class="form-control" [(ngModel)]="cantidadPV" formControlName="cantidadPV"
+                            (change)="calcularTotal(); actualizarDeudaActualizada(); VALIDAD_STOCK()"
+                            placeholder="Ingrese Cantidad">
+                    </div>
+                    <div class="mb-3">
+                        <b>Observacion:</b>
+                        <input type="text" class="form-control" [(ngModel)]="observacion" formControlName="observacion"
+                            placeholder="Ingrese Observacion">
+                    </div>
+
                 </div>
                 <div class="col-md-2">
-                    <form>
-                        <div class="mb-3">
-                            <b>Stock Actual:</b>
-                            <input type="number" class="form-control" [(ngModel)]="stockActual" placeholder="0" disabled>
-                        </div>
-                    </form>
+
+                    <div class="mb-3">
+                        <b>Stock Actual:</b>
+                        <input type="text" class="form-control" [(ngModel)]="stockActual"
+                            formControlName="stockActual" (change)="VALIDAD_STOCK()" placeholder="0">
+                    </div>
+
                 </div>
                 <div class="col-md-2">
-                    <form>
-                        <div class="mb-3">
-                            <b>Costo (S/.):</b>
-                            <input type="text" class="form-control"  [(ngModel)]="CostoCompra" placeholder="0" disabled>
-                        </div>
-                    </form>
+
+                    <div class="mb-3">
+                        <b>Costo (S/.):</b>
+                        <input type="text" class="form-control" [(ngModel)]="CostoCompra" formControlName="CostoCompra"
+                            placeholder="0" disabled>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -114,7 +121,7 @@
             <ng-template pTemplate="caption">
 
                 <div class="text-center" style="color: white;">
-                   Lista de productos
+                    Lista de productos
                 </div>
 
             </ng-template>

@@ -16,7 +16,6 @@
     </ng-template>
 </p-breadcrumb>
 
-
 <div style="padding-top: 5px;">
     <div class="card">
         <div>
@@ -107,7 +106,6 @@
         Deuda acumulada de <b>{{ClienteName}}</b>: <h4> <b>S/. {{deudaActualizada | number:'1.2-2'}}</b></h4>
     </div>
 
-
     <div class="align-items-center gap-3 mb-3">
         <label class="font-semibold w-6rem">Monto:</label>
         <input type="number" class="form-control" [(ngModel)]="monto" autocomplete="off" />
@@ -123,8 +121,14 @@
             <div class="col text-center"><button class="btn btn-danger" >Cancelar</button>
             </div>
         </div>
-
     </div>
+</p-dialog>
+
+<p-dialog  [closable]="false" [modal]="true" [(visible)]="loading" [style]="{ width: '25rem' }"> 
+    <div class="loader" style="width: 100%;">
+        <span class="loader-text">Cargando Informacion ... Espere porfavor</span>
+          <span class="load"></span>
+      </div>
 </p-dialog>
 
 <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"

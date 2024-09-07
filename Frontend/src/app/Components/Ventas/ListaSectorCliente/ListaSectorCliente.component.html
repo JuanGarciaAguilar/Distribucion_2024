@@ -63,7 +63,7 @@
                                     </button>
                                 </td>
                                 <td class="text-center">
-                                    <button (click)="GoMantenimientoVentas()"
+                                    <button (click)="GoMantenimientoVentas(row)"
                                         style="border-radius: 50%;background: darkslateblue; border: 1px solid darkslateblue;color:  white;">
                                         <li class="pi pi-shopping-cart"></li>
                                     </button>
@@ -98,33 +98,11 @@
                 </p-tabPanel>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <p-tabPanel header="Reservas del dia">
                     <p-table #dt1 [value]="ReservasData" dataKey="id" styleClass="p-datatable-striped" [rows]="9"
                         [rowsPerPageOptions]="[8, 25, 50]" [loading]="loading" [paginator]="true"
                         [globalFilterFields]="['clienteName']">
                         <ng-template pTemplate="caption">
-
                             <div class="row">
                                 <div class="col" style="padding: 5px 8px 2px 18px;">
                                     <input class="form-control" type="date" [(ngModel)]="Buscar"
@@ -138,7 +116,6 @@
                                 <div class="col" style="padding: 5px;"><button style="height: 90%; padding: 5px;"
                                         class="btn btn-primary">Confirmar todo</button></div>
                             </div>
-
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
@@ -208,27 +185,19 @@
                                         <li class="pi pi-history"></li>
                                     </button>
                                 </td>
-
-
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="emptymessage">
                             <tr>
-                                <td colspan="7">No hay clientes en este sector.</td>
+                                <td colspan="7">No hay datos.</td>
                             </tr>
                         </ng-template>
                     </p-table>
                 </p-tabPanel>
-
             </p-tabView>
-
         </div>
-
     </div>
-
 </div>
-
-
 
 <p-dialog [closable]="false" [modal]="true" [(visible)]="PagoDeudaModal" [style]="{ width: '25rem' }">
     <div>
@@ -254,8 +223,14 @@
             <div class="col text-center"><button class="btn btn-danger" (click)="ModalAdelantoClose()">Cancelar</button>
             </div>
         </div>
-
     </div>
+</p-dialog>
+
+<p-dialog  [closable]="false" [modal]="true" [(visible)]="loading" [style]="{ width: '25rem' }">
+    <div class="loader" style="width: 100%;">
+        <span class="loader-text">Cargando Informacion ... Espere porfavor</span>
+          <span class="load"></span>
+      </div>
 </p-dialog>
 
 <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"

@@ -39,6 +39,7 @@ export class GlobalConstants {
     public static Sector: string = GlobalConstants.API + 'Sector/';
     public static Cliente_nt: string = GlobalConstants.API + 'Cliente_nt/';
     public static Cliente: string = GlobalConstants.API + 'Cliente/';
+    public static Stock: string = GlobalConstants.API + 'Stock/';
 }
 
 

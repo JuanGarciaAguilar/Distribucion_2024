@@ -79,6 +79,13 @@
     </div>
 </p-dialog>
 
+<p-dialog  [closable]="false" [modal]="true" [(visible)]="loading" [style]="{ width: '25rem' }"> 
+    <div class="loader" style="width: 100%;">
+        <span class="loader-text">Cargando Informacion ... Espere porfavor</span>
+          <span class="load"></span>
+      </div>
+</p-dialog>
+
 <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
         [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" position="bottom-right"
         key="Notificacion" />
