@@ -23,7 +23,7 @@
                         </div>
                         <div class="mb-3">
                             <b>Precio (S/.):</b>
-                            <input type="number" class="form-control" placeholder="Ingrese Precio">
+                            <input type="number" class="form-control" [(ngModel)]="precioPV" placeholder="Ingrese Precio">
                         </div>
 
                     </form>
@@ -32,7 +32,7 @@
                     <form>
                         <div class="mb-3">
                             <b>Producto:</b>
-                            <p-dropdown [options]="cities" optionLabel="name" [filter]="true"
+                            <p-dropdown [options]="cities" optionLabel="name" [filter]="true"  [(ngModel)]="producto"
                                 placeholder="Select a City">
                                 <ng-template let-country pTemplate="item">
                                     <div style="padding-left: 4px;">
@@ -43,7 +43,7 @@
                         </div>
                         <div class="mb-3">
                             <b>Total (S/.):</b>
-                            <input type="text" class="form-control" placeholder="0" disabled>
+                            <input type="text" class="form-control" [(ngModel)]="totalPV" placeholder="0" disabled>
                         </div>
                     </form>
                 </div>
@@ -51,7 +51,7 @@
                     <form>
                         <div class="mb-3">
                             <b>Unidad Medida:</b>
-                            <p-dropdown [options]="cities" optionLabel="name" [filter]="true"
+                            <p-dropdown [options]="cities" optionLabel="name" [filter]="true" [(ngModel)]="unidadDeMedida"
                                 placeholder="Select a City">
                                 <ng-template let-country pTemplate="item">
                                     <div style="padding-left: 4px;">
@@ -62,7 +62,7 @@
                         </div>
                         <div class="mb-3">
                             <b>Amortizacion(S/.):</b>
-                            <input type="number" class="form-control" placeholder="Ingrese Amortizacion">
+                            <input type="number" class="form-control" [(ngModel)]="amortizacion" placeholder="Ingrese Amortizacion">
                         </div>
                     </form>
                 </div>
@@ -70,11 +70,11 @@
                     <form>
                         <div class="mb-3">
                             <b>Cantidad:</b>
-                            <input type="number" class="form-control" placeholder="Ingrese Cantidad">
+                            <input type="number" class="form-control" [(ngModel)]="cantidadPV" placeholder="Ingrese Cantidad">
                         </div>
                         <div class="mb-3">
                             <b>Observacion:</b>
-                            <input type="text" class="form-control" placeholder="Ingrese Observacion">
+                            <input type="text" class="form-control"  [(ngModel)]="observacion" placeholder="Ingrese Observacion">
                         </div>
                     </form>
                 </div>
@@ -82,7 +82,7 @@
                     <form>
                         <div class="mb-3">
                             <b>Stock Actual:</b>
-                            <input type="number" class="form-control" placeholder="0" disabled>
+                            <input type="number" class="form-control" [(ngModel)]="stockActual" placeholder="0" disabled>
                         </div>
                     </form>
                 </div>
@@ -90,7 +90,7 @@
                     <form>
                         <div class="mb-3">
                             <b>Costo (S/.):</b>
-                            <input type="text" class="form-control" placeholder="0" disabled>
+                            <input type="text" class="form-control"  [(ngModel)]="CostoCompra" placeholder="0" disabled>
                         </div>
                     </form>
                 </div>

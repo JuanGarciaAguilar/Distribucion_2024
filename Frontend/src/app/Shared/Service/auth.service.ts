@@ -174,15 +174,33 @@ export class AuthService {
 
 
 
+    SetSectoresData(data: any) {
+        localStorage.setItem('SectoresData', JSON.stringify(data));
+    }
+
+    GetSectoresData() {
+        let data =  JSON.parse(localStorage.getItem('SectoresData')!);
+        return data;
+    }
 
 
 
-    SetVentasData(Data: any) {
-        localStorage.setItem('VentasData', JSON.stringify(Data));
+    SetVentasData(data: any) {
+        localStorage.setItem('VentasData', JSON.stringify(data));
     }
 
     GetVentasData() {
         let data =  JSON.parse(localStorage.getItem('VentasData')!);
+        return data;
+    }
+
+
+    SetVentasUpdateData(data: any) {
+        localStorage.setItem('VentasUpdateData', JSON.stringify(data));
+    }
+
+    GetVentasUpdateData() {
+        let data =  JSON.parse(localStorage.getItem('VentasUpdateData')!);
         return data;
     }
 }

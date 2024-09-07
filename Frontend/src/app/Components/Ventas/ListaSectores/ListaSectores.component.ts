@@ -1,5 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from 'src/app/Shared/Service/auth.service';
 import { ClienteService } from 'src/app/Shared/Service/Cliente.service';
 import { SectorService } from 'src/app/Shared/Service/Sector.service';
 import { VentasService } from 'src/app/Shared/Service/ventas.service';
@@ -12,14 +14,17 @@ import { VentasService } from 'src/app/Shared/Service/ventas.service';
 })
 export class ListaSectoresComponent implements OnInit {
 
-  private _VentasService = inject(VentasService);
+  private _auth = inject(AuthService);
   private _ClienteService = inject(ClienteService);
   private _SectorService = inject(SectorService);
+  private _Router = inject(Router);
 
-  home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
   items: MenuItem[] = [
-    { label: 'Lista de sectores' },
-  ];
+    { icon: 'pi pi-home', route: '/' },
+    { label: 'Ventas por sector', route: '/Ventas/Sectores' }
+];
+
+
   constructor() { }
   Loading:boolean = true;
   SectorData: any;
@@ -48,5 +53,11 @@ export class ListaSectoresComponent implements OnInit {
       });
 
     });
+  }
+
+  GoListaClienteBySector(data:any){
+    this._Router.navigate(['/Ventas/SectorCliente/'+ data.sectorId]);
+     this._auth.SetSectoresData(data);
+
   }
 }

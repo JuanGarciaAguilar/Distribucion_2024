@@ -12,7 +12,7 @@ import { VentasService } from 'src/app/Shared/Service/ventas.service';
     selector: 'app-ListaSectorCliente',
     templateUrl: './ListaSectorCliente.component.html',
     styleUrls: ['./ListaSectorCliente.component.css'],
-    providers: [MessageService]
+    providers: [MessageService],
 })
 export class ListaSectorClienteComponent implements OnInit {
     private _ClienteService = inject(ClienteService);
@@ -24,8 +24,12 @@ export class ListaSectorClienteComponent implements OnInit {
 
     constructor() { }
 
-    home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
-    items: MenuItem[] = [{ label: 'Lista de sectores' }];
+    items: MenuItem[] = [
+        { icon: 'pi pi-home', route: '/' },
+        { label: 'Ventas por sector', route: '/Ventas/Sectores' },
+        { label: 'Clientes por sector'}
+    ];
+
 
     loading: boolean = false;
 
@@ -41,7 +45,7 @@ export class ListaSectorClienteComponent implements OnInit {
     }
 
     async GetClientesBySector() {
-        let sector = this._ActivatedRoute.snapshot.paramMap.get('id');
+        let sector = this._auth.GetSectoresData().sectorId;//this._ActivatedRoute.snapshot.paramMap.get('id');
         await this._ClienteService
             .getclientesBySector(sector!)
             .subscribe((data: any) => {

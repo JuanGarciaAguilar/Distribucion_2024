@@ -1,4 +1,18 @@
-<p-breadcrumb class="max-w-full" [model]="items" [home]="home" />
+<p-breadcrumb class="max-w-full" [model]="items">
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                <span class="text-primary font-semibold">{{ item.label }}</span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url">
+                <span class="text-color">{{ item.label }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
+</p-breadcrumb>
 
 <div style="padding-top: 5px;">
 
@@ -12,24 +26,22 @@
                         [globalFilterFields]="['clienteName']">
                         <ng-template pTemplate="caption">
 
-
                             <div class="row">
                                 <div class="col" style="padding: 5px 8px 2px 18px;">
                                     <input class="form-control" type="text" [(ngModel)]="searchValue"
-                                        style="height: 90%; padding: 5px;"
+                                        style=" padding: 5px;"
                                         (input)="dt1.filterGlobal($event.target.value, 'contains')"
                                         placeholder="Buscar Cliente" />
                                 </div>
                                 <div class="col"></div>
                                 <div class="col"></div>
                             </div>
-
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th style="min-width:25rem">Cliente</th>
-                                <th style="min-width:15rem">Deuda Acumulada</th>
-                                <th style="min-width:15rem">Pagar Deuda</th>
+                                <th style="min-width:25rem" class="text-center">Cliente</th>
+                                <th style="min-width:15rem" class="text-center">Deuda Acumulada</th>
+                                <th style="min-width:15rem" class="text-center">Pagar Deuda</th>
                                 <th style="min-width:10rem" class="text-center">Registrar</th>
                                 <th style="min-width:10rem" class="text-center">Hist. Ventas</th>
                                 <th style="min-width:10rem" class="text-center">Hist. Reservas</th>
@@ -39,7 +51,7 @@
                         <ng-template pTemplate="body" let-row>
                             <tr>
                                 <td>
-                                    {{ row.clienteName }}
+                                   <b> {{ row.clienteName }}</b>
                                 </td>
                                 <td class="text-center">
                                     S/. {{ row.deudaActualizada | number: '1.2-2'  }}

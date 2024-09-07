@@ -18,7 +18,7 @@ import { HistorialVentasComponent } from './HistorialVentas/HistorialVentas.comp
 import { HistorialReservaComponent } from './HistorialReserva/HistorialReserva.component';
 import { HistorialAnulacionesComponent } from './HistorialAnulaciones/HistorialAnulaciones.component';
 import { MantemientoVentasComponent } from './MantemientoVentas/MantemientoVentas.component';
-
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [ListaSectoresComponent
@@ -31,6 +31,7 @@ import { MantemientoVentasComponent } from './MantemientoVentas/MantemientoVenta
                 CommonModule,
                 VentasRoutingModule,
                 BreadcrumbModule,
+                MessagesModule,
                 TableModule,
                 ButtonModule,
                 InputTextModule,

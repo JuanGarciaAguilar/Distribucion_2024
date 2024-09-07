@@ -1,3 +1,132 @@
-<p>
-  HistorialAnulaciones works!
-</p>
+<!-- <p-breadcrumb class="max-w-full" [model]="items" [home]="home" /> -->
+
+<p-breadcrumb class="max-w-full" [model]="items">
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                <span class="text-primary font-semibold">{{ item.label }}</span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url">
+                <span class="text-color">{{ item.label }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
+</p-breadcrumb>
+
+
+<div style="padding-top: 5px;">
+    <div class="card">
+        <div>
+            <p-messages [(value)]="ClienteName" [closable]="false" />
+        </div>
+        <p-table [value]="VentasData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
+            [loading]="loading" [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-striped"
+            class="p-datatable-sm">
+            <ng-template pTemplate="caption">
+                <div class="text-center" style="color: white;">
+                    Historial de ventas
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="text-center">Fecha Venta</th>
+                    <th class="text-center">Producto</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">Unidad Medida</th>
+                    <th class="text-center">Precio</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-center">Amortizacion</th>
+                    <th class="text-center">Deuda Actua.</th>
+                    <th class="text-center">Observacion</th>
+                    <th class="text-center">Usuario </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+                <tr>
+                    <td class="text-center">
+                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;">{{row.fechaVenta | date: 'dd-MM-yyyy HH:mm:ss'}}</span>
+                          <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;">{{row.fechaVenta | date: 'dd-MM-yyyy HH:mm:ss'}}</span>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;"> {{row.productName}}</span>
+                        <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;"> {{row.productName}}</span>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;"> {{row.cantidadVenta}}</span>
+                        <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;"> {{row.cantidadVenta}}</span>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;"> {{row.unidadMedida}}</span>
+                        <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;"> {{'_____'}}</span>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;"> {{row.precioIngresadoVenta / row.cantidadVenta | number:'1.2-2'}}</span>
+                          <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;"> {{'_____'}}</span>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;"> {{row.precioIngresadoVenta | number:'1.2-2'}}</span>
+                        <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;"> {{row.precioIngresadoVenta | number:'1.2-2'}}</span>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;">{{row.amortizacion | number:'1.2-2'}}</span>
+                        <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;"> {{row.amortizacion | number:'1.2-2'}}</span>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;">{{row.deudaActualizada | number:'1.2-2'}}</span>
+                        <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;">{{row.deudaActualizada | number:'1.2-2'}}</span>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;">{{row.observacion}}</span>
+                        <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;">{{row.observacion}}</span>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;">{{row.usuarioId}}</span>
+                        <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;">{{row.usuarioId}}</span>
+                    </td>
+                    <td class="text-center">
+                        <button pButton icon="pi pi-pencil" (click)="goToEdit(row)"
+                            style="border-radius: 50%;width: 30px;height: 30px;background: mediumblue;"
+                            pTooltip="Ver Equivalencias"  ></button>
+                    </td>
+                    <td class="text-center">
+                        <button pButton icon="pi pi-trash"
+                            style="border-radius: 50%;width: 30px;height: 30px;background: red;"
+                            pTooltip="Eliminar Producto"></button>
+                    </td>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<p-dialog [closable]="false" [modal]="true" [(visible)]="PagoDeudaModal" [style]="{ width: '25rem' }">
+    <div>
+        Deuda acumulada de <b>{{ClienteName}}</b>: <h4> <b>S/. {{deudaActualizada | number:'1.2-2'}}</b></h4>
+    </div>
+
+
+    <div class="align-items-center gap-3 mb-3">
+        <label class="font-semibold w-6rem">Monto:</label>
+        <input type="number" class="form-control" [(ngModel)]="monto" autocomplete="off" />
+    </div>
+
+    <div class="align-items-center gap-3 mb-3">
+        <label class="font-semibold w-6rem">Observacion:</label>
+        <input type="text" class="form-control" [(ngModel)]="observacion" autocomplete="off" />
+    </div>
+    <div class="gap-2">
+        <div class="row">
+            <div class="col text-center"><button class="btn btn-primary" >Guardar</button></div>
+            <div class="col text-center"><button class="btn btn-danger" >Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</p-dialog>
+
+<p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
+        [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" position="bottom-right"
+        key="Notificacion" />
