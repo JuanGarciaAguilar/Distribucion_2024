@@ -40,6 +40,8 @@ export class GlobalConstants {
     public static Cliente_nt: string = GlobalConstants.API + 'Cliente_nt/';
     public static Cliente: string = GlobalConstants.API + 'Cliente/';
     public static Stock: string = GlobalConstants.API + 'Stock/';
+    public static Compra: string = GlobalConstants.API + 'Compra/';
+    public static CompraDetalle: string = GlobalConstants.API + 'CompraDetalle/';
 }
 
 
