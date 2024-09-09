@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MenuItem, MessageService } from 'primeng/api';
+import { MenuItem, Message, MessageService, PrimeNGConfig } from 'primeng/api';
 import { VentaEntity, VentasModel, VentasTempModel } from 'src/app/Shared/Models/VentasModel';
 import { AuthService } from 'src/app/Shared/Service/auth.service';
 import { ClienteService } from 'src/app/Shared/Service/Cliente.service';
@@ -19,6 +19,7 @@ export class MantemientoVentasComponent implements OnInit {
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
   items: MenuItem[] = [{ label: 'Ventas' }, { label: 'Lista Clientes' }, { label: 'Nueva Venta' }];
 
+  private _primengConfig = inject(PrimeNGConfig);
   private _auth = inject(AuthService);
   private _ProductosService = inject(ProductosService);
   private _VentasService = inject(VentasService);
@@ -42,8 +43,25 @@ export class MantemientoVentasComponent implements OnInit {
 
   deudaActualizada: number = 0;
   deudaAnterior: number = 0;
+  //ClienteName :string= this._auth.GetVentasData().clienteName;
+  //DeudaByCliente: number = this._auth.GetVentasData().deudaActualizada;
+  //ClienteName: Message[] | undefined;
+  DeudaByCliente: number = 0;
+  ClienteName: Message[] = [
+    {
+      severity: 'info',
+      detail: 'Cliente:  ' + this._auth.GetVentasData().clienteName,
+    },
+  ];
 
+  DeudaByClienteLoad: Message[] = [
+    {
+      severity: 'info',
+      detail: 'Deuda Acumulada:  S/. ' + this._auth.GetVentasData().deudaActualizada,
+    },
+  ];
 
+  ClienteId: number = this._auth.GetVentasData().clienteId;
   constructor() {
 
     console.log('modulo historial ventas', this._auth.GetVentasData());
@@ -69,7 +87,9 @@ export class MantemientoVentasComponent implements OnInit {
   ];
   products: any;
   ngOnInit() {
+    this._primengConfig.ripple = true;
     this.GetCargarDatosGenerales();
+    this.obtenerdeuda();
   }
 
 
@@ -98,10 +118,11 @@ export class MantemientoVentasComponent implements OnInit {
   } */
 
   public seleccionaProducto() {
+
+    this.ClearField();
     /*  let ProductDescripcion = this.dataTempProducto.filter(
        (f: any) => f.productId == productId
      ); */
-    console.log('producto seleccionado', this.productoSelected);
 
     this.precioPV = 0;
     // this.stockActual = 0;
@@ -127,17 +148,19 @@ export class MantemientoVentasComponent implements OnInit {
     //////////////////////////////////////////////
 
     // this.obtenerstockproducto(this.productoSelected.productId);
-    this._StockService.getStockByProductId(this.productoSelected.productId).subscribe((data: any) => {
-      this.stockActualTemp = data.stock;
-      if (this.unidadMedidaSelected !== null || this.unidadMedidaSelected !== undefined) {
-        this.cambiarStockUnidadMedida();
-      }
-    }
-    );
+
   }
+
 
   stockActualTemp: number = 0;
   cambiarStockUnidadMedida() {
+
+    this._StockService.getStockByProductId(this.productoSelected.productId).subscribe((data: any) => {
+      this.stockActualTemp = data.stock;
+      /* if (this.unidadMedidaSelected !== null || this.unidadMedidaSelected !== undefined) {
+        this.cambiarStockUnidadMedida();
+      } */
+    });
 
     this.stockActual = parseFloat((
       this.stockActualTemp /
@@ -152,7 +175,7 @@ export class MantemientoVentasComponent implements OnInit {
 
   }
 
-  cargar() { 
+  cargar() {
     this._ComprasService.getComprasMax(this.productoSelected.productId, this.unidadMedidaSelected.unidadBase).subscribe((data: any) => {
       this.cantidadObjetos_db = data[0].cantidadObjetos;;
       this.CostoCompra = Number(data[0].costo.toFixed(2));
@@ -190,28 +213,32 @@ export class MantemientoVentasComponent implements OnInit {
   amortizacionlast: any;
 
 
-  clienteId: number = 0;
   VentaDataTemporalObjeto!: VentasTempModel;
   VentaDataTemporal: VentasTempModel[] = [];
   cantidadObjetos_db: number = 0;
+  NroFila: number = 0;
   agregaProducto() {
 
-    for(let row of this.VentaDataTemporal){
-        if (row.productName == this.productoSelected.productName){
-          this._MessageService.add({
-            severity: 'error'
-            , summary: 'Error al Guardar Producto'
-            , detail: 'Producto ya se encuentra registrado'
-            , key: 'Notificacion'
-            , life: 5000
+    for (let row of this.VentaDataTemporal) {
+      if (row.productName == this.productoSelected.productName) {
+        this._MessageService.add({
+          severity: 'error'
+          , summary: 'Error al Guardar Producto'
+          , detail: 'Producto ya se encuentra registrado'
+          , key: 'Notificacion'
+          , life: 5000
         });
-            return
-        }
+        return
+      }
     }
 
+ 
+    this.NroFila = this.VentaDataTemporal.length == 0 ? 1 : this.VentaDataTemporal.length + 1;
+
     this.VentaDataTemporalObjeto = new VentasTempModel();
+    this.VentaDataTemporalObjeto.NroFila = this.NroFila;
     this.VentaDataTemporalObjeto.cantidadVenta = this.cantidadPV;
-    this.VentaDataTemporalObjeto.clienteId = this.clienteId;
+    this.VentaDataTemporalObjeto.clienteId = this.ClienteId
     this.VentaDataTemporalObjeto.productId = this.productoSelected.productId;
     this.VentaDataTemporalObjeto.productName = this.productoSelected.productName;
     this.VentaDataTemporalObjeto.unidadMedidad = this.unidadMedidaSelected.unidadBase;
@@ -221,12 +248,12 @@ export class MantemientoVentasComponent implements OnInit {
     this.VentaDataTemporalObjeto.precioIngresadoVenta = this.totalPV;
     this.VentaDataTemporalObjeto.amortizacion = this.amortizacion;
     this.VentaDataTemporalObjeto.observacion = this.observacion;
-    this.VentaDataTemporalObjeto.deudaActualizada = this.DeudaByClient + parseFloat(this.deudaActualizada.toFixed(2));
-    console.log('objeto',this.VentaDataTemporalObjeto);
-    
+    this.VentaDataTemporalObjeto.deudaActualizada = this.DeudaByCliente + parseFloat(this.deudaActualizada.toFixed(2));
+    console.log('objeto', this.VentaDataTemporalObjeto);
+
     this.VentaDataTemporal.push(this.VentaDataTemporalObjeto);
-
-
+    this.ClearField();
+    this.productoSelected = [];
 
     /*  if (agrega) {
        this.noDuplicate = true;
@@ -261,13 +288,62 @@ export class MantemientoVentasComponent implements OnInit {
 
 
   }
-  DeudaByClient:number = 0;
-  obtenerdeuda() {
-  
-    
-    this.DeudaByClient = Number(this._ClienteService.getDeudaAnteriorByClient(this._auth.GetVentasData().clienteId).toPromise());
+  DeudaByClient: number = 0;
+  async obtenerdeuda() {
+    let data = await this._ClienteService.getDeudaAnteriorByClient(this._auth.GetVentasData().clienteId).toPromise();
+    this.DeudaByCliente = Number(data);
 
-     
   }
 
+  EditVentaDataTemp(data: any) {
+    this.NroFila = data.NroFila;
+    this.cantidadPV = data.cantidadVenta;
+    this.productoSelected = this.ProductosData.find((f: any) => f.productId == data.productId);
+    this.unidadMedidaSelected = this.EquivalenciaDataFilter.find((f: any) => f.unidadBase == data.unidadMedidad);
+    this.precioPV = data.precio;
+    this.cantidadObjetos_db = data.pesoVenta;
+    this.totalPV = data.precioIngresadoVenta;
+    this.amortizacion = data.amortizacion;
+    this.observacion = data.observacion;
+  }
+
+  UpdateVentaDataTemp() {
+ 
+    this.VentaDataTemporalObjeto = new VentasTempModel(); 
+    this.VentaDataTemporalObjeto.cantidadVenta = this.cantidadPV; 
+    this.VentaDataTemporalObjeto.productId = this.productoSelected.productId;
+    this.VentaDataTemporalObjeto.productName = this.productoSelected.productName;
+    this.VentaDataTemporalObjeto.unidadMedidad = this.unidadMedidaSelected.unidadBase;
+    this.VentaDataTemporalObjeto.precio = this.precioPV;
+    this.VentaDataTemporalObjeto.pesoVenta = this.cantidadObjetos_db;
+    this.VentaDataTemporalObjeto.precioRealVenta = this.cantidadPV * this.precioPV;
+    this.VentaDataTemporalObjeto.precioIngresadoVenta = this.totalPV;
+    this.VentaDataTemporalObjeto.amortizacion = this.amortizacion;
+    this.VentaDataTemporalObjeto.observacion = this.observacion;
+    this.VentaDataTemporalObjeto.deudaActualizada = this.DeudaByCliente + this.totalPV - this.amortizacion;
+
+    let Objeto:any = this.VentaDataTemporal
+  
+    for (let row of Objeto){ 
+      if (row.NroFila == this.NroFila){
+        row = this.VentaDataTemporalObjeto;
+      }
+
+       
+    }
+
+  }
+
+  ClearField() {
+    //this.FechaVenta = '';
+    this.precioPV = 0;
+
+    this.totalPV = 0;
+    this.unidadMedidaSelected = [];
+    this.amortizacion = 0;
+    this.cantidadPV = 0;
+    this.observacion = '';
+    this.stockActual = 0;
+    this.CostoCompra = 0;
+  }
 }

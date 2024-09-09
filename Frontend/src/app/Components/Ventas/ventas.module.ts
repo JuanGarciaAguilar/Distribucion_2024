@@ -20,6 +20,7 @@ import { HistorialAnulacionesComponent } from './HistorialAnulaciones/HistorialA
 import { MantemientoVentasComponent } from './MantemientoVentas/MantemientoVentas.component';
 import { MessagesModule } from 'primeng/messages';
 
+import { FieldsetModule } from 'primeng/fieldset';
 @NgModule({
   declarations: [ListaSectoresComponent
                 ,ListaSectorClienteComponent
@@ -29,6 +30,7 @@ import { MessagesModule } from 'primeng/messages';
                 ,MantemientoVentasComponent ],
   imports: [
                 CommonModule,
+                FieldsetModule,
                 VentasRoutingModule,
                 BreadcrumbModule,
                 MessagesModule,
