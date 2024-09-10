@@ -45,21 +45,20 @@ hijodeijos:any[]=[];
   async getReporte(){
 
 
+
     this._VentasService.getReporteVentas(this.fInicio, this.fFin, 0).subscribe(
       (data:any) => {
-     //   console.log('GetProductos',data);
+        console.log('GetProductos',data);
         for(let producto of this.ProductosHeader){
 
                 let array = data.filter((f:any)=> f.productParentName.trim() == producto.productName.trim())
                 for(let ar of array){
-
-
                     let datito = {
                         name : ar.productName.trim(),
                         Concepto: [
                             {Descripcion :'Stock Inicial'},
                             {Descripcion :'Stock Final'},
-                            {Descripcion :'Stock'}
+                            {Descripcion :'Venta'}
                         ]
                     }
                     if (this.dataaa.length == 0){
@@ -72,53 +71,105 @@ hijodeijos:any[]=[];
                             this.dataaa.push(datito);
                         }
                     }
-
-
-
-
                 }
-
                 producto.ProductosData = this.dataaa ;
                 this.dataaa=[];
-
-
     }
 
       for(let header of this.ProductosHeader){
             for(let hijo of header.ProductosData){
 
-                let Dates = data.filter((f:any)=> f.productParentName.trim() == header.productName.trim() && f.productName.trim() == hijo.name.trim());
-
-                hijo.children = Dates;
-
-                for(let registros of hijo.children)
-                {
-                    let items = Dates.filter((f:any)=> f.clienteName == 'Stock Inicial');
-                    registros.StockInicial = items;
-                }
-
-                for(let registros of hijo.children)
-                    {
-                        let items = Dates.filter((f:any)=> f.clienteName == 'Stock Final');
-                        registros.StockFinal = items;
-                    }
-
-                    for(let registros of hijo.children)
-                        {
-                            let items = Dates.filter((f:any)=> f.clienteName !== 'Stock Final' && f.clienteName == 'Stock Inicial');
-                            registros.Stock = items;
+              let Dates = data.filter((f:any)=> f.productParentName.trim() == header.productName.trim() && f.productName.trim() == hijo.name.trim());
+              let StockInicial = Dates.filter((f:any)=> f.descripcion == 'Stock Inicial' || f.descripcion == 'Compra');
+              let StockFinal = Dates.filter((f:any)=> f.descripcion == 'Stock Final');
+              let items = Dates.filter((f:any)=> f.descripcion == 'Venta');
+                for(let con of hijo.Concepto){
+                    if (con.Descripcion == 'Stock Inicial'){
+                        let dat = StockInicial.filter((f:any)=>  f.cantidadCompra !== 0);
+debugger
+                        if (dat.length == 0){
+                            con.Items = [{adelanto : '',
+                                amortizacion : 0,
+                                cantidadCompra : 0,
+                                cantidadCompraEstandar : 0,
+                                cantidadVenta : 0,
+                                cantidadVentaEstandar : 0,
+                                clienteId : 0,
+                                clienteName : "Stock Inicial",
+                                descripcion : "Stock Inicial",
+                                fecha : "",
+                                fechaReserva : null,
+                                observacion : "------------",
+                                precioIngresadoVenta : 0,
+                                productId : 0,
+                                productName : hijo.name.trim(),
+                                productParentId : 0,
+                                productParentName : " ",
+                                relevanceValue : 0,
+                                sectorId : 0,
+                                sectorName : "Stock Inicial",
+                                stock : 0,
+                                stockInicial : 0,
+                                stockSobrante : 0,
+                                unidadMedida : "",
+                                usuarioId : "--------",
+                                ventaId : 0}]
+                        }else{
+                            con.Items = StockInicial.filter((f:any)=>  f.cantidadCompra !== 0);
                         }
+
+                    }
+                    if (con.Descripcion == 'Compra'){
+                        con.Items = StockInicial;
+                    }
+                    if (con.Descripcion == 'Venta'){
+                        con.Items = items;
+                    }
+                    if (con.Descripcion == 'Stock Final'){
+                        con.Items = StockFinal;
+                    }
+                }
             }
         }
-
         console.log(this.ProductosHeader);
-
       });
     }
-}
 
-function has(itemCode: any): unknown {
-    throw new Error('Function not implemented.');
+    TotalInicial(data:any){
+    let total : number = 0;
+       for(let row of data.Concepto){
+            for(let item of row.Items){
+                if (item.descripcion == 'Stock Inicial' || item.descripcion == 'Compra'){
+                    total += item.cantidadCompra;
+                }
+            }
+       }
+        return total;
+    }
+
+    TotalFinal(data:any){
+        let total : number = 0;
+           for(let row of data.Concepto){
+                for(let item of row.Items){
+                    if (item.descripcion == 'Stock Final'){
+                        total += item.stockSobrante;
+                    }
+                }
+           }
+            return total;
+    }
+
+    TotalVentas(data:any){
+        let total : number = 0;
+           for(let row of data.Concepto){
+                for(let item of row.Items){
+                    if (item.descripcion == 'Venta'){
+                        total += item.cantidadVenta;
+                    }
+                }
+           }
+            return total;
+    }
+
 }
-//this.reporteequema = Array.from(new Set(this.reporteequema))
 
