@@ -18,19 +18,7 @@ export class GlobalConstants {
     static API: string = 'http://distribuye-dis-go-api.azurewebsites.net/api/';
  //? ------------------------------------------------
 
-    public static ControlInterno: string = GlobalConstants.API + 'Control/';
-    public static Constantes: string = GlobalConstants.API + 'Constantes/';
-   // public static Proveedor: string = GlobalConstants.API + 'Proveedor/';
-    public static FileVersion: string = GlobalConstants.API + 'Files/';
-    public static Perfil: string = GlobalConstants.API + 'Perfil/';
-    public static PerfilMovimiento: string = GlobalConstants.API + 'PerfilMovimiento/';
-    public static Altas: string = GlobalConstants.API + 'Altas/';
-    public static Servidores: string = GlobalConstants.API + 'Servidores/';
-    public static Modulo: string = GlobalConstants.API + 'Modulo/';
-    public static Usuario: string = GlobalConstants.API + 'Usuario/';
-    public static PerfilCargo: string = GlobalConstants.API + 'PerfilCargo/';
-    public static Notificaciones: string = GlobalConstants.API + 'Notificaciones/';
-    public static Dba: string = GlobalConstants.API + 'Dba/';
+
 
 
 
@@ -43,6 +31,9 @@ export class GlobalConstants {
     public static Compra: string = GlobalConstants.API + 'Compra/';
     public static CompraDetalle: string = GlobalConstants.API + 'CompraDetalle/';
     public static Proveedor: string = GlobalConstants.API + 'Proveedor/';
+    public static Gastos: string = GlobalConstants.API + 'Gasto/';
+    public static Usuarios: string = GlobalConstants.API + 'Usuario/';
+    public static Cuidad: string = GlobalConstants.API + 'Cuidad/';
 }
 
 
