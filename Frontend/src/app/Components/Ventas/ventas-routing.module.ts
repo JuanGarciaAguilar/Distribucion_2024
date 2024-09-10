@@ -6,6 +6,9 @@ import { HistorialVentasComponent } from './HistorialVentas/HistorialVentas.comp
 import { HistorialReservaComponent } from './HistorialReserva/HistorialReserva.component';
 import { HistorialAnulacionesComponent } from './HistorialAnulaciones/HistorialAnulaciones.component';
 import { MantemientoVentasComponent } from './MantemientoVentas/MantemientoVentas.component';
+import { HistorialComprasComponent } from './HistorialCompras/HistorialCompras.component';
+import { ReporteComprasComponent } from './ReporteCompras/ReporteCompras.component';
+import { ReportesVentasTestComponent } from './ReportesVentasTest/ReportesVentasTest.component';
 
 const routes: Routes = [
   {
@@ -31,9 +34,14 @@ const routes: Routes = [
             path:'HistorialReservas',
             component: HistorialReservaComponent
           },
-          {
+         /*  {
             path:'HistorialAnulaciones',
             component: HistorialAnulacionesComponent
+          } */
+
+          {
+            path:'HistorialAnulaciones',
+            component: ReportesVentasTestComponent
           }
       ],
 

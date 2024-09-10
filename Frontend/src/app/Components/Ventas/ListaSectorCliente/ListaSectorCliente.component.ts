@@ -57,6 +57,8 @@ export class ListaSectorClienteComponent implements OnInit {
     async GetReservasSector() {
         await this._VentasService.getreservas().subscribe((data: any) => {
             this.ReservasData = data;
+            console.log('reservas',data);
+
         });
     }
 

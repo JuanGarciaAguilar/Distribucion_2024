@@ -58,8 +58,8 @@ getDeudaTotal(idCli : number): any {
   return this._http.get(GlobalConstants.Ventas + 'DeudaTotal/' + idCli, this._auth.getHeader());
 }
 
-getReporteVentas(fIni:string, fFin :string, Ventas: VentasModel): any {
-  return this._http.get(GlobalConstants.Ventas + 'Reporte/' + fIni + '/' + fFin + '/' + Ventas);
+getReporteVentas(fIni:string, fFin :string, producto:number): any {
+  return this._http.get(GlobalConstants.Ventas + 'Reporte/' + fIni + '/' + fFin + '/' + producto);
 }
 
 getReportePagos(fIni:string, fFin :string, Ventas: VentasModel): any {

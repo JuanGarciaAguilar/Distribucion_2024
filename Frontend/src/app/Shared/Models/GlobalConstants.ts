@@ -8,7 +8,7 @@ export class GlobalConstants {
     // static API: string = 'http://localhost:9595/api/';
     //static DOMINIO : string = 'http://localhost:9595/';
     //? -------------------------------------------------
-    
+
     //? -- -------ENTORNO DESARROLLO--------------------
 /*     static API: string = 'http://localhost:51629/api/';
     static DOMINIO: string = 'http://localhost:51629/'; */
@@ -20,7 +20,7 @@ export class GlobalConstants {
 
     public static ControlInterno: string = GlobalConstants.API + 'Control/';
     public static Constantes: string = GlobalConstants.API + 'Constantes/';
-    public static Proveedor: string = GlobalConstants.API + 'Proveedor/';
+   // public static Proveedor: string = GlobalConstants.API + 'Proveedor/';
     public static FileVersion: string = GlobalConstants.API + 'Files/';
     public static Perfil: string = GlobalConstants.API + 'Perfil/';
     public static PerfilMovimiento: string = GlobalConstants.API + 'PerfilMovimiento/';
@@ -33,7 +33,7 @@ export class GlobalConstants {
     public static Dba: string = GlobalConstants.API + 'Dba/';
 
 
-    
+
     public static Producto: string = GlobalConstants.API + 'Producto/';
     public static Ventas: string = GlobalConstants.API + 'Venta/';
     public static Sector: string = GlobalConstants.API + 'Sector/';
@@ -42,6 +42,7 @@ export class GlobalConstants {
     public static Stock: string = GlobalConstants.API + 'Stock/';
     public static Compra: string = GlobalConstants.API + 'Compra/';
     public static CompraDetalle: string = GlobalConstants.API + 'CompraDetalle/';
+    public static Proveedor: string = GlobalConstants.API + 'Proveedor/';
 }
 
 

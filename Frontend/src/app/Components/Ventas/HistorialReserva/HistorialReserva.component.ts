@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, Message, MessageService } from 'primeng/api';
+import { VentasModel } from 'src/app/Shared/Models/VentasModel';
 import { AuthService } from 'src/app/Shared/Service/auth.service';
 import { ClienteService } from 'src/app/Shared/Service/Cliente.service';
 import { VentasService } from 'src/app/Shared/Service/ventas.service';
@@ -27,29 +28,31 @@ export class HistorialReservaComponent implements OnInit {
     ];
 
     constructor() {}
-    ClienteName: Message[] | undefined;
+    ClienteName: Message[] = [
+        {
+            severity: 'success',
+            detail: 'Cliente:' + this._Auth.GetVentasData().clienteName,
+        },
+    ];
     VentasData: any;
     loading: boolean = true;
 
     ClienteNameModal: string = '';
 
-    nombreClientePago: string = '';
-    deudaActualizada: number = 0;
-    FechaPago?: string = '';
-    monto: number = 0;
-    observacion: string = '';
-    ClienteId: number = 0;
-    VentaId: number = 0;
-    PagoDeudaModal: boolean = false;
     ngOnInit() {
-        this.ClienteName = [
-            {
-                severity: 'success',
-                detail:
-                    'Cliente:  ' +
-                    '  ' +
-                    this._Auth.GetVentasData().clienteName,
-            },
-        ];
+       this.GetHistorialReservas();
+    }
+
+    ReservasData:VentasModel[]=[];
+    GetHistorialReservas(){
+        this._VentasService.getListaReservaByCliente(this._Auth.GetVentasData().clienteId).subscribe(
+            (data) => {
+                console.log('data',data);
+
+              this.ReservasData = data;
+
+              this.loading = false;
+            }
+          );
     }
 }

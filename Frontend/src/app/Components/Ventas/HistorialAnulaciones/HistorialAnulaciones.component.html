@@ -21,7 +21,7 @@
         <div>
             <p-messages [(value)]="ClienteName" [closable]="false" />
         </div>
-        <p-table [value]="VentasData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
+        <p-table [value]="AnulacionesData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
             [loading]="loading" [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-striped"
             class="p-datatable-sm">
             <ng-template pTemplate="caption">
@@ -101,30 +101,9 @@
         </p-table>
     </div>
 </div>
-<p-dialog [closable]="false" [modal]="true" [(visible)]="PagoDeudaModal" [style]="{ width: '25rem' }">
-    <div>
-        Deuda acumulada de <b>{{ClienteName}}</b>: <h4> <b>S/. {{deudaActualizada | number:'1.2-2'}}</b></h4>
-    </div>
 
-    <div class="align-items-center gap-3 mb-3">
-        <label class="font-semibold w-6rem">Monto:</label>
-        <input type="number" class="form-control" [(ngModel)]="monto" autocomplete="off" />
-    </div>
 
-    <div class="align-items-center gap-3 mb-3">
-        <label class="font-semibold w-6rem">Observacion:</label>
-        <input type="text" class="form-control" [(ngModel)]="observacion" autocomplete="off" />
-    </div>
-    <div class="gap-2">
-        <div class="row">
-            <div class="col text-center"><button class="btn btn-primary" >Guardar</button></div>
-            <div class="col text-center"><button class="btn btn-danger" >Cancelar</button>
-            </div>
-        </div>
-    </div>
-</p-dialog>
-
-<p-dialog  [closable]="false" [modal]="true" [(visible)]="loading" [style]="{ width: '25rem' }"> 
+<p-dialog  [closable]="false" [modal]="true" [(visible)]="loading" [style]="{ width: '25rem' }">
     <div class="loader" style="width: 100%;">
         <span class="loader-text">Cargando Informacion ... Espere porfavor</span>
           <span class="load"></span>

@@ -19,18 +19,26 @@ import { HistorialReservaComponent } from './HistorialReserva/HistorialReserva.c
 import { HistorialAnulacionesComponent } from './HistorialAnulaciones/HistorialAnulaciones.component';
 import { MantemientoVentasComponent } from './MantemientoVentas/MantemientoVentas.component';
 import { MessagesModule } from 'primeng/messages';
-
+import { TreeTableModule } from 'primeng/treetable';
 import { FieldsetModule } from 'primeng/fieldset';
+import { HistorialComprasComponent } from './HistorialCompras/HistorialCompras.component';
+import { ReporteComprasComponent } from './ReporteCompras/ReporteCompras.component';
+import { ReportesVentasTestComponent } from './ReportesVentasTest/ReportesVentasTest.component';
+import { PanelModule } from 'primeng/panel';
+
 @NgModule({
   declarations: [ListaSectoresComponent
                 ,ListaSectorClienteComponent
                 ,HistorialVentasComponent
                 ,HistorialReservaComponent
                 ,HistorialAnulacionesComponent
-                ,MantemientoVentasComponent ],
+                ,MantemientoVentasComponent
+            ,HistorialComprasComponent ,ReporteComprasComponent,ReportesVentasTestComponent],
   imports: [
                 CommonModule,
                 FieldsetModule,
+                TreeTableModule,
+                PanelModule,
                 VentasRoutingModule,
                 BreadcrumbModule,
                 MessagesModule,

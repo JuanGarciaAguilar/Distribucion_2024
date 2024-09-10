@@ -26,29 +26,32 @@ export class HistorialAnulacionesComponent implements OnInit {
         { label: 'Historial de Anulaciones'},
     ];
     constructor() {}
-    ClienteName: Message[] | undefined;
-    VentasData: any;
+    ClienteName: Message[] = [
+        {
+            severity: 'success',
+            detail: 'Cliente:  ' + this._Auth.GetVentasData().clienteName,
+        },
+    ];
+
     loading: boolean = true;
-
     ClienteNameModal: string = '';
-
     nombreClientePago: string = '';
-    deudaActualizada: number = 0;
-    FechaPago?: string = '';
-    monto: number = 0;
-    observacion: string = '';
-    ClienteId: number = 0;
-    VentaId: number = 0;
-    PagoDeudaModal: boolean = false;
+
     ngOnInit() {
-        this.ClienteName = [
-            {
-                severity: 'success',
-                detail:
-                    'Cliente:  ' +
-                    '  ' +
-                    this._Auth.GetVentasData().clienteName,
-            },
-        ];
+
+    }
+
+
+    AnulacionesData:any;
+    GetHistorialReservas(){
+        this._VentasService.getListaVentasanuladasByCliente(this._Auth.GetVentasData().clienteId).subscribe(
+            (data) => {
+                console.log('data',data);
+
+              this.AnulacionesData = data;
+
+              this.loading = false;
+            }
+          );
     }
 }
