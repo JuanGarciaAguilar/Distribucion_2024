@@ -22,10 +22,12 @@ getProveedoresAll(): any {
   getProveedoresAllCiudad(): any {
     return this._http.get(GlobalConstants.Proveedor +'ProveedorCiudad',this._auth.getHeader());
   }
-
-/*   getAllNewCiudad(): any {
-    return this._http.get(GlobalConstants.Proveedor + 'Ciudad/NewCiudades');
+/* 
+  getProveedoresAllCiudad(): any {
+    return this.httpClient.get(this.API + 'Proveedor/ProveedorCiudad');
+    // return this.httpClient.get(this.API + 'Proveedor/GetProveedorAll');
   }
+
 
   getAllInsertCiudad(ciudad: Ciudad): any {
     return this._http.post(this.API + 'Ciudad/InsertCiudad',ciudad ,httpOptions);

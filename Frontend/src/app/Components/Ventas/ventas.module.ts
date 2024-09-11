@@ -22,8 +22,7 @@ import { MessagesModule } from 'primeng/messages';
 import { TreeTableModule } from 'primeng/treetable';
 import { FieldsetModule } from 'primeng/fieldset';
 import { HistorialComprasComponent } from './HistorialCompras/HistorialCompras.component';
-import { ReporteComprasComponent } from './ReporteCompras/ReporteCompras.component';
-import { ReportesVentasTestComponent } from './ReportesVentasTest/ReportesVentasTest.component';
+import { ReporteComprasComponent } from './ReporteCompras/ReporteCompras.component'; 
 import { PanelModule } from 'primeng/panel';
 
 @NgModule({
@@ -33,7 +32,7 @@ import { PanelModule } from 'primeng/panel';
                 ,HistorialReservaComponent
                 ,HistorialAnulacionesComponent
                 ,MantemientoVentasComponent
-            ,HistorialComprasComponent ,ReporteComprasComponent,ReportesVentasTestComponent],
+            ,HistorialComprasComponent ,ReporteComprasComponent],
   imports: [
                 CommonModule,
                 FieldsetModule,

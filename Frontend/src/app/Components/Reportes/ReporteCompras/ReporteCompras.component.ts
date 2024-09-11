@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/api';
+import { ComprasService } from 'src/app/Shared/Service/Compras.service';
+import { ProveedorService } from 'src/app/Shared/Service/Proveedor.service';
 
 @Component({
   selector: 'app-ReporteCompras',
@@ -6,10 +9,66 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ReporteCompras.component.css']
 })
 export class ReporteComprasComponent implements OnInit {
+  items: MenuItem[] = [
+    { icon: 'pi pi-home', route: '/' },
+    { label: 'Reporte de Compras' },
+];
+private _ComprasService = inject(ComprasService);
+private _ProveedorService = inject(ProveedorService);
+constructor() { }
+ProveedorData:any;
+ProveedorSelected:any;
+fInicio: string = '';
+fFin: string = '';
+nProveedor: string = '';
+totalflete: number = 0;
+calculoTotalCompras: number = 0;
+ngOnInit() {
+this.GetProvedor();
+}
 
-  constructor() { }
+GetProvedor(){
+this._ProveedorService.getProveedoresAll().subscribe(
+    (data:any) => {
 
-  ngOnInit() {
-  }
+      for(let row of data){
+        row.proveedorId = 0,
+        row.proveedorName = 'Todos los proveedores'
+      }
+      console.log(data);
+      this.ProveedorData = data;
+      //this.loading = false;
+    });
+}
 
+ReporteData:any;
+getReporte() {
+/*  this.totalcantidad = 0;
+this.totalflete = 0;
+this.loading = true; */
+debugger
+console.log(this.ProveedorSelected.proveedorId);
+
+this._ComprasService
+  .getReporteCompras(this.fInicio, this.fFin, this.ProveedorSelected.proveedorId)
+  .subscribe((data:any) => {
+    this.ReporteData = data;
+    console.log('dataaaaa',data);
+
+  /*   this.loadItems();
+    this.loading = false;
+
+    this.calculoTotalCompras = 0;
+    this.totalflete = 0;
+
+    for (let i = 0; i < this.reporteComprasTemp.length; i++) {
+      debugger;
+      this.calculoTotalCompras += this.reporteComprasTemp[i].precioCompra;
+
+      this.totalflete +=
+        this.reporteComprasTemp[i].costoFleteItemCompra *
+        this.reporteComprasTemp[i].cantidadCompra; */
+   /*  } */
+  });
+}
 }

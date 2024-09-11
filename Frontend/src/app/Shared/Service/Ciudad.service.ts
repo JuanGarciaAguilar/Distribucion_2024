@@ -16,15 +16,15 @@ export class CiudadService {
 constructor() { }
 
 getAllNewCiudad(): any {
-    return this._HttpClient.get(GlobalConstants.Cuidad + 'NewCiudades',this._AuthService.getHeader());
+    return this._HttpClient.get(GlobalConstants.Ciudad + 'NewCiudades',this._AuthService.getHeader());
   }
 
   getAllInsertCiudad(ciudad: CuidadModel): any {
-    return this._HttpClient.post(GlobalConstants.Cuidad + 'InsertCiudad',ciudad ,this._AuthService.getHeader());
+    return this._HttpClient.post(GlobalConstants.Ciudad + 'InsertCiudad',ciudad ,this._AuthService.getHeader());
   }
 
   getAllUpdateCiudad(ciudad: CuidadModel): any {
-    return this._HttpClient.post(GlobalConstants.Cuidad + 'UpdateCiudad',ciudad ,this._AuthService.getHeader());
+    return this._HttpClient.post(GlobalConstants.Ciudad + 'UpdateCiudad',ciudad ,this._AuthService.getHeader());
   }
 
 }

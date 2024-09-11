@@ -1,3 +1,146 @@
-<p>
-  ReporteVentas works!
-</p>
+
+<p-breadcrumb class="max-w-full" [model]="items">
+  <ng-template pTemplate="item" let-item>
+      <ng-container *ngIf="item.route; else elseBlock">
+          <a [routerLink]="item.route" class="p-menuitem-link">
+              <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+              <span class="text-primary font-semibold">{{ item.label }}</span>
+          </a>
+      </ng-container>
+      <ng-template #elseBlock>
+          <a [href]="item.url">
+              <span class="text-color">{{ item.label }}</span>
+          </a>
+      </ng-template>
+  </ng-template>
+</p-breadcrumb>
+<div style="padding-top: 5px;">
+  <div class="card" style="padding: 0px; ">
+      <div class="container-fluid">
+          <div class="row gx-2">
+              <div class="col-3">
+                  <b>Desde:</b>
+                  <input type="date" class="form-control" [(ngModel)]="fInicio">
+              </div>
+              <div class="col-3">
+                  <b>Hasta:</b>
+                  <input type="date" class="form-control" [(ngModel)]="fFin">
+              </div>
+              <div class="col-3">
+                  <button class=" btn btn-primary" (click)="getReporte()">filtrar</button>
+              </div>
+          </div>
+      </div>
+      <hr>
+
+      <p-table [value]="ProductosHeader" #dt
+      [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }" [globalFilterFields]="['productName']"
+          [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-striped" class="p-datatable-sm">
+          <ng-template pTemplate="caption">
+              <div class="flex justify-content-between">
+                      <input  class="form-control" type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar Categoria" />
+              </div>
+          </ng-template>
+          <ng-template pTemplate="body" let-row>
+              <tr >
+                  <td class="text-center" colspan="11">
+                      <p-panel header="{{row.productName}}" [toggleable]="true" >
+                          <p-table [value]="row.ProductosData" [tableStyle]="{ 'min-width': '50rem' }">
+                             <!--  <ng-template pTemplate="caption">
+                                  <div class="flex justify-content-between">
+                                          <input  class="form-control" type="text" (input)="productos.filterGlobal($event.target.value, 'contains')" placeholder="Keyboard Search" />
+                                  </div>
+                              </ng-template> -->
+                              <ng-template pTemplate="body" let-header>
+                                  <tr style="border: 1px solid white !important;">
+                                      <p-panel header="{{header.name}}" [toggleable]="true" >
+                                          <p-table [value]="header.Concepto" [tableStyle]="{ 'min-width': '50rem' }" >
+                                              <ng-template pTemplate="body" let-Concepto let-index="rowIndex">
+                                                  <tr [pReorderableRow]="index">
+                                                      <td>
+                                                          <span class="pi pi-bars" pReorderableRowHandle pTooltip="Reordenar(↑ - ↓)"></span>
+                                                      </td>
+                                                      <p-panel header="{{Concepto.Descripcion}}" [toggleable]="true" >
+                                                          <p-table [value]="Concepto.Items" [tableStyle]="{ 'min-width': '50rem' }" >
+                                                              <ng-template pTemplate="header">
+                                                                  <tr>
+                                                                      <th class="text-center" style="width: 10rem;">Producto</th>
+                                                                      <th class="text-center" style="width: 10rem;">Fecha Venta</th>
+                                                                      <th class="text-center" style="width: 15rem;">Cliente </th>
+                                                                      <th class="text-center" style="width: 6rem;">U.M</th>
+                                                                      <th class="text-center" style="width: 6rem;">Cantidad</th>
+                                                                      <th class="text-center" style="width: 7rem;">Monto Venta</th>
+                                                                      <th class="text-center" style="width: 10rem;">Amortizacion / Adelanto</th>
+                                                                      <th class="text-center" style="width: 10rem;">Observacion</th>
+                                                                      <th class="text-center" style="width: 8rem;">Usuario</th>
+                                                                  </tr>
+                                                              </ng-template>
+                                                              <ng-template pTemplate="body" let-dat  >
+                                                                  <tr *ngIf="dat.sectorName == 'Stock Inicial'" style="color: blue;" >
+
+                                                                     <!--  <td class="text-center">{{dat.sectorName}}</td> -->
+                                                                      <td class="text-center">{{dat.productName}}</td>
+                                                                      <td class="text-center">{{dat.fecha |date:'YYYY-MM-dd'}}</td>
+                                                                      <td class="text-center">{{dat.clienteName}}</td>
+                                                                      <td class="text-center">{{dat.unidadMedida}}</td>
+                                                                      <td class="text-center">{{dat.cantidadCompra | number:'1.2-2'}}</td>
+                                                                      <td class="text-center">{{dat.precioIngresadoVenta | number:'1.2-2'}}</td>
+                                                                      <td class="text-center">{{dat.amortizacion | number:'1.2-2'}}</td>
+                                                                      <td class="text-center">{{dat.observacion}}</td>
+                                                                      <td class="text-center">{{dat.usuarioId}}</td>
+                                                                  </tr>
+                                                                  <tr *ngIf="dat.sectorName !== 'Stock Inicial' && dat.sectorName !== 'Stock Final'" style="color: black;font-weight: ;">
+                                                                      <!-- <td class="text-center">{{dat.sectorName}}</td> -->
+                                                                      <td class="text-center">{{dat.productName}}</td>
+                                                                      <td class="text-center">{{dat.fecha |date:'YYYY-MM-dd'}}</td>
+                                                                      <td class="text-center">{{dat.clienteName}}</td>
+                                                                      <td class="text-center">{{dat.unidadMedida}}</td>
+                                                                      <td class="text-center">{{dat.cantidadVenta | number:'1.2-2'}}</td>
+                                                                      <td class="text-center">{{dat.precioIngresadoVenta | number:'1.2-2'}}</td>
+                                                                      <td class="text-center">{{dat.amortizacion | number:'1.2-2'}}</td>
+                                                                      <td class="text-center">{{dat.observacion}}</td>
+                                                                      <td class="text-center">{{dat.usuarioId}}</td>
+                                                                  </tr>
+                                                                  <tr *ngIf="dat.sectorName == 'Stock Final'" style="color: red;">
+                                                                      <!-- <td class="text-center">{{dat.sectorName}}</td> -->
+                                                                      <td class="text-center">{{dat.productName}}</td>
+                                                                      <td class="text-center">{{dat.fecha |date:'YYYY-MM-dd'}}</td>
+                                                                      <td class="text-center">{{dat.clienteName}}</td>
+                                                                      <td class="text-center">{{dat.unidadMedida}}</td>
+                                                                      <td class="text-center">{{dat.stockSobrante | number:'1.2-2'}}</td>
+                                                                      <td class="text-center">{{dat.precioIngresadoVenta | number:'1.2-2'}}</td>
+                                                                      <td class="text-center">{{dat.amortizacion | number:'1.2-2'}}</td>
+                                                                      <td class="text-center">{{dat.observacion}}</td>
+                                                                      <td class="text-center">{{dat.usuarioId}}</td>
+                                                                  </tr>
+
+                                                              </ng-template>
+                                                             <!--  <ng-template pTemplate="footer">
+                                                                  <tr>
+                                                                      <td colspan="4" class="text-right">Totals</td>
+                                                                      <td>{{1500 | currency: 'S/. '}}</td>
+                                                                      <td>{{5852 | currency: 'S/. '}}</td>
+                                                                  </tr>
+                                                              </ng-template> -->
+                                                          </p-table>
+
+                                                      </p-panel>
+                                                  </tr>
+                                              </ng-template>
+
+                                          </p-table>
+                                          <div class="row">
+                                              <div class="col">Stock Inicial : {{ TotalInicial(header) | number:'1.2-2'}}</div>
+                                              <div class="col">Ventas : {{TotalVentas(header) | number:'1.2-2'}}  </div>
+                                              <div class="col">Stock Final : {{ TotalFinal(header) | number:'1.2-2'}}</div>
+                                          </div>
+                                      </p-panel>
+                                  </tr>
+                              </ng-template>
+                          </p-table>
+                      </p-panel>
+                  </td>
+          </ng-template>
+      </p-table>
+  </div>
+</div>

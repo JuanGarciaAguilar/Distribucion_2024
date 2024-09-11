@@ -18,10 +18,9 @@ export class GlobalConstants {
     static API: string = 'http://distribuye-dis-go-api.azurewebsites.net/api/';
  //? ------------------------------------------------
 
-
-
-
-
+ 
+ public static Usuario: string = GlobalConstants.API + 'Usuario/';
+    public static Modulo: string = GlobalConstants.API + 'Modulo/';
     public static Producto: string = GlobalConstants.API + 'Producto/';
     public static Ventas: string = GlobalConstants.API + 'Venta/';
     public static Sector: string = GlobalConstants.API + 'Sector/';
@@ -33,7 +32,7 @@ export class GlobalConstants {
     public static Proveedor: string = GlobalConstants.API + 'Proveedor/';
     public static Gastos: string = GlobalConstants.API + 'Gasto/';
     public static Usuarios: string = GlobalConstants.API + 'Usuario/';
-    public static Cuidad: string = GlobalConstants.API + 'Cuidad/';
+    public static Ciudad: string = GlobalConstants.API + 'Ciudad/';
 }
 
 

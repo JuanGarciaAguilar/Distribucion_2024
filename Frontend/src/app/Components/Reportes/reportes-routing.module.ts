@@ -7,42 +7,43 @@ import { ReporteEstadosFinancierosComponent } from './ReporteEstadosFinancieros/
 import { ReporteGastosComponent } from './ReporteGastos/ReporteGastos.component';
 import { ReporteIngresosComponent } from './ReporteIngresos/ReporteIngresos.component';
 import { ReporteVentasClienteComponent } from './ReporteVentasCliente/ReporteVentasCliente.component';
+import { ReporteVentasComponent } from './ReporteVentas/ReporteVentas.component';
 
 const routes: Routes = [
     {
         path: '',
         children: [
             {
-                path: 'ReporteCapital',
+                path: 'ReporteCapitalTotal',
                 component: ReporteCapitalComponent,
             },
             {
-              path:'SectorCliente/:id',
+              path:'ReporteCompras',
               component: ReporteComprasComponent
             },
             {
-              path:'MantenimientoVenta',
+              path:'ReporteDiario',
               component: ReporteDiarioComponent
             },
             {
-              path:'HistorialVentas',
+              path:'ReporteEstadoFinanciero',
               component: ReporteEstadosFinancierosComponent
             },
             {
-              path:'HistorialReservas',
+              path:'ReporteGastos',
               component: ReporteGastosComponent
             },
              {
-              path:'HistorialAnulaciones',
+              path:'ReporteIngresos',
               component: ReporteIngresosComponent
             },
             {
-              path:'HistorialAnulaciones',
+              path:'ReporteVentasCliente',
               component: ReporteVentasClienteComponent
             },
             {
-                path:'HistorialAnulaciones',
-                component: ReporteVentasClienteComponent
+                path:'ReporteVentas',
+                component: ReporteVentasComponent
               }
         ],
 
