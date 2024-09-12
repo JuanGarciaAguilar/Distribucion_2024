@@ -12,13 +12,13 @@ import { ProveedorService } from 'src/app/Shared/Service/Proveedor.service';
 @Component({
   selector: 'app-MantenimientoCompras',
   templateUrl: './MantenimientoCompras.component.html',
-  styleUrls: ['./MantenimientoCompras.component.css'],  
+  styleUrls: ['./MantenimientoCompras.component.css'],
   providers: [MessageService],
 })
 export class MantenimientoComprasComponent implements OnInit {
 
-  private _AuthService = inject(AuthService); 
-  private _Router = inject(Router); 
+  private _AuthService = inject(AuthService);
+  private _Router = inject(Router);
   private _messageService = inject(MessageService);
   private _EquivalenciasService = inject(EquivalenciasService);
   private _ProductosService = inject(ProductosService);
@@ -78,4 +78,7 @@ DocumentoCompra = [
       });
     }
   }
+
+
+
 }

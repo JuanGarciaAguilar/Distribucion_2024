@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ComprasRoutingModule } from './compras-routing.module';
@@ -15,6 +15,9 @@ import { ToastModule } from 'primeng/toast';
 import { TabViewModule } from 'primeng/tabview';
 import { SkeletonModule } from 'primeng/skeleton';
 import { MessagesModule } from 'primeng/messages';
+import { DividerModule } from 'primeng/divider';
+import { StepperModule } from 'primeng/stepper';
+import { StepsModule } from 'primeng/steps';
 
 @NgModule({
     declarations: [HistorialComprasComponent, MantenimientoComprasComponent],
@@ -33,6 +36,10 @@ import { MessagesModule } from 'primeng/messages';
         DialogModule,
         ReactiveFormsModule,
         MessagesModule,
+        DividerModule,
+        StepsModule,
+        StepperModule
     ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class ComprasModule {}
