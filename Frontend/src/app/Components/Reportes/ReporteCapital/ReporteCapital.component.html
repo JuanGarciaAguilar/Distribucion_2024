@@ -1,3 +1,138 @@
-<p>
-  ReporteCapital works!
-</p>
+<p-breadcrumb class="max-w-full" [model]="items">
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                <span class="text-primary font-semibold">{{ item.label }}</span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url">
+                <span class="text-color">{{ item.label }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
+</p-breadcrumb>
+
+<div style="padding-top: 5px;">
+    <div class="card" style="padding: 0px; ">
+        <div class="row">
+            <div class="col">
+                <span class="text-center">Reporte Capital</span>
+
+            </div>
+            <div class="col">
+                <span class="text-center">
+                    <div class="row">
+                        <div class="col"><input type="date" class="form-control"></div>
+                        <div class="col"><button class="btn btn-primary">Buscar</button></div>
+                        <div class="col"><button class="btn btn-primary">Limpiar</button></div>
+                    </div>
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div>
+                 <h3><span> <b>Efectivo : S/. {{EfectivoData}}</b></span></h3>
+                </div>
+
+            </div>
+            <div class="col">
+                <span class="text-center">
+
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h3><span> <b>Créditos</b> :S/. {{CreditoTotal}}</span></h3>
+                <p-table [value]="CreditoData" styleClass="p-datatable-striped" [rows]="10">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="min-width:8rem" class="text-center">Sector</th>
+                            <th style="min-width:8rem" class="text-center">Créditos otorgados</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-row>
+                        <tr>
+                            <td class="text-center">
+                                {{ row.sectorName }}
+                            </td>
+                            <td class="text-center">
+                                {{ row.deudaActualizada | number:'1.2-2' }}
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="7">No hay datos.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div class="col">
+                <h3><b> Productos: </b>S/. {{totalStock}}</h3>
+                <p-table [value]="StockData" sortField="productParentName" sortMode="single" styleClass="p-datatable-striped"
+                    dataKey="productParentName" rowGroupMode="subheader" groupRowsBy="productParentName" [expandedRowKeys]="{}"
+                    [tableStyle]="{'min-width': '70rem'}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 5rem;" class="text-center">#</th>
+                            <th  class="text-center">Productos</th>
+                            <th  class="text-center">U. M.</th>
+                            <th  class="text-center">Stock Actual</th>
+                            <th  class="text-center">Costo</th>
+                            <th  class="text-center">Valor Total</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="groupheader" let-row let-rowIndex="rowIndex" let-expanded="expanded">
+                        <tr>
+                            <td colspan="6"   style="padding-top: 0px;">
+                                <button type="button" pButton pRipple [pRowToggler]="row" style="padding-bottom: 0px; border-radius: 50%;"
+                                    class="p-button-text p-button-rounded p-button-plain mr-2"
+                                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+                                </button>
+
+                                <span class="font-bold ml-2"> <b>Categoria: </b>{{row.productParentName}}</span>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="rowexpansion" let-row let-rowIndex="rowIndex">
+                        <tr>
+                            <td class="text-center">{{rowIndex +1}}</td>
+                            <td class="text-center">
+                                <p *ngIf="row.cantidadActualStock == 0" style="color: blue;">{{row.productName}}</p>
+                                <p *ngIf="row.cantidadActualStock !== 0" style="color: black;">{{row.productName}}</p>
+                            </td>
+                            <td class="text-center">
+                                <p *ngIf="row.cantidadActualStock == 0" style="color: blue;">{{row.unidadMedida}}</p>
+                                <p *ngIf="row.cantidadActualStock !== 0" style="color: black;">{{row.unidadMedida}}</p>
+                            </td>
+                            <td class="text-center">
+                                <p *ngIf="row.cantidadActualStock == 0" style="color: blue;">{{row.cantidadActualStock
+                                    }}</p>
+                                <p *ngIf="row.cantidadActualStock !== 0" style="color: black;">
+                                    {{row.cantidadActualStock}}</p>
+                            </td>
+                            <td class="text-center">
+                                <p *ngIf="row.cantidadActualStock == 0" style="color: blue;">{{row.costoCompra|
+                                    number:'1.2-2'}}</p>
+                                <p *ngIf="row.cantidadActualStock !== 0" style="color: black;">{{row.costoCompra|
+                                    number:'1.2-2'}}</p>
+                            </td>
+                            <td class="text-center">
+                                {{row.cantidadActualStock * row.costoCompra | number: "1.1-1"}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,13 +11,13 @@ export class StockService {
 
   private _http = inject(HttpClient);
   private _auth = inject(AuthService);
-  
+
 constructor() { }
 
 
 getStockAll(): any {
- 
-  return this._http.get(GlobalConstants.Stock + 'StockAll/,this._auth.getHeader()');
+
+  return this._http.get(GlobalConstants.Stock + 'StockAll/',this._auth.getHeader());
 }
 
 getStockAllFechas(fInicio: string): any {
