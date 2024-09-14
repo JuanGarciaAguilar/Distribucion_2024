@@ -39,17 +39,19 @@
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th style="min-width:25rem" class="text-center">Cliente</th>
-                                <th style="min-width:15rem" class="text-center">Deuda Acumulada</th>
-                                <th style="min-width:15rem" class="text-center">Pagar Deuda</th>
-                                <th style="min-width:10rem" class="text-center">Registrar</th>
-                                <th style="min-width:10rem" class="text-center">Hist. Ventas</th>
-                                <th style="min-width:10rem" class="text-center">Hist. Reservas</th>
-                                <th style="min-width:10rem" class="text-center">Anulaciones</th>
+                                <th class="text-center">#</th>
+                                <th style="min-width:25rem" class="text-center" pSortableColumn="clienteName">Cliente <p-sortIcon  field="clienteName"></p-sortIcon></th>
+                                <th style="min-width:15rem" class="text-center" >Deuda Acumulada</th>
+                                <th style="min-width:15rem" class="text-center" >Pagar Deuda</th>
+                                <th style="min-width:10rem" class="text-center" >Registrar</th>
+                                <th style="min-width:10rem" class="text-center" >Hist. Ventas</th>
+                                <th style="min-width:10rem" class="text-center" >Hist. Reservas</th>
+                                <th style="min-width:10rem" class="text-center" >Anulaciones</th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-row>
+                        <ng-template pTemplate="body" let-row let-rowIndex="rowIndex"> 
                             <tr>
+                                <td class="text-center"> {{rowIndex + 1}}</td>
                                 <td>
                                     <b> {{ row.clienteName }}</b>
                                 </td>
@@ -119,6 +121,7 @@
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
+                                <th>#</th>
                                 <th style="min-width:8rem" class="text-center">Fecha Reserva</th>
                                 <th style="min-width:8rem" class="text-center">Fecha Venta</th>
                                 <th style="min-width:10rem" class="text-center">Cliente</th>
@@ -134,8 +137,9 @@
                                 <th style="min-width:5rem" class="text-center">Rechazar</th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-row>
+                        <ng-template pTemplate="body" let-row let-rowIndex="RowIndex"  >
                             <tr>
+                                <td class="text-center"> {{rowIndex + 1}}</td>
                                 <td class="text-center">
                                     {{ row.fechaReserva }}
                                 </td>

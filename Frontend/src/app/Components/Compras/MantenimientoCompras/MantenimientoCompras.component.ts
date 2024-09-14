@@ -27,37 +27,53 @@ export class MantenimientoComprasComponent implements OnInit {
 
   items: MenuItem[] = [
     { icon: 'pi pi-home', route: '/' },
-    { label: 'Ventas por sector', route: '/Ventas/Sectores' },
-    { label: 'Clientes por sector', route: '/Ventas/SectorCliente/'+ this._AuthService.GetSectoresData().sectorId },
-    { label: 'Historial de Anulaciones'},
-];
+    { label: 'Nueva Compra' },
+  ];
 
-DocumentoCompra = [
-  {id: 1, label: 'FACTURA ELECTRONICA'},
-  {id: 2, label: 'BOLETA ELECTRONICA'},
-  {id: 3, label: 'NOTA DE PEDIDO'},
-  {id: 4, label: 'COTIZACION'},
-  {id: 4, label: 'SIN DOCUMENTO'},
-];
+  DocumentoCompra = [
+    { id: 1, label: 'FACTURA ELECTRONICA' },
+    { id: 2, label: 'BOLETA ELECTRONICA' },
+    { id: 3, label: 'NOTA DE PEDIDO' },
+    { id: 4, label: 'COTIZACION' },
+    { id: 4, label: 'SIN DOCUMENTO' },
+  ];
   constructor() { }
-  cities:any;
-  ComprasData:any;
-  ProductoData:any;
-  ProveedorData:any;
-  UnidadMedidaData:any;
-  CiudadData:any;
 
-  ProductoSelected:any;
+  FechaCompra: string = '';
+  FechaEntrega: string = '';
+  CiudadSelected: any;
+  ProveedorSelected: any;
+  ProductoSelected: any;
+  FleteUnitario: number = 0;
+  CantidadCompra: number = 0;
+  PrecioUnitario: number = 0;
+  CostoTotalCompra: number = 0;
+  SaldoAnterior: number = 0;
+  Amortizacion: number = 0;
+  Saldo: number = 0;
+  NumeroDocumento: string = '';
+  DocumentoCompraSelected: any;
 
-  update:boolean =false;
-  equivalenciaFilter: Equivalencia[]=[];
- async ngOnInit() {
+  TotalCompra: number = 0;
+  CostoTotalFlete: number = 0;
+
+  cities: any;
+  ComprasData: any;
+  ProductoData: any;
+  ProveedorData: any;
+  UnidadMedidaData: any;
+  CiudadData: any;
+
+
+  update: boolean = false;
+  equivalenciaFilter: Equivalencia[] = [];
+  async ngOnInit() {
     this.ProductoData = await this._ProductosService.GetListaProductos().toPromise();
     this.UnidadMedidaData = await this._ProductosService.getListaEquivalencia().toPromise();
     this.ProveedorData = await this._ProveedorService.getProveedoresAll().toPromise();
     this.CiudadData = await this._CiudadService.getAllNewCiudad().toPromise();
-    console.log('proveedor',this.ProveedorData);
-    console.log('cuidad',this.CiudadData);
+    console.log('proveedor', this.ProveedorData);
+    console.log('cuidad', this.CiudadData);
   }
 
 
@@ -71,7 +87,7 @@ DocumentoCompra = [
           this.UnidadMedidaData[i].bloq = true;
         }
       }
-      this.UnidadMedidaData.forEach((objSubcate:any) => {
+      this.UnidadMedidaData.forEach((objSubcate: any) => {
         if (objSubcate.productId == this.ProductoSelected.productId) {
           this.equivalenciaFilter.push(objSubcate);
         }

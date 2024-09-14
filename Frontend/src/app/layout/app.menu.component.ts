@@ -16,13 +16,13 @@ export class AppMenuComponent implements OnInit {
         private _menu: ModuloService,
         private _Auth: AuthService
     ) {}
-
+    Loading:boolean=false;
     ngOnInit() {
 
         this._AuthToken.ValidarToken();
 
         try {
-
+            this.Loading =true;
             this._menu
                 .GetModulo('')
                 .subscribe((data: any) => {
@@ -42,6 +42,7 @@ export class AppMenuComponent implements OnInit {
 
                         this.model = data;
                     });
+                    this.Loading =false;
                 });
         } catch (error) {}
 

@@ -23,7 +23,8 @@
             <p-stepperPanel header="Datos Generales">
                 <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
                     <div class="flex flex-column">
-                        <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                        <div
+                            class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
                             <div class="row" style="padding: 10px;">
                                 <div class="col">
                                     <label><b>Fecha de Compra :</b></label>
@@ -35,31 +36,36 @@
                                 </div>
                                 <div class="col">
                                     <label><b>Cuidad de la compra :</b></label>
-                                    <p-dropdown [options]="CiudadData" optionLabel="ciudadName" placeholder="Seleccione Cuidad" />
+                                    <p-dropdown [options]="CiudadData" optionLabel="ciudadName"
+                                        placeholder="Seleccione Cuidad" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="flex py-4">
-                        <p-button label="Next" (onClick)="nextCallback.emit()" />
-                    </div
-                ></ng-template>
+                        <p-button label="Siguiente" (onClick)="nextCallback.emit()" />
+                    </div>
+                </ng-template>
             </p-stepperPanel>
             <p-stepperPanel header="Detalle de la compra">
-                <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+                <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback"
+                    let-index="index">
                     <div class="flex flex-column">
-                        <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium" style="width: 90%;">
+                        <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
+                            style="width: 90%;">
 
                             <div class="row" style="padding: 10px;width: 100%;">
                                 <div class="col-md-2">
                                     <label>Proveedor :</label>
-                                    <p-dropdown [options]="ProveedorData" [filter]="true" filterBy="proveedorName" optionLabel="proveedorName" [showClear]="true"
+                                    <p-dropdown [options]="ProveedorData" [filter]="true" filterBy="proveedorName"
+                                        optionLabel="proveedorName" [showClear]="true"
                                         placeholder="Seleccione Porveedor" />
                                 </div>
                                 <div class="col-md-2">
                                     <label>Producto :</label>
-                                    <p-dropdown [options]="ProductoData" [filter]="true" filterBy="productName" optionLabel="productName" [showClear]="true"
-                                        placeholder="Seleccione Producto" (onChange)="obtenerEquivalencia()"/>
+                                    <p-dropdown [options]="ProductoData" [filter]="true" filterBy="productName"
+                                        optionLabel="productName" [showClear]="true" placeholder="Seleccione Producto"
+                                        (onChange)="obtenerEquivalencia()" />
                                 </div>
                                 <div class="col-md-2">
                                     <label>Flete Unitario :</label>
@@ -67,7 +73,8 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label>Unidad Medida :</label>
-                                    <p-dropdown [options]="UnidadMedidaData" [filter]="true" filterBy="unidadBase" optionLabel="unidadBase" [showClear]="true"
+                                    <p-dropdown [options]="UnidadMedidaData" [filter]="true" filterBy="unidadBase"
+                                        optionLabel="unidadBase" [showClear]="true"
                                         placeholder="Selecione unidad Medida" />
                                 </div>
                                 <div class="col-md-2">
@@ -99,8 +106,8 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label>Documento Compra:</label>
-                                    <p-dropdown [options]="DocumentoCompra" [filter]="true" filterBy="label" optionLabel="label" [showClear]="true"
-                                        placeholder="Seleccione documento" />
+                                    <p-dropdown [options]="DocumentoCompra" [filter]="true" filterBy="label"
+                                        optionLabel="label" [showClear]="true" placeholder="Seleccione documento" />
                                 </div>
                                 <div class="col-md-2">
                                     <label>Numero Documento :</label>
@@ -125,47 +132,51 @@
                             </div>
 
                             <div class="row" style="padding: 10px;width: 100%;">
-                                <p-table [value]="ComprasData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
-             [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-striped"
-            class="p-datatable-sm">
-            <ng-template pTemplate="caption">
-                <div class="text-center" style="color: white;">
-                    Historial de ventas
-                </div>
-            </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th class="text-center">Proveedor</th>
-                    <th class="text-center">Producto</th>
-                    <th class="text-center">Cantidad</th>
-                    <th class="text-center">U. M.</th>
-                    <th class="text-center">Precio Uni</th>
-                    <th class="text-center">Costo Total</th>
-                    <th class="text-center">Amortizacion</th>
-                    <th class="text-center">Saldo</th>
-                    <th class="text-center">Flete Unitario</th>
-                    <th class="text-center">Documento de Compra </th>
-                    <th class="text-center">Numero de Documento</th>
-                    <th class="text-center">Observacion</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-row>
-                <tr>
-                    <td class="text-center">
-                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;">{{row.fechaVenta | date: 'dd-MM-yyyy HH:mm:ss'}}</span>
-                          <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;">{{row.fechaVenta | date: 'dd-MM-yyyy HH:mm:ss'}}</span>
-                    </td>
+                                <p-table [value]="ComprasData" [paginator]="true" [rows]="5"
+                                    [tableStyle]="{ 'min-width': '50rem' }" [rowsPerPageOptions]="[5, 10, 20]"
+                                    styleClass="p-datatable-striped" class="p-datatable-sm">
+                                    <ng-template pTemplate="caption">
+                                        <div class="text-center" style="color: white;">
+                                            Historial de ventas
+                                        </div>
+                                    </ng-template>
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th class="text-center">Proveedor</th>
+                                            <th class="text-center">Producto</th>
+                                            <th class="text-center">Cantidad</th>
+                                            <th class="text-center">U. M.</th>
+                                            <th class="text-center">Precio Uni</th>
+                                            <th class="text-center">Costo Total</th>
+                                            <th class="text-center">Amortizacion</th>
+                                            <th class="text-center">Saldo</th>
+                                            <th class="text-center">Flete Unitario</th>
+                                            <th class="text-center">Documento de Compra </th>
+                                            <th class="text-center">Numero de Documento</th>
+                                            <th class="text-center">Observacion</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-row>
+                                        <tr>
+                                            <td class="text-center">
+                                                <span *ngIf="row.productName != 'PAGOS'"
+                                                    Style="color: black;">{{row.fechaVenta | date: 'dd-MM-yyyy
+                                                    HH:mm:ss'}}</span>
+                                                <span *ngIf="row.productName == 'PAGOS'"
+                                                    Style="color: blue;">{{row.fechaVenta | date: 'dd-MM-yyyy
+                                                    HH:mm:ss'}}</span>
+                                            </td>
 
-            </ng-template>
-        </p-table>
+                                    </ng-template>
+                                </p-table>
                             </div>
                         </div>
                     </div>
                     <div class="flex py-4 gap-2">
-                        <p-button label="Back" severity="secondary" (onClick)="prevCallback.emit()" />
-                        <p-button label="Next" (onClick)="nextCallback.emit()" />
+                        <p-button label="Regresar" severity="secondary" (onClick)="prevCallback.emit()" />
+                        <p-button label="Siguiente" (onClick)="nextCallback.emit()" />
                     </div>
                 </ng-template>
             </p-stepperPanel>
@@ -173,11 +184,77 @@
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
                     <div class="flex flex-column h-12rem">
                         <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                            Content III
+
+                            <div class="row" style="padding: 10px;width: 100%;">
+                                <div class="col-md-2">
+                                    <label><b>Fecha de Compra :</b></label>
+                                    <input type="date" class="form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <label><b>Fecha de Entrega :</b></label>
+                                    <input type="date" class="form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <label><b>Cuidad de la compra :</b></label>
+                                    <p-dropdown [options]="CiudadData" optionLabel="ciudadName"
+                                        placeholder="Seleccione Cuidad" />
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <label><b>Total Compra :</b>    </label>
+                                    <input type="number" class="form-control" placeholder="0">
+                                </div>
+                                <div class="col-md-2">
+                                    <label><b>Costo Total Flete :</b>    </label>
+                                    <input type="number" class="form-control" placeholder="0">
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding: 10px;width: 100%;">
+                                <p-table [value]="ComprasData" [paginator]="true" [rows]="5"
+                                    [tableStyle]="{ 'min-width': '50rem' }" [rowsPerPageOptions]="[5, 10, 20]"
+                                    styleClass="p-datatable-striped" class="p-datatable-sm">
+                                    <ng-template pTemplate="caption">
+                                        <div class="text-center" style="color: white;">
+                                            Historial de ventas
+                                        </div>
+                                    </ng-template>
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th class="text-center">Proveedor</th>
+                                            <th class="text-center">Producto</th>
+                                            <th class="text-center">Cantidad</th>
+                                            <th class="text-center">U. M.</th>
+                                            <th class="text-center">Precio Uni</th>
+                                            <th class="text-center">Costo Total</th>
+                                            <th class="text-center">Amortizacion</th>
+                                            <th class="text-center">Saldo</th>
+                                            <th class="text-center">Flete Unitario</th>
+                                            <th class="text-center">Documento de Compra </th>
+                                            <th class="text-center">Numero de Documento</th>
+                                            <th class="text-center">Observacion</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-row>
+                                        <tr>
+                                            <td class="text-center">
+                                                <span *ngIf="row.productName != 'PAGOS'"
+                                                    Style="color: black;">{{row.fechaVenta | date: 'dd-MM-yyyy
+                                                    HH:mm:ss'}}</span>
+                                                <span *ngIf="row.productName == 'PAGOS'"
+                                                    Style="color: blue;">{{row.fechaVenta | date: 'dd-MM-yyyy
+                                                    HH:mm:ss'}}</span>
+                                            </td>
+
+                                    </ng-template>
+                                </p-table>
+                            </div>
                         </div>
                     </div>
                     <div class="flex py-4">
-                        <p-button label="Back" (onClick)="prevCallback.emit()" />
+                        <p-button label="Terminar Compra" (onClick)="prevCallback.emit()" />
                     </div>
                 </ng-template>
             </p-stepperPanel>
@@ -205,13 +282,13 @@
         <form class="row g-3">
             <div class="col-md-2">
                 <label>Proveedor :</label>
-                <p-dropdown [options]="ProveedorData" [filter]="true" filterBy="proveedorName" optionLabel="proveedorName" [showClear]="true"
-                    placeholder="Seleccione Porveedor" />
+                <p-dropdown [options]="ProveedorData" [filter]="true" filterBy="proveedorName"
+                    optionLabel="proveedorName" [showClear]="true" placeholder="Seleccione Porveedor" />
             </div>
             <div class="col-md-2">
                 <label>Producto :</label>
-                <p-dropdown [options]="ProductoData" [filter]="true" filterBy="productName" optionLabel="productName" [showClear]="true"
-                    placeholder="Seleccione Producto" (onChange)="obtenerEquivalencia()"/>
+                <p-dropdown [options]="ProductoData" [filter]="true" filterBy="productName" optionLabel="productName"
+                    [showClear]="true" placeholder="Seleccione Producto" (onChange)="obtenerEquivalencia()" />
             </div>
             <div class="col-md-2">
                 <label>Flete Unitario :</label>
@@ -219,8 +296,8 @@
             </div>
             <div class="col-md-2">
                 <label>Unidad Medida :</label>
-                <p-dropdown [options]="UnidadMedidaData" [filter]="true" filterBy="unidadBase" optionLabel="unidadBase" [showClear]="true"
-                    placeholder="Selecione unidad Medida" />
+                <p-dropdown [options]="UnidadMedidaData" [filter]="true" filterBy="unidadBase" optionLabel="unidadBase"
+                    [showClear]="true" placeholder="Selecione unidad Medida" />
             </div>
             <div class="col-md-2">
                 <label>Cantidad :</label>
@@ -248,8 +325,8 @@
             </div>
             <div class="col-md-2">
                 <label>Documento Compra:</label>
-                <p-dropdown [options]="DocumentoCompra" [filter]="true" filterBy="label" optionLabel="label" [showClear]="true"
-                    placeholder="Seleccione documento" />
+                <p-dropdown [options]="DocumentoCompra" [filter]="true" filterBy="label" optionLabel="label"
+                    [showClear]="true" placeholder="Seleccione documento" />
             </div>
             <div class="col-md-2">
                 <label>Numero Documento :</label>
@@ -287,40 +364,41 @@
 
         <div class="row">
             <p-table [value]="ComprasData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
-             [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-striped"
-            class="p-datatable-sm">
-            <ng-template pTemplate="caption">
-                <div class="text-center" style="color: white;">
-                    Historial de ventas
-                </div>
-            </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th class="text-center">Proveedor</th>
-                    <th class="text-center">Producto</th>
-                    <th class="text-center">Cantidad</th>
-                    <th class="text-center">U. M.</th>
-                    <th class="text-center">Precio Uni</th>
-                    <th class="text-center">Costo Total</th>
-                    <th class="text-center">Amortizacion</th>
-                    <th class="text-center">Saldo</th>
-                    <th class="text-center">Flete Unitario</th>
-                    <th class="text-center">Documento de Compra </th>
-                    <th class="text-center">Numero de Documento</th>
-                    <th class="text-center">Observacion</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-row>
-                <tr>
-                    <td class="text-center">
-                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;">{{row.fechaVenta | date: 'dd-MM-yyyy HH:mm:ss'}}</span>
-                          <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;">{{row.fechaVenta | date: 'dd-MM-yyyy HH:mm:ss'}}</span>
-                    </td>
+                [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-striped" class="p-datatable-sm">
+                <ng-template pTemplate="caption">
+                    <div class="text-center" style="color: white;">
+                        Historial de ventas
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="text-center">Proveedor</th>
+                        <th class="text-center">Producto</th>
+                        <th class="text-center">Cantidad</th>
+                        <th class="text-center">U. M.</th>
+                        <th class="text-center">Precio Uni</th>
+                        <th class="text-center">Costo Total</th>
+                        <th class="text-center">Amortizacion</th>
+                        <th class="text-center">Saldo</th>
+                        <th class="text-center">Flete Unitario</th>
+                        <th class="text-center">Documento de Compra </th>
+                        <th class="text-center">Numero de Documento</th>
+                        <th class="text-center">Observacion</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td class="text-center">
+                            <span *ngIf="row.productName != 'PAGOS'" Style="color: black;">{{row.fechaVenta | date:
+                                'dd-MM-yyyy HH:mm:ss'}}</span>
+                            <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;">{{row.fechaVenta | date:
+                                'dd-MM-yyyy HH:mm:ss'}}</span>
+                        </td>
 
-            </ng-template>
-        </p-table>
+                </ng-template>
+            </p-table>
         </div>
 
     </div>

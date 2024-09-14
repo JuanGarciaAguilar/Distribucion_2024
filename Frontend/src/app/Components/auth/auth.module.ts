@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { LoginComponent } from './login/login.component';
+import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -18,6 +20,8 @@ import { LoginComponent } from './login/login.component';
     CommonModule,
     ButtonModule,
     CheckboxModule,
+    ToastModule,
+    DialogModule,
     InputTextModule,
     FormsModule,
     PasswordModule
