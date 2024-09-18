@@ -1,3 +1,89 @@
-<p>
-  ReporteDiario works!
-</p>
+<p-breadcrumb class="max-w-full" [model]="items">
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                <span class="text-primary font-semibold">{{ item.label }}</span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url">
+                <span class="text-color">{{ item.label }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
+</p-breadcrumb>
+<div style="padding-top: 5px;">
+    <div class="card" style="padding: 0px; ">
+        <div class="container-fluid">
+            <div class="row gx-2">
+                <div class="col-3">
+                    <b>Fecha:</b>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="col-3">
+                    <b>Sector:</b>
+                   <select  >
+                    <option *ngFor="let item of SectorData" [value]="item.sectorId">{{item.sectorName}}</option>
+                   </select>
+                </div>
+                <div class="col-3">
+                    <button class=" btn btn-primary">filtrar</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col">Saldo Inicial</div>
+                <div class="col">Venta Total</div>
+                <div class="col">Amortización Total</div>
+                <div class="col">Saldo Final</div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="card">
+                <p-table [value]="sales" [tableStyle]="{'min-width': '50rem'}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th rowspan="3">Product</th>
+                            <th colspan="4">Sale Rate</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Sales</th>
+                            <th colspan="2">Profits</th>
+                        </tr>
+                        <tr>
+                            <th>Last Year</th>
+                            <th>This Year</th>
+                            <th>Last Year</th>
+                            <th>This Year</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-sale>
+                        <tr>
+                            <td>{{sale.product}}</td>
+                            <td>{{sale.lastYearSale}}%</td>
+                            <td>{{sale.thisYearSale}}%</td>
+                            <td>{{sale.lastYearProfit | currency: 'USD'}}</td>
+                            <td>{{sale.thisYearProfit | currency: 'USD'}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <tr>
+                            <td colspan="3" class="text-right">Totals</td>
+                            <td>{{lastYearTotal | currency: 'USD'}}</td>
+                            <td>{{thisYearTotal | currency: 'USD'}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

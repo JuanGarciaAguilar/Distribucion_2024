@@ -28,7 +28,8 @@ this.GetProductos();
 ProductosHeader:any;
 GetProductos() {
 this._ProductosService.GetListaProductos().subscribe((data: any) => {
-        this.ProductosHeader = data.filter((header: any) => header.productParentId == 0);
+        this.ProductosHeader = data;//.filter((header: any) => header.productParentId == 0);
+        console.log('GetProductos',data);
     }
 );
 }
@@ -46,7 +47,7 @@ async getReporte(){
 
 this._VentasService.getReporteVentas(this.fInicio, this.fFin, 0).subscribe(
   (data:any) => {
-    console.log('GetProductos',data);
+    debugger
     for(let producto of this.ProductosHeader){
 
             let array = data.filter((f:any)=> f.productParentName.trim() == producto.productName.trim())
@@ -129,7 +130,7 @@ debugger
             }
         }
     }
-    console.log(this.ProductosHeader);
+
   });
 }
 

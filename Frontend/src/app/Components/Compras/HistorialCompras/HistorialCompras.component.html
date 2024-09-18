@@ -1,3 +1,86 @@
-<p>
-  HistorialCompras works!
-</p>
+<p-breadcrumb class="max-w-full" [model]="items">
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                <span class="text-primary font-semibold">{{ item.label }}</span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url">
+                <span class="text-color">{{ item.label }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
+</p-breadcrumb>
+
+<div style="padding-top: 5px;">
+    <div class="card">
+
+        <p-table [value]="HistorialComprasData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
+            [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-striped" class="p-datatable-sm">
+            <ng-template pTemplate="caption">
+                <div class="text-center" style="color: white;">
+                    Historial de ventas
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="text-center">Fecha Compra</th>
+                    <th class="text-center">Fecha Entrega</th>
+                    <th class="text-center">Proveedor</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-center">Flete</th>
+                    <th class="text-center">Estado</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+                <tr>
+                    <td class="text-center">
+                        {{row.fechaCompra}}
+                    </td>
+                    <td class="text-center">
+                        {{row.fechaEntrega}}
+                    </td>
+                    <td class="text-center">
+                        {{row.proveedorName}}
+                    </td>
+                    <td class="text-center">
+                        {{row.totalCompra | number:'1.2-2'}}
+                    </td>
+                    <td class="text-center">
+                        {{row.costoFlete | number:'1.2-2'}}
+                    </td>
+                    <td class="text-center">
+                        <b>
+                            <span *ngIf="row.compraStatus == 'Nuevo'" Style="color: blue;"> {{row.compraStatus}}</span>
+                            <span *ngIf="row.compraStatus == 'Recibido Parcialmente'" Style="color: red;"> {{row.compraStatus}}</span>
+                            <span *ngIf="row.compraStatus == 'Recibido Completamente'" Style="color: black;"> {{row.compraStatus}}</span>
+                        </b>
+                    </td>
+                    <td>
+                        <button pTooltip="Editar Compra" [hidden]="row.btnEstado === true"
+                            style="border-radius: 50%;background: darkblue; border: 1px solid darkblue;color:  white;">
+                            <li class="pi pi-pencil"></li>
+                        </button>
+                    </td>
+                    <td>
+                        <button pTooltip="Confirmar Compra"
+                            style="border-radius: 50%;background: darkorange; border: 1px solid darkorange;color:  white;">
+                            <li class="pi pi-check"></li>
+                        </button>
+                    </td>
+                    <td>
+                        <button pTooltip="Eliminar Compra" [hidden]="row.btnEstado === true"
+                            style="border-radius: 50%;background: darkslategrey; border: 1px solid darkslategrey;color:  white;">
+                            <li class="pi pi-trash"></li>
+                        </button>
+                    </td>
+            </ng-template>
+        </p-table>
+
+    </div>
+</div>

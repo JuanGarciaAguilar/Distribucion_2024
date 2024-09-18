@@ -12,6 +12,9 @@ export class ClienteService {
   private _auth = inject(AuthService);
   constructor() { }
 
+  getListaClientes() {
+    return this._http.get<ClienteModel[]>(GlobalConstants.Cliente_nt + 'listaCliente');
+  }
 
   getclientesBySector(id : string) {
     return this._http.get<ClienteModel[]>(GlobalConstants.Cliente_nt + 'clientesBySector/' + id);
