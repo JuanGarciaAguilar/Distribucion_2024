@@ -28,15 +28,15 @@
                             <div class="row" style="padding: 10px;">
                                 <div class="col">
                                     <label><b>Fecha de Compra :</b></label>
-                                    <input type="date" class="form-control">
+                                    <input type="date" [(ngModel)]="FechaCompra" class="form-control">
                                 </div>
                                 <div class="col">
                                     <label><b>Fecha de Entrega :</b></label>
-                                    <input type="date" class="form-control">
+                                    <input type="date" [(ngModel)]="FechaEntrega" class="form-control">
                                 </div>
                                 <div class="col">
                                     <label><b>Cuidad de la compra :</b></label>
-                                    <p-dropdown [options]="CiudadData" optionLabel="ciudadName"
+                                    <p-dropdown [options]="CiudadData" optionLabel="ciudadName" [(ngModel)]="CiudadSelected"
                                         placeholder="Seleccione Cuidad" />
                                 </div>
                             </div>
@@ -54,72 +54,86 @@
                         <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
                             style="width: 90%;">
 
-                            <div class="row" style="padding: 10px;width: 100%;">
-                                <div class="col-md-2">
-                                    <label>Proveedor :</label>
-                                    <p-dropdown [options]="ProveedorData" [filter]="true" filterBy="proveedorName"
-                                        optionLabel="proveedorName" [showClear]="true"
-                                        placeholder="Seleccione Porveedor" />
+                            <form  [formGroup]="_FormGroup" action="">
+                                <div class="row" style="padding: 10px;width: 100%;">
+                                    <div class="col-md-2">
+                                        <label>Proveedor :</label>
+                                        <p-dropdown [options]="ProveedorData" [filter]="true" filterBy="proveedorName" formControlName="ProveedorSelected"
+                                            optionLabel="proveedorName" [showClear]="true" [(ngModel)]="ProveedorSelected" (onChange) = "getSaldoAnterior()"
+                                            placeholder="Seleccione Porveedor" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Producto :</label>
+                                        <p-dropdown [options]="ProductoData" [filter]="true" filterBy="productName" [(ngModel)]="ProductoSelected" formControlName="ProductoSelected"
+                                            optionLabel="productName" [showClear]="true" placeholder="Seleccione Producto" (onChange)="obtenerEquivalencia();getSaldoAnterior()" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Flete Unitario :</label>
+                                        <input type="number" class="form-control" [(ngModel)]="FleteUnitario" placeholder="0" formControlName="FleteUnitario">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Unidad Medida :</label>
+                                        <p-dropdown [options]="UnidadMedidaData" [filter]="true" filterBy="unidadBase" [(ngModel)]="UnidadMedidaSelected"
+                                            optionLabel="unidadBase" [showClear]="true" formControlName="UnidadMedidaSelected"
+                                            placeholder="Selecione unidad Medida" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Cantidad :</label>
+                                        <input type="number" [(ngModel)]="CantidadCompra" class="form-control" placeholder="0" formControlName="CantidadCompra" (change)="calcularCostoTotal()">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Precio Unitario :</label>
+                                        <input type="number" [(ngModel)]="PrecioUnitario" class="form-control" placeholder="0" formControlName="PrecioUnitario" (change)="calcularCostoTotal()">
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <label>Producto :</label>
-                                    <p-dropdown [options]="ProductoData" [filter]="true" filterBy="productName"
-                                        optionLabel="productName" [showClear]="true" placeholder="Seleccione Producto"
-                                        (onChange)="obtenerEquivalencia()" />
+                                <div class="row" style="padding: 10px;width: 100%;">
+                                    <div class="col-md-2">
+                                        <label>Costo Total :</label>
+                                        <input type="number" class="form-control" [(ngModel)]="CostoTotalCompra" placeholder="0" formControlName="CostoTotalCompra">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Saldo Anterior :</label>
+                                        <input type="number" class="form-control" [(ngModel)]="SaldoAnterior" formControlName="SaldoAnterior" placeholder="0" >
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Amortizacion :</label>
+                                        <input type="number" class="form-control" [(ngModel)]="Amortizacion" placeholder="0" formControlName="Amortizacion" (click)="calcularSaldo()">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Saldo :</label>
+                                        <input type="number" class="form-control" [(ngModel)]="Saldo" formControlName="Saldo" placeholder="0" >
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Documento Compra:</label>
+                                        <p-dropdown [options]="DocumentoCompra" [filter]="true" filterBy="label" [(ngModel)]="DocumentoCompraSelected" formControlName="DocumentoCompraSelected"
+                                            optionLabel="label" [showClear]="true" placeholder="Seleccione documento" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Numero Documento :</label>
+                                        <input type="text" [(ngModel)]="NumeroDocumento" [(ngModel)]="NumeroDocumento" formControlName="NumeroDocumento" class="form-control">
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <label>Flete Unitario :</label>
-                                    <input type="number" class="form-control" placeholder="0">
+                                <div class="row" style="padding: 10px;width: 100%;">
+                                    <div class="col-md-6">
+                                        <label>Observacion :</label>
+                                        <input type="text" class="form-control" [(ngModel)]="Observacion" formControlName="Observacion" autocomplete="off">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>.</label>
+                                        <button type="submit" class="btn btn-primary" style="width: 100%;" (click)="AgregarProductos()" [disabled]="!_FormGroup.valid">Guardar</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>.</label>
+                                        <button type="submit" [disabled]="!update" style="width: 100%;"
+                                            class="btn btn-danger">Actualizacion</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <label>Unidad Medida :</label>
-                                    <p-dropdown [options]="UnidadMedidaData" [filter]="true" filterBy="unidadBase"
-                                        optionLabel="unidadBase" [showClear]="true"
-                                        placeholder="Selecione unidad Medida" />
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Cantidad :</label>
-                                    <input type="number" class="form-control" placeholder="0">
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Precio Unitario :</label>
-                                    <input type="number" class="form-control" placeholder="0">
-                                </div>
-                            </div>
+                            </form>
+                            
 
-                            <div class="row" style="padding: 10px;width: 100%;">
-                                <div class="col-md-2">
-                                    <label>Costo Total :</label>
-                                    <input type="number" class="form-control" placeholder="0" disabled>
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Saldo Anterior :</label>
-                                    <input type="number" class="form-control" placeholder="0" disabled>
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Amortizacion :</label>
-                                    <input type="number" class="form-control" placeholder="0">
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Saldo :</label>
-                                    <input type="number" class="form-control" placeholder="0" disabled>
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Documento Compra:</label>
-                                    <p-dropdown [options]="DocumentoCompra" [filter]="true" filterBy="label"
-                                        optionLabel="label" [showClear]="true" placeholder="Seleccione documento" />
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Numero Documento :</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row" style="padding: 10px;width: 100%;">
-                                <div class="col-md-12">
-                                    <label>Observacion :</label>
-                                    <input type="text" class="form-control" autocomplete="off">
-                                </div>
-                            </div>
+
+                            <hr style="padding: 0.5px; width: 100%; background: #b8b8c7;}">
+
 
                             <div class="row" style="padding: 10px;width: 100%;">
                                 <div class="col text-center">
@@ -134,42 +148,57 @@
                             <div class="row" style="padding: 10px;width: 100%;">
                                 <p-table [value]="ComprasData" [paginator]="true" [rows]="5"
                                     [tableStyle]="{ 'min-width': '50rem' }" [rowsPerPageOptions]="[5, 10, 20]"
-                                    styleClass="p-datatable-striped" class="p-datatable-sm">
+                                    styleClass="p-datatable-gridlines"  class="p-datatable-sm">
                                     <ng-template pTemplate="caption">
                                         <div class="text-center" style="color: white;">
-                                            Historial de ventas
+                                            Lista de productos a comprar
                                         </div>
                                     </ng-template>
                                     <ng-template pTemplate="header">
                                         <tr>
+                                            <th class="text-center">#</th>
                                             <th class="text-center">Proveedor</th>
                                             <th class="text-center">Producto</th>
                                             <th class="text-center">Cantidad</th>
                                             <th class="text-center">U. M.</th>
                                             <th class="text-center">Precio Uni</th>
-                                            <th class="text-center">Costo Total</th>
-                                            <th class="text-center">Amortizacion</th>
+                                            <th class="text-center">Total</th>
+                                            <th class="text-center">Amort.</th>
                                             <th class="text-center">Saldo</th>
-                                            <th class="text-center">Flete Unitario</th>
+                                            <th class="text-center">Flet. Unit.</th>
                                             <th class="text-center">Documento de Compra </th>
-                                            <th class="text-center">Numero de Documento</th>
-                                            <th class="text-center">Observacion</th>
+                                            <th class="text-center">Numero de Doc.</th>
+                                            <th class="text-center">Obs.</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </ng-template>
-                                    <ng-template pTemplate="body" let-row>
+                                    <ng-template pTemplate="body" let-row  let-rowIndex="rowIndex">
                                         <tr>
-                                            <td class="text-center">
-                                                <span *ngIf="row.productName != 'PAGOS'"
-                                                    Style="color: black;">{{row.fechaVenta | date: 'dd-MM-yyyy
-                                                    HH:mm:ss'}}</span>
-                                                <span *ngIf="row.productName == 'PAGOS'"
-                                                    Style="color: blue;">{{row.fechaVenta | date: 'dd-MM-yyyy
-                                                    HH:mm:ss'}}</span>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;"><b>{{rowIndex + 1}}</b></td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.ProveedorName}}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.ProductoName}}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.cantidadCompra}}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.unidadMedida}}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.precioUnitario}}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.precioCompra }}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.totalDeposito }}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.saldoDeposito }}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.costoFleteItemCompra }}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.documentoCompra }}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.numeroDocumento }}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.Observacion }}</td>
+                                            <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                                                <button style="border-radius: 50%;background: darkblue; border: 1px solid darkblue;color:  white;" (click)="SelectedCompraData(row)">
+                                                    <li class="pi pi-pencil"></li>
+                                                </button>
                                             </td>
-
-                                    </ng-template>
+                                            <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                                                <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;" (click)="DeleteItem(row)">
+                                                    <li class="pi pi-trash"></li>
+                                                </button>
+                                            </td>
+                                        </ng-template>
                                 </p-table>
                             </div>
                         </div>
@@ -183,7 +212,8 @@
             <p-stepperPanel header="Resumen">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
                     <div class="flex flex-column h-12rem">
-                        <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                        <div
+                            class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
 
                             <div class="row" style="padding: 10px;width: 100%;">
                                 <div class="col-md-2">
@@ -199,13 +229,13 @@
                                     <p-dropdown [options]="CiudadData" optionLabel="ciudadName"
                                         placeholder="Seleccione Cuidad" />
                                 </div>
-                                
+
                                 <div class="col-md-2">
-                                    <label><b>Total Compra :</b>    </label>
+                                    <label><b>Total Compra :</b> </label>
                                     <input type="number" class="form-control" placeholder="0">
                                 </div>
                                 <div class="col-md-2">
-                                    <label><b>Costo Total Flete :</b>    </label>
+                                    <label><b>Costo Total Flete :</b> </label>
                                     <input type="number" class="form-control" placeholder="0">
                                 </div>
                             </div>
@@ -213,42 +243,47 @@
                             <div class="row" style="padding: 10px;width: 100%;">
                                 <p-table [value]="ComprasData" [paginator]="true" [rows]="5"
                                     [tableStyle]="{ 'min-width': '50rem' }" [rowsPerPageOptions]="[5, 10, 20]"
-                                    styleClass="p-datatable-striped" class="p-datatable-sm">
+                                    styleClass="p-datatable-gridlines"  class="p-datatable-sm">
                                     <ng-template pTemplate="caption">
                                         <div class="text-center" style="color: white;">
-                                            Historial de ventas
+                                            Lista de productos a comprar
                                         </div>
                                     </ng-template>
                                     <ng-template pTemplate="header">
                                         <tr>
+                                            <th class="text-center">#</th>
                                             <th class="text-center">Proveedor</th>
                                             <th class="text-center">Producto</th>
                                             <th class="text-center">Cantidad</th>
                                             <th class="text-center">U. M.</th>
                                             <th class="text-center">Precio Uni</th>
-                                            <th class="text-center">Costo Total</th>
-                                            <th class="text-center">Amortizacion</th>
+                                            <th class="text-center">Total</th>
+                                            <th class="text-center">Amort.</th>
                                             <th class="text-center">Saldo</th>
-                                            <th class="text-center">Flete Unitario</th>
+                                            <th class="text-center">Flet. Unit.</th>
                                             <th class="text-center">Documento de Compra </th>
-                                            <th class="text-center">Numero de Documento</th>
-                                            <th class="text-center">Observacion</th>
-                                            <th></th>
-                                            <th></th>
+                                            <th class="text-center">Numero de Doc.</th>
+                                            <th class="text-center">Obs.</th>
+                                             
                                         </tr>
                                     </ng-template>
-                                    <ng-template pTemplate="body" let-row>
+                                    <ng-template pTemplate="body" let-row  let-rowIndex="rowIndex">
                                         <tr>
-                                            <td class="text-center">
-                                                <span *ngIf="row.productName != 'PAGOS'"
-                                                    Style="color: black;">{{row.fechaVenta | date: 'dd-MM-yyyy
-                                                    HH:mm:ss'}}</span>
-                                                <span *ngIf="row.productName == 'PAGOS'"
-                                                    Style="color: blue;">{{row.fechaVenta | date: 'dd-MM-yyyy
-                                                    HH:mm:ss'}}</span>
-                                            </td>
-
-                                    </ng-template>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;"><b>{{rowIndex + 1}}</b></td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.ProveedorName}}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.ProductoName}}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.cantidadCompra}}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.unidadMedida}}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.precioUnitario}}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.precioCompra }}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.totalDeposito }}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.saldoDeposito }}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.costoFleteItemCompra }}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.documentoCompra }}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.numeroDocumento }}</td>
+                                            <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">{{row.Observacion }}</td>
+                                             
+                                        </ng-template>
                                 </p-table>
                             </div>
                         </div>
@@ -259,151 +294,24 @@
                 </ng-template>
             </p-stepperPanel>
         </p-stepper>
-        <br>
-
-
-        <span class="text-center"><b>Datos Generales</b></span>
-        <div class="row">
-            <div class="col">
-                <label><b>Fecha de Compra :</b></label>
-                <input type="date" class="form-control">
-            </div>
-            <div class="col">
-                <label><b>Fecha de Entrega :</b></label>
-                <input type="date" class="form-control">
-            </div>
-            <div class="col">
-                <label><b>Cuidad de la compra :</b></label>
-                <p-dropdown [options]="CiudadData" optionLabel="ciudadName" placeholder="Seleccione Cuidad" />
-            </div>
-        </div>
-        <p-divider type="solid" />
-        <span class="text-center"><b>Detalle de la compra</b></span>
-        <form class="row g-3">
-            <div class="col-md-2">
-                <label>Proveedor :</label>
-                <p-dropdown [options]="ProveedorData" [filter]="true" filterBy="proveedorName"
-                    optionLabel="proveedorName" [showClear]="true" placeholder="Seleccione Porveedor" />
-            </div>
-            <div class="col-md-2">
-                <label>Producto :</label>
-                <p-dropdown [options]="ProductoData" [filter]="true" filterBy="productName" optionLabel="productName"
-                    [showClear]="true" placeholder="Seleccione Producto" (onChange)="obtenerEquivalencia()" />
-            </div>
-            <div class="col-md-2">
-                <label>Flete Unitario :</label>
-                <input type="number" class="form-control" placeholder="0">
-            </div>
-            <div class="col-md-2">
-                <label>Unidad Medida :</label>
-                <p-dropdown [options]="UnidadMedidaData" [filter]="true" filterBy="unidadBase" optionLabel="unidadBase"
-                    [showClear]="true" placeholder="Selecione unidad Medida" />
-            </div>
-            <div class="col-md-2">
-                <label>Cantidad :</label>
-                <input type="number" class="form-control" placeholder="0">
-            </div>
-            <div class="col-md-2">
-                <label>Precio Unitario :</label>
-                <input type="number" class="form-control" placeholder="0">
-            </div>
-            <div class="col-md-2">
-                <label>Costo Total :</label>
-                <input type="number" class="form-control" placeholder="0" disabled>
-            </div>
-            <div class="col-md-2">
-                <label>Saldo Anterior :</label>
-                <input type="number" class="form-control" placeholder="0" disabled>
-            </div>
-            <div class="col-md-2">
-                <label>Amortizacion :</label>
-                <input type="number" class="form-control" placeholder="0">
-            </div>
-            <div class="col-md-2">
-                <label>Saldo :</label>
-                <input type="number" class="form-control" placeholder="0" disabled>
-            </div>
-            <div class="col-md-2">
-                <label>Documento Compra:</label>
-                <p-dropdown [options]="DocumentoCompra" [filter]="true" filterBy="label" optionLabel="label"
-                    [showClear]="true" placeholder="Seleccione documento" />
-            </div>
-            <div class="col-md-2">
-                <label>Numero Documento :</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="col-md-12">
-                <label>Observacion :</label>
-                <input type="text" class="form-control" autocomplete="off">
-            </div>
-
-            <div class="row text-center">
-                <div class="col">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-                <div class="col">
-                    <button type="submit" [disabled]="!update" class="btn btn-danger">Actualizacion</button>
-                </div>
-            </div>
-        </form>
-
-
-
-        <p-divider type="solid" />
-        <div class="row">
-            <div class="col text-center">
-                <span>Costo Total del Flete: S/ 0.00</span>
-            </div>
-            <div class="col text-center">
-                <span>
-                    Monto Total de Compra: S/ 0.00</span>
-            </div>
-        </div>
-        <p-divider type="solid" />
-
-
-        <div class="row">
-            <p-table [value]="ComprasData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
-                [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-striped" class="p-datatable-sm">
-                <ng-template pTemplate="caption">
-                    <div class="text-center" style="color: white;">
-                        Historial de ventas
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th class="text-center">Proveedor</th>
-                        <th class="text-center">Producto</th>
-                        <th class="text-center">Cantidad</th>
-                        <th class="text-center">U. M.</th>
-                        <th class="text-center">Precio Uni</th>
-                        <th class="text-center">Costo Total</th>
-                        <th class="text-center">Amortizacion</th>
-                        <th class="text-center">Saldo</th>
-                        <th class="text-center">Flete Unitario</th>
-                        <th class="text-center">Documento de Compra </th>
-                        <th class="text-center">Numero de Documento</th>
-                        <th class="text-center">Observacion</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-row>
-                    <tr>
-                        <td class="text-center">
-                            <span *ngIf="row.productName != 'PAGOS'" Style="color: black;">{{row.fechaVenta | date:
-                                'dd-MM-yyyy HH:mm:ss'}}</span>
-                            <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;">{{row.fechaVenta | date:
-                                'dd-MM-yyyy HH:mm:ss'}}</span>
-                        </td>
-
-                </ng-template>
-            </p-table>
-        </div>
-
+  
     </div>
 </div>
-
-<p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
-    [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" position="bottom-right"
-    key="Notificacion" />
+ 
+    <p-toast 
+    position="bottom-center" 
+    key="Notificacion"  
+    [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div class="flex flex-column align-items-start" style="flex: 1">
+                <div class="flex align-items-center gap-2">
+                    <span class="font-bold text-900">
+                        {{ message.summary }}
+                    </span>
+                </div>
+                <div class="font-medium text-lg my-3 text-900">
+                    {{ message.detail }}
+                </div> 
+            </div>
+        </ng-template>
+</p-toast>

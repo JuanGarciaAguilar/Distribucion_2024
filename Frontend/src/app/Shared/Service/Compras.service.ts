@@ -2,7 +2,7 @@ import {  HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { GlobalConstants } from '../Models/GlobalConstants';
-import { Compra, CostosEntity,CompraDetalle } from '../Models/ComprasModel';
+import { CompraDetalleModel, CompraModel, CostosEntity } from '../Models/ComprasModel';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class ComprasService {
 constructor() { }
 
 
-insertNewCompra(compra: Compra): any {
+insertNewCompra(compra: CompraModel): any {
   return this._http.post(GlobalConstants.Compra + 'insert', compra, this._auth.getHeader());
 }
 
@@ -36,11 +36,11 @@ getComprasMax(id: number, unidad: string): any {
   return this._http.get(GlobalConstants.CompraDetalle + 'DetalleMax/' + id + '/' + unidad, this._auth.getHeader());
 }
 
-updateCompraDetalle(CompraDetalle: CompraDetalle): any {
+updateCompraDetalle(CompraDetalle: CompraDetalleModel): any {
   return this._http.post(GlobalConstants.CompraDetalle + 'update', CompraDetalle, this._auth.getHeader());
 }
 
-insertCompraDetalle(CompraDetalle: CompraDetalle): any {
+insertCompraDetalle(CompraDetalle: CompraDetalleModel): any {
   return this._http.post(GlobalConstants.CompraDetalle + 'InsertDetalle', CompraDetalle, this._auth.getHeader());
 }
 
@@ -58,15 +58,15 @@ getVentasAll(): any {
 }
 
 
-updateCompra(compra: Compra): any {
+updateCompra(compra: CompraModel): any {
   return this._http.post(GlobalConstants.Compra + 'update', compra, this._auth.getHeader());
 }
 
-updateCompraFechas(compra: Compra): any {
+updateCompraFechas(compra: CompraModel): any {
   return this._http.post(GlobalConstants.Compra + 'updateFechas', compra, this._auth.getHeader());
 }
 
-confirmarCompra(compra: Compra): any {
+confirmarCompra(compra: CompraModel): any {
   return this._http.post(GlobalConstants.Compra + 'confirmar', compra, this._auth.getHeader());
 }
 

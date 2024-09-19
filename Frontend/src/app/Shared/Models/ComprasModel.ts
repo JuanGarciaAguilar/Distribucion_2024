@@ -1,4 +1,4 @@
-export class Compra {
+export class CompraModel {
     compraId : number = 0 ;
     fechaCompra!: Date;
     fechaEntrega!: Date;
@@ -8,7 +8,7 @@ export class Compra {
     usuarioId: string= '' ;
     compraEstado: number = 0 ;
     compraStatus: string= '' ;
-    compraDetalleTabla!: CompraDetalle[];
+    compraDetalleTabla!: CompraDetalleModel[];
     index: number = 0 ;
     btnEstado!: boolean;
     Observacion: string= '' ;
@@ -16,7 +16,7 @@ export class Compra {
   
 
 
-export class CompraDetalle {
+export class CompraDetalleModel {
     detalleCompraId: number = 0 ;
     compraId: number = 0 ;
     //proveedor: Proveedor;
@@ -79,3 +79,31 @@ export class CompraDetalle {
     costo: number = 0 ;
   }
   
+
+  export class CompraDetalleArrayModel {
+    detalleCompraId: number = 0 ;
+    compraId: number = 0 ;
+    ProveedorName: string='';
+    proveedorId: number = 0 ;
+    ProductoName: string='';
+    productId: number = 0 ;
+    unidadMedidaId: number = 0 ;
+    unidadMedida: string= '' ;
+    cantidadCompra : number = 0 ;
+    pesoCompra: number = 0 ;
+    precioUnitario: number = 0 ;
+    precioCompra : number = 0 ;
+    totalDeposito : number = 0 ;
+    saldoDeposito : number = 0 ;
+    saldoAnterior : number = 0 ;
+    costoFleteItemCompra : number = 0 ;
+    FleteCompra: number = 0 ;
+    cantidadBuenEstado : number = 0 ;
+    cantidadMalEstado: number = 0 ;
+    documentoCompra: string= '' ;
+    compraEstado: number = 0 ;
+    btnEstado!: boolean;
+    opcionConfirmar: string= '' ;
+    Observacion: string= '' ;
+    numeroDocumento: string= '' ;
+  }
