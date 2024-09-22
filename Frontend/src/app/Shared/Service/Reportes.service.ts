@@ -8,8 +8,7 @@ import { CierreDiarioReportHeader, EstadoFinanciero } from '../Models/ReportesMo
   providedIn: 'root'
 })
 export class ReportesService {
-
-    private _ReportesService = inject(ReportesService);
+ 
     private _HttpClient = inject(HttpClient);
     private _AuthService = inject(AuthService);
 

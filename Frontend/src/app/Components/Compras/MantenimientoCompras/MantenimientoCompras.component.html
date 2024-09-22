@@ -18,7 +18,6 @@
 
 <div style="padding-top: 5px;">
     <div class="card">
-
         <p-stepper orientation="vertical">
             <p-stepperPanel header="Datos Generales">
                 <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
@@ -73,7 +72,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Unidad Medida :</label>
-                                        <p-dropdown [options]="UnidadMedidaData" [filter]="true" filterBy="unidadBase" [(ngModel)]="UnidadMedidaSelected"
+                                        <p-dropdown [options]="equivalenciaFilter" [filter]="true" filterBy="unidadBase" [(ngModel)]="UnidadMedidaSelected"
                                             optionLabel="unidadBase" [showClear]="true" formControlName="UnidadMedidaSelected"
                                             placeholder="Selecione unidad Medida" />
                                     </div>
@@ -97,7 +96,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Amortizacion :</label>
-                                        <input type="number" class="form-control" [(ngModel)]="Amortizacion" placeholder="0" formControlName="Amortizacion" (click)="calcularSaldo()">
+                                        <input type="number" class="form-control" [(ngModel)]="Amortizacion" placeholder="0" formControlName="Amortizacion" (change)="calcularSaldo()">
                                     </div>
                                     <div class="col-md-2">
                                         <label>Saldo :</label>
@@ -120,7 +119,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label>.</label>
-                                        <button type="submit" class="btn btn-primary" style="width: 100%;" (click)="AgregarProductos()" [disabled]="!_FormGroup.valid">Guardar</button>
+                                        <button type="submit" class="btn btn-primary" style="width: 100%;" (click)="AgregarProductos();CalcularTotales()" [disabled]="!_FormGroup.valid">Guardar</button>
                                     </div>
                                     <div class="col-md-3">
                                         <label>.</label>
@@ -129,19 +128,17 @@
                                     </div>
                                 </div>
                             </form>
-                            
-
-
+                        
                             <hr style="padding: 0.5px; width: 100%; background: #b8b8c7;}">
 
 
                             <div class="row" style="padding: 10px;width: 100%;">
                                 <div class="col text-center">
-                                    <span>Costo Total del Flete: S/ 0.00</span>
+                                    <span>Costo Total del Flete: S/ {{CostoTotalFlete}}</span>
                                 </div>
                                 <div class="col text-center">
                                     <span>
-                                        Monto Total de Compra: S/ 0.00</span>
+                                        Monto Total de Compra: S/ {{MontoTotalCompra}}</span>
                                 </div>
                             </div>
 
@@ -194,7 +191,7 @@
                                                 </button>
                                             </td>
                                             <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
-                                                <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;" (click)="DeleteItem(row)">
+                                                <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;" (click)="DeleteItem(row);CalcularTotales()">
                                                     <li class="pi pi-trash"></li>
                                                 </button>
                                             </td>
@@ -211,9 +208,8 @@
             </p-stepperPanel>
             <p-stepperPanel header="Resumen">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
-                    <div class="flex flex-column h-12rem">
-                        <div
-                            class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                    <div class="flex flex-column">
+                        <div  class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
 
                             <div class="row" style="padding: 10px;width: 100%;">
                                 <div class="col-md-2">
@@ -232,11 +228,11 @@
 
                                 <div class="col-md-2">
                                     <label><b>Total Compra :</b> </label>
-                                    <input type="number" class="form-control" placeholder="0">
+                                    <input type="number" class="form-control" value="{{MontoTotalCompra}}" placeholder="0">
                                 </div>
                                 <div class="col-md-2">
                                     <label><b>Costo Total Flete :</b> </label>
-                                    <input type="number" class="form-control" placeholder="0">
+                                    <input type="number" class="form-control" value="{{CostoTotalFlete}}" placeholder="0">
                                 </div>
                             </div>
 

@@ -1,4 +1,59 @@
-<p>
-  ReporteEstadosFinancieros works!
-</p>
-dawd
+<p-breadcrumb class="max-w-full" [model]="items">
+  <ng-template pTemplate="item" let-item>
+    <ng-container *ngIf="item.route; else elseBlock">
+      <a [routerLink]="item.route" class="p-menuitem-link">
+        <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+        <span class="text-primary font-semibold">{{ item.label }}</span>
+      </a>
+    </ng-container>
+    <ng-template #elseBlock>
+      <a [href]="item.url">
+        <span class="text-color">{{ item.label }}</span>
+      </a>
+    </ng-template>
+  </ng-template>
+</p-breadcrumb>
+<div style="padding-top: 5px;">
+  <div class="card">
+    <div class="container-fluid">
+  
+
+
+      <p-table [value]="ReporteData" rowGroupMode="rowspan" groupRowsBy="fecha" sortField="fecha" sortMode="single"
+      [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
+      [rowsPerPageOptions]="[10, 20,30,40,50]" styleClass="p-datatable-striped" class="p-datatable-sm">
+      <ng-template pTemplate="caption">
+
+        <div class="container text-center" style="color: white;">
+          Lista
+        </div>
+      </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Fecha</th>
+            <th class="text-center">Descripcion</th>
+            <th class="text-center">Monto (S/.)</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row let-rowIndex="rowIndex" let-rowgroup="rowgroup"
+          let-rowspan="rowspan">
+          <tr>
+            <td class="text-center">{{rowIndex + 1}}</td>
+            <td *ngIf="rowgroup" [attr.rowspan]="rowspan" class="text-center">
+
+              <span class="font-bold ml-2">{{row.fecha |date:'YYYY-MM-dd'}}</span>
+            </td>
+            <td class="text-center">{{ row.descripcion }}</td>
+            <td class="text-center">
+              <span *ngIf="row.monto < 0" Style="color: red;">{{row.monto | number: '1.2-2'}}</span>
+           <span *ngIf="row.monto >= 0" Style="color: blue;">  {{row.monto | number: '1.2-2'}}</span>
+             
+          </tr>
+        </ng-template>
+      </p-table>
+
+
+    </div>
+  </div>
+</div>

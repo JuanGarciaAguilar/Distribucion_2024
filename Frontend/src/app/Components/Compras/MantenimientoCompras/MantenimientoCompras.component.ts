@@ -5,7 +5,7 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { CompraDetalleArrayModel, CompraDetalleModel, CompraModel } from 'src/app/Shared/Models/ComprasModel';
 import { Equivalencia } from 'src/app/Shared/Models/equivalencia';
 import { AuthService } from 'src/app/Shared/Service/auth.service';
-import { CiudadService } from 'src/app/Shared/Service/Ciudad.service'; 
+import { CiudadService } from 'src/app/Shared/Service/Ciudad.service';
 import { ComprasService } from 'src/app/Shared/Service/Compras.service';
 import { EquivalenciasService } from 'src/app/Shared/Service/Equivalencias.service';
 import { ProductosService } from 'src/app/Shared/Service/Productos.service';
@@ -41,7 +41,7 @@ export class MantenimientoComprasComponent implements OnInit {
     { id: 4, label: 'SIN DOCUMENTO' },
   ];
 
-  _FormGroup:FormGroup | undefined;
+  _FormGroup: FormGroup | undefined;
 
   constructor() {
     this._FormGroup = new FormGroup({
@@ -52,15 +52,15 @@ export class MantenimientoComprasComponent implements OnInit {
       FleteUnitario: new FormControl(null, [Validators.required]),
       CantidadCompra: new FormControl(null, [Validators.required]),
       PrecioUnitario: new FormControl(null, [Validators.required]),
-      CostoTotalCompra: new FormControl({value:'',disabled :true}),
-      SaldoAnterior:  new FormControl({value:'',disabled :true}),
+      CostoTotalCompra: new FormControl({ value: '', disabled: true }),
+      SaldoAnterior: new FormControl({ value: '', disabled: true }),
       Amortizacion: new FormControl(null, [Validators.required]),
-      Saldo:   new FormControl({value:'',disabled :true}),
+      Saldo: new FormControl({ value: '', disabled: true }),
       DocumentoCompraSelected: new FormControl(null),
       NumeroDocumento: new FormControl(null),
-      Observacion: new FormControl(null),  
+      Observacion: new FormControl(null),
     });
-   }
+  }
 
   FechaCompra: string = '';
   FechaEntrega: string = '';
@@ -68,23 +68,23 @@ export class MantenimientoComprasComponent implements OnInit {
 
   ProveedorSelected: any;
   ProductoSelected: any;
-  UnidadMedidaSelected:any;
+  UnidadMedidaSelected: any;
   FleteUnitario: number = 0;
   CantidadCompra!: number;
   PrecioUnitario!: number;
   CostoTotalCompra: number = 0;
   SaldoAnterior: number = 0;
-  Amortizacion!: number;
+  Amortizacion: number = 0;
   Saldo: number = 0;
   NumeroDocumento: string = '';
   DocumentoCompraSelected: any;
-  Observacion :string ='';
+  Observacion: string = '';
 
-  TotalCompra: number = 0;
+  MontoTotalCompra: number = 0;
   CostoTotalFlete: number = 0;
 
   cities: any;
-  ComprasData: any[]=[];
+  ComprasData: any[] = [];
   ProductoData: any;
   ProveedorData: any;
   UnidadMedidaData: any;
@@ -102,8 +102,8 @@ export class MantenimientoComprasComponent implements OnInit {
     console.log('cuidad', this.CiudadData);
   }
 
-
   obtenerEquivalencia() {
+
     if (this.ProductoSelected.productId != null) {
       this.equivalenciaFilter = [];
       for (let i = 0; i < this.UnidadMedidaData.length; i++) {
@@ -121,14 +121,12 @@ export class MantenimientoComprasComponent implements OnInit {
     }
   }
 
- 
   CompraDetalleTemp!: CompraDetalleArrayModel;
-  
-  AgregarProductos(){ 
- 
 
-    for(let row of this.ComprasData){
-      if (row.ProductoName.includes(this.ProductoSelected.productName)){
+  AgregarProductos() {
+
+    for (let row of this.ComprasData) {
+      if (row.ProductoName.includes(this.ProductoSelected.productName)) {
         this._MessageService.add({
           severity: 'error'
           , summary: 'Error al Guardar Producto'
@@ -140,7 +138,7 @@ export class MantenimientoComprasComponent implements OnInit {
       }
     }
 
-    if (this.CantidadCompra == 0){
+    if (this.CantidadCompra == 0) {
       this._MessageService.add({
         severity: 'error'
         , summary: 'Error en la cantidad de la compra'
@@ -172,17 +170,15 @@ export class MantenimientoComprasComponent implements OnInit {
   }
 
   calcularSaldo() {
-
-  
-    if (this.Amortizacion == null) {
+    debugger
+    //  this.Saldo = 0;
+    if (this.Amortizacion == 0 || this.Amortizacion == undefined) {
       this.Saldo = parseFloat(
-        (0 - this.PrecioUnitario + this.SaldoAnterior).toFixed(2)
-      ); 
-    } else {
-      this.Saldo = parseFloat(
-        (this.PrecioUnitario + this.SaldoAnterior - this.Amortizacion).toFixed(2)
+        (this.CantidadCompra * this.PrecioUnitario + this.SaldoAnterior).toFixed(2)
       );
-      if (this.Saldo == null) {
+    } else {
+      this.Saldo = this.Saldo - this.Amortizacion;
+      if (this.Saldo == 0) {
         this.Amortizacion = 0;
       }
     }
@@ -197,54 +193,60 @@ export class MantenimientoComprasComponent implements OnInit {
     ) {
       this.PrecioUnitario = 0;
     } else {
-      this.PrecioUnitario = parseFloat(
+      this.CostoTotalCompra = parseFloat(
         (this.PrecioUnitario * this.CantidadCompra).toFixed(2)
       );
-    //  this.setSaldoAnterior();
+      //  this.setSaldoAnterior();
       this.calcularSaldo();
     }
   }
 
-SaldoAnteriorData:any;
-  getSaldoAnterior() { 
+  SaldoAnteriorData: any;
+  getSaldoAnterior() {
     if (this.ProductoSelected.productId !== '' && this.ProveedorSelected.proveedorId !== '') {
       this._ComprasService
-        .getCompraSaldoAnterior(this.ProductoSelected.productId, this.ProveedorSelected.proveedorId).subscribe((data:any) => {  
+        .getCompraSaldoAnterior(this.ProductoSelected.productId, this.ProveedorSelected.proveedorId).subscribe((data: any) => {
           this.SaldoAnterior = data;
-          }); 
-     // this.SaldoAnterior = 0;  
+        });
     }
   }
 
-  SelectedCompraData(data:any){
-    console.log('data seleccionada',data);
-    
+  SelectedCompraData(data: any) {
+    console.log('data seleccionada', data);
+
   }
 
-  DeleteItem(data:any){
-    this.ComprasData.slice(this.ComprasData.find((item:any,index:any)=>{
-      if(item.ProveedorName == data.ProveedorName && item.ProductoName == data.ProductoName && item.Observacion == data.Observacion){
+  DeleteItem(data: any) {
+    this.ComprasData.splice(this.ComprasData.find((item: any, index: any) => {
+      if (item.ProveedorName == data.ProveedorName && item.ProductoName == data.ProductoName && item.Observacion == data.Observacion) {
         return index
       }
-    }),1);
-
-    console.log('borrado nuevba listya', this.ComprasData);
-    
+    }), 1);
   }
 
-  Cleaning(){
-  this.ProveedorSelected = [];
-  this.ProductoSelected = [];
-  this.UnidadMedidaSelected = [];
-  this.FleteUnitario = 0;
-  this.CantidadCompra = 0;
-  this.PrecioUnitario = 0;
-  this.CostoTotalCompra = 0;
-  this.SaldoAnterior = 0;
-  this.Amortizacion = 0;
-  this.Saldo = 0;
-  this.NumeroDocumento = '';
-  this.DocumentoCompraSelected = [];
-  this.Observacion ='';
+  CalcularTotales() {
+    this.CostoTotalFlete = 0;
+    this.MontoTotalCompra = 0;
+    for (let row of this.ComprasData) {
+      this.CostoTotalFlete += row.costoFleteItemCompra * row.cantidadCompra;
+      this.MontoTotalCompra += row.precioCompra;
+    }
+  }
+
+
+  Cleaning() {
+    this.ProveedorSelected = [];
+    this.ProductoSelected = [];
+    this.UnidadMedidaSelected = [];
+    this.FleteUnitario = 0;
+    this.CantidadCompra = 0;
+    this.PrecioUnitario = 0;
+    this.CostoTotalCompra = 0;
+    this.SaldoAnterior = 0;
+    this.Amortizacion = 0;
+    this.Saldo = 0;
+    this.NumeroDocumento = '';
+    this.DocumentoCompraSelected = [];
+    this.Observacion = '';
   }
 }
