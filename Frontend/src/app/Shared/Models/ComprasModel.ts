@@ -8,7 +8,7 @@ export class CompraModel {
     usuarioId: string= '' ;
     compraEstado: number = 0 ;
     compraStatus: string= '' ;
-    compraDetalleTabla!: CompraDetalleModel[];
+    compraDetalleTabla: CompraDetalleModel[]=[];
     index: number = 0 ;
     btnEstado!: boolean;
     Observacion: string= '' ;

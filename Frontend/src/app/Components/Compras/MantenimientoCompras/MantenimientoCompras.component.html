@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="flex py-4">
-                        <p-button label="Siguiente" (onClick)="nextCallback.emit()" />
+                        <p-button label="Siguiente" (onClick)="nextCallback.emit();Validator()" />
                     </div>
                 </ng-template>
             </p-stepperPanel>
@@ -202,7 +202,7 @@
                     </div>
                     <div class="flex py-4 gap-2">
                         <p-button label="Regresar" severity="secondary" (onClick)="prevCallback.emit()" />
-                        <p-button label="Siguiente" (onClick)="nextCallback.emit()" />
+                        <p-button label="Siguiente" (onClick)="nextCallback.emit();Validator()" />
                     </div>
                 </ng-template>
             </p-stepperPanel>
@@ -284,8 +284,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex py-4">
-                        <p-button label="Terminar Compra" (onClick)="prevCallback.emit()" />
+                    <div class="flex py-4 gap-2" >
+                        <p-button label="Regresar" severity="secondary" (onClick)="prevCallback.emit()" />
+                        <p-button label="Terminar Compra" (onClick)="InsertCompra()" />
                     </div>
                 </ng-template>
             </p-stepperPanel>

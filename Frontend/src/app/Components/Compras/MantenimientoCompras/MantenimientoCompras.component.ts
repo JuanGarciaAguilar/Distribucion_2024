@@ -62,8 +62,8 @@ export class MantenimientoComprasComponent implements OnInit {
     });
   }
 
-  FechaCompra: string = '';
-  FechaEntrega: string = '';
+  FechaCompra!: Date;
+  FechaEntrega!: Date;
   CiudadSelected: any;
 
   ProveedorSelected: any;
@@ -94,12 +94,20 @@ export class MantenimientoComprasComponent implements OnInit {
   update: boolean = false;
   equivalenciaFilter: Equivalencia[] = [];
   async ngOnInit() {
-    this.ProductoData = await this._ProductosService.GetListaProductos().toPromise();
+    this.GetProductos();
     this.UnidadMedidaData = await this._ProductosService.getListaEquivalencia().toPromise();
     this.ProveedorData = await this._ProveedorService.getProveedoresAll().toPromise();
     this.CiudadData = await this._CiudadService.getAllNewCiudad().toPromise();
     console.log('proveedor', this.ProveedorData);
     console.log('cuidad', this.CiudadData);
+  }
+
+  async GetProductos() {
+    let data = await this._ProductosService.GetListaProductos().toPromise();
+
+
+    this.ProductoData = data.filter((f: any) => f.productParentId !== 0);
+    console.log('productos', this.ProductoData);
   }
 
   obtenerEquivalencia() {
@@ -233,6 +241,120 @@ export class MantenimientoComprasComponent implements OnInit {
     }
   }
 
+  CompraDetalleData!: CompraDetalleArrayModel;
+  CompraData = new CompraModel;
+  InsertCompra() {
+
+    if (this.FechaCompra == undefined) {
+      this._MessageService.add({
+        severity: 'error'
+        , summary: 'Campos vacios'
+        , detail: 'fecha de compra no puede ir vacio'
+        , key: 'Notificacion'
+        , life: 5000
+      });
+      return
+    }
+
+    if (this.FechaEntrega == undefined) {
+      this._MessageService.add({
+        severity: 'error'
+        , summary: 'Campos vacios'
+        , detail: 'fecha de entrega no puede ir vacio'
+        , key: 'Notificacion'
+        , life: 5000
+      });
+      return
+    }
+
+    if (this.CiudadSelected == undefined) {
+      this._MessageService.add({
+        severity: 'error'
+        , summary: 'Campos vacios'
+        , detail: 'seleccione el origen de compra'
+        , key: 'Notificacion'
+        , life: 5000
+      });
+      return
+    }
+
+    if (this.ComprasData.length == 0){
+      this._MessageService.add({
+        severity: 'error'
+        , summary: 'No existe producto'
+        , detail: 'Registre productos  a comprar'
+        , key: 'Notificacion'
+        , life: 4000
+      });
+      return
+    }
+
+    this.CompraData = new CompraModel();
+    this.CompraDetalleData = new CompraDetalleArrayModel();
+    this.CompraData.fechaCompra = this.FechaCompra;
+    this.CompraData.fechaEntrega = this.FechaEntrega;
+    this.CompraData.origenCompra = this.CiudadSelected.ciudadId;
+    for (let row of this.ComprasData) {
+      this.CompraDetalleData.proveedorId = row.proveedorId;
+      this.CompraDetalleData.productId = row.productId;
+      this.CompraDetalleData.compraId = 0;
+      this.CompraDetalleData.cantidadCompra = row.cantidadCompra;
+      this.CompraDetalleData.unidadMedida = row.unidadMedida;
+      this.CompraDetalleData.precioUnitario = row.precioUnitario;
+      this.CompraDetalleData.precioCompra = row.precioCompra;
+      this.CompraDetalleData.totalDeposito = row.totalDeposito;
+      this.CompraDetalleData.saldoDeposito = row.saldoDeposito;
+      this.CompraDetalleData.costoFleteItemCompra = row.costoFleteItemCompra;
+      this.CompraDetalleData.documentoCompra = row.documentoCompra;
+      this.CompraDetalleData.numeroDocumento = row.numeroDocumento;
+      this.CompraDetalleData.compraEstado = 2;
+      this.CompraDetalleData.Observacion = row.Observacion;
+      this.CompraData.compraDetalleTabla.push(this.CompraDetalleData);
+    }
+    console.log(this.CompraData);
+
+    this._ComprasService.insertNewCompra(this.CompraData).subscribe((data: any) => {
+      this._MessageService.add({
+        severity: 'success'
+        , summary: 'Operación Exitosa'
+        , detail: 'Producto registrado'
+        , key: 'Notificacion'
+        , life: 5000
+      });
+    });
+  }
+
+  Validator() {
+    if (this.FechaCompra == undefined) {
+      this._MessageService.add({
+        severity: 'error'
+        , summary: 'Campos vacios'
+        , detail: 'fecha de compra no puede ir vacio'
+        , key: 'Notificacion'
+        , life: 5000
+      });
+    }
+
+    if (this.FechaEntrega == undefined) {
+      this._MessageService.add({
+        severity: 'error'
+        , summary: 'Campos vacios'
+        , detail: 'fecha de entrega no puede ir vacio'
+        , key: 'Notificacion'
+        , life: 5000
+      });
+    }
+
+    if (this.CiudadSelected == undefined) {
+      this._MessageService.add({
+        severity: 'error'
+        , summary: 'Campos vacios'
+        , detail: 'seleccione el origen de compra'
+        , key: 'Notificacion'
+        , life: 5000
+      });
+    }
+  }
 
   Cleaning() {
     this.ProveedorSelected = [];
