@@ -40,10 +40,10 @@
             <ng-template pTemplate="body" let-row>
                 <tr>
                     <td class="text-center">
-                        {{row.fechaCompra}}
+                        {{row.fechaCompra |date:'YYYY-MM-dd'}}
                     </td>
                     <td class="text-center">
-                        {{row.fechaEntrega}}
+                        {{row.fechaEntrega |date:'YYYY-MM-dd'}}
                     </td>
                     <td class="text-center">
                         {{row.proveedorName}}

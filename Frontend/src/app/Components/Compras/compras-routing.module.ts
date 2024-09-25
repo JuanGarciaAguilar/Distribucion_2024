@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HistorialComprasComponent } from './HistorialCompras/HistorialCompras.component';
 import { MantenimientoComprasComponent } from './MantenimientoCompras/MantenimientoCompras.component';
+import { ConfirmarComprasComponent } from './ConfirmarCompras/ConfirmarCompras.component';
 
 const routes: Routes = [
     {
@@ -14,9 +15,8 @@ const routes: Routes = [
             {
               path: 'Historial',
               component: HistorialComprasComponent,
-          },
+          }, 
         ],
-
     },
   ];
 @NgModule({

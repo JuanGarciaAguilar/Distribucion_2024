@@ -42,7 +42,8 @@
                         </div>
                     </div>
                     <div class="flex py-4">
-                        <p-button label="Siguiente" (onClick)="nextCallback.emit();Validator()" />
+                        <button class="btn btn-primary" (click)="nextCallback.emit();Validator()"> Siguiente</button>
+                        <!-- <p-button label="Siguiente" (onClick)="nextCallback.emit();Validator()" /> -->
                     </div>
                 </ng-template>
             </p-stepperPanel>
@@ -201,8 +202,12 @@
                         </div>
                     </div>
                     <div class="flex py-4 gap-2">
-                        <p-button label="Regresar" severity="secondary" (onClick)="prevCallback.emit()" />
-                        <p-button label="Siguiente" (onClick)="nextCallback.emit();Validator()" />
+                        <button class="btn btn-danger" (click)="prevCallback.emit()"> Regresar</button>
+                        <button class="btn btn-primary" (click)="nextCallback.emit();Validator()"> Siguiente</button>
+
+
+                       <!--  <p-button label="Regresar" severity="secondary" (onClick)="prevCallback.emit()" />
+                        <p-button label="Siguiente" (onClick)="nextCallback.emit();Validator()" /> -->
                     </div>
                 </ng-template>
             </p-stepperPanel>
@@ -285,8 +290,10 @@
                         </div>
                     </div>
                     <div class="flex py-4 gap-2" >
-                        <p-button label="Regresar" severity="secondary" (onClick)="prevCallback.emit()" />
-                        <p-button label="Terminar Compra" (onClick)="InsertCompra()" />
+                        <button class="btn btn-danger" (click)="prevCallback.emit()"> Regresar</button>
+                        <button class="btn btn-primary" (click)="InsertCompra()" [disabled]="!_FormGroup.valid"> Terminar Compra</button>
+                        <!-- <p-button label="Regresar" severity="secondary" (onClick)="prevCallback.emit()" />
+                        <p-button label="Terminar Compra" (onClick)="InsertCompra()" [Disabled]="!_FormGroup.valid"/> -->
                     </div>
                 </ng-template>
             </p-stepperPanel>
