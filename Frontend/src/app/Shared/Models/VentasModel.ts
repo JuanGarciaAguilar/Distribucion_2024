@@ -1,6 +1,28 @@
 import { ProductoEntity } from './Producto'
 import { ReservaDia } from './reserva-diamodel';
 
+export class Venta_SalidaModel {
+
+  ventaId: number = 0;
+  fechaVenta: string = '';
+  clienteId: number = 0;
+  productId: number = 0;
+  cantidadVenta: number = 0;
+  unidadMedida: string = '';
+  pesoVenta: number = 0;
+  precioRealVenta: number = 0;
+  precioIngresadoVenta: number = 0;
+  amortizacion: number = 0;
+  deudaActualizada: number = 0;
+  usuarioId: string = '';
+  observacion: string = '';
+  FechaReserva!:Date;
+
+}
+
+
+
+
 export class VentasTempModel {
   NroFila: number = 0;
   cantidadVenta: number = 0;

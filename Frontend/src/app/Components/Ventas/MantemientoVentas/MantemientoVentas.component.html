@@ -174,7 +174,7 @@
                     </td>
                     <td class="text-center">
 
-                        <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;" >
+                        <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;" (click)="DeleteConfirm($event,row)">
                             <li class="pi pi-trash"></li>
                         </button>
 
@@ -183,11 +183,68 @@
                     <!--  <td class="text-center">{{ row.pesoVenta }}</td> -->
                 </tr>
             </ng-template>
+            <ng-template pTemplate="footer">
+                <tr>
+                    <td colspan="8" class="text-right">Totals</td>
+                    <td>{{TotalVentas | currency: 'USD'}}</td> 
+                </tr>
+            </ng-template>
         </p-table>
+<br>
+
+<div class="container">
+    <div class="row text-center" style="border: 1px solid darkslategrey;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;">
+    <div class="col">
+            <button class="btn btn-primary" (click)="InsertVenta()">Guardar</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-success">Reservar</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-info" (click)="GoHistorialVentas()">Historial</button>
+        </div>
+    </div>
+</div>
+        
     </div>
 </div>
 
 
-<p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
+<!-- <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
     [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" position="bottom-right"
-    key="Notificacion" />
+    key="Notificacion" /> -->
+
+    <p-toast position="bottom-center" key="Notificacion" [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div class="flex flex-column align-items-start" style="flex: 1">
+                <div class="flex align-items-center gap-2">
+                    <span class="font-bold text-900">
+                        {{ message.summary }}
+                    </span>
+                </div>
+                <div class="font-medium text-lg my-3 text-900">
+                    {{ message.detail }}
+                </div>
+            </div>
+        </ng-template>
+    </p-toast>
+
+
+     
+        <p-toast />
+        <p-confirmPopup #confirmPopupRef>
+            <ng-template pTemplate="headless" let-message let-test>
+                <div class="border-round p-3">
+                    <span>{{ message.message }}</span>
+                    <div class="flex align-items-center gap-2 mt-3">
+                        <button class="btn btn-primary" (click)="DeleteVenta()">Confirmar</button>
+                        <button class="btn btn-danger" (click)="NotConfirm()">Cancelar</button> 
+                    </div>
+                </div>
+            </ng-template>
+        </p-confirmPopup>
+    

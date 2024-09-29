@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { GlobalConstants } from '../Models/GlobalConstants';
 import { HttpClient } from '@angular/common/http';
-import { VentasModel } from '../Models/VentasModel';
+import { Venta_SalidaModel, VentasModel } from '../Models/VentasModel';
 import { CierreDiarioReport, CierreDiarioReportHeader } from '../Models/cierre-diario.report';
 import { ReservaDia } from '../Models/reserva-diamodel';
 
@@ -16,7 +16,7 @@ export class VentasService {
 
   constructor() { }
 
-postInsertaVenta(ventas :VentasModel): any {
+postInsertaVenta(ventas :Venta_SalidaModel): any {
   return this._http.post(GlobalConstants.Ventas + 'IngresarVenta', ventas);
 }
 postInsertaVentaAnulada(venta : VentasModel): any {
