@@ -18,9 +18,10 @@ import { MessagesModule } from 'primeng/messages';
 import { DividerModule } from 'primeng/divider';
 import { StepperModule } from 'primeng/stepper';
 import { StepsModule } from 'primeng/steps';
+import { ConfirmarComprasComponent } from './ConfirmarCompras/ConfirmarCompras.component';
 
 @NgModule({
-    declarations: [HistorialComprasComponent, MantenimientoComprasComponent],
+    declarations: [HistorialComprasComponent, MantenimientoComprasComponent,ConfirmarComprasComponent],
     imports: [
         CommonModule,
         ComprasRoutingModule,

@@ -75,7 +75,7 @@ export class MantemientoVentasComponent implements OnInit {
       totalPV: new FormControl(null, [Validators.required, Validators.min(0)]),
       amortizacion: new FormControl(null, [Validators.required, Validators.min(0)]),
       observacion: new FormControl(null),
-      CostoCompra: new FormControl(null),
+      CostoCompra: new FormControl({ value: '', disabled: true }),
     });
   }
   cities: any = [
@@ -167,16 +167,19 @@ export class MantemientoVentasComponent implements OnInit {
       this.EquivalenciaData.filter(
         (x: any) =>
           x.productId == this.productoSelected.productId &&
-          x.unidadBase == this.unidadMedidaSelected.unidadBase.replace(/ /g, "") &&
+          x.unidadBase.trim() == this.unidadMedidaSelected.unidadBase.trim() &&
           x.estado == true
       )[0].cantidadObjetos
-    ).toFixed(2));
-    console.log('hjhjh', this.EquivalenciaData);
+    ).toFixed(2)); 
+console.log(this.stockActual);
 
   }
 
   cargar() {
-    this._ComprasService.getComprasMax(this.productoSelected.productId, this.unidadMedidaSelected.unidadBase).subscribe((data: any) => {
+    debugger
+    this._ComprasService.getComprasMax(this.productoSelected.productId, this.unidadMedidaSelected.unidadBase.trim()).subscribe((data: any) => {
+      console.log('datsaaaaaaaa',data);
+      
       this.cantidadObjetos_db = data[0].cantidadObjetos;;
       this.CostoCompra = Number(data[0].costo.toFixed(2));
     });

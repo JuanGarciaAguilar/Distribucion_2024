@@ -18,6 +18,7 @@ import { ReporteVentasComponent } from './ReporteVentas/ReporteVentas.component'
 import { ReporteVentasClienteComponent } from './ReporteVentasCliente/ReporteVentasCliente.component';
 import { ReporteComprasComponent } from './ReporteCompras/ReporteCompras.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { DropdownModule } from 'primeng/dropdown';
     CommonModule,
     ReportesRoutingModule,
     TreeTableModule,
+    SelectButtonModule, 
     PanelModule,
     BreadcrumbModule,
     MessagesModule,

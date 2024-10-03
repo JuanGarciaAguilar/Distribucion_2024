@@ -10,7 +10,6 @@ import { CierreDiarioReport } from '../Models/cierre-diario.report';
 })
 export class ReportesService {
 
-
     private _HttpClient = inject(HttpClient);
     private _AuthService = inject(AuthService);
 
