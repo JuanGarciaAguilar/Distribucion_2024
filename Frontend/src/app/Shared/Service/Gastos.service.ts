@@ -43,12 +43,5 @@ insertNewGasto(gasto: GastosModel): any {
     return this._http.get(GlobalConstants.Gastos  + 'delete/' + id, this._auth.getHeader());
   }
 
-  getReporteGastos(repGastosFechaInicio :string, repGastosFechaFin : string) {
-    return this._http.get(GlobalConstants.Gastos + repGastosFechaInicio + '/' + repGastosFechaFin, this._auth.getHeader())
-  }
-
-  getGastoTotalPeriodo(fechaInicio : string, fechaFin : string): any {
-    return this._http.get(GlobalConstants.Gastos  + 'TotalPeriodo/' + fechaInicio + '/' + fechaFin, this._auth.getHeader())
-  }
 
 }

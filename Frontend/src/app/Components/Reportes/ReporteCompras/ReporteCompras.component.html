@@ -1,46 +1,124 @@
 <p-breadcrumb class="max-w-full" [model]="items">
-  <ng-template pTemplate="item" let-item>
-      <ng-container *ngIf="item.route; else elseBlock">
-          <a [routerLink]="item.route" class="p-menuitem-link">
-              <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
-              <span class="text-primary font-semibold">{{ item.label }}</span>
-          </a>
-      </ng-container>
-      <ng-template #elseBlock>
-          <a [href]="item.url">
-              <span class="text-color">{{ item.label }}</span>
-          </a>
-      </ng-template>
-  </ng-template>
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                <span class="text-primary font-semibold">{{ item.label }}</span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url">
+                <span class="text-color">{{ item.label }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
 </p-breadcrumb>
 <div style="padding-top: 5px;">
-  <div class="card" style="padding: 0px; ">
-      <div class="container-fluid">
-          <div class="row gx-2">
-              <div class="col-3">
-               <b>Desde:</b>
-               <input type="date" class="form-control" [(ngModel)]="fInicio">
-              </div>
-            <div class="col-3">
-              <b>Hasta:</b>
-               <input type="date" class="form-control" [(ngModel)]="fFin">
+    <div class="card" style="padding: 0px; ">
+        <div class="container-fluid">
+            <div class="row gx-2">
+                <div class="col-3">
+                    <b>Desde:</b>
+                    <input type="date" class="form-control" [(ngModel)]="fInicio">
+                </div>
+                <div class="col-3">
+                    <b>Hasta:</b>
+                    <input type="date" class="form-control" [(ngModel)]="fFin">
+                </div>
+                <div class="col-3">
+                    <b>Proveedor:</b>
+                    <p-dropdown [options]="ProveedorData" optionLabel="proveedorName" [filter]="true"
+                        filterBy="proveedorName" [(ngModel)]="ProveedorSelected" placeholder="Selecciona Proveedor">
+                        <ng-template let-row pTemplate="item">
+                            <div style="padding-left: 4px;">
+                                <div>{{ row.proveedorName }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+                <div class="col-3">
+                    <button class=" btn btn-primary" (click)="getReporte()">filtrar</button>
+                </div>
             </div>
-            <div class="col-3">
-              <b>Proveedor:</b>
-              <p-dropdown [options]="ProveedorData" optionLabel="proveedorName" [filter]="true"
-              filterBy="proveedorName"   [(ngModel)]="ProveedorSelected"  placeholder="Selecciona Proveedor">
-              <ng-template let-row pTemplate="item">
-                  <div style="padding-left: 4px;">
-                      <div>{{ row.proveedorName }}</div>
-                  </div>
-              </ng-template>
-          </p-dropdown>
-            </div>
-            <div class="col-3">
-              <button class=" btn btn-primary" (click)="getReporte()">filtrar</button>
-          </div>
-          </div>
         </div>
 
-  </div>
+    </div>
+</div>
+
+<div style="padding-top: 5px;">
+
+    <div class="card">
+        <p-table [value]="ReporteData" sortField="proveedorName" sortMode="single" [scrollable]="true"
+            scrollHeight="400px" rowGroupMode="subheader" groupRowsBy="proveedorName"
+            [tableStyle]="{'min-width': '40rem'}" #dt1 styleClass="p-datatable-striped" [rows]="10"
+            [rowsPerPageOptions]="[10, 20, 50]" [paginator]="true" [globalFilterFields]="['ProductName']">
+            <ng-template pTemplate="caption">
+
+                <div class="row">
+                    <div class="col" style="padding: 5px 8px 2px 18px;">
+                        <input class="form-control" type="text" [(ngModel)]="searchValue" style=" padding: 5px;"
+                            (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar Producto" />
+                    </div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Fecha Compra</th>
+                    <th>Fecha Venta</th>
+                    <th>Ciudad</th>
+                    <th>Proveedor</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Unidad Medida</th>
+                    <th>Precio Unit.</th>
+                    <th>Precio Com.</th>
+                    <th>Total</th>
+                    <th>Saldo</th>
+                    <th>Documento</th>
+                    <th>Numero</th>
+                    <th>Flete</th>
+                    <th>Observacion</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="groupheader" let-customer>
+                <tr pRowGroupHeader>
+                    <td colspan="5">
+
+                        <span class="font-bold ml-2">{{customer.proveedorName }}</span>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="groupfooter" let-customer>
+                <tr>
+                    <td colspan="5" class="text-right font-bold pr-6">
+                        <!-- Total Customers: {{calculateCustomerTotal(customer.representative.name)}} -->
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex">
+                <tr>
+                    <td> {{customer.fechaCompra}} </td>
+                    <td> {{customer.fechaEntrega}} </td>
+                    <td>{{'chim'}}</td>
+                    <!--  <td> <p>{{dataItem.origenCompra == 1 ? "Trujillo" : dataItem.origenCompra == 2 ? "Talara" :
+              dataItem.origenCompra == 3 ? "Piura" : "Chiclayo"}}</p> </td> -->
+                    <td> {{customer.proveedorName}} </td>
+                    <td> {{customer.productName}} </td>
+                    <td> {{customer.cantidadCompra}} </td>
+                    <td> {{customer.unidadMedida}} </td>
+                    <td> {{customer.precioUnitario}} </td>
+                    <td> {{customer.precioCompra}} </td>
+                    <td> {{customer.totalDeposito}} </td>
+                    <td> {{customer.saldoDeposito}} </td>
+                    <td> {{customer.documentoCompra}} </td>
+                    <td> {{customer.numeroDocumento}} </td>
+                    <td> {{customer.costoFleteItemCompra}} </td>
+                    <td> {{customer.observacion}} </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
 </div>

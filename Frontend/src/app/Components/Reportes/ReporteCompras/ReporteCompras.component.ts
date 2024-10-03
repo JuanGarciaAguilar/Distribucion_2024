@@ -30,13 +30,8 @@ this.GetProvedor();
 GetProvedor(){
 this._ProveedorService.getProveedoresAll().subscribe(
     (data:any) => {
-
-      for(let row of data){
-        row.proveedorId = 0,
-        row.proveedorName = 'Todos los proveedores'
-      }
-      console.log(data);
       this.ProveedorData = data;
+      this.ProveedorData.unshift({"proveedorId": "","proveedorName":"Todos los Proveedores"})
       //this.loading = false;
     });
 }
@@ -47,10 +42,8 @@ getReporte() {
 this.totalflete = 0;
 this.loading = true; */
 debugger
-console.log(this.ProveedorSelected.proveedorId);
-
 this._ComprasService
-  .getReporteCompras(this.fInicio, this.fFin, this.ProveedorSelected.proveedorId)
+  .getReporteCompras(this.fInicio, this.fFin, this.ProveedorSelected.proveedorName)
   .subscribe((data:any) => {
     this.ReporteData = data;
     console.log('dataaaaa',data);

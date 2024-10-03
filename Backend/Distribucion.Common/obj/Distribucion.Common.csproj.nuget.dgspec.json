@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj": {}
+    "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj": {}
   },
   "projects": {
-    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj": {
+    "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj",
+        "projectUniqueName": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj",
         "projectName": "Distribucion.Common",
-        "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj",
-        "packagesPath": "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\",
-        "outputPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Common\\obj\\",
+        "projectPath": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Common\\Distribucion.Common.csproj",
+        "packagesPath": "C:\\Users\\juga\\.nuget\\packages\\",
+        "outputPath": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Garcia Aguilar Juan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\juga\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

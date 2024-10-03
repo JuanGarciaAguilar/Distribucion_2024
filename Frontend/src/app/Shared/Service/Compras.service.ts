@@ -11,7 +11,7 @@ export class ComprasService {
 
   private _http = inject(HttpClient);
   private _auth = inject(AuthService);
-  
+
 constructor() { }
 
 
@@ -85,6 +85,6 @@ getCompraSaldoAnterior(ProductiId : number, ProveedorId :number): any {
   return this._http.get(GlobalConstants.Compra + 'saldo/' + ProductiId + '/' + ProveedorId, this._auth.getHeader());
 }
 
-getReporteCompras(fIni : string, fFin : string, ProveedorId : number): any {
+getReporteCompras(fIni : string, fFin : string, ProveedorId : string): any {
   return this._http.get(GlobalConstants.Compra + 'reporte/' + fIni + '/' + fFin + '/' + ProveedorId, this._auth.getHeader());
 }}

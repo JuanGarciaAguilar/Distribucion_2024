@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Security\\Distribucion.Security.csproj": {}
+    "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Security\\Distribucion.Security.csproj": {}
   },
   "projects": {
-    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
+    "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
+        "projectUniqueName": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
         "projectName": "Distribucion.Entidades",
-        "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
-        "packagesPath": "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\",
-        "outputPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\obj\\",
+        "projectPath": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj",
+        "packagesPath": "C:\\Users\\juga\\.nuget\\packages\\",
+        "outputPath": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Entidades\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Garcia Aguilar Juan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\juga\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -72,20 +73,21 @@
         }
       }
     },
-    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj": {
+    "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj",
+        "projectUniqueName": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj",
         "projectName": "Distribucion.Interfaces",
-        "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj",
-        "packagesPath": "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\",
-        "outputPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\obj\\",
+        "projectPath": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj",
+        "packagesPath": "C:\\Users\\juga\\.nuget\\packages\\",
+        "outputPath": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Garcia Aguilar Juan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\juga\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -101,8 +103,8 @@
           "netcoreapp2.0": {
             "targetAlias": "netcoreapp2.0",
             "projectReferences": {
-              "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
-                "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj"
+              "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj": {
+                "projectPath": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Entidades\\Distribucion.Entidades.csproj"
               }
             }
           }
@@ -144,20 +146,21 @@
         }
       }
     },
-    "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Security\\Distribucion.Security.csproj": {
+    "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Security\\Distribucion.Security.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Security\\Distribucion.Security.csproj",
+        "projectUniqueName": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Security\\Distribucion.Security.csproj",
         "projectName": "Distribucion.Security",
-        "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Security\\Distribucion.Security.csproj",
-        "packagesPath": "C:\\Users\\Garcia Aguilar Juan\\.nuget\\packages\\",
-        "outputPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Security\\obj\\",
+        "projectPath": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Security\\Distribucion.Security.csproj",
+        "packagesPath": "C:\\Users\\juga\\.nuget\\packages\\",
+        "outputPath": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Security\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Garcia Aguilar Juan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\juga\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -173,8 +176,8 @@
           "netcoreapp2.0": {
             "targetAlias": "netcoreapp2.0",
             "projectReferences": {
-              "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj": {
-                "projectPath": "E:\\Repositorios GitHub\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj"
+              "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj": {
+                "projectPath": "C:\\RepositorioWeb\\Repositorios  2024\\Distribucion_2024\\Backend\\Distribucion.Interfaces\\Distribucion.Interfaces.csproj"
               }
             }
           }
