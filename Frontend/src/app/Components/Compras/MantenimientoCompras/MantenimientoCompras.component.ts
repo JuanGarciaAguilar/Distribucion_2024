@@ -288,12 +288,13 @@ export class MantenimientoComprasComponent implements OnInit {
       });
       return
     }
-
+debugger
     this.CompraData = new CompraModel();
     this.CompraDetalleData = new CompraDetalleArrayModel();
     this.CompraData.fechaCompra = this.FechaCompra;
     this.CompraData.fechaEntrega = this.FechaEntrega;
     this.CompraData.origenCompra = this.CiudadSelected.ciudadId;
+    this.CompraData.usuarioId = this._AuthService.GetUsuario().usuarioId;
     for (let row of this.ComprasData) {
       this.CompraDetalleData.proveedorId = row.proveedorId;
       this.CompraDetalleData.productId = row.productId;
@@ -310,6 +311,8 @@ export class MantenimientoComprasComponent implements OnInit {
       this.CompraDetalleData.compraEstado = 2;
       this.CompraDetalleData.Observacion = row.Observacion;
       this.CompraData.compraDetalleTabla.push(this.CompraDetalleData);
+      this.CompraData.costoFlete += row.costoFleteItemCompra * row.cantidadCompra;
+      this.CompraData.totalCompra += row.precioCompra; 
     }
     console.log(this.CompraData);
 

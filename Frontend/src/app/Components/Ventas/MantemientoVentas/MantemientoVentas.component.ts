@@ -1,21 +1,28 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MenuItem, Message, MessageService, PrimeNGConfig } from 'primeng/api';
-import { VentaEntity, VentasModel, VentasTempModel } from 'src/app/Shared/Models/VentasModel';
+import { ToastModule } from 'primeng/toast';
+import * as moment from 'moment';
+import { ConfirmationService, MenuItem, Message, MessageService, PrimeNGConfig } from 'primeng/api';
+import { Venta_SalidaModel, VentaEntity, VentasModel, VentasTempModel } from 'src/app/Shared/Models/VentasModel';
 import { AuthService } from 'src/app/Shared/Service/auth.service';
 import { ClienteService } from 'src/app/Shared/Service/Cliente.service';
 import { ComprasService } from 'src/app/Shared/Service/Compras.service';
 import { ProductosService } from 'src/app/Shared/Service/Productos.service';
 import { StockService } from 'src/app/Shared/Service/Stock.service';
 import { VentasService } from 'src/app/Shared/Service/ventas.service';
+import { ConfirmPopup } from 'primeng/confirmpopup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-MantemientoVentas',
   templateUrl: './MantemientoVentas.component.html',
   styleUrls: ['./MantemientoVentas.component.css'],
-  providers: [MessageService],
+  providers: [MessageService,ConfirmationService],
 })
 export class MantemientoVentasComponent implements OnInit {
+
+  @ViewChild(ConfirmPopup) confirmPopup!: ConfirmPopup;
+  
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
   items: MenuItem[] = [{ label: 'Ventas' }, { label: 'Lista Clientes' }, { label: 'Nueva Venta' }];
 
@@ -25,8 +32,10 @@ export class MantemientoVentasComponent implements OnInit {
   private _VentasService = inject(VentasService);
   private _StockService = inject(StockService);
   private _ComprasService = inject(ComprasService);
+  private _Router = inject(Router);
   private _ClienteService = inject(ClienteService);
   private _MessageService = inject(MessageService);
+  private _ConfirmationService = inject(ConfirmationService);
 
   _FormGroup: FormGroup;
 
@@ -63,8 +72,7 @@ export class MantemientoVentasComponent implements OnInit {
 
   ClienteId: number = this._auth.GetVentasData().clienteId;
   constructor() {
-
-    console.log('modulo historial ventas', this._auth.GetVentasData());
+ 
     this._FormGroup = new FormGroup({
       FechaVenta: new FormControl(null),
       stockActual: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.min(0.0)]),
@@ -95,6 +103,7 @@ export class MantemientoVentasComponent implements OnInit {
 
   actualizarDeudaActualizada() {
     try {
+      debugger
       if (this.amortizacion == 0 || this.amortizacion == null) {
         this.deudaActualizada = this.totalPV + this.deudaAnterior;
       } else {
@@ -119,7 +128,7 @@ export class MantemientoVentasComponent implements OnInit {
 
   public seleccionaProducto() {
 
-    this.ClearField();
+    this.unidadMedidaSelected = [];
     /*  let ProductDescripcion = this.dataTempProducto.filter(
        (f: any) => f.productId == productId
      ); */
@@ -143,55 +152,62 @@ export class MantemientoVentasComponent implements OnInit {
       if (data.productId == this.productoSelected.productId) {
         this.EquivalenciaDataFilter.push(data);
       }
-    });
-    console.log('EquivalenciaData', this.EquivalenciaData);
+    }); 
     //////////////////////////////////////////////
 
     // this.obtenerstockproducto(this.productoSelected.productId);
 
   }
 
-
-  stockActualTemp: number = 0;
   cambiarStockUnidadMedida() {
-
+debugger
     this._StockService.getStockByProductId(this.productoSelected.productId).subscribe((data: any) => {
-      this.stockActualTemp = data.stock;
+      console.log('stockkkkkkkkkkkkkk',data);
+      
+      //this.stockActualTemp = data.stock;
       /* if (this.unidadMedidaSelected !== null || this.unidadMedidaSelected !== undefined) {
         this.cambiarStockUnidadMedida();
       } */
+
+        this.stockActual = parseFloat((
+          data.stock /
+          this.EquivalenciaData.filter((x: any) => x.productId == this.productoSelected.productId &&
+                                                  x.unidadBase.trim() == this.unidadMedidaSelected.unidadBase.trim() &&
+                                                  x.estado == true
+          )[0].cantidadObjetos
+        ).toFixed(2)); 
+    
     });
 
-    this.stockActual = parseFloat((
-      this.stockActualTemp /
-      this.EquivalenciaData.filter(
-        (x: any) =>
-          x.productId == this.productoSelected.productId &&
-          x.unidadBase.trim() == this.unidadMedidaSelected.unidadBase.trim() &&
-          x.estado == true
-      )[0].cantidadObjetos
-    ).toFixed(2)); 
-console.log(this.stockActual);
-
+    
   }
 
+
+
+
   cargar() {
-    debugger
+    
     this._ComprasService.getComprasMax(this.productoSelected.productId, this.unidadMedidaSelected.unidadBase.trim()).subscribe((data: any) => {
-      console.log('datsaaaaaaaa',data);
-      
+ 
       this.cantidadObjetos_db = data[0].cantidadObjetos;;
       this.CostoCompra = Number(data[0].costo.toFixed(2));
     });
   }
 
   VALIDAD_STOCK() {
-    /* const Idventa = this.route.snapshot.queryParamMap.get("ventaId");
-    if (Idventa == null) {
+    // const Idventa = this.route.snapshot.queryParamMap.get("ventaId");
+    if (this._auth.GetVentasData().ventaId == null) {
       if (this.cantidadPV > this.stockActual) {
-        this.cantidadPV = null;
+        this.cantidadPV = 0;
+        this._MessageService.add({
+          severity: 'info'
+          , summary: 'advertencia'
+          , detail: 'Cantidad supera al stock disponible'
+          , key: 'Notificacion'
+          , life: 5000
+        });
       }
-    } */
+    } 
   }
 
   ProductosData: any;
@@ -217,7 +233,7 @@ console.log(this.stockActual);
 
 
   VentaDataTemporalObjeto!: VentasTempModel;
-  VentaDataTemporal: VentasTempModel[] = [];
+  VentaDataTemporal: any[] = [];
   cantidadObjetos_db: number = 0;
   NroFila: number = 0;
   agregaProducto() {
@@ -234,7 +250,7 @@ console.log(this.stockActual);
         return
       }
     }
-
+debugger
  
     this.NroFila = this.VentaDataTemporal.length == 0 ? 1 : this.VentaDataTemporal.length + 1;
 
@@ -251,13 +267,12 @@ console.log(this.stockActual);
     this.VentaDataTemporalObjeto.precioIngresadoVenta = this.totalPV;
     this.VentaDataTemporalObjeto.amortizacion = this.amortizacion;
     this.VentaDataTemporalObjeto.observacion = this.observacion;
-    this.VentaDataTemporalObjeto.deudaActualizada = this.DeudaByCliente + parseFloat(this.deudaActualizada.toFixed(2));
-    console.log('objeto', this.VentaDataTemporalObjeto);
+    this.VentaDataTemporalObjeto.deudaActualizada = this.DeudaByCliente + parseFloat(this.deudaActualizada.toFixed(2)); 
 
     this.VentaDataTemporal.push(this.VentaDataTemporalObjeto);
     this.ClearField();
     this.productoSelected = [];
-
+this.CalcularTotalVenta();
     /*  if (agrega) {
        this.noDuplicate = true;
        if (this.ventas.length < 1) {
@@ -337,6 +352,80 @@ console.log(this.stockActual);
 
   }
 
+  ventasobj!: Venta_SalidaModel;
+  InsertVenta(){
+    debugger
+    this.ventasobj = new Venta_SalidaModel();
+    for(let row of this.VentaDataTemporal){
+      this.ventasobj.fechaVenta =
+          this.FechaVenta == undefined
+            ? moment().format("YYYY/MM/DD HH:mm:ss")
+            : moment(this.FechaVenta).format("YYYY/MM/DD HH:mm:ss");
+        this.ventasobj.amortizacion = row.amortizacion;
+        this.ventasobj.cantidadVenta = row.cantidadVenta; //* this.ventas[i].pesoVenta;
+        this.ventasobj.pesoVenta =
+        row.cantidadVenta * row.pesoVenta;
+        this.ventasobj.unidadMedida = row.unidadMedidad;
+        this.ventasobj.clienteId = row.clienteId;
+        this.ventasobj.deudaActualizada = row.deudaActualizada;
+        this.ventasobj.precioIngresadoVenta =
+        row.precioIngresadoVenta;
+        this.ventasobj.precioRealVenta = row.precioRealVenta;
+        this.ventasobj.productId = row.productId;
+        this.ventasobj.usuarioId = this._auth.GetUsuario().userID;
+        this.ventasobj.observacion = row.observacion;
+
+        this._VentasService.postInsertaVenta(this.ventasobj).subscribe((data:any) => {
+  
+          this.obtenerdeuda();
+          this.ClearField();
+          this._MessageService.add({
+            severity: 'success'
+            , summary: 'Operación Exitosa'
+            , detail: 'Producto registro correctamente'
+            , key: 'Notificacion'
+            , life: 5000
+          });
+        });
+    }
+  }
+TotalVentas: number=0;
+  CalcularTotalVenta(){
+    for(let row of this.VentaDataTemporal){
+      this.TotalVentas += row.amortizacion;
+    }
+  }
+  
+
+  DeleteVenta(){
+    this.VentaDataTemporal.splice(this.VentaDataTemporal.find((item: any, index: any) => {
+      if (item.ProductoName == this.ventaSelected.ProductoName ) {
+        return index
+      }
+    }), 1);
+    this.ventaSelected = [];
+  }
+
+  NotConfirm(){
+    this.ventaSelected = [];
+    this.confirmPopup.reject();
+  }
+  
+ 
+  ventaSelected:any;
+  DeleteConfirm(event: Event,data:any) {
+    this.ventaSelected = data;
+    this._ConfirmationService.confirm({
+        target: event.target as EventTarget,
+        message: 'Desea Elimiar la venta seleccionada?',
+    });
+}
+
+
+GoHistorialVentas() {
+  this._Router.navigate(['/Ventas/HistorialVentas']);
+  this._auth.SetVentasData(this._auth.GetVentasData());
+}
   ClearField() {
     //this.FechaVenta = '';
     this.precioPV = 0;
@@ -348,5 +437,9 @@ console.log(this.stockActual);
     this.observacion = '';
     this.stockActual = 0;
     this.CostoCompra = 0;
+ 
+    this.productoSelected = [];  
+    this.cantidadObjetos_db = 0;   
+    this.DeudaByCliente;  
   }
 }

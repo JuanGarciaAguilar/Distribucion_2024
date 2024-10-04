@@ -22,6 +22,7 @@ import { MessagesModule } from 'primeng/messages';
 import { TreeTableModule } from 'primeng/treetable';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @NgModule({
   declarations: [ListaSectoresComponent
@@ -40,6 +41,7 @@ import { PanelModule } from 'primeng/panel';
                 BreadcrumbModule,
                 MessagesModule,
                 TableModule,
+                ConfirmPopupModule ,
                 ButtonModule,
                 InputTextModule,
                 FormsModule,
