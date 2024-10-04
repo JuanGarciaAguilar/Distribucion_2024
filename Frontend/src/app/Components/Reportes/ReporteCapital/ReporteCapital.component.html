@@ -15,36 +15,29 @@
 </p-breadcrumb>
 
 <div style="padding-top: 5px;">
-    <div class="card" style="padding: 0px; ">
+<p-toolbar>
+    <div class="p-toolbar-group-start">
+        <h3><span> <b>Efectivo : S/. {{EfectivoData}}</b></span></h3>
+    </div>
+    <div class="p-toolbar-group-center">
+        <span class="p-input-icon-left"> 
+        </span>
+    </div>
+    <div class="p-toolbar-group-end"> 
         <div class="row">
-            <div class="col">
-                <span class="text-center">Reporte Capital</span>
-
-            </div>
-            <div class="col">
-                <span class="text-center">
-                    <div class="row">
-                        <div class="col"><input type="date" class="form-control"></div>
-                        <div class="col"><button class="btn btn-primary">Buscar</button></div>
-                        <div class="col"><button class="btn btn-primary">Limpiar</button></div>
-                    </div>
-                </span>
-            </div>
+            <div class="col"><input type="date" class="form-control"></div>
+            <div class="col"><button class="btn btn-primary">Buscar</button></div>
+            <div class="col"><button class="btn btn-primary">Limpiar</button></div>
         </div>
+    </div>
+</p-toolbar>
+</div>
 
-        <div class="row">
-            <div class="col">
-                <div>
-                 <h3><span> <b>Efectivo : S/. {{EfectivoData}}</b></span></h3>
-                </div>
-
-            </div>
-            <div class="col">
-                <span class="text-center">
-
-                </span>
-            </div>
-        </div>
+   
+<div style="padding-top: 5px;">
+    <div class="card" style="padding: 10px; ">
+       
+       
 
         <div class="row">
             <div class="col">

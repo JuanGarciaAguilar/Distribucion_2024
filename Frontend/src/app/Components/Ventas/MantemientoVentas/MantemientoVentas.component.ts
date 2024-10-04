@@ -70,6 +70,8 @@ export class MantemientoVentasComponent implements OnInit {
     },
   ];
 
+  Reservar_Modal:boolean = false;
+
   ClienteId: number = this._auth.GetVentasData().clienteId;
   constructor() {
  
@@ -420,7 +422,27 @@ TotalVentas: number=0;
         message: 'Desea Elimiar la venta seleccionada?',
     });
 }
-
+venta_salida: Venta_SalidaModel[] = [];
+InsertReservas(){
+  this.venta_salida = [];
+ // this.ventasobj = new Venta_SalidaModel();
+  for (let row of this.VentaDataTemporal) {
+    this.ventasobj = new Venta_SalidaModel();
+    this.ventasobj.amortizacion = row.amortizacion;
+    this.ventasobj.cantidadVenta = row.cantidadVenta;
+    this.ventasobj.unidadMedida = row.productId.unidadMedidad;
+    this.ventasobj.clienteId = row.clienteId;
+    this.ventasobj.deudaActualizada = row.deudaActualizada;
+    this.ventasobj.pesoVenta = row.pesoVenta;
+    this.ventasobj.precioIngresadoVenta = row.precioIngresadoVenta;
+    this.ventasobj.precioRealVenta = row.precioRealVenta;
+    this.ventasobj.productId = row.productId.productId;
+    this.ventasobj.usuarioId = this._auth.GetUsuario().userID;
+   // this.ventasobj.FechaReserva = this.FechaReservaModal;
+    //this.venta_salida[i].FechaReserva = moment(this.FechaReservaModal).toDate();
+    this.ventasobj.observacion = row.observacion;
+  }
+}
 
 GoHistorialVentas() {
   this._Router.navigate(['/Ventas/HistorialVentas']);

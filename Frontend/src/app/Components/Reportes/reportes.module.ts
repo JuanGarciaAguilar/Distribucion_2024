@@ -20,7 +20,7 @@ import { ReporteComprasComponent } from './ReporteCompras/ReporteCompras.compone
 import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ToastModule } from 'primeng/toast';
-
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import { ToastModule } from 'primeng/toast';
     BreadcrumbModule,
     MessagesModule,
     TableModule,
+    ToolbarModule,
     ButtonModule,
     FormsModule,
     DropdownModule,
