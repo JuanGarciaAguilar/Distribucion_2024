@@ -1,2 +1,0 @@
-﻿ALTER TABLE Venta ADD Observacion NVARCHAR(100)
-

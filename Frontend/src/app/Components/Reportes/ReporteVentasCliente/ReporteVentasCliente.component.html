@@ -1,3 +1,132 @@
-<p>
-  ReporteVentasCliente works!
-</p>
+<p-breadcrumb class="max-w-full" [model]="items">
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                <span class="text-primary font-semibold">{{ item.label }}</span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url">
+                <span class="text-color">{{ item.label }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
+</p-breadcrumb>
+<div style="padding-top: 5px;">
+    <div class="card">
+        <div class="row text-center">
+            <div class="col">
+                <label>Producto :</label>
+                <p-dropdown [options]="ClienteData" [filter]="true" filterBy="clienteName"
+                    [(ngModel)]="ClienteSelection" optionLabel="clienteName" [showClear]="true"
+                    placeholder="Seleccione Cliente" />
+            </div>
+            <div class="col">
+                <label>Fecha Inicio :</label>
+                <input type="date" class="form-control" [(ngModel)]="fechainicio">
+            </div>
+            <div class="col">
+                <label>Fecha Final :</label>
+                <input type="date" class="form-control" [(ngModel)]="fechafin">
+            </div>
+            <div class="col" style="padding-top: 35px;">
+                <button class="btn btn-primary" style="width: 100%;" (click)="GetReporte()">Buscar</button>
+            </div>
+            <div class="col" style="padding-top: 35px;">
+                <button class="btn btn-danger" style="width: 100%;" (click)="DescargarPdf()">Exportar Pdf</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div style="padding-top: 5px;">
+    <div class="card">
+        <p-table #dt1 [value]="ReporteByClienteData" styleClass="p-datatable-striped" [rows]="10"
+            [rowsPerPageOptions]="[10, 20, 50]" [loading]="loading" [paginator]="true" dataKey="VentaId"
+            [globalFilterFields]="['ProductName']" [selection]="true"  [(selection)]="ReporteSelected" >
+            <ng-template pTemplate="caption">
+
+                <div class="row">
+                    <div class="col" style="padding: 5px 8px 2px 18px;">
+                        <input class="form-control" type="text" [(ngModel)]="searchValue" style=" padding: 5px;"
+                            (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar Ventas" />
+                    </div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                     <th class="text-center">#</th>
+                    <th class="text-center"><p-tableHeaderCheckbox /></th>
+                    <th class="text-center">Producto </th>
+                    <th class="text-center">Unidad Medida</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">Precio</th>
+                    <th class="text-center">Amortización</th>
+                    <th class="text-center">Deuda Actualizada</th>
+                    <th class="text-center">Fecha</th>
+                    <th class="text-center">Observacion</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
+                <tr>
+                    <td class="text-center"> {{rowIndex + 1}}</td>
+                    <td>
+                        <p-tableCheckbox [value]="row" />
+                    </td>
+                    <td>
+                        <b> {{ row.ProductName }}</b>
+                    </td>
+                    <td class="text-center">
+                        {{ row.UnidadMedida }}
+                    </td>
+                    <td class="text-center">
+                        {{ row.CantidadVenta }}
+                    </td>
+                    <td class="text-center">
+                        S/. {{ row.PrecioIngresadoVenta }}
+                    </td>
+                    <td class="text-center">
+                        S/. {{ row.Amortizacion }}
+                    </td>
+                    <td class="text-center">
+                        S/. {{ row.DeudaActualizada }}
+                    </td>
+                    <td class="text-center">
+                        {{ row.FechaVenta | date:'dd/MM/yyyy' }}
+                    </td>
+                    <td class="text-center">
+                        {{ row.Observacion }}
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">No hay clientes en este sector.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+
+<p-toast
+    position="bottom-center"
+    key="Notificacion"
+    [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div class="flex flex-column align-items-start" style="flex: 1">
+                <div class="flex align-items-center gap-2">
+                    <span class="font-bold text-900">
+                        {{ message.summary }}
+                    </span>
+                </div>
+                <div class="font-medium text-lg my-3 text-900">
+                    {{ message.detail }}
+                </div>
+            </div>
+        </ng-template>
+</p-toast>

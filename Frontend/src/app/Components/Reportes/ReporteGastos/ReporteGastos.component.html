@@ -1,3 +1,133 @@
-<p>
-  ReporteGastos works!
-</p>
+<p-breadcrumb class="max-w-full" [model]="items">
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                <span class="text-primary font-semibold">{{ item.label }}</span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url">
+                <span class="text-color">{{ item.label }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
+</p-breadcrumb>
+<div style="padding-top: 5px;">
+    <div class="card">
+        <div class="row text-center">
+
+            <div class="col">
+                <label><b>Desde :</b></label>
+                <input type="date" class="form-control" [(ngModel)]="repGastosFechaInicio">
+            </div>
+            <div class="col">
+                <label><b>Hasta :</b></label>
+                <input type="date" class="form-control" [(ngModel)]="repGastosFechaFin">
+            </div>
+            <div class="col" style="padding-top: 35px;">
+                <button class="btn btn-primary" style="width: 100%;" (click)="getReporte()">Buscar</button>
+            </div>
+            <div class="col" style="padding-top: 35px;">
+                <h3><label>Total Gastos: S/.  {{totalMonto}}</label> </h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div style="padding-top: 5px;">
+    <div class="card">
+        <p-table #dt1 [value]="reporteGastosData" styleClass="p-datatable-striped" [rows]="10"
+            [rowsPerPageOptions]="[10, 20, 50]" [loading]="loading" [paginator]="true"
+            [globalFilterFields]="['ProductName']" [selection]="true"   >
+            <ng-template pTemplate="caption">
+
+                <div class="row text-center">
+                    <div class="col text-center" style="padding: 5px 8px 2px 18px;">
+                         <span> <h4 style="color: white;">Reporte de gastos</h4> </span>
+                    </div>
+
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                     <th class="text-center">#</th>
+                    <th class="text-center">Fecha Incio </th>
+                    <th class="text-center">Fecha Fin</th>
+                    <th class="text-center">Diesel</th>
+                    <th class="text-center">Administración</th>
+                    <th class="text-center">Personal</th>
+                    <th class="text-center">Otros</th>
+                    <th class="text-center">Sunat</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
+                <tr>
+                    <td class="text-center"> {{rowIndex + 1}}</td>
+
+                    <td class="text-center">
+                        {{ row.fechaInicio | date:'dd/MM/yyyy' }}
+                    </td>
+                    <td class="text-center">
+                        {{ row.fechaFinal| date:'dd/MM/yyyy'  }}
+                    </td>
+                    <td class="text-center">
+                        S/. {{ row.diesel | number:'1.2-2' }}
+                    </td>
+                    <td class="text-center">
+                        S/. {{ row.casa | number:'1.2-2'}}
+                    </td>
+                   <!--  <td class="text-center">
+                        S/. {{ row.ayudante }}
+                    </td> -->
+                    <td class="text-center">
+                        S/. {{ row.personal| number:'1.2-2' }}
+                    </td>
+                    <td class="text-center">
+                        S/.  {{ row.otros | number:'1.2-2'}}
+                    </td>
+                    <td class="text-center">
+                        S/. {{ row.sunat | number:'1.2-2'}}
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <tr>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center">S/. {{totalDiesel| number:'1.2-2' }}</td>
+                    <td class="text-center">S/. {{totalCasa| number:'1.2-2' }}</td>
+                    <td class="text-center">S/. {{totalPersonal| number:'1.2-2' }}</td>
+                    <td class="text-center">S/. {{totalOtros | number:'1.2-2'}}</td>
+                    <td class="text-center">S/. {{totalSunat | number:'1.2-2'}}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">No hay gastos registrados en el rango de fechas.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+
+<p-toast
+    position="bottom-center"
+    key="Notificacion"
+    [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div class="flex flex-column align-items-start" style="flex: 1">
+                <div class="flex align-items-center gap-2">
+                    <span class="font-bold text-900">
+                        {{ message.summary }}
+                    </span>
+                </div>
+                <div class="font-medium text-lg my-3 text-900">
+                    {{ message.detail }}
+                </div>
+            </div>
+        </ng-template>
+</p-toast>

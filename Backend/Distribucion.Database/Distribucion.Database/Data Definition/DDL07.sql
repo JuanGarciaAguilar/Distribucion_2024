@@ -1,3 +1,0 @@
-﻿ALTER TABLE venta ADD UsuarioId NVARCHAR(100) 
-ALTER TABLE venta ADD CONSTRAINT FK_UsuarioId FOREIGN KEY (UsuarioId)     
-    REFERENCES Usuario (UserID)  
