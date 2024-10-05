@@ -16,7 +16,7 @@ export class HistorialComprasComponent implements OnInit {
     private _ComprasService = inject(ComprasService);
     private _Router = inject(Router);
     private _AuthService = inject(AuthService);
-    
+
     items: MenuItem[] = [
         { icon: 'pi pi-home', route: '/' },
         { label: 'Historial de Compras' },
@@ -89,8 +89,8 @@ export class HistorialComprasComponent implements OnInit {
         });
     }
 
-    GoConfirmacion(){
+    GoConfirmacion(data:any){
       this._Router.navigate(['/Compras/ConfirmarCompra']);
-   //   this._AuthService.setco(this._AuthService.GetVentasData());
+      this._AuthService.SetCompraData(data);
     }
 }

@@ -16,7 +16,7 @@ export class Venta_SalidaModel {
   deudaActualizada: number = 0;
   usuarioId: string = '';
   observacion: string = '';
-  FechaReserva!:Date;
+  FechaReserva?:Date;
 
 }
 
@@ -28,7 +28,7 @@ export class VentasTempModel {
   cantidadVenta: number = 0;
   clienteId: number = 0;
   productId: number = 0;
-  productName: string = ''; 
+  productName: string = '';
   precio: number = 0;
   unidadMedidad: string = '';
   pesoVenta: number = 0;
@@ -119,7 +119,7 @@ export class VentaEntity {
       r.cantidadMinima = 0;
       r.Observacion = d.observacion;
       r.isReserva = true;
-  
+
       return r;
     } */
 

@@ -1,21 +1,116 @@
 <p-breadcrumb class="max-w-full" [model]="items">
-  <ng-template pTemplate="item" let-item>
-      <ng-container *ngIf="item.route; else elseBlock">
-          <a [routerLink]="item.route" class="p-menuitem-link">
-              <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
-              <span class="text-primary font-semibold">{{ item.label }}</span>
-          </a>
-      </ng-container>
-      <ng-template #elseBlock>
-          <a [href]="item.url">
-              <span class="text-color">{{ item.label }}</span>
-          </a>
-      </ng-template>
-  </ng-template>
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                <span class="text-primary font-semibold">{{ item.label }}</span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url">
+                <span class="text-color">{{ item.label }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
 </p-breadcrumb>
 
 <div style="padding-top: 5px;">
-  <div class="card">
-    
-  </div>
+    <div class="card">
+        <span class="text-center"><b>
+                <span><b>Detalle de Compra Seleccionada para Verificar</b></span>
+            </b></span>
+        <hr>
+
+        <div class="grid" style="padding-top: 10px;">
+            <div class="col-12 lg:col-6 xl:col-2">
+                <span><b>Fecha de Compra:</b></span>
+                <input type="text" class="form-control" [(ngModel)]="FechaCompra" disabled>
+            </div>
+            <div class="col-12 lg:col-6 xl:col-2">
+                <span><b>Fecha de Entrega:</b></span>
+                <input type="text" class="form-control" [(ngModel)]="FechaEntrega" disabled>
+            </div>
+            <div class="col-12 lg:col-6 xl:col-2">
+                <span><b>Ciudad: </b></span>
+                <input type="text" class="form-control"  [(ngModel)]="Ciudad"disabled>
+            </div>
+            <div class="col-12 lg:col-6 xl:col-2">
+                <span><b>Total de la Compra (S/):</b></span>
+                <input type="text" class="form-control"  [(ngModel)]="TotalCompra"disabled>
+            </div>
+            <div class="col-12 lg:col-6 xl:col-2">
+                <span><b>Costo del Flete (S/):</b></span>
+                <input type="text" class="form-control"  [(ngModel)]="TotalFlete"disabled>
+            </div>
+        </div>
+    </div>
+
+    <div class="card text-center" style="padding: 0px;">
+        <div class="row" >
+            <div class="col"><button class="btn btn-info"><- Regresar al Historial</button></div>
+            <div class="col"><button class="btn btn-primary">Confirmar Compra</button></div>
+        </div>
+    </div>
+    <div class="card">
+
+        <p-table [value]="ComprasData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '100rem' }"
+            [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm">
+            <ng-template pTemplate="caption"  dataKey="detalleCompraId"  [(selection)]="ComprasDetalleSelected">
+                <div class="text-center" style="color: white;">
+                    Lista de compras a confirmar
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="text-center" style="width: 3rem;">#</th>
+                    <th class="text-center" style="width: 5rem;"><p-tableHeaderCheckbox /></th>
+                    <th class="text-center" style="width: 25rem;">Proveedor</th>
+                    <th class="text-center" style="width: 30rem;">Producto</th>
+                    <th class="text-center" style="width: 20rem;">Cantidad</th>
+                    <th class="text-center" style="width: 20rem;">U. M.</th>
+                    <th class="text-center" style="width: 20rem;">Precio Uni</th>
+                    <th class="text-center" style="width: 20rem;">Total</th>
+                    <th class="text-center" style="width: 20rem;">Amort.</th>
+                    <th class="text-center" style="width: 20rem;">Saldo</th>
+                    <th class="text-center" style="width: 20rem;">Flet. Unit.</th>
+                    <th class="text-center" style="width: 30rem;">Documento </th>
+                    <th class="text-center" style="width: 20rem;">Numero</th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
+                <tr>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        <b>{{rowIndex + 1}}</b>
+                    </td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        <p-tableCheckbox [value]="row" />
+                    </td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        {{row.ProveedorName}}</td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        {{row.ProductName}}</td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        {{row.cantidadCompra}}</td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        {{row.unidadMedida}}</td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        {{row.precioUnitario | number:'1.2-2'}}</td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        {{row.precioCompra | number:'1.2-2'}}</td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        {{row.totalDeposito | number:'1.2-2'}}</td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        {{row.saldoDeposito | number:'1.2-2'}}</td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        {{row.costoFleteItemCompra | number:'1.2-2'}}</td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        {{row.documentoCompra }}</td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        {{row.numeroDocumento }}</td>
+
+            </ng-template>
+        </p-table>
+    </div>
+
 </div>

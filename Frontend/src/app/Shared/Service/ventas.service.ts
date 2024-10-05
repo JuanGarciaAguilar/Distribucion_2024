@@ -96,5 +96,5 @@ getReservasByFecha(fecha:Date ): any {
     return this._http.get<ReservaDia[]>(GlobalConstants.Ventas + 'reservas', this._auth.getHeader());
   }
 
-  
+
 }

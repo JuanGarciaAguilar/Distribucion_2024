@@ -281,7 +281,7 @@ export class MantemientoVentasComponent implements OnInit {
            this.ventas.push(this.venta);
          }
        }
- 
+
      } */
 
 

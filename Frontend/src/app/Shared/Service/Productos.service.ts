@@ -16,7 +16,7 @@ export class ProductosService {
   constructor() { }
 
 
-  GetListaProductos():  Observable<any>  {
+  GetListaProductos():  any  {
     return this._http.get(GlobalConstants.Producto ,this._auth.getHeader());
   }
 
