@@ -1,6 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { EstadoDetalle, Estados } from 'src/app/Shared/Models/Estados';
+import { AuthService } from 'src/app/Shared/Service/auth.service';
 import { ComprasService } from 'src/app/Shared/Service/Compras.service';
 
 @Component({
@@ -12,7 +14,9 @@ import { ComprasService } from 'src/app/Shared/Service/Compras.service';
 export class HistorialComprasComponent implements OnInit {
 
     private _ComprasService = inject(ComprasService);
-
+    private _Router = inject(Router);
+    private _AuthService = inject(AuthService);
+    
     items: MenuItem[] = [
         { icon: 'pi pi-home', route: '/' },
         { label: 'Historial de Compras' },
@@ -83,5 +87,10 @@ export class HistorialComprasComponent implements OnInit {
             this.HistorialComprasData = data;
 
         });
+    }
+
+    GoConfirmacion(){
+      this._Router.navigate(['/Compras/ConfirmarCompra']);
+   //   this._AuthService.setco(this._AuthService.GetVentasData());
     }
 }

@@ -16,7 +16,7 @@ export class VentasService {
 
   constructor() { }
 
-postInsertaVenta(ventas :Venta_SalidaModel): any {
+postInsertaVenta(ventas :any): any {
   return this._http.post(GlobalConstants.Ventas + 'IngresarVenta', ventas);
 }
 postInsertaVentaAnulada(venta : VentasModel): any {
@@ -85,8 +85,16 @@ postDeleteVentaAll(ventaId : number): any {
 
 
 getReservasByFecha(fecha:Date ): any {
-    return this._http.get<ReservaDia[]>(GlobalConstants.Ventas + 'ReservasByFechas/' +fecha);
+    return this._http.get<ReservaDia[]>(GlobalConstants.Ventas + 'ReservasByFechas/' +fecha, this._auth.getHeader());
   }
 
+  InsertReserva(venta: any) {
+    return this._http.post(GlobalConstants.Ventas + 'RegistrarReserva', venta, this._auth.getHeader());
+  }
 
+  getReservasDia(): any {
+    return this._http.get<ReservaDia[]>(GlobalConstants.Ventas + 'reservas', this._auth.getHeader());
+  }
+
+  
 }

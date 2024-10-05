@@ -17,12 +17,12 @@ import { Router } from '@angular/router';
   selector: 'app-MantemientoVentas',
   templateUrl: './MantemientoVentas.component.html',
   styleUrls: ['./MantemientoVentas.component.css'],
-  providers: [MessageService,ConfirmationService],
+  providers: [MessageService, ConfirmationService],
 })
 export class MantemientoVentasComponent implements OnInit {
 
   @ViewChild(ConfirmPopup) confirmPopup!: ConfirmPopup;
-  
+
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
   items: MenuItem[] = [{ label: 'Ventas' }, { label: 'Lista Clientes' }, { label: 'Nueva Venta' }];
 
@@ -70,11 +70,11 @@ export class MantemientoVentasComponent implements OnInit {
     },
   ];
 
-  Reservar_Modal:boolean = false;
-
+  Reservar_Modal: boolean = false;
+  FechaReservaModal!: Date;
   ClienteId: number = this._auth.GetVentasData().clienteId;
   constructor() {
- 
+
     this._FormGroup = new FormGroup({
       FechaVenta: new FormControl(null),
       stockActual: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.min(0.0)]),
@@ -88,13 +88,7 @@ export class MantemientoVentasComponent implements OnInit {
       CostoCompra: new FormControl({ value: '', disabled: true }),
     });
   }
-  cities: any = [
-    { name: 'New York', code: 'NY' },
-    { name: 'Rome', code: 'RM' },
-    { name: 'London', code: 'LDN' },
-    { name: 'Istanbul', code: 'IST' },
-    { name: 'Paris', code: 'PRS' }
-  ];
+
   products: any;
   ngOnInit() {
     this._primengConfig.ripple = true;
@@ -105,13 +99,11 @@ export class MantemientoVentasComponent implements OnInit {
 
   actualizarDeudaActualizada() {
     try {
-      debugger
       if (this.amortizacion == 0 || this.amortizacion == null) {
         this.deudaActualizada = this.totalPV + this.deudaAnterior;
       } else {
         this.deudaActualizada = this.totalPV + this.deudaAnterior - this.amortizacion;
       }
-
     } catch (e) {
       console.log(e);
     }
@@ -154,7 +146,7 @@ export class MantemientoVentasComponent implements OnInit {
       if (data.productId == this.productoSelected.productId) {
         this.EquivalenciaDataFilter.push(data);
       }
-    }); 
+    });
     //////////////////////////////////////////////
 
     // this.obtenerstockproducto(this.productoSelected.productId);
@@ -162,42 +154,32 @@ export class MantemientoVentasComponent implements OnInit {
   }
 
   cambiarStockUnidadMedida() {
-debugger
+
     this._StockService.getStockByProductId(this.productoSelected.productId).subscribe((data: any) => {
-      console.log('stockkkkkkkkkkkkkk',data);
-      
+
       //this.stockActualTemp = data.stock;
       /* if (this.unidadMedidaSelected !== null || this.unidadMedidaSelected !== undefined) {
         this.cambiarStockUnidadMedida();
       } */
 
-        this.stockActual = parseFloat((
-          data.stock /
-          this.EquivalenciaData.filter((x: any) => x.productId == this.productoSelected.productId &&
-                                                  x.unidadBase.trim() == this.unidadMedidaSelected.unidadBase.trim() &&
-                                                  x.estado == true
-          )[0].cantidadObjetos
-        ).toFixed(2)); 
-    
+      this.stockActual = parseFloat((
+        data.stock /
+        this.EquivalenciaData.filter((x: any) => x.productId == this.productoSelected.productId &&
+          x.unidadBase.trim() == this.unidadMedidaSelected.unidadBase.trim() &&
+          x.estado == true
+        )[0].cantidadObjetos
+      ).toFixed(2));
     });
-
-    
   }
 
-
-
-
   cargar() {
-    
     this._ComprasService.getComprasMax(this.productoSelected.productId, this.unidadMedidaSelected.unidadBase.trim()).subscribe((data: any) => {
- 
       this.cantidadObjetos_db = data[0].cantidadObjetos;;
       this.CostoCompra = Number(data[0].costo.toFixed(2));
     });
   }
 
   VALIDAD_STOCK() {
-    // const Idventa = this.route.snapshot.queryParamMap.get("ventaId");
     if (this._auth.GetVentasData().ventaId == null) {
       if (this.cantidadPV > this.stockActual) {
         this.cantidadPV = 0;
@@ -209,7 +191,7 @@ debugger
           , life: 5000
         });
       }
-    } 
+    }
   }
 
   ProductosData: any;
@@ -230,10 +212,7 @@ debugger
 
   EquivalenciaData: any;
   EquivalenciaDataFilter: any[] = [];
-
   amortizacionlast: any;
-
-
   VentaDataTemporalObjeto!: VentasTempModel;
   VentaDataTemporal: any[] = [];
   cantidadObjetos_db: number = 0;
@@ -252,8 +231,7 @@ debugger
         return
       }
     }
-debugger
- 
+
     this.NroFila = this.VentaDataTemporal.length == 0 ? 1 : this.VentaDataTemporal.length + 1;
 
     this.VentaDataTemporalObjeto = new VentasTempModel();
@@ -269,12 +247,12 @@ debugger
     this.VentaDataTemporalObjeto.precioIngresadoVenta = this.totalPV;
     this.VentaDataTemporalObjeto.amortizacion = this.amortizacion;
     this.VentaDataTemporalObjeto.observacion = this.observacion;
-    this.VentaDataTemporalObjeto.deudaActualizada = this.DeudaByCliente + parseFloat(this.deudaActualizada.toFixed(2)); 
+    this.VentaDataTemporalObjeto.deudaActualizada = this.DeudaByCliente + parseFloat(this.deudaActualizada.toFixed(2));
 
     this.VentaDataTemporal.push(this.VentaDataTemporalObjeto);
     this.ClearField();
     this.productoSelected = [];
-this.CalcularTotalVenta();
+    this.CalcularTotalVenta();
     /*  if (agrega) {
        this.noDuplicate = true;
        if (this.ventas.length < 1) {
@@ -316,6 +294,7 @@ this.CalcularTotalVenta();
   }
 
   EditVentaDataTemp(data: any) {
+
     this.NroFila = data.NroFila;
     this.cantidadPV = data.cantidadVenta;
     this.productoSelected = this.ProductosData.find((f: any) => f.productId == data.productId);
@@ -325,131 +304,131 @@ this.CalcularTotalVenta();
     this.totalPV = data.precioIngresadoVenta;
     this.amortizacion = data.amortizacion;
     this.observacion = data.observacion;
+    this.cambiarStockUnidadMedida();
+    this.cargar();
   }
 
   UpdateVentaDataTemp() {
- 
-    this.VentaDataTemporalObjeto = new VentasTempModel(); 
-    this.VentaDataTemporalObjeto.cantidadVenta = this.cantidadPV; 
-    this.VentaDataTemporalObjeto.productId = this.productoSelected.productId;
-    this.VentaDataTemporalObjeto.productName = this.productoSelected.productName;
-    this.VentaDataTemporalObjeto.unidadMedidad = this.unidadMedidaSelected.unidadBase;
-    this.VentaDataTemporalObjeto.precio = this.precioPV;
-    this.VentaDataTemporalObjeto.pesoVenta = this.cantidadObjetos_db;
-    this.VentaDataTemporalObjeto.precioRealVenta = this.cantidadPV * this.precioPV;
-    this.VentaDataTemporalObjeto.precioIngresadoVenta = this.totalPV;
-    this.VentaDataTemporalObjeto.amortizacion = this.amortizacion;
-    this.VentaDataTemporalObjeto.observacion = this.observacion;
-    this.VentaDataTemporalObjeto.deudaActualizada = this.DeudaByCliente + this.totalPV - this.amortizacion;
 
-    let Objeto:any = this.VentaDataTemporal
-  
-    for (let row of Objeto){ 
-      if (row.NroFila == this.NroFila){
-        row = this.VentaDataTemporalObjeto;
+    this.VentaDataTemporalObjeto = new VentasTempModel();
+
+    for (let row of this.VentaDataTemporal) {
+      if (row.NroFila == this.NroFila) {
+        row.cantidadVenta = this.cantidadPV;
+        row.productId = this.productoSelected.productId;
+        row.productName = this.productoSelected.productName;
+        row.unidadMedidad = this.unidadMedidaSelected.unidadBase;
+        row.precio = this.precioPV;
+        row.pesoVenta = this.cantidadObjetos_db;
+        row.precioRealVenta = this.cantidadPV * this.precioPV;
+        row.precioIngresadoVenta = this.totalPV;
+        row.amortizacion = this.amortizacion;
+        row.observacion = this.observacion;
+        row.deudaActualizada = this.DeudaByCliente + this.totalPV - this.amortizacion;
       }
-
-       
+      this.CalcularTotalVenta();
+      this.ClearField();
     }
-
   }
 
   ventasobj!: Venta_SalidaModel;
-  InsertVenta(){
-    debugger
-    this.ventasobj = new Venta_SalidaModel();
-    for(let row of this.VentaDataTemporal){
-      this.ventasobj.fechaVenta =
-          this.FechaVenta == undefined
-            ? moment().format("YYYY/MM/DD HH:mm:ss")
-            : moment(this.FechaVenta).format("YYYY/MM/DD HH:mm:ss");
-        this.ventasobj.amortizacion = row.amortizacion;
-        this.ventasobj.cantidadVenta = row.cantidadVenta; //* this.ventas[i].pesoVenta;
-        this.ventasobj.pesoVenta =
-        row.cantidadVenta * row.pesoVenta;
-        this.ventasobj.unidadMedida = row.unidadMedidad;
-        this.ventasobj.clienteId = row.clienteId;
-        this.ventasobj.deudaActualizada = row.deudaActualizada;
-        this.ventasobj.precioIngresadoVenta =
-        row.precioIngresadoVenta;
-        this.ventasobj.precioRealVenta = row.precioRealVenta;
-        this.ventasobj.productId = row.productId;
-        this.ventasobj.usuarioId = this._auth.GetUsuario().userID;
-        this.ventasobj.observacion = row.observacion;
+  InsertVenta() {
 
-        this._VentasService.postInsertaVenta(this.ventasobj).subscribe((data:any) => {
-  
-          this.obtenerdeuda();
-          this.ClearField();
-          this._MessageService.add({
-            severity: 'success'
-            , summary: 'Operación Exitosa'
-            , detail: 'Producto registro correctamente'
-            , key: 'Notificacion'
-            , life: 5000
-          });
+    this.ventasobj = new Venta_SalidaModel();
+    for (let row of this.VentaDataTemporal) {
+      this.ventasobj.fechaVenta = this.FechaVenta == undefined ? moment().format("YYYY/MM/DD HH:mm:ss") : moment(this.FechaVenta).format("YYYY/MM/DD HH:mm:ss");
+      this.ventasobj.amortizacion = row.amortizacion;
+      this.ventasobj.cantidadVenta = row.cantidadVenta; //* this.ventas[i].pesoVenta;
+      this.ventasobj.pesoVenta = row.cantidadVenta * row.pesoVenta;
+      this.ventasobj.unidadMedida = row.unidadMedidad;
+      this.ventasobj.clienteId = row.clienteId;
+      this.ventasobj.deudaActualizada = row.deudaActualizada;
+      this.ventasobj.precioIngresadoVenta = row.precioIngresadoVenta;
+      this.ventasobj.precioRealVenta = row.precioRealVenta;
+      this.ventasobj.productId = row.productId;
+      this.ventasobj.usuarioId = this._auth.GetUsuario().userID;
+      this.ventasobj.observacion = row.observacion;
+
+      this._VentasService.postInsertaVenta(this.ventasobj).subscribe((data: any) => {
+
+        this.obtenerdeuda();
+        this.ClearField();
+        this._MessageService.add({
+          severity: 'success'
+          , summary: 'Operación Exitosa'
+          , detail: 'Producto registro correctamente'
+          , key: 'Notificacion'
+          , life: 5000
         });
+      });
     }
   }
-TotalVentas: number=0;
-  CalcularTotalVenta(){
-    for(let row of this.VentaDataTemporal){
+  TotalVentas: number = 0;
+  CalcularTotalVenta() {
+    this.TotalVentas = 0;
+    for (let row of this.VentaDataTemporal) {
       this.TotalVentas += row.amortizacion;
     }
   }
-  
 
-  DeleteVenta(){
+  DeleteVenta() {
     this.VentaDataTemporal.splice(this.VentaDataTemporal.find((item: any, index: any) => {
-      if (item.ProductoName == this.ventaSelected.ProductoName ) {
+      if (item.ProductoName == this.ventaSelected.ProductoName) {
         return index
       }
     }), 1);
     this.ventaSelected = [];
   }
 
-  NotConfirm(){
+  NotConfirm() {
     this.ventaSelected = [];
     this.confirmPopup.reject();
   }
-  
- 
-  ventaSelected:any;
-  DeleteConfirm(event: Event,data:any) {
+
+  ventaSelected: any;
+  DeleteConfirm(event: Event, data: any) {
     this.ventaSelected = data;
     this._ConfirmationService.confirm({
-        target: event.target as EventTarget,
-        message: 'Desea Elimiar la venta seleccionada?',
+      target: event.target as EventTarget,
+      message: 'Desea Elimiar la venta seleccionada?',
     });
-}
-venta_salida: Venta_SalidaModel[] = [];
-InsertReservas(){
-  this.venta_salida = [];
- // this.ventasobj = new Venta_SalidaModel();
-  for (let row of this.VentaDataTemporal) {
-    this.ventasobj = new Venta_SalidaModel();
-    this.ventasobj.amortizacion = row.amortizacion;
-    this.ventasobj.cantidadVenta = row.cantidadVenta;
-    this.ventasobj.unidadMedida = row.productId.unidadMedidad;
-    this.ventasobj.clienteId = row.clienteId;
-    this.ventasobj.deudaActualizada = row.deudaActualizada;
-    this.ventasobj.pesoVenta = row.pesoVenta;
-    this.ventasobj.precioIngresadoVenta = row.precioIngresadoVenta;
-    this.ventasobj.precioRealVenta = row.precioRealVenta;
-    this.ventasobj.productId = row.productId.productId;
-    this.ventasobj.usuarioId = this._auth.GetUsuario().userID;
-   // this.ventasobj.FechaReserva = this.FechaReservaModal;
-    //this.venta_salida[i].FechaReserva = moment(this.FechaReservaModal).toDate();
-    this.ventasobj.observacion = row.observacion;
   }
-}
+  venta_salida!: Venta_SalidaModel;
+  InsertReservas() {
 
-GoHistorialVentas() {
-  this._Router.navigate(['/Ventas/HistorialVentas']);
-  this._auth.SetVentasData(this._auth.GetVentasData());
-}
+    for (let row of this.VentaDataTemporal) {
+      this.venta_salida = new Venta_SalidaModel();
+      this.venta_salida.amortizacion = row.amortizacion;
+      this.venta_salida.cantidadVenta = row.cantidadVenta;
+      this.venta_salida.unidadMedida = row.unidadMedidad;
+      this.venta_salida.clienteId = row.clienteId;
+      this.venta_salida.deudaActualizada = row.deudaActualizada;
+      this.venta_salida.pesoVenta = row.pesoVenta;
+      this.venta_salida.precioIngresadoVenta = row.precioIngresadoVenta;
+      this.venta_salida.precioRealVenta = row.precioRealVenta;
+      this.venta_salida.productId = row.productId;
+      this.venta_salida.usuarioId = this._auth.GetUsuario().userID;
+      this.venta_salida.FechaReserva = this.FechaReservaModal;
+      this.venta_salida.observacion = row.observacion;
+
+      this._VentasService.InsertReserva(this.venta_salida).subscribe((data: any) => {
+        this._MessageService.add({
+          severity: 'success'
+          , summary: 'Operación Exitosa'
+          , detail: 'Venta reservada correctamente'
+          , key: 'Notificacion'
+          , life: 5000
+        });
+      });
+    }
+  }
+
+  GoHistorialVentas() {
+    this._Router.navigate(['/Ventas/HistorialVentas']);
+    this._auth.SetVentasData(this._auth.GetVentasData());
+  }
+
   ClearField() {
-    //this.FechaVenta = '';
     this.precioPV = 0;
 
     this.totalPV = 0;
@@ -459,9 +438,9 @@ GoHistorialVentas() {
     this.observacion = '';
     this.stockActual = 0;
     this.CostoCompra = 0;
- 
-    this.productoSelected = [];  
-    this.cantidadObjetos_db = 0;   
-    this.DeudaByCliente;  
+
+    this.productoSelected = [];
+    this.cantidadObjetos_db = 0;
+    this.DeudaByCliente;
   }
 }

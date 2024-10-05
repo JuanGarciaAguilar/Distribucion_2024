@@ -1,9 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-import { MenuItem, MessageService } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { ClienteModel, ClientePagosEntity } from 'src/app/Shared/Models/ClienteModel';
 import { ReservaDia } from 'src/app/Shared/Models/reserva-diamodel';
+import { Venta_SalidaModel } from 'src/app/Shared/Models/VentasModel';
 import { AuthService } from 'src/app/Shared/Service/auth.service';
 import { ClienteService } from 'src/app/Shared/Service/Cliente.service';
 import { VentasService } from 'src/app/Shared/Service/ventas.service';
@@ -12,7 +13,7 @@ import { VentasService } from 'src/app/Shared/Service/ventas.service';
     selector: 'app-ListaSectorCliente',
     templateUrl: './ListaSectorCliente.component.html',
     styleUrls: ['./ListaSectorCliente.component.css'],
-    providers: [MessageService],
+    providers: [MessageService,ConfirmationService],
 })
 export class ListaSectorClienteComponent implements OnInit {
     private _ClienteService = inject(ClienteService);
@@ -21,6 +22,7 @@ export class ListaSectorClienteComponent implements OnInit {
     private _Router = inject(Router);
     private _auth = inject(AuthService);
     private _messageService = inject(MessageService);
+    private _ConfirmationService = inject(ConfirmationService);
 
     constructor() { }
 
@@ -37,8 +39,8 @@ export class ListaSectorClienteComponent implements OnInit {
     PagoDeudaModal: boolean = false;
     ClienteBySectorData: ClienteModel[] = [];
     ReservasData: ReservaDia[] = [];
-    Buscar?: Date;
-
+    Buscar!: Date;
+    ListaTotalProductos : any;
     ngOnInit() {
         this.GetClientesBySector();
         this.GetReservasSector();
@@ -142,6 +144,116 @@ export class ListaSectorClienteComponent implements OnInit {
             });
         }
     }
+
+
+    GetReservas(){
+        this._VentasService.getReservasDia().subscribe((data: any) => {
+            this.ReservasData = data;
+            //this.loadingReservas = false;
+           // this.tablaClientesReserva = Object.assign([], this.listaReservas
+           /*  this.calculoTotalReserva = 0;
+            if (x.length > 0) {
+              for (let i = 0; i < this.listaReservas.length; i++) {
+                this.calculoTotalReserva +=
+                  this.listaReservas[i].precioIngresadoVenta;
+              }
+            } */
+      
+           /*  this.TotalProdutoDiakendo = {
+              data: this.listaReservas.slice(
+                this.state.skip,
+                this.state.skip + this.pageSize
+              ),
+              total: this.listaReservas.length,
+            }; */
+            //  this.GetReservasTotalDia();
+          //  this.GetClienteSectores();
+          });
+        
+    }
+
+    getReservasByDate() {
+       // this.loadingReservas = true;
+      //  debugger;
+        this._VentasService.getReservasByFecha(this.Buscar).subscribe((data:any) => {
+        //  debugger;
+        this.ReservasData = data;
+         /*  this.loadingReservas = false;
+    
+          this.tablaClientesReserva = Object.assign([], this.listaReservas);
+    
+          this.calculoTotalReserva = 0;
+          for (let i = 0; i < this.listaReservas.length; i++) {
+            this.calculoTotalReserva += this.listaReservas[i].precioIngresadoVenta;
+          }
+          this.GetReservasTotalDia(); */
+          //this.TotalProdutoDiakendo
+        });
+      }
+      ventasobj!: Venta_SalidaModel;
+      confirmarReserva(venta:any) {
+        
+       
+      }
+      ReservaSelectd :any;
+      DeleteConfirm(event: Event, data: any) {
+         this.ReservaSelectd = data;
+        this._ConfirmationService.confirm({
+          target: event.target as EventTarget,
+          message: 'Desea Confirmar la reserva?',
+        });
+      }
+    
+      ConfirmarReserva(){
+        this._VentasService.getVentasById(this.ReservaSelectd.ventaId).subscribe((data:any) => {
+            debugger
+            this.ventasobj = new Venta_SalidaModel();
+            for (let row of data) {
+              this.ventasobj.amortizacion = row.amortizacion;
+              this.ventasobj.cantidadVenta = row.cantidadVenta; //* this.ventas[i].pesoVenta;
+              this.ventasobj.pesoVenta =row.pesoVenta;
+              this.ventasobj.unidadMedida = row.unidadMedida;
+              this.ventasobj.clienteId = row.clienteId;
+              this.ventasobj.deudaActualizada =row.deudaActualizada;
+              this.ventasobj.precioIngresadoVenta = row.precioIngresadoVenta;
+              this.ventasobj.precioRealVenta = row.precioRealVenta;
+              this.ventasobj.productId = Number(row.productId);
+              this.ventasobj.usuarioId = row.usuarioId;
+              this.ventasobj.observacion = row.observacion;
+              this.ventasobj.fechaVenta = row.fechaVenta;
+            }
+          });
+          this._VentasService.postInsertaVenta(this.ventasobj).subscribe(
+            (x:any) => {
+              debugger;
+              this._VentasService.postEliminaVenta(this.ReservaSelectd.ventaId).subscribe(
+                (data:any) => {
+
+                    this._messageService.add({
+                        severity: 'success'
+                        , summary: 'Operación Exitosa'
+                        , detail: 'Venta reservada correctamente'
+                        , key: 'Notificacion'
+                        , life: 5000
+                      });
+
+                 /*  this.showToast();
+                  this.getReservasDia();
+                  this.GetReservasTotalDia();
+                  this.GetClienteSectores(); */
+                });
+  
+              /*t his.showToast();
+              this.getReservasDia();
+              this.GetClienteSectores(); */
+            }          );
+      }
+    
+      NotConfirm(){
+         
+      }
+      
+
     GoMantenimientoVentas(Data: any) {
         this._Router.navigate(['/Ventas/MantenimientoVenta']);
         this._auth.SetVentasData(Data);

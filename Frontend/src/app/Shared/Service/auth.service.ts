@@ -203,4 +203,14 @@ export class AuthService {
         let data =  JSON.parse(localStorage.getItem('VentasUpdateData')!);
         return data;
     }
+
+    GetCompraData() {
+        let data =  JSON.parse(localStorage.getItem('CompraData')!);
+        return data;
+    }
+
+    SetCompraData(data: any) {
+        localStorage.setItem('CompraData', JSON.stringify(data));
+    }
+
 }

@@ -13,8 +13,6 @@
 
         <div class="row">
             <div class="col">
-
-
                 <p-messages [(value)]="ClienteName" [closable]="false" />
             </div>
             <div class="col">
@@ -120,11 +118,12 @@
 
         <div class="card-footer" style="padding: 0px;">
             <div class="row">
-                <div class="col text-center" style="    padding: 0.6rem;"><button class="btn btn-primary"
-                        (click)="agregaProducto()">Agregar
-                        Ventas</button></div>
+                <div class="col text-center" style="padding: 0.6rem;">
+                    <button class="btn btn-primary" (click)="agregaProducto()">Agregar Ventas</button>
+                </div>
+             
                 <div class="col text-center" style="    padding: 0.6rem;">
-                    <button class="btn btn-danger" (click)="UpdateVentaDataTemp()">Actualizar</button>
+                    <button class="btn btn-danger" (click)="UpdateVentaDataTemp()">Actualizar Venta</button>
                 </div>
             </div>
         </div>
@@ -187,8 +186,8 @@
             </ng-template>
             <ng-template pTemplate="footer">
                 <tr>
-                    <td colspan="8" class="text-right">Totals</td>
-                    <td>{{TotalVentas | currency: 'USD'}}</td>
+                    <td colspan="8" class="text-right">Total</td>
+                    <td> S/. {{TotalVentas}}</td>
                 </tr>
             </ng-template>
         </p-table>
@@ -216,16 +215,18 @@
 </div>
 
 
-<p-dialog header="Reserva de Venta" [modal]="true" [(visible)]="Reservar_Modal" [style]="{ width: '25rem' }">
+<p-dialog header="Reservar Venta" [modal]="true" [(visible)]="Reservar_Modal" [style]="{ width: '20rem' }">
    <!--  <span class="p-text-secondary block mb-5">Update your information.</span> -->
-    <div class="row">
-        <label >Fecha de Reserva</label> <br> 
-        <input type="date" class="form-control">
+    <div class="container">
+        <label ><b>Fecha de Reserva</b></label> <br> 
+        <input type="datetime-local" class="form-control" [(ngModel)]="FechaReservaModal">
+        <div  style="padding-top: 20px;">
+            <button class="btn btn-primary" style="width: 100%;" (click)="InsertReservas()">Reservar</button>
+        </div>
+       
     </div>
      
-    <div class="flex justify-content-end gap-2">
-        <button class="btn btn-primary">Reservar</button>
-    </div>
+    
 </p-dialog>
 
 
@@ -248,6 +249,10 @@
     </ng-template>
 </p-toast>
 
+
+<p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
+    [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" position="bottom-right"
+    key="Notificacion" />
 
 
 <p-toast />

@@ -5,20 +5,24 @@ import { MantenimientoComprasComponent } from './MantenimientoCompras/Mantenimie
 import { ConfirmarComprasComponent } from './ConfirmarCompras/ConfirmarCompras.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        children: [
-            {
-                path: 'Registro',
-                component: MantenimientoComprasComponent,
-            },
-            {
-              path: 'Historial',
-              component: HistorialComprasComponent,
-          }, 
-        ],
-    },
-  ];
+  {
+    path: '',
+    children: [
+      {
+        path: 'Registro',
+        component: MantenimientoComprasComponent,
+      },
+      {
+        path: 'Historial',
+        component: HistorialComprasComponent,
+      },
+      {
+        path: 'ConfirmarCompra',
+        component: ConfirmarComprasComponent,
+      },
+    ],
+  },
+];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
