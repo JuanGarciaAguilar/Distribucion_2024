@@ -10,12 +10,12 @@ export class GlobalConstants {
     //? -------------------------------------------------
 
     //? -- -------ENTORNO DESARROLLO--------------------
-/*     static API: string = 'http://localhost:51629/api/';
-    static DOMINIO: string = 'http://localhost:51629/'; */
+    static API: string = 'http://localhost:51628/api/';
+    static DOMINIO: string = 'http://localhost:51628/'; 
     //? ------------------------------------------------
  //? -- -------ENTORNO produccion--------------------
-    protected API: string = 'http://distribuye-dis-go-api.azurewebsites.net/api/';
-    static API: string = 'http://distribuye-dis-go-api.azurewebsites.net/api/';
+   // protected API: string = 'http://distribuye-dis-go-api.azurewebsites.net/api/';
+   // static API: string = 'http://distribuye-dis-go-api.azurewebsites.net/api/';
  //? ------------------------------------------------
 
 

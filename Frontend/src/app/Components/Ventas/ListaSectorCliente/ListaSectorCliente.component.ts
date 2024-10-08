@@ -1,19 +1,24 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
+import { ConfirmationService, MenuItem, Message, MessageService, PrimeNGConfig } from 'primeng/api';
+import { ConfirmPopup } from 'primeng/confirmpopup';
 import { ClienteModel, ClientePagosEntity } from 'src/app/Shared/Models/ClienteModel';
 import { ReservaDia } from 'src/app/Shared/Models/reserva-diamodel';
-import { Venta_SalidaModel } from 'src/app/Shared/Models/VentasModel';
+import { Venta_SalidaModel, VentasTempModel } from 'src/app/Shared/Models/VentasModel';
 import { AuthService } from 'src/app/Shared/Service/auth.service';
 import { ClienteService } from 'src/app/Shared/Service/Cliente.service';
+import { ComprasService } from 'src/app/Shared/Service/Compras.service';
+import { ProductosService } from 'src/app/Shared/Service/Productos.service';
+import { StockService } from 'src/app/Shared/Service/Stock.service';
 import { VentasService } from 'src/app/Shared/Service/ventas.service';
 
 @Component({
     selector: 'app-ListaSectorCliente',
     templateUrl: './ListaSectorCliente.component.html',
     styleUrls: ['./ListaSectorCliente.component.css'],
-    providers: [MessageService,ConfirmationService],
+    providers: [MessageService, ConfirmationService],
 })
 export class ListaSectorClienteComponent implements OnInit {
     private _ClienteService = inject(ClienteService);
@@ -24,7 +29,26 @@ export class ListaSectorClienteComponent implements OnInit {
     private _messageService = inject(MessageService);
     private _ConfirmationService = inject(ConfirmationService);
 
-    constructor() { }
+    private _primengConfig = inject(PrimeNGConfig);
+    private _ProductosService = inject(ProductosService);
+    private _StockService = inject(StockService);
+    private _ComprasService = inject(ComprasService);
+    private _MessageService = inject(MessageService);
+    @ViewChild(ConfirmPopup) ConfirmarPopup!: ConfirmPopup;
+    constructor() {
+        this._FormGroup = new FormGroup({
+            FechaVenta: new FormControl(null),
+            stockActual: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.min(0.0)]),
+            cantidadPV: new FormControl(null, [Validators.required]),
+            productoSelected: new FormControl(null, [Validators.required]),
+            unidadMedidaSelected: new FormControl("", [Validators.required]),
+            precioPV: new FormControl(null, [Validators.required]),
+            totalPV: new FormControl(null, [Validators.required, Validators.min(0)]),
+            amortizacion: new FormControl(null, [Validators.required, Validators.min(0)]),
+            observacion: new FormControl(null),
+            CostoCompra: new FormControl({ value: '', disabled: true }),
+        });
+    }
 
     items: MenuItem[] = [
         { icon: 'pi pi-home', route: '/' },
@@ -37,15 +61,205 @@ export class ListaSectorClienteComponent implements OnInit {
 
     searchValue: string | undefined;
     PagoDeudaModal: boolean = false;
+    TitleBoton: string = '';
+    ReservaOperacionModal: boolean = false;
+    EditarReservaModal: boolean = false;
     ClienteBySectorData: ClienteModel[] = [];
     ReservasData: ReservaDia[] = [];
     Buscar!: Date;
-    ListaTotalProductos : any;
+    ListaTotalProductos: any;
+    TitleModal: String = '';
+    MensajeModal: string = '';
+
+
+
+    ////////////// Ediotar venta
+
+    _FormGroup: FormGroup;
+
+    FechaVenta: string = '';
+    precioPV: number = 0;
+    productoSelected: any;
+    totalPV: number = 0;
+    unidadMedidaSelected: any;
+    amortizacion: number = 0;
+    cantidadPV: number = 0;
+    observacion: string = '';
+    stockActual: number = 0;
+    CostoCompra: number = 0;
+
+    deudaActualizada: number = 0;
+    deudaAnterior: number = 0;
+    DeudaByCliente: number = 0;
+    ClienteName: Message[] = [
+        {
+            severity: 'info',
+            detail: 'Cliente:  ' + this._auth.GetVentasData().clienteName,
+        },
+    ];
+
+    DeudaByClienteLoad: Message[] = [
+        {
+            severity: 'info',
+            detail: 'Deuda Acumulada:  S/. ' + this._auth.GetVentasData().deudaActualizada,
+        },
+    ];
+
+    Reservar_Modal: boolean = false;
+    FechaReservaModal!: Date;
+    ClienteId: number = this._auth.GetVentasData().clienteId;
+    //////////////////////////////
+    EquivalenciaData: any;
+    EquivalenciaDataFilter: any[] = [];
+    amortizacionlast: any;
+    VentaDataTemporalObjeto!: VentasTempModel;
+    VentaDataTemporal: any[] = [];
+    cantidadObjetos_db: number = 0;
+    NroFila: number = 0;
+
     ngOnInit() {
         this.GetClientesBySector();
         this.GetReservasSector();
+        this._primengConfig.ripple = true;
+        this.GetCargarDatosGenerales();
+        this.obtenerdeuda();
     }
 
+    async obtenerdeuda() {
+        let data = await this._ClienteService.getDeudaAnteriorByClient(this._auth.GetVentasData().clienteId).toPromise();
+        this.DeudaByCliente = Number(data);
+
+    }
+    ProductosData: any;
+    async GetCargarDatosGenerales() {
+        await this._ProductosService.GetListaProductos().subscribe((data: any) => {
+            this.ProductosData = data.filter((f: any) => f.productParentId !== 0);
+        });
+
+        await this._ProductosService.getListaEquivalencia().subscribe((data: any) => {
+            try {
+                //  this.VentasId();
+                this.EquivalenciaData = data.filter((x: any) => x.estado > 0);
+                this.EquivalenciaData.fleteUnitario;
+                this.amortizacionlast = this.EquivalenciaData.cantidadObjetos;
+            } catch (error) { }
+        });
+    }
+
+    CalcularTotalVenta() {
+        this.TotalVentas = 0;
+        for (let row of this.VentaDataTemporal) {
+            this.TotalVentas += row.amortizacion;
+        }
+    }
+
+
+    public seleccionaProducto() {
+
+        this.unidadMedidaSelected = [];
+        /*  let ProductDescripcion = this.dataTempProducto.filter(
+           (f: any) => f.productId == productId
+         ); */
+
+        this.precioPV = 0;
+        // this.stockActual = 0;
+        this.totalPV = 0;
+        this.amortizacion = 0;
+        /* this.productoId = productId;
+        this.productoName = ProductDescripcion[0].productName; */
+
+        /*  this.actualizar = true;
+         this.readonly = false; */
+        // this.obtenerEquivalencia(this.productoSelected.productId);
+        /*  this.getDeudaAnterior(this.productoSelected.productId); */
+
+        ///////// Obtenemos Equivalencias
+        this.EquivalenciaDataFilter = [];
+
+        this.EquivalenciaData.forEach((data: any) => {
+            if (data.productId == this.productoSelected.productId) {
+                this.EquivalenciaDataFilter.push(data);
+            }
+        });
+        //////////////////////////////////////////////
+
+        // this.obtenerstockproducto(this.productoSelected.productId);
+
+    }
+
+    cambiarStockUnidadMedida() {
+
+        this._StockService.getStockByProductId(this.productoSelected.productId).subscribe((data: any) => {
+
+            //this.stockActualTemp = data.stock;
+            /* if (this.unidadMedidaSelected !== null || this.unidadMedidaSelected !== undefined) {
+              this.cambiarStockUnidadMedida();
+            } */
+
+            this.stockActual = parseFloat((
+                data.stock /
+                this.EquivalenciaData.filter((x: any) => x.productId == this.productoSelected.productId &&
+                    x.unidadBase == this.unidadMedidaSelected.unidadBase &&
+                    x.estado == true
+                )[0].cantidadObjetos
+            ).toFixed(2));
+        });
+    }
+    actualizarDeudaActualizada() {
+        try {
+            if (this.amortizacion == 0 || this.amortizacion == null) {
+                this.deudaActualizada = this.totalPV + this.deudaAnterior;
+            } else {
+                this.deudaActualizada = this.totalPV + this.deudaAnterior - this.amortizacion;
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    calcularTotal() {
+        let calculo = (this.cantidadPV * this.precioPV).toFixed(2);
+        this.totalPV = parseFloat(calculo);
+    }
+
+    cargar() {
+        this._ComprasService.getComprasMax(this.productoSelected.productId, this.unidadMedidaSelected.unidadBase).subscribe((data: any) => {
+            this.cantidadObjetos_db = data[0].cantidadObjetos;;
+            this.CostoCompra = Number(data[0].costo.toFixed(2));
+        });
+    }
+
+    VALIDAD_STOCK() {
+        if (this._auth.GetVentasData().ventaId == null) {
+            if (this.cantidadPV > this.stockActual) {
+                this.cantidadPV = 0;
+                this._MessageService.add({
+                    severity: 'info'
+                    , summary: 'advertencia'
+                    , detail: 'Cantidad supera al stock disponible'
+                    , key: 'Notificacion'
+                    , life: 5000
+                });
+            }
+        }
+    }
+ 
+    TotalVentas: number = 0;
+    ClearField() {
+        this.precioPV = 0;
+
+        this.totalPV = 0;
+        this.unidadMedidaSelected = [];
+        this.amortizacion = 0;
+        this.cantidadPV = 0;
+        this.observacion = '';
+        this.stockActual = 0;
+        this.CostoCompra = 0;
+
+        this.productoSelected = [];
+        this.cantidadObjetos_db = 0;
+        this.DeudaByCliente;
+    }
     async GetClientesBySector() {
         let sector = this._auth.GetSectoresData().sectorId;//this._ActivatedRoute.snapshot.paramMap.get('id');
         await this._ClienteService
@@ -59,7 +273,7 @@ export class ListaSectorClienteComponent implements OnInit {
     async GetReservasSector() {
         await this._VentasService.getreservas().subscribe((data: any) => {
             this.ReservasData = data;
-            console.log('reservas',data);
+            console.log('reservas', data);
 
         });
     }
@@ -79,11 +293,8 @@ export class ListaSectorClienteComponent implements OnInit {
     }
 
     nombreClientePago: string = '';
-    deudaActualizada: number = 0;
     FechaPago?: string = '';
     monto: number = 0;
-    observacion: string = '';
-    ClienteId: number = 0;
 
     ModalAdelantoOpen(data: any) {
         this.ClienteId = data.clienteId;
@@ -146,113 +357,190 @@ export class ListaSectorClienteComponent implements OnInit {
     }
 
 
-    GetReservas(){
+    GetReservas() {
         this._VentasService.getReservasDia().subscribe((data: any) => {
             this.ReservasData = data;
             //this.loadingReservas = false;
-           // this.tablaClientesReserva = Object.assign([], this.listaReservas
-           /*  this.calculoTotalReserva = 0;
-            if (x.length > 0) {
-              for (let i = 0; i < this.listaReservas.length; i++) {
-                this.calculoTotalReserva +=
-                  this.listaReservas[i].precioIngresadoVenta;
-              }
-            } */
-      
-           /*  this.TotalProdutoDiakendo = {
-              data: this.listaReservas.slice(
-                this.state.skip,
-                this.state.skip + this.pageSize
-              ),
-              total: this.listaReservas.length,
-            }; */
+            // this.tablaClientesReserva = Object.assign([], this.listaReservas
+            /*  this.calculoTotalReserva = 0;
+             if (x.length > 0) {
+               for (let i = 0; i < this.listaReservas.length; i++) {
+                 this.calculoTotalReserva +=
+                   this.listaReservas[i].precioIngresadoVenta;
+               }
+             } */
+
+            /*  this.TotalProdutoDiakendo = {
+               data: this.listaReservas.slice(
+                 this.state.skip,
+                 this.state.skip + this.pageSize
+               ),
+               total: this.listaReservas.length,
+             }; */
             //  this.GetReservasTotalDia();
-          //  this.GetClienteSectores();
-          });
-        
+            //  this.GetClienteSectores();
+        });
+
     }
 
     getReservasByDate() {
-       // this.loadingReservas = true;
-      //  debugger;
-        this._VentasService.getReservasByFecha(this.Buscar).subscribe((data:any) => {
+        // this.loadingReservas = true;
         //  debugger;
-        this.ReservasData = data;
-         /*  this.loadingReservas = false;
-    
-          this.tablaClientesReserva = Object.assign([], this.listaReservas);
-    
-          this.calculoTotalReserva = 0;
-          for (let i = 0; i < this.listaReservas.length; i++) {
-            this.calculoTotalReserva += this.listaReservas[i].precioIngresadoVenta;
-          }
-          this.GetReservasTotalDia(); */
-          //this.TotalProdutoDiakendo
-        });
-      }
-      ventasobj!: Venta_SalidaModel;
-      confirmarReserva(venta:any) {
-        
+        this._VentasService.getReservasByFecha(this.Buscar).subscribe((data: any) => {
+            //  debugger;
+            this.ReservasData = data;
+            /*  this.loadingReservas = false;
        
-      }
-      ReservaSelectd :any;
-      DeleteConfirm(event: Event, data: any) {
-         this.ReservaSelectd = data;
-        this._ConfirmationService.confirm({
-          target: event.target as EventTarget,
-          message: 'Desea Confirmar la reserva?',
+             this.tablaClientesReserva = Object.assign([], this.listaReservas);
+       
+             this.calculoTotalReserva = 0;
+             for (let i = 0; i < this.listaReservas.length; i++) {
+               this.calculoTotalReserva += this.listaReservas[i].precioIngresadoVenta;
+             }
+             this.GetReservasTotalDia(); */
+            //this.TotalProdutoDiakendo
         });
-      }
-    
-      ConfirmarReserva(){
-        this._VentasService.getVentasById(this.ReservaSelectd.ventaId).subscribe((data:any) => {
-            debugger
-            this.ventasobj = new Venta_SalidaModel();
-            for (let row of data) {
-              this.ventasobj.amortizacion = row.amortizacion;
-              this.ventasobj.cantidadVenta = row.cantidadVenta; //* this.ventas[i].pesoVenta;
-              this.ventasobj.pesoVenta =row.pesoVenta;
-              this.ventasobj.unidadMedida = row.unidadMedida;
-              this.ventasobj.clienteId = row.clienteId;
-              this.ventasobj.deudaActualizada =row.deudaActualizada;
-              this.ventasobj.precioIngresadoVenta = row.precioIngresadoVenta;
-              this.ventasobj.precioRealVenta = row.precioRealVenta;
-              this.ventasobj.productId = Number(row.productId);
-              this.ventasobj.usuarioId = row.usuarioId;
-              this.ventasobj.observacion = row.observacion;
-              this.ventasobj.fechaVenta = row.fechaVenta;
-            }
-          });
-          this._VentasService.postInsertaVenta(this.ventasobj).subscribe(
-            (x:any) => {
-              debugger;
-              this._VentasService.postEliminaVenta(this.ReservaSelectd.ventaId).subscribe(
-                (data:any) => {
+    }
+    ventasobj!: Venta_SalidaModel;
+    confirmarReserva(venta: any) {
 
+
+    }
+    ReservaSelectd: any;
+
+
+    ConfirmarReserva() {
+
+
+        if (this.Var_Operacion === 1) {
+
+            this._VentasService.getVentasById(this.ReservaSelectd.ventaId).subscribe((data: any) => {
+           
+                this.ventasobj = new Venta_SalidaModel();
+                for (let row of data) {
+                    this.ventasobj.amortizacion = row.amortizacion;
+                    this.ventasobj.cantidadVenta = row.cantidadVenta; //* this.ventas[i].pesoVenta;
+                    this.ventasobj.pesoVenta = row.pesoVenta;
+                    this.ventasobj.unidadMedida = row.unidadMedida;
+                    this.ventasobj.clienteId = row.clienteId;
+                    this.ventasobj.deudaActualizada = row.deudaActualizada;
+                    this.ventasobj.precioIngresadoVenta = row.precioIngresadoVenta;
+                    this.ventasobj.precioRealVenta = row.precioRealVenta;
+                    this.ventasobj.productId = Number(row.productId);
+                    this.ventasobj.usuarioId = row.usuarioId;
+                    this.ventasobj.observacion = row.observacion;
+                    this.ventasobj.fechaVenta = row.fechaVenta;
+                }
+            });
+            this._VentasService.postInsertaVenta(this.ventasobj).subscribe(
+                (x: any) => {
+                    debugger;
+                    this._VentasService.postEliminaVenta(this.ReservaSelectd.ventaId).subscribe(
+                        (data: any) => {
+
+                            this._messageService.add({
+                                severity: 'success'
+                                , summary: 'Operación Exitosa'
+                                , detail: 'Venta reservada correctamente'
+                                , key: 'Notificacion'
+                                , life: 5000
+                            });
+
+                            /*  this.showToast();
+                             this.getReservasDia();
+                             this.GetReservasTotalDia();
+                             this.GetClienteSectores(); */
+                        });
+
+                    /*t his.showToast();
+                    this.getReservasDia();
+                    this.GetClienteSectores(); */
+                });
+        }
+
+        if (this.Var_Operacion === 2) {
+            this._VentasService.postEliminaVenta(this.ReservaSelectd.ventaId).subscribe(
+                (data: any) => {
                     this._messageService.add({
                         severity: 'success'
                         , summary: 'Operación Exitosa'
-                        , detail: 'Venta reservada correctamente'
+                        , detail: 'Reserva Eliminada correctamente'
                         , key: 'Notificacion'
                         , life: 5000
-                      });
-
-                 /*  this.showToast();
-                  this.getReservasDia();
-                  this.GetReservasTotalDia();
-                  this.GetClienteSectores(); */
+                    });
+                    this.CloseModal();
+                    // this.getReservasDia();
+                    //this.GetReservasTotalDia();
                 });
-  
-              /*t his.showToast();
-              this.getReservasDia();
-              this.GetClienteSectores(); */
-            }          );
-      }
-    
-      NotConfirm(){
-         
-      }
-      
+        }
+    }
+
+    DeleteReserva() {
+
+    }
+
+
+    Var_Operacion: number = 0;
+    OpenModal(data: any, Operacion: number) {
+        this.ReservaSelectd = data;
+        if (Operacion === 1) {
+            this.ReservaOperacionModal = true;
+            this.TitleModal = 'Confirmación de la reserva';
+            this.MensajeModal = 'Desea Confirmar la reserva seleccionada';
+            this.Var_Operacion = Operacion;
+            this.TitleBoton = 'Confirmar la Reserva';
+        }
+
+        if (Operacion === 2) {
+            this.ReservaOperacionModal = true;
+            this.TitleModal = 'Eliminar la reserva';
+            this.MensajeModal = 'Desea Eliminar la reserva seleccionada';
+            this.Var_Operacion = Operacion;
+            this.TitleBoton = 'Eliminar la Reserva';
+        }
+
+        if (Operacion === 3) {
+            debugger
+            this.unidadMedidaSelected =[];
+            this.EquivalenciaData.forEach((equi: any) => {
+                if (equi.productId == this.ReservaSelectd.productId) {
+                    this.EquivalenciaDataFilter.push(equi);
+                }
+            });
+            this.EditarReservaModal = true;
+            this.NroFila = data.NroFila;
+            this.cantidadPV = data.cantidadVenta;
+            this.productoSelected = this.ProductosData.find((f: any) => f.productId == data.productId);
+            this.unidadMedidaSelected = this.EquivalenciaDataFilter.find((f: any) => f.unidadBase.trim() == data.unidadMedida.trim());
+            this.precioPV = data.precio;
+            this.cantidadObjetos_db = data.pesoVenta;
+            this.totalPV = data.precioIngresadoVenta;
+            this.amortizacion = data.amortizacion;
+            this.observacion = data.observacion;
+           console.log('equivalñ',this.unidadMedidaSelected);
+           
+
+            this.cambiarStockUnidadMedida();
+            this.cargar();
+        }
+
+
+    }
+
+    CloseModal() {
+        this.ReservaOperacionModal = false;
+        this.ReservaSelectd = [];
+    }
+
+
+    OpenUpdateReservaModal(data: any) {
+        this.ReservaSelectd = data;
+
+
+        this.EditarReservaModal = true;
+
+    }
+
 
     GoMantenimientoVentas(Data: any) {
         this._Router.navigate(['/Ventas/MantenimientoVenta']);

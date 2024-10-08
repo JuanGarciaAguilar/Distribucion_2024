@@ -394,33 +394,43 @@ export class MantemientoVentasComponent implements OnInit {
     });
   }
   venta_salida!: Venta_SalidaModel;
+  ReservaArray:Venta_SalidaModel[]=[];
   InsertReservas() {
 
     for (let row of this.VentaDataTemporal) {
       this.venta_salida = new Venta_SalidaModel();
-      this.venta_salida.amortizacion = row.amortizacion;
+      this.venta_salida.ventaId = 0;
+      this.venta_salida.fechaVenta =  '2024-10-11'
+      this.venta_salida.clienteId = row.clienteId;
+      this.venta_salida.productId = row.productId;
+      this.venta_salida.ProductName = 'gaaa';
       this.venta_salida.cantidadVenta = row.cantidadVenta;
       this.venta_salida.unidadMedida = row.unidadMedidad;
-      this.venta_salida.clienteId = row.clienteId;
-      this.venta_salida.deudaActualizada = row.deudaActualizada;
       this.venta_salida.pesoVenta = row.pesoVenta;
-      this.venta_salida.precioIngresadoVenta = row.precioIngresadoVenta;
       this.venta_salida.precioRealVenta = row.precioRealVenta;
-      this.venta_salida.productId = row.productId;
+      this.venta_salida.precioIngresadoVenta = row.precioIngresadoVenta;
+      this.venta_salida.amortizacion = row.amortizacion;
+      this.venta_salida.deudaActualizada = row.deudaActualizada;
       this.venta_salida.usuarioId = this._auth.GetUsuario().userID;
+      this.venta_salida.CantidadMinima = 5;
+      this.venta_salida.IsReserva =true;
       this.venta_salida.FechaReserva = this.FechaReservaModal;
       this.venta_salida.observacion = row.observacion;
-
-      this._VentasService.InsertReserva(this.venta_salida).subscribe((data: any) => {
-        this._MessageService.add({
-          severity: 'success'
-          , summary: 'Operación Exitosa'
-          , detail: 'Venta reservada correctamente'
-          , key: 'Notificacion'
-          , life: 5000
-        });
-      });
+     
+       this.ReservaArray.push(this.venta_salida);
+    
     }
+
+    console.log(this.ReservaArray);
+    this._VentasService.InsertReserva(this.ReservaArray).subscribe((data: any) => {
+      this._MessageService.add({
+        severity: 'success'
+        , summary: 'Operación Exitosa'
+        , detail: 'Venta reservada correctamente'
+        , key: 'Notificacion'
+        , life: 5000
+      });
+    });
   }
 
   GoHistorialVentas() {

@@ -40,16 +40,17 @@
                         <ng-template pTemplate="header">
                             <tr>
                                 <th class="text-center">#</th>
-                                <th style="min-width:25rem" class="text-center" pSortableColumn="clienteName">Cliente <p-sortIcon  field="clienteName"></p-sortIcon></th>
-                                <th style="min-width:15rem" class="text-center" >Deuda Acumulada</th>
-                                <th style="min-width:15rem" class="text-center" >Pagar Deuda</th>
-                                <th style="min-width:10rem" class="text-center" >Registrar</th>
-                                <th style="min-width:10rem" class="text-center" >Hist. Ventas</th>
-                                <th style="min-width:10rem" class="text-center" >Hist. Reservas</th>
-                                <th style="min-width:10rem" class="text-center" >Anulaciones</th>
+                                <th style="min-width:25rem" class="text-center" pSortableColumn="clienteName">Cliente
+                                    <p-sortIcon field="clienteName"></p-sortIcon></th>
+                                <th style="min-width:15rem" class="text-center">Deuda Acumulada</th>
+                                <th style="min-width:15rem" class="text-center">Pagar Deuda</th>
+                                <th style="min-width:10rem" class="text-center">Registrar</th>
+                                <th style="min-width:10rem" class="text-center">Hist. Ventas</th>
+                                <th style="min-width:10rem" class="text-center">Hist. Reservas</th>
+                                <th style="min-width:10rem" class="text-center">Anulaciones</th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-row let-rowIndex="rowIndex"> 
+                        <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
                             <tr>
                                 <td class="text-center"> {{rowIndex + 1}}</td>
                                 <td>
@@ -111,10 +112,12 @@
                                         style="height: 90%; padding: 5px;" />
                                 </div>
                                 <div class="col" style="padding: 5px;">
-                                    <button style="height: 90%; padding: 5px;" class="btn btn-primary" (click)="getReservasByDate()">Buscar</button>
+                                    <button style="height: 90%; padding: 5px;" class="btn btn-primary"
+                                        (click)="getReservasByDate()">Buscar</button>
                                 </div>
                                 <div class="col" style="padding: 5px;"><button style="height: 90%; padding: 5px;"
-                                        class="btn btn-primary" (click)="ListaTotalProductos = true">Ver total de productos</button></div>
+                                        class="btn btn-primary" (click)="ListaTotalProductos = true">Ver total de
+                                        productos</button></div>
                                 <div class="col" style="padding: 5px;"><button style="height: 90%; padding: 5px;"
                                         class="btn btn-primary">Confirmar todo</button></div>
                             </div>
@@ -137,7 +140,7 @@
                                 <th style="min-width:5rem" class="text-center">Rechazar</th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-row let-rowIndex="RowIndex"  >
+                        <ng-template pTemplate="body" let-row let-rowIndex="RowIndex">
                             <tr>
                                 <td class="text-center"> {{rowIndex + 1}}</td>
                                 <td class="text-center">
@@ -162,29 +165,32 @@
                                     {{ row.precioIngresadoVenta / row.cantidadVenta |number:'1.2-2'}}
                                 </td>
                                 <td class="text-center">
-                                    {{ row.precioIngresadoVenta  |number:'1.2-2'}}
+                                    {{ row.precioIngresadoVenta |number:'1.2-2'}}
                                 </td>
                                 <td class="text-center">
-                                    {{ row.amortizacion  |number:'1.2-2'}}
+                                    {{ row.amortizacion |number:'1.2-2'}}
                                 </td>
                                 <td class="text-center">
                                     {{ row.observacion }}
                                 </td>
                                 <td class="text-center">
                                     <button
-                                        style="border-radius: 50%;background: darkblue; border: 1px solid darkblue;color:  white;" (click)="DeleteConfirm($event,row)">
+                                        style="border-radius: 50%;background: darkblue; border: 1px solid darkblue;color:  white;"
+                                        (click)="OpenModal(row,1)">
                                         <li class="pi pi-check"></li>
                                     </button>
                                 </td>
                                 <td class="text-center">
                                     <button
-                                        style="border-radius: 50%;background: darkorange; border: 1px solid darkorange;color:  white;">
+                                        style="border-radius: 50%;background: darkorange; border: 1px solid darkorange;color:  white;"
+                                        (click)="OpenModal(row,3)">
                                         <li class="pi pi-pencil"></li>
                                     </button>
                                 </td>
                                 <td class="text-center">
                                     <button
-                                        style="border-radius: 50%;background: red; border: 1px solid red;color:  white;">
+                                        style="border-radius: 50%;background: red; border: 1px solid red;color:  white;"
+                                        (click)="OpenModal(row,2)">
                                         <li class="pi pi-trash"></li>
                                     </button>
                                 </td>
@@ -230,49 +236,65 @@
     </div>
 </p-dialog>
 
+<p-dialog header="{{TitleModal}}" [modal]="true" [(visible)]="ReservaOperacionModal" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-5">{{MensajeModal}}.</span>
+
+    <div class="flex justify-content-end gap-2">
+        <div class="row text-center">
+            <div class="col">
+                <button class="btn btn-primary" style="width: 100%;"
+                    (click)="ConfirmarReserva()">{{TitleBoton}}</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-danger" style="width: 100%;" (click)="CloseModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</p-dialog>
+
 <p-dialog header="Lista de Productos" [modal]="true" [(visible)]="ListaTotalProductos" [style]="{ width: '50rem' }">
     <!--  <span class="p-text-secondary block mb-5">Update your information.</span> -->
-     <div class="container">
+    <div class="container">
         <p-table #dt1 [value]="ReservasData" dataKey="id" styleClass="p-datatable-striped" [rows]="9"
-        [rowsPerPageOptions]="[8, 25, 50]" [loading]="loading" [paginator]="true"
-        [globalFilterFields]="['productName']">
-        
-        <ng-template pTemplate="header">
-            <tr>
-                <th>#</th>
-                <th style="min-width:8rem" class="text-center">Producto</th>
-                <th style="min-width:8rem" class="text-center">Cantidad</th> 
-                <th style="min-width:8rem" class="text-center">U. M.</th> 
+            [rowsPerPageOptions]="[8, 25, 50]" [loading]="loading" [paginator]="true"
+            [globalFilterFields]="['productName']">
 
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-row let-rowIndex="RowIndex"  >
-            <tr>
-                <td class="text-center"> {{rowIndex + 1}}</td>
-                <td class="text-center">
-                    {{ row.productName }}
-                </td>
-                <td class="text-center">
-                    {{ row.cantidadVenta }}
-                </td>
-                <td class="text-center">
-                    {{ row.unidadMedida }}
-                </td> 
-                 
-               
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-            <tr>
-                <td colspan="7">No hay datos.</td>
-            </tr>
-        </ng-template>
-    </p-table>
-        
-     </div>
-      
-     
- </p-dialog>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>#</th>
+                    <th style="min-width:8rem" class="text-center">Producto</th>
+                    <th style="min-width:8rem" class="text-center">Cantidad</th>
+                    <th style="min-width:8rem" class="text-center">U. M.</th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row let-rowIndex="RowIndex">
+                <tr>
+                    <td class="text-center"> {{rowIndex + 1}}</td>
+                    <td class="text-center">
+                        {{ row.productName }}
+                    </td>
+                    <td class="text-center">
+                        {{ row.cantidadVenta }}
+                    </td>
+                    <td class="text-center">
+                        {{ row.unidadMedida }}
+                    </td>
+
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">No hay datos.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+
+
+</p-dialog>
 
 <p-dialog [closable]="false" [modal]="true" [(visible)]="loading" [style]="{ width: '25rem' }">
     <div class="loader" style="width: 100%;">
@@ -285,14 +307,109 @@
     [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" position="bottom-right"
     key="Notificacion" />
 
-    <p-confirmPopup #confirmPopupRef>
-        <ng-template pTemplate="headless" let-message let-test>
-            <div class="border-round p-3">
-                <span>{{ message.message }}</span>
-                <div class="flex align-items-center gap-2 mt-3">
-                    <button class="btn btn-primary" (click)="ConfirmarReserva()">Confirmar</button>
-                    <button class="btn btn-danger" (click)="NotConfirm()">Cancelar</button>
-                </div>
+<p-confirmPopup #ConfirmarPopup>
+    <ng-template pTemplate="headless" let-message let-test>
+        <div class="border-round p-3">
+            <span>{{ message.message }}</span>
+            <div class="flex align-items-center gap-2 mt-3">
+                <button class="btn btn-primary" (click)="ConfirmarReserva()">Confirmar</button>
+                <button class="btn btn-danger" (click)="NotConfirm()">Cancelar</button>
             </div>
-        </ng-template>
-    </p-confirmPopup>
+        </div>
+    </ng-template>
+</p-confirmPopup>
+
+
+<p-confirmPopup #DeleteReservaPopup>
+    <ng-template pTemplate="headless" let-message let-test>
+        <div class="border-round p-3">
+            <span>{{ message.message }}</span>
+            <div class="flex align-items-center gap-2 mt-3">
+                <button class="btn btn-primary" (click)="ConfirmarReserva()">Confirmar</button>
+                <button class="btn btn-danger" (click)="NotConfirm()">Cancelar</button>
+            </div>
+        </div>
+    </ng-template>
+</p-confirmPopup>
+
+
+<p-dialog [closable]="false" header="Actualizando venta" [modal]="true" [(visible)]="EditarReservaModal"
+    [style]="{ width: '50rem' }">
+    <div class="grid" [formGroup]="_FormGroup">
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Fecha Venta:</b>
+            <input type="datetime-local" [(ngModel)]="FechaVenta" formControlName="FechaVenta" class="form-control">
+        </div>
+
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Producto:</b>
+            <p-dropdown [options]="ProductosData" optionLabel="productName" [filter]="true" filterBy="productName"
+                (onChange)="seleccionaProducto()" [(ngModel)]="productoSelected" formControlName="productoSelected"
+                placeholder="Selecciona Producto">
+                <ng-template let-row pTemplate="item">
+                    <div style="padding-left: 4px;">
+                        <div>{{ row.productName }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Unidad Medida:</b>
+            <p-dropdown [options]="EquivalenciaDataFilter" optionLabel="unidadBase" [filter]="true"
+                filterBy="unidadBase" [(ngModel)]="unidadMedidaSelected" formControlName="unidadMedidaSelected"
+                (onChange)="cambiarStockUnidadMedida();cargar()" placeholder="Selecciona Unidad Medida">
+                <ng-template let-country pTemplate="item">
+                    <div style="padding-left: 4px;">
+                        <div>{{ country.unidadBase }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Cantidad:</b>
+            <input type="number" class="form-control" [(ngModel)]="cantidadPV" formControlName="cantidadPV"
+                (change)="calcularTotal(); actualizarDeudaActualizada(); VALIDAD_STOCK()"
+                placeholder="Ingrese Cantidad">
+        </div>
+
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Stock Actual:</b>
+            <input type="text" class="form-control" [(ngModel)]="stockActual" formControlName="stockActual"
+                (change)="VALIDAD_STOCK()" placeholder="0">
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Costo (S/.):</b>
+            <input type="text" class="form-control" [(ngModel)]="CostoCompra" formControlName="CostoCompra"
+                placeholder="0" disabled>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Precio (S/.):</b>
+            <input type="number" class="form-control" [(ngModel)]="precioPV" formControlName="precioPV"
+                (change)="calcularTotal(); actualizarDeudaActualizada()" placeholder="Ingrese Precio">
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Total (S/.):</b>
+            <input type="text" class="form-control" [(ngModel)]="totalPV" formControlName="totalPV" placeholder="0"
+                (change)="actualizarDeudaActualizada()" disabled>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Amortizacion(S/.):</b>
+            <input type="number" class="form-control" [(ngModel)]="amortizacion" formControlName="amortizacion"
+                placeholder="Ingrese Amortizacion" (change)="actualizarDeudaActualizada()">
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Observacion:</b>
+            <input type="text" class="form-control" [(ngModel)]="observacion" formControlName="observacion"
+                placeholder="Ingrese Observacion">
+        </div>
+
+        <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 35px;">
+            <button class="btn btn-primary" style="width: 100%;">Actualizar Venta</button>
+        </div>
+
+
+        <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 35px;">
+            <button class="btn btn-danger" style="width: 100%;" (click)="EditarReservaModal =false">Cancelar</button>
+        </div>
+    </div>
+</p-dialog>

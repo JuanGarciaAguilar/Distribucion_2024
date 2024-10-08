@@ -15,9 +15,11 @@ export class Venta_SalidaModel {
   amortizacion: number = 0;
   deudaActualizada: number = 0;
   usuarioId: string = '';
+  CantidadMinima:number = 0;
   observacion: string = '';
   FechaReserva?:Date;
-
+  IsReserva : boolean = true;
+  ProductName:string='';
 }
 
 
