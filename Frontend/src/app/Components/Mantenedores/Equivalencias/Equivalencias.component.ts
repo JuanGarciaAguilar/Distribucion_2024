@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-Equivalencias',
@@ -6,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./Equivalencias.component.css']
 })
 export class EquivalenciasComponent implements OnInit {
-
+    items: MenuItem[] = [
+        { icon: 'pi pi-home', route: '/' },
+        { label: 'Modulo de equivalencias' },
+    ];
   constructor() { }
-
+  EquivalenciaData:any;
   ngOnInit() {
   }
 

@@ -1,3 +1,83 @@
-<p>
-  Clientes works!
-</p>
+<p-breadcrumb class="max-w-full" [model]="items">
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                <span class="text-primary font-semibold">{{ item.label }}</span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url">
+                <span class="text-color">{{ item.label }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
+</p-breadcrumb>
+
+<div style="padding-top: 5px;">
+    <div class="card">
+        <span class="text-center"><b>
+                <span><b>Datos del cliente</b></span>
+            </b></span>
+        <hr>
+
+        <div class="grid" style="padding-top: 10px;">
+            <div class="col-12 lg:col-6 xl:col-3">
+                <span><b>Nombres :</b></span>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-12 lg:col-6 xl:col-3">
+                <span><b>Telefono:</b></span>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-12 lg:col-6 xl:col-3">
+                <span><b>Sector: </b></span>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-12 lg:col-6 xl:col-3">
+                <span><b>Dirección :</b></span>
+                <input type="text" class="form-control">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="card">
+
+    <p-table [value]="ClientesData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '100rem' }"
+        [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm">
+        <ng-template pTemplate="caption"  >
+            <div class="text-center" style="color: white;">
+                Lista de clientes
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="text-center" style="width: 3rem;">#</th>
+                <th class="text-center" style="width: 25rem;">Nombres</th>
+                <th class="text-center" style="width: 30rem;">Direccíon</th>
+                <th class="text-center" style="width: 20rem;">Telefono</th>
+                <th class="text-center" style="width: 20rem;"> </th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
+            <tr>
+                <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                    <b>{{rowIndex + 1}}</b>
+                </td>
+
+                <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                    {{row.ProveedorName}}</td>
+                <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                    {{row.ProductName}}</td>
+                <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                    {{row.cantidadCompra}}</td>
+                <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                    {{row.unidadMedida}}</td>
+
+
+        </ng-template>
+    </p-table>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-UnidadMedida',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UnidadMedidaComponent implements OnInit {
 
+    items: MenuItem[] = [
+        { icon: 'pi pi-home', route: '/' },
+        { label: 'Modulo de unidad de medida' },
+    ];
   constructor() { }
-
+  SectorData:any
   ngOnInit() {
   }
-
 }
