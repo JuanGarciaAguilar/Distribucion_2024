@@ -48,9 +48,9 @@
             </ng-template>
             <ng-template pTemplate="body" let-row>
                 <tr>
-                    <td class="text-center">
-                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;">{{row.fechaVenta | date: 'dd-MM-yyyy HH:mm:ss'}}</span>
-                          <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;">{{row.fechaVenta | date: 'dd-MM-yyyy HH:mm:ss'}}</span>
+                    <td class="text-center">   
+                        <span *ngIf="row.productName != 'PAGOS'" Style="color: black;">{{row.fechaVenta | date: 'YYYY-MM-dd HH:mm:ss'}}</span>
+                          <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;">{{row.fechaVenta | date: 'YYYY-MM-dd HH:mm:ss'}}</span>
                     </td>
                     <td class="text-center">
                         <span *ngIf="row.productName != 'PAGOS'" Style="color: black;"> {{row.productName}}</span>
@@ -89,41 +89,109 @@
                         <span *ngIf="row.productName == 'PAGOS'" Style="color: blue;">{{row.usuarioId}}</span>
                     </td>
                     <td class="text-center">
-                        <button pButton icon="pi pi-pencil" (click)="goToEdit(row)"
+                        <button pButton icon="pi pi-pencil" (click)="OpenModal(row,2)"
                             style="border-radius: 50%;width: 30px;height: 30px;background: mediumblue;"
                             pTooltip="Ver Equivalencias"  ></button>
                     </td>
                     <td class="text-center">
                         <button pButton icon="pi pi-trash"
-                            style="border-radius: 50%;width: 30px;height: 30px;background: red;"
+                            style="border-radius: 50%;width: 30px;height: 30px;background: red;" (click)="OpenModal(row,1)"
                             pTooltip="Eliminar Producto"></button>
                     </td>
             </ng-template>
         </p-table>
     </div>
 </div>
-<p-dialog [closable]="false" [modal]="true" [(visible)]="PagoDeudaModal" [style]="{ width: '25rem' }">
-    <div>
-        Deuda acumulada de <b>{{ClienteName}}</b>: <h4> <b>S/. {{deudaActualizada | number:'1.2-2'}}</b></h4>
+ 
+
+<p-dialog [closable]="false" header="Actualizando venta" [modal]="true" [(visible)]="EditarReservaModal"
+    [style]="{ width: '70rem' }">
+
+    <div class="row">
+        <div class="col">
+            <p-messages [(value)]="ClienteName" [closable]="false" />
+        </div>
+        <div class="col">
+            <p-messages [(value)]="DeudaByClienteLoad" [closable]="false" />
+        </div>
     </div>
 
+    <div class="grid" [formGroup]="_FormGroup">
+       <!--  <div class="col-12 lg:col-6 xl:col-3">
+            <b>Fecha Venta:</b>
+            <input type="datetime-local" [(ngModel)]="FechaVenta" formControlName="FechaVenta" class="form-control">
+        </div> -->
 
-    <div class="align-items-center gap-3 mb-3">
-        <label class="font-semibold w-6rem">Monto:</label>
-        <input type="number" class="form-control" [(ngModel)]="monto" autocomplete="off" />
-    </div>
-
-    <div class="align-items-center gap-3 mb-3">
-        <label class="font-semibold w-6rem">Observacion:</label>
-        <input type="text" class="form-control" [(ngModel)]="observacion" autocomplete="off" />
-    </div>
-    <div class="gap-2">
-        <div class="row">
-            <div class="col text-center"><button class="btn btn-primary" (click)="InsertPagoAdelanto()" >Guardar</button></div>
-            <div class="col text-center"><button class="btn btn-danger" (click)="ModalAdelantoClose()">Cancelar</button>
-            </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Producto:</b>
+            <p-dropdown [options]="ProductosData" optionLabel="productName" [filter]="true" filterBy="productName"
+                (onChange)="seleccionaProducto()" [(ngModel)]="productoSelected" formControlName="productoSelected"
+                placeholder="Selecciona Producto">
+                <ng-template let-row pTemplate="item">
+                    <div style="padding-left: 4px;">
+                        <div>{{ row.productName }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Unidad Medida:</b>
+            <p-dropdown [options]="EquivalenciaDataFilter" optionLabel="unidadBase" [filter]="true"
+                filterBy="unidadBase" [(ngModel)]="unidadMedidaSelected" formControlName="unidadMedidaSelected"
+                (onChange)="cambiarStockUnidadMedida();cargar()" placeholder="Selecciona Unidad Medida">
+                <ng-template let-country pTemplate="item">
+                    <div style="padding-left: 4px;">
+                        <div>{{ country.unidadBase }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Cantidad:</b>
+            <input type="number" class="form-control" [(ngModel)]="cantidadPV" formControlName="cantidadPV"
+                (change)="calcularTotal(); actualizarDeudaActualizada(); VALIDAD_STOCK()"
+                placeholder="Ingrese Cantidad">
         </div>
 
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Stock Actual:</b>
+            <input type="text" class="form-control" [(ngModel)]="stockActual" formControlName="stockActual"
+                (change)="VALIDAD_STOCK()" placeholder="0">
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Costo (S/.):</b>
+            <input type="text" class="form-control" [(ngModel)]="CostoCompra" formControlName="CostoCompra"
+                placeholder="0" disabled>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Precio (S/.):</b>
+            <input type="number" class="form-control" [(ngModel)]="precioPV" formControlName="precioPV"
+                (change)="calcularTotal(); actualizarDeudaActualizada()" placeholder="Ingrese Precio">
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Total (S/.):</b>
+            <input type="text" class="form-control" [(ngModel)]="totalPV" formControlName="totalPV" placeholder="0"
+                (change)="actualizarDeudaActualizada()" disabled>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Amortizacion(S/.):</b>
+            <input type="number" class="form-control" [(ngModel)]="amortizacion" formControlName="amortizacion"
+                placeholder="Ingrese Amortizacion" (change)="actualizarDeudaActualizada()">
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <b>Observacion:</b>
+            <input type="text" class="form-control" [(ngModel)]="observacion" formControlName="observacion"
+                placeholder="Ingrese Observacion">
+        </div>
+
+        <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 35px;">
+            <button class="btn btn-primary" style="width: 100%;" (click)="UpdateVenta()">Actualizar Venta</button>
+        </div>
+
+
+        <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 35px;">
+            <button class="btn btn-danger" style="width: 100%;" (click)="EditarReservaModal =false">Cancelar</button>
+        </div>
     </div>
 </p-dialog>
 
@@ -137,3 +205,32 @@
 <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
         [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" position="bottom-right"
         key="Notificacion" />
+
+        <p-confirmPopup #ConfirmarPopup>
+            <ng-template pTemplate="headless" let-message let-test>
+                <div class="border-round p-3">
+                    <span>{{ message.message }}</span>
+                    <div class="flex align-items-center gap-2 mt-3">
+                        <button class="btn btn-primary" (click)="ConfirmarReserva()">Confirmar</button>
+                        <button class="btn btn-danger" (click)="NotConfirm()">Cancelar</button>
+                    </div>
+                </div>
+            </ng-template>
+        </p-confirmPopup>
+
+
+        <p-dialog header="{{TitleModal}}" [modal]="true" [(visible)]="ReservaOperacionModal" [style]="{ width: '25rem' }">
+            <span class="p-text-secondary block mb-5">{{MensajeModal}}.</span>
+        
+            <div class="flex justify-content-end gap-2">
+                <div class="row text-center">
+                    <div class="col">
+                        <button class="btn btn-primary" style="width: 100%;"
+                            (click)="eliminarVenta()">{{TitleBoton}}</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-danger" style="width: 100%;" (click)="CloseModal()">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </p-dialog>

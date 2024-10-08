@@ -221,11 +221,13 @@ export class ListaSectorClienteComponent implements OnInit {
         let calculo = (this.cantidadPV * this.precioPV).toFixed(2);
         this.totalPV = parseFloat(calculo);
     }
-
+    CantidadActualStock: number = 0;
     cargar() {
         this._ComprasService.getComprasMax(this.productoSelected.productId, this.unidadMedidaSelected.unidadBase).subscribe((data: any) => {
-            this.cantidadObjetos_db = data[0].cantidadObjetos;;
+            this.cantidadObjetos_db = data[0].cantidadObjetos;
+            debugger
             this.CostoCompra = Number(data[0].costo.toFixed(2));
+            this.CantidadActualStock = data[0].cantidadActualStock;
         });
     }
 
@@ -243,7 +245,7 @@ export class ListaSectorClienteComponent implements OnInit {
             }
         }
     }
- 
+
     TotalVentas: number = 0;
     ClearField() {
         this.precioPV = 0;
@@ -402,10 +404,7 @@ export class ListaSectorClienteComponent implements OnInit {
         });
     }
     ventasobj!: Venta_SalidaModel;
-    confirmarReserva(venta: any) {
 
-
-    }
     ReservaSelectd: any;
 
 
@@ -415,7 +414,7 @@ export class ListaSectorClienteComponent implements OnInit {
         if (this.Var_Operacion === 1) {
 
             this._VentasService.getVentasById(this.ReservaSelectd.ventaId).subscribe((data: any) => {
-           
+
                 this.ventasobj = new Venta_SalidaModel();
                 for (let row of data) {
                     this.ventasobj.amortizacion = row.amortizacion;
@@ -473,6 +472,53 @@ export class ListaSectorClienteComponent implements OnInit {
                     //this.GetReservasTotalDia();
                 });
         }
+
+        if (this.Var_Operacion === 4) {
+            let EstadoReserva:boolean = false;
+
+            for (let item of this.ReservasData){
+                this._VentasService.getVentasById(Number(item.ventaId)).subscribe((data: any) => {
+
+                    this.ventasobj = new Venta_SalidaModel();
+                    for (let row of data) {
+                        this.ventasobj.amortizacion = row.amortizacion;
+                        this.ventasobj.cantidadVenta = row.cantidadVenta; //* this.ventas[i].pesoVenta;
+                        this.ventasobj.pesoVenta = row.pesoVenta;
+                        this.ventasobj.unidadMedida = row.unidadMedida;
+                        this.ventasobj.clienteId = row.clienteId;
+                        this.ventasobj.deudaActualizada = row.deudaActualizada;
+                        this.ventasobj.precioIngresadoVenta = row.precioIngresadoVenta;
+                        this.ventasobj.precioRealVenta = row.precioRealVenta;
+                        this.ventasobj.productId = Number(row.productId);
+                        this.ventasobj.usuarioId = row.usuarioId;
+                        this.ventasobj.observacion = row.observacion;
+                        this.ventasobj.fechaVenta = row.fechaVenta;
+    
+                        this._VentasService.postInsertaVenta(this.ventasobj).subscribe((x: any) => {
+                            this._VentasService.postEliminaVenta(Number(item.ventaId)).subscribe(
+                                (data: any) => {
+                                    EstadoReserva = true;
+                                });
+                        });
+    
+                        
+                    }
+                });
+            }
+            if (!EstadoReserva){
+                this._messageService.add({
+                    severity: 'success'
+                    , summary: 'Operación Exitosa'
+                    , detail: 'Venta reservada correctamente'
+                    , key: 'Notificacion'
+                    , life: 5000
+                });
+                this.CleanFields();
+                this.GetReservas();
+            }
+            
+          
+        }
     }
 
     DeleteReserva() {
@@ -482,7 +528,9 @@ export class ListaSectorClienteComponent implements OnInit {
 
     Var_Operacion: number = 0;
     OpenModal(data: any, Operacion: number) {
-        this.ReservaSelectd = data;
+        this.ReservaSelectd = data; 
+        console.log(data);
+        
         if (Operacion === 1) {
             this.ReservaOperacionModal = true;
             this.TitleModal = 'Confirmación de la reserva';
@@ -501,7 +549,8 @@ export class ListaSectorClienteComponent implements OnInit {
 
         if (Operacion === 3) {
             debugger
-            this.unidadMedidaSelected =[];
+            this.unidadMedidaSelected = [];
+            this.EquivalenciaDataFilter = [];
             this.EquivalenciaData.forEach((equi: any) => {
                 if (equi.productId == this.ReservaSelectd.productId) {
                     this.EquivalenciaDataFilter.push(equi);
@@ -512,20 +561,98 @@ export class ListaSectorClienteComponent implements OnInit {
             this.cantidadPV = data.cantidadVenta;
             this.productoSelected = this.ProductosData.find((f: any) => f.productId == data.productId);
             this.unidadMedidaSelected = this.EquivalenciaDataFilter.find((f: any) => f.unidadBase.trim() == data.unidadMedida.trim());
-            this.precioPV = data.precio;
-            this.cantidadObjetos_db = data.pesoVenta;
+            this.precioPV = data.precioIngresadoVenta / data.cantidadVenta;
+            // this.cantidadObjetos_db = data.pesoVenta;
             this.totalPV = data.precioIngresadoVenta;
             this.amortizacion = data.amortizacion;
             this.observacion = data.observacion;
-           console.log('equivalñ',this.unidadMedidaSelected);
-           
-
+            this.FechaVenta = data.fechaReserva;
             this.cambiarStockUnidadMedida();
             this.cargar();
         }
 
+        if (Operacion === 4) {
+
+            if (this.ReservasData.length === 0){
+                this._MessageService.add({
+                    severity: 'info'
+                    , summary: 'advertencia'
+                    , detail: '!No hay reservas a confirmar!'
+                    , key: 'Notificacion'
+                    , life: 5000
+                });
+                return;
+            }
+
+            this.ReservaOperacionModal = true;
+            this.TitleModal = 'Confirmación de reservas';
+            this.MensajeModal = 'Desea Confirmar todas las reservas';
+            this.Var_Operacion = Operacion;
+            this.TitleBoton = 'Si, Confirmar';
+        }
 
     }
+
+    UpdateVenta() {
+        debugger
+        var cantidadequivalencia = this.cantidadObjetos_db;
+        var stockactual = this.CantidadActualStock; //traer stock
+
+        if (cantidadequivalencia == 1) {
+            var cantidadactual: any = this.ReservaSelectd.cantidadVenta;
+        } else {
+            var cantidadactual: any = this.ReservaSelectd.cantidadVenta * cantidadequivalencia;
+        }
+
+        var cantidadactualmodificado = this.cantidadPV;
+
+        var cantidadtotal = cantidadequivalencia * cantidadactualmodificado;
+        var stockactualizado = stockactual + cantidadactual;
+
+        var newstock = stockactualizado - cantidadtotal;
+
+        var stockvalidator = stockactualizado - cantidadtotal;
+        if (stockvalidator < 0) {
+            this._MessageService.add({
+                severity: 'info'
+                , summary: 'advertencia'
+                , detail: 'La cantidad Ingresada supera al stock actual'
+                , key: 'Notificacion'
+                , life: 5000
+            });
+            return;
+        }
+        const data = new Venta_SalidaModel();
+
+        data.amortizacion = this.ReservaSelectd.amortizacion;
+        data.cantidadVenta = this.cantidadPV;
+        data.clienteId = parseFloat(this.ReservaSelectd.clienteId);
+        data.deudaActualizada = this.deudaAnterior;
+        data.unidadMedida = this.unidadMedidaSelected.unidadBase;
+        data.precioIngresadoVenta = this.totalPV;
+        data.precioRealVenta = 0;
+        data.productId = this.productoSelected.productId;
+        data.ventaId = this.ReservaSelectd.ventaId;
+        data.observacion = this.observacion;
+        data.pesoVenta = newstock;
+        this._VentasService.updateVenta(data).subscribe(
+            (x: any) => {
+                this._MessageService.add({
+                    severity: 'success'
+                    , summary: 'Operacion Exitosa'
+                    , detail: 'Reserva Actualizada correctamente'
+                    , key: 'Notificacion'
+                    , life: 5000
+                });
+                this.GetReservas();
+                this.CleanFields();
+            });
+    }
+
+    ConfirmarTodo() {
+
+    }
+
 
     CloseModal() {
         this.ReservaOperacionModal = false;
@@ -538,6 +665,7 @@ export class ListaSectorClienteComponent implements OnInit {
 
 
         this.EditarReservaModal = true;
+        this.CleanFields();
 
     }
 
@@ -573,5 +701,6 @@ export class ListaSectorClienteComponent implements OnInit {
         this.FechaPago = '';
         this.monto = 0;
         this.observacion = '';
+        this.ReservaSelectd=[];
     }
 }

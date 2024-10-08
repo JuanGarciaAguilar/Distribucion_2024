@@ -52,9 +52,6 @@ export class MantemientoVentasComponent implements OnInit {
 
   deudaActualizada: number = 0;
   deudaAnterior: number = 0;
-  //ClienteName :string= this._auth.GetVentasData().clienteName;
-  //DeudaByCliente: number = this._auth.GetVentasData().deudaActualizada;
-  //ClienteName: Message[] | undefined;
   DeudaByCliente: number = 0;
   ClienteName: Message[] = [
     {

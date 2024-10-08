@@ -31,7 +31,7 @@ GetProvedor(){
 this._ProveedorService.getProveedoresAll().subscribe(
     (data:any) => {
       this.ProveedorData = data;
-      this.ProveedorData.unshift({"proveedorId": "","proveedorName":"Todos los Proveedores"})
+      this.ProveedorData.unshift({"proveedorId": "0","proveedorName":"Todos los Proveedores"})
       //this.loading = false;
     });
 }
@@ -43,7 +43,7 @@ this.totalflete = 0;
 this.loading = true; */
 debugger
 this._ComprasService
-  .getReporteCompras(this.fInicio, this.fFin, this.ProveedorSelected.proveedorName)
+  .getReporteCompras(this.fInicio, this.fFin, this.ProveedorSelected.proveedorId)
   .subscribe((data:any) => {
     this.ReporteData = data;
     console.log('dataaaaa',data);

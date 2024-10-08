@@ -50,8 +50,8 @@
     <div class="card">
         <p-table [value]="ReporteData" sortField="proveedorName" sortMode="single" [scrollable]="true"
             scrollHeight="400px" rowGroupMode="subheader" groupRowsBy="proveedorName"
-            [tableStyle]="{'min-width': '40rem'}" #dt1 styleClass="p-datatable-striped" [rows]="10"
-            [rowsPerPageOptions]="[10, 20, 50]" [paginator]="true" [globalFilterFields]="['ProductName']">
+            [tableStyle]="{ 'min-width': '100rem' }" #dt1 styleClass="p-datatable-striped" [rows]="10"  
+            [rowsPerPageOptions]="[10, 20, 50]" [paginator]="true" [globalFilterFields]="['productName','proveedorName']">
             <ng-template pTemplate="caption">
 
                 <div class="row">
@@ -65,26 +65,26 @@
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Fecha Compra</th>
-                    <th>Fecha Venta</th>
-                    <th>Ciudad</th>
-                    <th>Proveedor</th>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Unidad Medida</th>
-                    <th>Precio Unit.</th>
-                    <th>Precio Com.</th>
-                    <th>Total</th>
-                    <th>Saldo</th>
-                    <th>Documento</th>
-                    <th>Numero</th>
-                    <th>Flete</th>
-                    <th>Observacion</th>
+                    <th class="text-center" style="width: 30rem;">Fecha Compra</th>
+                    <th class="text-center" style="width: 20rem;">Fecha Venta</th>
+                    <th class="text-center" style="width: 20rem;">Ciudad</th>
+                    <th class="text-center" style="width: 20rem;">Proveedor</th>
+                    <th class="text-center" style="width: 20rem;">Producto</th>
+                    <th class="text-center" style="width: 20rem;">Cantidad</th>
+                    <th class="text-center" style="width: 20rem;">Unidad Medida</th>
+                    <th class="text-center" style="width: 20rem;">Precio Unit.</th>
+                    <th class="text-center" style="width: 20rem;">Precio Com.</th>
+                    <th class="text-center" style="width: 20rem;">Total</th>
+                    <th class="text-center" style="width: 20rem;">Saldo</th>
+                    <th class="text-center" style="width: 20rem;">Documento</th>
+                    <th class="text-center" style="width: 20rem;">Numero</th>
+                    <th class="text-center" style="width: 20rem;">Flete</th>
+                    <th class="text-center" style="width: 20rem;">Observacion</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="groupheader" let-customer>
                 <tr pRowGroupHeader>
-                    <td colspan="5">
+                    <td colspan="15" style="background: darkslategrey;color: white;">
 
                         <span class="font-bold ml-2">{{customer.proveedorName }}</span>
                     </td>
@@ -99,8 +99,8 @@
             </ng-template>
             <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex">
                 <tr>
-                    <td> {{customer.fechaCompra}} </td>
-                    <td> {{customer.fechaEntrega}} </td>
+                    <td> {{customer.fechaCompra | date:'YYYY-MM-dd'}} </td>
+                    <td> {{customer.fechaEntrega  | date:'YYYY-MM-dd'}} </td>
                     <td>{{'chim'}}</td>
                     <!--  <td> <p>{{dataItem.origenCompra == 1 ? "Trujillo" : dataItem.origenCompra == 2 ? "Talara" :
               dataItem.origenCompra == 3 ? "Piura" : "Chiclayo"}}</p> </td> -->

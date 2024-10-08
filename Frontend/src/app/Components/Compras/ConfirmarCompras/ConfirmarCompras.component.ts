@@ -33,6 +33,7 @@ export class ConfirmarComprasComponent implements OnInit {
     Ciudad:string='';
     TotalCompra:number = 0;
     TotalFlete : number=0;
+    EditarCompraModal: boolean =false;
   async  ngOnInit() {
         let ProductosData:any = await this._ProductosService.GetListaProductos().toPromise();
         let ProveedorData:any = await this._ProveedorService.getProveedoresAll().toPromise();

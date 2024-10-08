@@ -41,7 +41,8 @@
                             <tr>
                                 <th class="text-center">#</th>
                                 <th style="min-width:25rem" class="text-center" pSortableColumn="clienteName">Cliente
-                                    <p-sortIcon field="clienteName"></p-sortIcon></th>
+                                    <p-sortIcon field="clienteName"></p-sortIcon>
+                                </th>
                                 <th style="min-width:15rem" class="text-center">Deuda Acumulada</th>
                                 <th style="min-width:15rem" class="text-center">Pagar Deuda</th>
                                 <th style="min-width:10rem" class="text-center">Registrar</th>
@@ -102,7 +103,7 @@
 
 
                 <p-tabPanel header="Reservas del dia">
-                    <p-table #dt1 [value]="ReservasData" dataKey="id" styleClass="p-datatable-striped" [rows]="9"
+                    <p-table #dt2 [value]="ReservasData" styleClass="p-datatable-striped" [rows]="9"
                         [rowsPerPageOptions]="[8, 25, 50]" [loading]="loading" [paginator]="true"
                         [globalFilterFields]="['clienteName']">
                         <ng-template pTemplate="caption">
@@ -119,12 +120,12 @@
                                         class="btn btn-primary" (click)="ListaTotalProductos = true">Ver total de
                                         productos</button></div>
                                 <div class="col" style="padding: 5px;"><button style="height: 90%; padding: 5px;"
-                                        class="btn btn-primary">Confirmar todo</button></div>
+                                        class="btn btn-primary" (click)="OpenModal(ReservasData,4)">Confirmar todo</button></div>
                             </div>
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th>#</th>
+                                <th class="text-center">#</th>
                                 <th style="min-width:8rem" class="text-center">Fecha Reserva</th>
                                 <th style="min-width:8rem" class="text-center">Fecha Venta</th>
                                 <th style="min-width:10rem" class="text-center">Cliente</th>
@@ -140,14 +141,14 @@
                                 <th style="min-width:5rem" class="text-center">Rechazar</th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-row let-rowIndex="RowIndex">
+                        <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
                             <tr>
                                 <td class="text-center"> {{rowIndex + 1}}</td>
                                 <td class="text-center">
-                                    {{ row.fechaReserva }}
+                                    {{ row.fechaReserva |date:'YYYY-MM-dd' }}
                                 </td>
                                 <td class="text-center">
-                                    {{ row.fecha }}
+                                    {{ row.fecha |date:'YYYY-MM-dd'}}
                                 </td>
                                 <td class="text-center">
                                     {{ row.clienteName }}
@@ -156,7 +157,7 @@
                                     {{ row.productName }}
                                 </td>
                                 <td class="text-center">
-                                    {{ row.Cantidad }}
+                                    {{ row.cantidadVenta }}
                                 </td>
                                 <td class="text-center">
                                     {{ row.unidadMedida}}
@@ -255,20 +256,18 @@
 <p-dialog header="Lista de Productos" [modal]="true" [(visible)]="ListaTotalProductos" [style]="{ width: '50rem' }">
     <!--  <span class="p-text-secondary block mb-5">Update your information.</span> -->
     <div class="container">
-        <p-table #dt1 [value]="ReservasData" dataKey="id" styleClass="p-datatable-striped" [rows]="9"
+        <p-table #dt3 [value]="ReservasData"  styleClass="p-datatable-striped" [rows]="9"
             [rowsPerPageOptions]="[8, 25, 50]" [loading]="loading" [paginator]="true"
             [globalFilterFields]="['productName']">
-
             <ng-template pTemplate="header">
                 <tr>
                     <th>#</th>
                     <th style="min-width:8rem" class="text-center">Producto</th>
                     <th style="min-width:8rem" class="text-center">Cantidad</th>
                     <th style="min-width:8rem" class="text-center">U. M.</th>
-
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-row let-rowIndex="RowIndex">
+            <ng-template pTemplate="body" let-row  let-rowIndex="rowIndex">
                 <tr>
                     <td class="text-center"> {{rowIndex + 1}}</td>
                     <td class="text-center">
@@ -280,13 +279,11 @@
                     <td class="text-center">
                         {{ row.unidadMedida }}
                     </td>
-
-
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
                 <tr>
-                    <td colspan="7">No hay datos.</td>
+                    <td colspan="3">No hay datos.</td>
                 </tr>
             </ng-template>
         </p-table>
@@ -334,12 +331,21 @@
 
 
 <p-dialog [closable]="false" header="Actualizando venta" [modal]="true" [(visible)]="EditarReservaModal"
-    [style]="{ width: '50rem' }">
+    [style]="{ width: '70rem' }">
+
+    <div class="row">
+        <div class="col">
+            <p-messages [(value)]="ClienteName" [closable]="false" />
+        </div>
+        <div class="col">
+            <p-messages [(value)]="DeudaByClienteLoad" [closable]="false" />
+        </div>
+    </div>
     <div class="grid" [formGroup]="_FormGroup">
-        <div class="col-12 lg:col-6 xl:col-3">
+       <!--  <div class="col-12 lg:col-6 xl:col-3">
             <b>Fecha Venta:</b>
             <input type="datetime-local" [(ngModel)]="FechaVenta" formControlName="FechaVenta" class="form-control">
-        </div>
+        </div> -->
 
         <div class="col-12 lg:col-6 xl:col-3">
             <b>Producto:</b>
@@ -404,7 +410,7 @@
         </div>
 
         <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 35px;">
-            <button class="btn btn-primary" style="width: 100%;">Actualizar Venta</button>
+            <button class="btn btn-primary" style="width: 100%;" (click)="UpdateVenta()">Actualizar Venta</button>
         </div>
 
 
