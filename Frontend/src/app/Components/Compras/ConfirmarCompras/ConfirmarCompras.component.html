@@ -24,11 +24,11 @@
         <div class="grid" style="padding-top: 10px;">
             <div class="col-12 lg:col-6 xl:col-2">
                 <span><b>Fecha de Compra:</b></span>
-                <input type="text" class="form-control" [(ngModel)]="FechaCompra" disabled>
+                <input type="text" class="form-control" [ngModel]="FechaCompra | date: 'yyyy-MM-dd'" disabled>
             </div>
             <div class="col-12 lg:col-6 xl:col-2">
                 <span><b>Fecha de Entrega:</b></span>
-                <input type="text" class="form-control" [(ngModel)]="FechaEntrega" disabled>
+                <input type="text" class="form-control" [ngModel]="FechaEntrega | date: 'yyyy-MM-dd'" disabled>
             </div>
             <div class="col-12 lg:col-6 xl:col-2">
                 <span><b>Ciudad: </b></span>
@@ -113,8 +113,8 @@
                         {{row.numeroDocumento }}</td>
                     <td class="text-center">
                         <button pButton icon="pi pi-pencil"
-                            style="border-radius: 50%;width: 30px;height: 30px;background: blue;" (click)="EditarCompraModal = true"
-                            pTooltip="Editar Compra"></button>
+                            style="border-radius: 50%;width: 30px;height: 30px;background: blue;"
+                            (click)="SelectedComopra(row)" pTooltip="Editar Compra"></button>
                     </td>
                     <td class="text-center">
                         <button pButton icon="pi pi-trash"
@@ -130,26 +130,102 @@
 <p-dialog [closable]="false" header="Actualizando Compra" [modal]="true" [(visible)]="EditarCompraModal"
     [style]="{ width: '70rem' }">
 
-  
-    <div class="grid"  >
-       <!--  <div class="col-12 lg:col-6 xl:col-3">
+    <form [formGroup]="_FormGroup">
+        <div class="grid">
+            <!--  <div class="col-12 lg:col-6 xl:col-3">
             <b>Fecha Venta:</b>
             <input type="datetime-local" [(ngModel)]="FechaVenta" formControlName="FechaVenta" class="form-control">
         </div> -->
 
-        <div class="col-12 lg:col-6 xl:col-3">
-            <b>Producto:</b>
-             
-        </div>
+            <div class="col-12 lg:col-6 xl:col-4">
+                <label><b>Fecha de Compra :</b></label>
+                <input type="date" [ngModel]="FechaCompra | date: 'yyyy-MM-dd'" class="form-control" formControlName="FechaCompra" >
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-4">
+                <label><b>Fecha de Entrega :</b></label>
+                <input type="date" [ngModel]="FechaCompra | date: 'yyyy-MM-dd'" class="form-control" formControlName="FechaEntrega">
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-4">
+                <label><b>Cuidad de la compra :</b></label>
+                <p-dropdown [options]="CiudadData" optionLabel="ciudadName" [(ngModel)]="CiudadSelected"
+                    formControlName="CiudadSelected" placeholder="Seleccione Cuidad" />
+            </div>
+
+            <hr>
+
+            <div class="col-12 lg:col-6 xl:col-3">
+                <label>Proveedor :</label>
+                <p-dropdown [options]="ProveedorData" [filter]="true" filterBy="proveedorName"
+                    formControlName="ProveedorSelected" optionLabel="proveedorName" [showClear]="true"
+                    [(ngModel)]="ProveedorSelected"
+                    placeholder="Seleccione Porveedor" />
+            </div>
+            <div class="col-12 lg:col-6 xl:col-3">
+                <label>Producto :</label>
+                <p-dropdown [options]="ProductoData" [filter]="true" filterBy="productName"
+                    [(ngModel)]="ProductoSelected" formControlName="ProductoSelected" optionLabel="productName"
+                    [showClear]="true" placeholder="Seleccione Producto" />
+            </div>
+            <div class="col-12 lg:col-6 xl:col-3">
+                <label>Flete Unitario :</label>
+                <input type="number" class="form-control" [(ngModel)]="FleteUnitario" placeholder="0"
+                    formControlName="FleteUnitario">
+            </div>
+            <div class="col-12 lg:col-6 xl:col-3">
+                <label>Unidad Medida :</label>
+                <p-dropdown [options]="equivalenciaFilter" [filter]="true" filterBy="unidadBase"
+                    [(ngModel)]="UnidadMedidaSelected" optionLabel="unidadBase" [showClear]="true"
+                    formControlName="UnidadMedidaSelected" placeholder="Selecione unidad Medida" />
+            </div>
+            <div class="col-12 lg:col-6 xl:col-3">
+                <label>Cantidad :</label>
+                <input type="number" [(ngModel)]="CantidadCompra" class="form-control" placeholder="0"
+                    formControlName="CantidadCompra">
+            </div>
+            <div class="col-12 lg:col-6 xl:col-3">
+                <label>Precio Unitario :</label>
+                <input type="number" [(ngModel)]="PrecioUnitario" class="form-control" placeholder="0"
+                    formControlName="PrecioUnitario">
+            </div>
+            <div class="col-12 lg:col-6 xl:col-3">
+                <label>Total :</label>
+                <input type="number" class="form-control" [(ngModel)]="CostoTotalCompra" placeholder="0"
+                    formControlName="CostoTotalCompra">
+            </div>
          
+            <div class="col-12 lg:col-6 xl:col-3">
+                <label>Amortizacion :</label>
+                <input type="number" class="form-control" [(ngModel)]="Amortizacion" placeholder="0"
+                    formControlName="Amortizacion">
+            </div>
+            <div class="col-12 lg:col-6 xl:col-3">
+                <label>Saldo :</label>
+                <input type="number" class="form-control" [(ngModel)]="Saldo" formControlName="Saldo" placeholder="0">
+            </div>
+            <div class="col-12 lg:col-6 xl:col-3">
+                <label>Documento Compra:</label>
+                <p-dropdown [options]="DocumentoCompra" [filter]="true" filterBy="label"
+                    [(ngModel)]="DocumentoCompraSelected" formControlName="DocumentoCompraSelected" optionLabel="label"
+                    [showClear]="true" placeholder="Seleccione documento" />
+            </div>
+            <div class="col-12 lg:col-6 xl:col-3">
+                <label>Numero Documento :</label>
+                <input type="text" [(ngModel)]="NumeroDocumento" [(ngModel)]="NumeroDocumento"
+                    formControlName="NumeroDocumento" class="form-control">
+            </div>
+           
 
-        <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 35px;">
-            <button class="btn btn-primary" style="width: 100%;" >Actualizar Venta</button>
+
+            <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 35px;">
+                <button class="btn btn-primary" style="width: 100%;">Actualizar Venta</button>
+            </div>
+
+
+            <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 35px;">
+                <button class="btn btn-danger" style="width: 100%;" (click)="EditarCompraModal=false">Cancelar</button>
+            </div>
         </div>
-
-
-        <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 35px;">
-            <button class="btn btn-danger" style="width: 100%;" >Cancelar</button>
-        </div>
-    </div>
+    </form>
 </p-dialog>
