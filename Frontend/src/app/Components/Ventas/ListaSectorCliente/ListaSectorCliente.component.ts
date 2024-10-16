@@ -392,9 +392,9 @@ export class ListaSectorClienteComponent implements OnInit {
             //  debugger;
             this.ReservasData = data;
             /*  this.loadingReservas = false;
-       
+
              this.tablaClientesReserva = Object.assign([], this.listaReservas);
-       
+
              this.calculoTotalReserva = 0;
              for (let i = 0; i < this.listaReservas.length; i++) {
                this.calculoTotalReserva += this.listaReservas[i].precioIngresadoVenta;
@@ -493,15 +493,15 @@ export class ListaSectorClienteComponent implements OnInit {
                         this.ventasobj.usuarioId = row.usuarioId;
                         this.ventasobj.observacion = row.observacion;
                         this.ventasobj.fechaVenta = row.fechaVenta;
-    
+
                         this._VentasService.postInsertaVenta(this.ventasobj).subscribe((x: any) => {
                             this._VentasService.postEliminaVenta(Number(item.ventaId)).subscribe(
                                 (data: any) => {
                                     EstadoReserva = true;
                                 });
                         });
-    
-                        
+
+
                     }
                 });
             }
@@ -516,8 +516,8 @@ export class ListaSectorClienteComponent implements OnInit {
                 this.CleanFields();
                 this.GetReservas();
             }
-            
-          
+
+
         }
     }
 
@@ -528,9 +528,9 @@ export class ListaSectorClienteComponent implements OnInit {
 
     Var_Operacion: number = 0;
     OpenModal(data: any, Operacion: number) {
-        this.ReservaSelectd = data; 
+        this.ReservaSelectd = data;
         console.log(data);
-        
+
         if (Operacion === 1) {
             this.ReservaOperacionModal = true;
             this.TitleModal = 'Confirmación de la reserva';

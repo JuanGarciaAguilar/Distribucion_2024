@@ -175,7 +175,7 @@
             </div>
             <div class="col-12 lg:col-6 xl:col-3">
                 <label>Unidad Medida :</label>
-                <p-dropdown [options]="equivalenciaFilter" [filter]="true" filterBy="unidadBase"
+                <p-dropdown [options]="UnidadMedidaData" [filter]="true" filterBy="unidadBase"
                     [(ngModel)]="UnidadMedidaSelected" optionLabel="unidadBase" [showClear]="true"
                     formControlName="UnidadMedidaSelected" placeholder="Selecione unidad Medida" />
             </div>
@@ -194,7 +194,7 @@
                 <input type="number" class="form-control" [(ngModel)]="CostoTotalCompra" placeholder="0"
                     formControlName="CostoTotalCompra">
             </div>
-         
+
             <div class="col-12 lg:col-6 xl:col-3">
                 <label>Amortizacion :</label>
                 <input type="number" class="form-control" [(ngModel)]="Amortizacion" placeholder="0"
@@ -215,11 +215,11 @@
                 <input type="text" [(ngModel)]="NumeroDocumento" [(ngModel)]="NumeroDocumento"
                     formControlName="NumeroDocumento" class="form-control">
             </div>
-           
+
 
 
             <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 35px;">
-                <button class="btn btn-primary" style="width: 100%;">Actualizar Venta</button>
+                <button class="btn btn-primary" style="width: 100%;" (click)="UpdateCompra()">Actualizar Venta</button>
             </div>
 
 

@@ -3,6 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { ClienteModel } from 'src/app/Shared/Models/ClienteModel';
 import { CierreDiarioReportHeader } from 'src/app/Shared/Models/ReportesModel';
 import { ClienteService } from 'src/app/Shared/Service/Cliente.service';
+import { ProductosService } from 'src/app/Shared/Service/Productos.service';
 import { ReportesService } from 'src/app/Shared/Service/Reportes.service';
 import { SectorService } from 'src/app/Shared/Service/Sector.service';
 
@@ -19,6 +20,7 @@ export class ReporteDiarioComponent implements OnInit {
     private _ClienteService = inject(ClienteService);
     private _SectorService = inject(SectorService);
     private _ReportesService = inject(ReportesService);
+    private _ProductosService = inject(ProductosService);
     constructor() {}
     sales: any;
     SectorData: any;
@@ -29,6 +31,22 @@ export class ReporteDiarioComponent implements OnInit {
        this.getReporteCierreDiarioCabecera();
     }
 
+    ProductosHeaderGrilla:any;
+   async GetProductos(){
+    debugger
+    let DataTemp:any =  await  this._ProductosService.GetListaProductos().toPromise();
+
+    this.ProductosHeaderGrilla = DataTemp.filter((f:any)=>f.productParentId == 0);
+
+    for (let productoPadre of this.ProductosHeaderGrilla){
+        let data:any = DataTemp.filter((f:any)=>f.productParentId !== 0 && f.productParentId == productoPadre.productId);
+        let longitud = data.length;
+       productoPadre.Hijos = data;
+       productoPadre.longitud = longitud;
+    }
+    console.log('header',this.ProductosHeaderGrilla);
+
+    }
 
     GetSectores() {
         this._SectorService.getListaSector().subscribe((data: any) => {
@@ -40,8 +58,8 @@ export class ReporteDiarioComponent implements OnInit {
 
     GetClientes() {
         this._ClienteService.getListaClientes().subscribe((clientesData) => {
-
             this.ClientesData = clientesData;
+            console.log('clientes',clientesData);
         });
     }
 
@@ -57,7 +75,7 @@ export class ReporteDiarioComponent implements OnInit {
 
     FechaInicio:string = '';
     SectorSelected :any;
-    clientes: ClienteModel[] = [];
+    clientes?: any;
     GetReporte(){
         this._ReportesService
         .getReporteCierreDiario(this.FechaInicio, this.SectorSelected)
@@ -67,13 +85,12 @@ export class ReporteDiarioComponent implements OnInit {
           this.totalVenta = 0;
           this.totalAmortizacion = 0;
    */debugger
-          this.clientes = this.ClientesData
-            .filter((x:any) => x.sectorId == this.SectorSelected)
-            .sort((a:any, b:any) => {
+          this.clientes = this.ClientesData.filter((x:any) => x.sectorId == this.SectorSelected)
+          /* .sort((a:any, b:any) => {
               const x = a.clienteName.toLowerCase();
               const y = b.clienteName.toLowerCase();
               return x < y ? -1 : x > y ? 1 : 0;
-            });
+            }); */
             console.log('clientes',this.ClientesData);
             console.log('clientes del reporte',this.clientes);
 

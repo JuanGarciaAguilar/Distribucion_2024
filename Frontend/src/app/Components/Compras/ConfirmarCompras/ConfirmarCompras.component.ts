@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
+import { CompraDetalleModel, CompraModel } from 'src/app/Shared/Models/ComprasModel';
 import { Equivalencia } from 'src/app/Shared/Models/equivalencia';
 import { AuthService } from 'src/app/Shared/Service/auth.service';
 import { CiudadService } from 'src/app/Shared/Service/Ciudad.service';
@@ -27,7 +28,7 @@ export class ConfirmarComprasComponent implements OnInit {
     private _ProveedorService = inject(ProveedorService);
     private _Router = inject(Router);
     private _AuthService = inject(AuthService);
-    private _MessageService = inject(MessageService); 
+    private _MessageService = inject(MessageService);
     private _CiudadService = inject(CiudadService);
 
     DocumentoCompra = [
@@ -73,9 +74,6 @@ export class ConfirmarComprasComponent implements OnInit {
     TotalFlete: number = 0;
     EditarCompraModal: boolean = false;
 
-
-    /*     FechaCompra!: Date;
-        FechaEntrega!: Date; */
     CiudadSelected: any;
 
     ProveedorSelected: any;
@@ -106,7 +104,7 @@ export class ConfirmarComprasComponent implements OnInit {
         let ProductosData: any = await this._ProductosService.GetListaProductos().toPromise();
         let ProveedorData: any = await this._ProveedorService.getProveedoresAll().toPromise();
         this.ComprasTemp.push(this._AuthService.GetCompraData());
-       
+
 
         this.dataCiudades = await this._CiudadService.getAllNewCiudad().toPromise();
         let Cuidades = this.dataCiudades.filter((f:any)=>f.ciudadId  == this.ComprasTemp[0].origenCompra);
@@ -133,17 +131,17 @@ export class ConfirmarComprasComponent implements OnInit {
 
     async GetProductos() {
         let data = await this._ProductosService.GetListaProductos().toPromise();
-
-
-        this.ProductoData = data.filter((f: any) => f.productParentId !== 0); 
+        this.ProductoData = data.filter((f: any) => f.productParentId !== 0);
     }
+    CompraId :number = 0;
+    CompraDetalleId : number =0;
     SelectedComopra(data: any) {
-
-        console.log('datexx', data);
-        debugger
+        this.CompraId = data.compraId;
+        this.CompraDetalleId = data.detalleCompraId;
         this.ProveedorSelected = this.ProveedorData.find((f: any) => f.proveedorId == data.proveedorId);
         this.ProductoSelected = this.ProductoData.find((f: any) => f.productId == data.productId);
-        this.UnidadMedidaSelected = this.equivalenciaFilter.find((f: any) => f.unidadBase == data.unidadMedida && f.productId == data.productId);
+        this.CiudadSelected = this.dataCiudades.find((f:any)=>f.ciudadId  == this.ComprasTemp[0].origenCompra);
+        this.UnidadMedidaSelected = this.UnidadMedidaData.find((f: any) => f.unidadBase == data.unidadMedida && f.productId == data.productId);
         this.FleteUnitario = data.costoFleteItemCompra;
         this.CantidadCompra = data.cantidadCompra;
         this.PrecioUnitario = data.precioUnitario;
@@ -153,5 +151,50 @@ export class ConfirmarComprasComponent implements OnInit {
         this.DocumentoCompraSelected = this.DocumentoCompra.find((f: any) => f.label == data.documentoCompra)
         this.NumeroDocumento = data.numeroDocumento;
         this.EditarCompraModal = true;
+
+    }
+
+    UpdateCompra(){
+
+        const datacompra = new CompraModel();
+        datacompra.fechaCompra = new Date(this.FechaCompra);
+      datacompra.fechaEntrega = new Date(this.FechaEntrega);
+      datacompra.origenCompra = this.CiudadSelected.ciudadId;
+
+
+      datacompra.compraId = this.CompraId;
+      const data = new CompraDetalleModel();
+      data.productId = this.ProductoSelected.productId;
+      data.proveedorId = this.ProveedorSelected.proveedorId;
+      data.detalleCompraId = this.CompraDetalleId;
+      data.compraId = this.CompraId;
+      data.cantidadCompra = this.CantidadCompra;
+      data.unidadMedida = this.UnidadMedidaSelected.unidadBase;
+      data.precioUnitario = this.PrecioUnitario;
+      data.precioCompra = this.CostoTotalCompra;
+      data.totalDeposito = this.Amortizacion;
+      data.saldoDeposito = this.Saldo;
+      data.costoFleteItemCompra = this.FleteUnitario;
+      data.documentoCompra = this.DocumentoCompraSelected.label;
+      data.numeroDocumento = this.NumeroDocumento;
+      ///variable declarada para almacenar el valor del flete total
+      data.pesoCompra = this.FleteUnitario;
+debugger
+      this._ComprasService.updateCompraDetalle(data).subscribe(
+        (x:any) => {
+          //this.fleteCompra = 0;
+          //this.CargarDetalleID();
+          //this.totalCompra = data.cantidadCompra * data.costoFleteItemCompra;
+          //this.CargarDetalleID();
+          this._ComprasService.updateCompraFechas(datacompra).subscribe((Z:any) => {
+             // this.CargarDetalleID();
+             // this.loadItems();
+              //this.router.navigate(["/menu/lista-compras/list"]);
+            });
+
+          //this.currentCompraObj.fechaCompra =  this.field("fechacompra").value;
+          //this.currentCompraObj.fechaEntrega = this.field("fechaentrega").value;
+
+        });
     }
 }
