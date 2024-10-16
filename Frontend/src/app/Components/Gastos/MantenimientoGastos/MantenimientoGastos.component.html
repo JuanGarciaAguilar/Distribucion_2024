@@ -1,3 +1,124 @@
-<p>
-  MantenimientoGastos works!
-</p>
+<p-breadcrumb class="max-w-full" [model]="items">
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                <span class="text-primary font-semibold">{{ item.label }}</span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url">
+                <span class="text-color">{{ item.label }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
+</p-breadcrumb>
+
+
+<div class="grid" style="padding-top: 10px;">
+    <div class="col-12 lg:col-6 xl:col-4">
+        <div style="padding-top: 5px;">
+            <div class="card">
+                <span class="text-center">
+                    <b>
+                        <span><b>Datos del Gasto </b></span>
+                    </b>
+                </span>
+                <hr>
+                <div class="grid" style="padding-top: 10px;">
+                    <div class="col-12 lg:col-6 xl:col-12">
+                        <span><b>Desde :</b></span>
+                        <input type="date" [(ngModel)]="fInicio" name="fInicio" class="form-control"
+                            (change)="enableBtnRegistrar(); enableBtnGuardar();">
+                    </div>
+                    <div class="col-12 lg:col-6 xl:col-12">
+                        <span><b>Hasta :</b></span>
+                        <input type="date" [(ngModel)]="fFin" name="fFin" class="form-control"
+                            (change)="enableBtnRegistrar(); enableBtnGuardar();">
+                    </div>
+                    <div class="col-12 lg:col-6 xl:col-12">
+                        <span><b>Tipo de Gasto :</b></span>
+                        <select class="form-control" [(ngModel)]="tGasto" name="tGasto"
+                            (change)='getInsumo(); enableBtnRegistrar();' aria-placeholder="Seleccione tipo de gasto">
+                            <option value="Diesel">Diesel</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Casa">Administrador</option>
+                            <option value="Sunat">Sunat</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                    <div class="col-12 lg:col-6 xl:col-12">
+                        <span><b>Monto :</b></span>
+                        <input type="number" [(ngModel)]="mMonto" name="mMonto" #newMon class="form-control"
+                            (keyup)="checkDetalle(); checkVacio(newMon.value); enableBtnRegistrar();">
+                    </div>
+                    <div class="col-12 lg:col-6 xl:col-12" *ngIf="E_Personal == false">
+                        <span><b>Personal :</b></span>
+                        <select class="form-control" [(ngModel)]="tPersonal" name="producto">
+                            <option *ngFor="let usu of tempusu" value="{{usu.userID}}">{{usu.userID}}</option>
+                        </select>
+                    </div>
+                    <div class="col-12 lg:col-6 xl:col-12">
+                        <span><b>Comentario :</b></span>
+                        <textarea [(ngModel)]="comentario" rows="3" cols="50" class="form-control"></textarea>
+                    </div>
+                    <div class="col-12 lg:col-6 xl:col-12">
+                        <span><b></b></span>
+                        <button class="btn btn-primary" style="width: 100%;"
+                            (click)="addGastoToArray()">Registrar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6 xl:col-8">
+        <div class="card">
+            <div class="text-center">
+                <span>
+                    <h4>Monto Total del Gasto: {{TotalGastos}}</h4>
+                </span>
+            </div>
+            <p-table [value]="gastoDetalleArray" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
+                [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm">
+                <ng-template pTemplate="caption">
+                    <div class="text-center" style="color: white;">
+                        Lista de Gastos
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="text-center" style="width: 3rem;">#</th>
+                        <th class="text-center" style="width: 15rem;">Tipo Gasto</th>
+                        <th class="text-center" style="width: 15rem;">Monto</th>
+                        <th class="text-center" style="width: 15rem;">Personal</th>
+                        <th class="text-center" style="width: 15rem;">Comentario</th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
+                    <tr>
+                        <td class="text-center"
+                            style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                            <b>{{rowIndex + 1}}</b>
+                        </td>
+                        <td class="text-center"
+                            style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                            {{row.insumo}}</td>
+                        <td class="text-center"
+                            style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                            {{row.gasto}}</td>
+                        <td class="text-center"
+                            style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                            {{row.userId}}</td>
+                        <td class="text-center"
+                            style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                            {{row.comentario}}</td>
+
+
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+</div>
