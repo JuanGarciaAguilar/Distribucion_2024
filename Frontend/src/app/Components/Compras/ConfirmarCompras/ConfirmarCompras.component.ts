@@ -63,12 +63,12 @@ export class ConfirmarComprasComponent implements OnInit {
         });
     }
     ComprasData: any[] = [];
-    ComprasDetalleSelected: any;
+    ComprasDetalleSelected!: any;
     ComprasTemp: any[] = [];
     // ProductosData:any;
 
-    FechaCompra: string = '';
-    FechaEntrega: string = '';
+    FechaCompra!: Date;
+    FechaEntrega!: Date;
     Ciudad: string = '';
     TotalCompra: number = 0;
     TotalFlete: number = 0;
@@ -99,18 +99,18 @@ export class ConfirmarComprasComponent implements OnInit {
     UnidadMedidaData: any;
     CiudadData: any;
     equivalenciaFilter: Equivalencia[] = [];
-    dataCiudades:any;
+    dataCiudades: any;
     async ngOnInit() {
+
         let ProductosData: any = await this._ProductosService.GetListaProductos().toPromise();
         let ProveedorData: any = await this._ProveedorService.getProveedoresAll().toPromise();
         this.ComprasTemp.push(this._AuthService.GetCompraData());
 
-
         this.dataCiudades = await this._CiudadService.getAllNewCiudad().toPromise();
-        let Cuidades = this.dataCiudades.filter((f:any)=>f.ciudadId  == this.ComprasTemp[0].origenCompra);
-        console.log('cudades',Cuidades);
+        let Cuidades = this.dataCiudades.filter((f: any) => f.ciudadId == this.ComprasTemp[0].origenCompra);
+        console.log('cudades', Cuidades);
         this.FechaCompra = this.ComprasTemp[0].fechaCompra;
-        this.FechaEntrega = this.ComprasTemp[0].fechaCompra;
+        this.FechaEntrega = this.ComprasTemp[0].fechaEntrega;
         this.Ciudad = Cuidades[0].ciudadName;
         this.TotalCompra = this.ComprasTemp[0].totalCompra;
         this.TotalFlete = this.ComprasTemp[0].costoFlete;
@@ -133,14 +133,14 @@ export class ConfirmarComprasComponent implements OnInit {
         let data = await this._ProductosService.GetListaProductos().toPromise();
         this.ProductoData = data.filter((f: any) => f.productParentId !== 0);
     }
-    CompraId :number = 0;
-    CompraDetalleId : number =0;
+    CompraId: number = 0;
+    CompraDetalleId: number = 0;
     SelectedComopra(data: any) {
         this.CompraId = data.compraId;
         this.CompraDetalleId = data.detalleCompraId;
         this.ProveedorSelected = this.ProveedorData.find((f: any) => f.proveedorId == data.proveedorId);
         this.ProductoSelected = this.ProductoData.find((f: any) => f.productId == data.productId);
-        this.CiudadSelected = this.dataCiudades.find((f:any)=>f.ciudadId  == this.ComprasTemp[0].origenCompra);
+        this.CiudadSelected = this.dataCiudades.find((f: any) => f.ciudadId == this.ComprasTemp[0].origenCompra);
         this.UnidadMedidaSelected = this.UnidadMedidaData.find((f: any) => f.unidadBase == data.unidadMedida && f.productId == data.productId);
         this.FleteUnitario = data.costoFleteItemCompra;
         this.CantidadCompra = data.cantidadCompra;
@@ -154,47 +154,120 @@ export class ConfirmarComprasComponent implements OnInit {
 
     }
 
-    UpdateCompra(){
+    field(name: string) {
+        return this._FormGroup?.get(name);
+    }
 
-        const datacompra = new CompraModel();
-        datacompra.fechaCompra = new Date(this.FechaCompra);
-      datacompra.fechaEntrega = new Date(this.FechaEntrega);
-      datacompra.origenCompra = this.CiudadSelected.ciudadId;
+    UpdateCompra() {
+        debugger
 
-
-      datacompra.compraId = this.CompraId;
-      const data = new CompraDetalleModel();
-      data.productId = this.ProductoSelected.productId;
-      data.proveedorId = this.ProveedorSelected.proveedorId;
-      data.detalleCompraId = this.CompraDetalleId;
-      data.compraId = this.CompraId;
-      data.cantidadCompra = this.CantidadCompra;
-      data.unidadMedida = this.UnidadMedidaSelected.unidadBase;
-      data.precioUnitario = this.PrecioUnitario;
-      data.precioCompra = this.CostoTotalCompra;
-      data.totalDeposito = this.Amortizacion;
-      data.saldoDeposito = this.Saldo;
-      data.costoFleteItemCompra = this.FleteUnitario;
-      data.documentoCompra = this.DocumentoCompraSelected.label;
-      data.numeroDocumento = this.NumeroDocumento;
-      ///variable declarada para almacenar el valor del flete total
-      data.pesoCompra = this.FleteUnitario;
-debugger
-      this._ComprasService.updateCompraDetalle(data).subscribe(
-        (x:any) => {
-          //this.fleteCompra = 0;
-          //this.CargarDetalleID();
-          //this.totalCompra = data.cantidadCompra * data.costoFleteItemCompra;
-          //this.CargarDetalleID();
-          this._ComprasService.updateCompraFechas(datacompra).subscribe((Z:any) => {
-             // this.CargarDetalleID();
-             // this.loadItems();
-              //this.router.navigate(["/menu/lista-compras/list"]);
+        if (
+            this.ProductoSelected == undefined ||
+            this.ProveedorSelected == undefined ||
+            this.CompraDetalleId == null ||
+            this.CompraId == null ||
+            this.CantidadCompra == null ||
+            this.UnidadMedidaSelected == undefined ||
+            this.PrecioUnitario == null ||
+            this.CostoTotalCompra == null ||
+            this.DocumentoCompraSelected == undefined ||
+            this.Amortizacion == undefined ||
+            this.FleteUnitario == undefined
+        ) {
+            this._MessageService.add({
+                severity: 'error'
+                , summary: 'Error'
+                , detail: 'Campos Vacios'
+                , key: 'Notificacion'
+                , life: 5000
             });
+            return;
+        }
+        const datacompra = new CompraModel();
+        datacompra.fechaCompra = this.field("FechaCompra")?.value == null ? this.FechaCompra : this.field("FechaCompra")?.value;
+        datacompra.fechaEntrega = this.field("FechaEntrega")?.value == null ? this.FechaEntrega : this.field("FechaEntrega")?.value;
+        datacompra.origenCompra = this.CiudadSelected.ciudadId;
 
-          //this.currentCompraObj.fechaCompra =  this.field("fechacompra").value;
-          //this.currentCompraObj.fechaEntrega = this.field("fechaentrega").value;
 
-        });
+        datacompra.compraId = this.CompraId;
+        const data = new CompraDetalleModel();
+        data.productId = this.ProductoSelected.productId;
+        data.proveedorId = this.ProveedorSelected.proveedorId;
+        data.detalleCompraId = this.CompraDetalleId;
+        data.compraId = this.CompraId;
+        data.cantidadCompra = this.CantidadCompra;
+        data.unidadMedida = this.UnidadMedidaSelected.unidadBase;
+        data.precioUnitario = this.PrecioUnitario;
+        data.precioCompra = this.CostoTotalCompra;
+        data.totalDeposito = this.Amortizacion;
+        data.saldoDeposito = this.Saldo;
+        data.costoFleteItemCompra = this.FleteUnitario;
+        data.documentoCompra = this.DocumentoCompraSelected.label;
+        data.numeroDocumento = this.NumeroDocumento;
+        ///variable declarada para almacenar el valor del flete total
+        data.pesoCompra = this.FleteUnitario;
+
+        this._ComprasService.updateCompraDetalle(data).subscribe(
+            (x: any) => {
+                this._ComprasService.updateCompraFechas(datacompra).subscribe((Z: any) => {
+                    this._MessageService.add({
+                        severity: 'error'
+                        , summary: 'Operación Exitosa'
+                        , detail: 'Compra Actualizada Correctamente'
+                        , key: 'Notificacion'
+                        , life: 5000
+                    });
+
+                    this._AuthService.DestroyData("CompraData");
+                    this._Router.navigate(['/Compras/Historial']);
+                });
+            });
+    }
+
+    calcular() {
+        this.CostoTotalCompra = this.CantidadCompra * this.PrecioUnitario;
+        this.Saldo = this.CostoTotalCompra - this.Amortizacion;
+    }
+
+    ConfirmarCompras() {
+        console.log('coomprass', this.ComprasTemp);
+        console.log('selected', this.ComprasDetalleSelected);
+        const Data = new CompraModel();
+
+        debugger
+        for (let row of this.ComprasTemp) {
+            Data.compraId = row.compraId;
+            Data.compraStatus = row.compraStatus;
+            Data.costoFlete = row.costoFlete;
+            Data.fechaCompra = row.fechaCompra;
+            Data.fechaEntrega = row.fechaEntrega;
+            Data.Observacion = row.observacion;
+            Data.origenCompra = row.origenCompra;
+            Data.totalCompra = row.totalCompra;
+            Data.usuarioId = row.usuarioId;
+
+            
+            for (let child of row.compraDetalleTabla) {
+                for (let selected of this.ComprasDetalleSelected) {
+                    if (selected.compraEstado == 2) {
+                        child.compraEstado = 1
+                    } else{
+                        child.compraEstado = 2
+                    }
+                   
+                }
+                Data.compraDetalleTabla.push(child);
+            }
+
+
+        }
+
+
+
+        this._ComprasService.confirmarCompra(Data).subscribe(
+            (res: any) => {
+                this._AuthService.DestroyData("CompraData");
+                this._Router.navigate(['/Compras/Historial']);
+            })
     }
 }

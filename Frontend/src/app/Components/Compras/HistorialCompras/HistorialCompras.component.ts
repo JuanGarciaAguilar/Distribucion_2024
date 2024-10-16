@@ -34,6 +34,8 @@ export class HistorialComprasComponent implements OnInit {
 
 
     ngOnInit() {
+      console.log( 'destrozando',this._AuthService.GetCompraData());
+      
         this.GetHistorialCompras();
     }
 

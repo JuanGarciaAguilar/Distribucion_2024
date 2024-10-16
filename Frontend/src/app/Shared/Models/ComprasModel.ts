@@ -1,7 +1,7 @@
 export class CompraModel {
     compraId : number = 0 ;
-    fechaCompra!: Date;
-    fechaEntrega!: Date;
+    fechaCompra?: Date;
+    fechaEntrega?: Date;
     origenCompra : string= '' ;
     totalCompra : number = 0 ;
     costoFlete: number = 0 ;

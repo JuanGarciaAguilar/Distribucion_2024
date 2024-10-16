@@ -213,4 +213,8 @@ export class AuthService {
         localStorage.setItem('CompraData', JSON.stringify(data));
     }
 
+    DestroyData(Name : any){
+        debugger
+        localStorage.removeItem(Name);
+    }
 }

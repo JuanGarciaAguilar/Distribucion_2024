@@ -47,15 +47,17 @@
 
     <div class="card text-center" style="padding: 0px;">
         <div class="row">
-            <div class="col"><button class="btn btn-info"><- Regresar al Historial</button></div>
-            <div class="col"><button class="btn btn-primary">Confirmar Compra</button></div>
+
+            <div class="col"><button class="btn btn-primary" (click)="ConfirmarCompras()">Confirmar Compra</button>
+            </div>
         </div>
     </div>
     <div class="card">
 
-        <p-table [value]="ComprasData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '100rem' }"
-            [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm">
-            <ng-template pTemplate="caption" dataKey="detalleCompraId" [(selection)]="ComprasDetalleSelected">
+        <p-table [value]="ComprasData" [paginator]="true" [rows]="20" [tableStyle]="{ 'min-width': '100rem' }"
+            [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm"
+            [selection]="true" [(selection)]="ComprasDetalleSelected">
+            <ng-template pTemplate="caption" dataKey="detalleCompraId">
                 <div class="text-center" style="color: white;">
                     Lista de compras a confirmar
                 </div>
@@ -87,7 +89,7 @@
                         <b>{{rowIndex + 1}}</b>
                     </td>
                     <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                        <p-tableCheckbox [value]="row" />
+                        <p-tableCheckbox [value]="row" *ngIf="row.compraEstado == 2" />
                     </td>
                     <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
                         {{row.ProveedorName}}</td>
@@ -130,7 +132,7 @@
 <p-dialog [closable]="false" header="Actualizando Compra" [modal]="true" [(visible)]="EditarCompraModal"
     [style]="{ width: '70rem' }">
 
-    <form [formGroup]="_FormGroup">
+    <form [formGroup]="_FormGroup" style="padding-top: 20px;">
         <div class="grid">
             <!--  <div class="col-12 lg:col-6 xl:col-3">
             <b>Fecha Venta:</b>
@@ -139,12 +141,14 @@
 
             <div class="col-12 lg:col-6 xl:col-4">
                 <label><b>Fecha de Compra :</b></label>
-                <input type="date" [ngModel]="FechaCompra | date: 'yyyy-MM-dd'" class="form-control" formControlName="FechaCompra" >
+                <input type="date" value="{{ FechaCompra | date: 'yyyy-MM-dd' }}" class="form-control"
+                    formControlName="FechaCompra" name="FechaCompra">
             </div>
 
             <div class="col-12 lg:col-6 xl:col-4">
                 <label><b>Fecha de Entrega :</b></label>
-                <input type="date" [ngModel]="FechaCompra | date: 'yyyy-MM-dd'" class="form-control" formControlName="FechaEntrega">
+                <input type="date" value="{{ FechaEntrega | date: 'yyyy-MM-dd' }}" class="form-control"
+                    formControlName="FechaEntrega" name="FechaEntrega">
             </div>
 
             <div class="col-12 lg:col-6 xl:col-4">
@@ -153,14 +157,13 @@
                     formControlName="CiudadSelected" placeholder="Seleccione Cuidad" />
             </div>
 
-            <hr>
+
 
             <div class="col-12 lg:col-6 xl:col-3">
                 <label>Proveedor :</label>
                 <p-dropdown [options]="ProveedorData" [filter]="true" filterBy="proveedorName"
                     formControlName="ProveedorSelected" optionLabel="proveedorName" [showClear]="true"
-                    [(ngModel)]="ProveedorSelected"
-                    placeholder="Seleccione Porveedor" />
+                    [(ngModel)]="ProveedorSelected" placeholder="Seleccione Porveedor" />
             </div>
             <div class="col-12 lg:col-6 xl:col-3">
                 <label>Producto :</label>
@@ -182,17 +185,17 @@
             <div class="col-12 lg:col-6 xl:col-3">
                 <label>Cantidad :</label>
                 <input type="number" [(ngModel)]="CantidadCompra" class="form-control" placeholder="0"
-                    formControlName="CantidadCompra">
+                    formControlName="CantidadCompra" (change)="calcular()">
             </div>
             <div class="col-12 lg:col-6 xl:col-3">
                 <label>Precio Unitario :</label>
                 <input type="number" [(ngModel)]="PrecioUnitario" class="form-control" placeholder="0"
-                    formControlName="PrecioUnitario">
+                    formControlName="PrecioUnitario" (change)="calcular()">
             </div>
             <div class="col-12 lg:col-6 xl:col-3">
                 <label>Total :</label>
                 <input type="number" class="form-control" [(ngModel)]="CostoTotalCompra" placeholder="0"
-                    formControlName="CostoTotalCompra">
+                    formControlName="CostoTotalCompra" (change)="calcular()">
             </div>
 
             <div class="col-12 lg:col-6 xl:col-3">
@@ -215,17 +218,35 @@
                 <input type="text" [(ngModel)]="NumeroDocumento" [(ngModel)]="NumeroDocumento"
                     formControlName="NumeroDocumento" class="form-control">
             </div>
+            <div class="col-12 lg:col-6 xl:col-3">
 
-
-
-            <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 35px;">
-                <button class="btn btn-primary" style="width: 100%;" (click)="UpdateCompra()">Actualizar Venta</button>
             </div>
 
 
-            <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 35px;">
+            <div class="col-12 lg:col-6 xl:col-6" style="padding-top: 35px;">
+                <button class="btn btn-primary" style="width: 100%;" (click)="UpdateCompra()">Actualizar Compra</button>
+            </div>
+
+
+            <div class="col-12 lg:col-6 xl:col-6" style="padding-top: 35px;">
                 <button class="btn btn-danger" style="width: 100%;" (click)="EditarCompraModal=false">Cancelar</button>
             </div>
         </div>
     </form>
 </p-dialog>
+
+
+<p-toast position="bottom-center" key="Notificacion" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column align-items-start" style="flex: 1">
+            <div class="flex align-items-center gap-2">
+                <span class="font-bold text-900">
+                    {{ message.summary }}
+                </span>
+            </div>
+            <div class="font-medium text-lg my-3 text-900">
+                {{ message.detail }}
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
