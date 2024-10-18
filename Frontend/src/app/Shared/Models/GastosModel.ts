@@ -1,9 +1,9 @@
 export class GastosModel {
-    gastoSemanalId: number = 0;;
-    fechaInicio: Date | undefined;
-    fechaFinal: Date | undefined;
+    gastoSemanalId: number = 0;
+    fechaInicio!: Date;
+    fechaFinal!: Date;
     gastoTotal: number = 0;
-   //userId:String;
+    //userId:String;
     gastoSemanalTabla: GastoDetalle[] = [];
 }
 
@@ -12,6 +12,6 @@ export class GastoDetalle {
     gastoSemanalId: number = 0;
     insumo: string = '';
     gasto: number = 0;
-    comentario:string = '';
-    userId:string = '';
-  }
+    comentario: string = '';
+    userId: string = '';
+}

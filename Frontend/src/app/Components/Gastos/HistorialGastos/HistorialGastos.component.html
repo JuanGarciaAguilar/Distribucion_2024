@@ -1,3 +1,78 @@
-<p>
-  HistorialGastos works!
-</p>
+<p-breadcrumb class="max-w-full" [model]="items">
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                <span class="text-primary font-semibold">{{ item.label }}</span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url">
+                <span class="text-color">{{ item.label }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
+</p-breadcrumb>
+
+<div style="padding-top: 5px;">
+    <div class="card">
+    <div class="container">
+        <p-table [value]="HistorialGastos" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
+        [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-striped" class="p-datatable-sm">
+        <ng-template pTemplate="caption">
+            <div class="text-center" style="color: white;">
+                Historial de gastos registrados
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Fecha Inicio</th>
+                <th class="text-center">Fecha Fin</th>
+                <th class="text-center">Monto</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
+            <tr>
+                <td class="text-center"
+                    style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                    <b>{{rowIndex + 1}}</b>
+                </td>
+                <td class="text-center"
+                    style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                    {{row.fechaInicio| date:'yyyy-MM-dd' }}</td>
+                <td class="text-center"
+                    style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                    {{row.fechaFinal| date:'yyyy-MM-dd'}}</td>
+                <td class="text-center"
+                    style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                    {{row.gastoTotal | number:'1.2-2'}}</td>
+
+                <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                    <button style="border-radius: 50%;background: blue; border: 1px solid blue;color:  white;" (click)="OpenUpdateGastosModal(row)">
+                        <li class="pi pi-pencil"></li>
+                    </button>
+                </td>
+                <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                    <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;"  >
+                        <li class="pi pi-trash"></li>
+                    </button>
+                </td>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="7">No hay datos.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    </div>
+    </div>
+</div>
+
+
+<p-dialog [closable]="false" [modal]="true" [(visible)]="UpdateGastoModal" [style]="{ width: '40rem' }">
+
+
+</p-dialog>
