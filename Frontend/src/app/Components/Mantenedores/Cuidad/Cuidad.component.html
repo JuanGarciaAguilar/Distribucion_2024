@@ -27,17 +27,17 @@
                 <hr>
                 <div class="grid" style="padding-top: 10px;">
                     <div class="col-12 lg:col-6 xl:col-6">
-                        <span><b>Descripción  :</b></span>
-                        <input type="text" class="form-control">
+                        <span><b>Descripción :</b></span>
+                        <input type="text" class="form-control" [(ngModel)]="Ciudad">
                     </div>
 
-                    <div class="col-12 lg:col-6 xl:col-3">
+                    <div class="col-12 lg:col-6 xl:col-3"  style="    padding-top: 35px;">
                         <span><b></b></span>
-                        <button class="btn btn-primary"  style="width: 100%;">Registrar</button>
+                        <button class="btn btn-primary" style="width: 100%;" [disabled]="enable" [disabled]="hiddenInsert" (click)="InsertCiudad()">Registrar</button>
                     </div>
-                    <div class="col-12 lg:col-6 xl:col-3">
+                    <div class="col-12 lg:col-6 xl:col-3" style="    padding-top: 35px;">
                         <span><b></b></span>
-                        <button class="btn btn-danger" style="width: 100%;">Registrar</button>
+                        <button class="btn btn-danger" style="width: 100%;" [disabled]="hidden" (click)="UpdateCiudad()">Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -46,37 +46,60 @@
     <div class="col-12 lg:col-6 xl:col-6">
         <div class="card">
 
-            <p-table [value]="CuidadData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '100rem' }"
+            <p-table [value]="CuidadData" [paginator]="true" [rows]="5"
                 [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm">
-                <ng-template pTemplate="caption"  >
+                <ng-template pTemplate="caption">
                     <div class="text-center" style="color: white;">
                         Lista de ciudades
                     </div>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="text-center" style="width: 3rem;">#</th>
-                        <th class="text-center" style="width: 25rem;">Sector</th>
-                        <th class="text-center" style="width: 20rem;"></th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Descripcion</th>
+                        <th class="text-center"></th>
+                        <!-- <th class="text-center"></th> -->
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
                     <tr>
-                        <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        <td class="text-center"
+                            style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
                             <b>{{rowIndex + 1}}</b>
                         </td>
 
-                        <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                            {{row.ProveedorName}}</td>
-                        <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                            {{row.ProductName}}</td>
+                        <td class="text-center"
+                            style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                            {{row.ciudadName}}</td>
 
+                        <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                            <button style="border-radius: 50%;background: blueviolet; border: 1px solid blueviolet;color:  white;" (click)="EditData(row)">
+                                <li class="pi pi-pencil"></li>
+                            </button>
+                        </td>
 
+                       <!--  <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                            <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;">
+                                <li class="pi pi-trash"></li>
+                            </button>
+                        </td> -->
                 </ng-template>
             </p-table>
         </div>
     </div>
 
 </div>
-
-
+<p-toast position="bottom-center" key="Notificacion" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column align-items-start" style="flex: 1">
+            <div class="flex align-items-center gap-2">
+                <span class="font-bold text-900">
+                    {{ message.summary }}
+                </span>
+            </div>
+            <div class="font-medium text-lg my-3 text-900">
+                {{ message.detail }}
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
