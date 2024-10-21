@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { CuidadModel } from 'src/app/Shared/Models/CuidadModel';
 import { CiudadService } from 'src/app/Shared/Service/Ciudad.service';
+import { UnidadMedidaService } from 'src/app/Shared/Service/UnidadMedida.service';
 
 @Component({
   selector: 'app-Cuidad',
@@ -13,6 +14,8 @@ export class CuidadComponent implements OnInit {
 
     private _CiudadService = inject(CiudadService);
     private _MessageService = inject(MessageService);
+
+
     items: MenuItem[] = [
         { icon: 'pi pi-home', route: '/' },
         { label: 'Modulo de ciudades' },

@@ -46,13 +46,19 @@
     <div class="col-12 lg:col-6 xl:col-6">
         <div class="card">
 
-            <p-table [value]="CuidadData" [paginator]="true" [rows]="5"
+            <p-table [value]="CuidadData" [paginator]="true" [rows]="5" #dt1  [globalFilterFields]="['ciudadName']"
                 [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm">
+
                 <ng-template pTemplate="caption">
-                    <div class="text-center" style="color: white;">
-                        Lista de ciudades
+                    <div class="flex">
+                       <span style="color: white;"> Lista de ciudades</span>
+                        <span class="ml-auto">
+                            <input class="form-control" type="text" [(ngModel)]="searchValue"
+                            (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar Ciudad" />
+                        </span>
                     </div>
                 </ng-template>
+
                 <ng-template pTemplate="header">
                     <tr>
                         <th class="text-center">#</th>

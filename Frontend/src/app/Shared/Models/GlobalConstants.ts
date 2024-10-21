@@ -34,6 +34,7 @@ export class GlobalConstants {
     public static Usuarios: string = GlobalConstants.API + 'Usuario/';
     public static Ciudad: string = GlobalConstants.API + 'Ciudad/';
     public static ReporteStock: string = GlobalConstants.API + 'stock/';
+    public static UnidadMedida: string = GlobalConstants.API + 'UnidadMedida/';
 }
 
 

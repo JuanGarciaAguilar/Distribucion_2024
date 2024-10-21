@@ -28,19 +28,19 @@
                 <div class="grid" style="padding-top: 10px;">
                     <div class="col-12 lg:col-6 xl:col-6">
                         <span><b>Unidad de Medida :</b></span>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" [(ngModel)]="unidadMedidad">
                     </div>
                     <div class="col-12 lg:col-6 xl:col-6">
                         <span><b>Descripcion :</b></span>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" [(ngModel)]="unidadDestino">
                     </div>
-                    <div class="col-12 lg:col-6 xl:col-3">
+                    <div class="col-12 lg:col-6 xl:col-6">
                         <span><b></b></span>
-                        <button class="btn btn-primary"  style="width: 100%;">Registrar</button>
+                        <button class="btn btn-primary"  style="width: 100%;" (click)="Insertsector()"  [disabled]="DisabledUpdate">Registrar</button>
                     </div>
-                    <div class="col-12 lg:col-6 xl:col-3">
+                    <div class="col-12 lg:col-6 xl:col-6">
                         <span><b></b></span>
-                        <button class="btn btn-danger" style="width: 100%;">Registrar</button>
+                        <button class="btn btn-danger" style="width: 100%;" (click)="Actualizarsector()" [disabled]="!DisabledUpdate">Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -49,17 +49,23 @@
     <div class="col-12 lg:col-6 xl:col-6">
         <div class="card">
 
-            <p-table [value]="SectorData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '100rem' }"
+            <p-table [value]="UnidadMedidaData" [paginator]="true" [rows]="5" #dt1  [globalFilterFields]="['unidadMedidad','unidadDestino']"
                 [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm">
-                <ng-template pTemplate="caption"  >
-                    <div class="text-center" style="color: white;">
-                        Lista de unidad de medida
+                <ng-template pTemplate="caption">
+                    <div class="flex">
+                       <span style="color: white;"> Lista de unidad de medida</span>
+                        <span class="ml-auto">
+                            <input class="form-control" type="text" [(ngModel)]="searchValue"
+                            (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar Unidad Medida" />
+                        </span>
                     </div>
                 </ng-template>
+
                 <ng-template pTemplate="header">
                     <tr>
                         <th class="text-center" style="width: 3rem;">#</th>
-                        <th class="text-center" style="width: 25rem;">Sector</th>
+                        <th class="text-center" style="width: 25rem;">Unidad de Medida</th>
+                        <th class="text-center" style="width: 20rem;">Descripcion</th>
                         <th class="text-center" style="width: 20rem;"></th>
                     </tr>
                 </ng-template>
@@ -68,13 +74,15 @@
                         <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
                             <b>{{rowIndex + 1}}</b>
                         </td>
-
                         <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                            {{row.ProveedorName}}</td>
+                            {{row.unidadMedidad}}</td>
                         <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                            {{row.ProductName}}</td>
-
-
+                            {{row.unidadDestino}}</td>
+                        <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                                <button style="border-radius: 50%;background: blueviolet; border: 1px solid blueviolet;color:  white;" (click)="SelectionItem(row)" >
+                                    <li class="pi pi-pencil"></li>
+                                </button>
+                        </td>
                 </ng-template>
             </p-table>
         </div>
@@ -83,3 +91,17 @@
 </div>
 
 
+<p-toast position="bottom-center" key="Notificacion" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column align-items-start" style="flex: 1">
+            <div class="flex align-items-center gap-2">
+                <span class="font-bold text-900">
+                    {{ message.summary }}
+                </span>
+            </div>
+            <div class="font-medium text-lg my-3 text-900">
+                {{ message.detail }}
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
