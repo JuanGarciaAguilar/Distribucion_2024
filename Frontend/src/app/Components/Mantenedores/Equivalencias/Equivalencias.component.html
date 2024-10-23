@@ -17,7 +17,7 @@
     <div class="card">
         <p-table [value]="EquivalenciaData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '100rem' }"
             [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm">
-            <ng-template pTemplate="caption"  >
+            <ng-template pTemplate="caption">
                 <div class="text-center" style="color: white;">
                     Lista de equivalencias
                 </div>
@@ -40,15 +40,175 @@
                     </td>
 
                     <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                        {{row.ProveedorName}}</td>
+                        {{row.productName}}
+                    </td>
                     <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                        {{row.ProductName}}</td>
+                        <span *ngFor="let equi of row.UnidadBaseData">
+                            <div class="row" style="padding-bottom: 5px;"> <p-chip label="{{equi.unidadBase}}" /></div>
+                        </span>
+                    </td>
                     <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                        {{row.cantidadCompra}}</td>
+                        <span *ngFor="let equi of row.UnidadBaseData">
+                            <div class="row" style="padding-bottom: 5px;"> <p-chip label="{{equi.unidadDestino}}" />
+                            </div>
+                        </span>
+                    </td>
                     <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                        {{row.unidadMedida}}</td>
+                        <span *ngFor="let equi of row.UnidadBaseData">
+                            <div class="row" style="padding-bottom: 5px;"> <p-chip label="{{equi.cantidadObjetos}}" />
+                            </div>
+                        </span>
+                    </td>
+                    <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                        <span *ngFor="let equi of row.UnidadBaseData">
+                            <div class="row" style="padding-bottom: 5px;"> <p-chip label="{{equi.fleteUnitario}}" />
+                            </div>
+                        </span>
+                    </td>
+                    <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                        <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;"
+                            (click)="SelectedEquivalenciasItem(row)">
+                            <li class="pi pi-eye"></li>
+                        </button>
+                    </td>
             </ng-template>
         </p-table>
     </div>
 
 </div>
+
+
+<p-dialog [closable]="false" header="Equivalencia de Producto" [modal]="true" [(visible)]="EquivalenciasModal"
+    [style]="{ width: '60rem' }">
+
+    <div class="container">
+        <div class="grid">
+
+
+
+            <div class="col-12 lg:col-6 xl:col-12">
+                <p-table [value]="EquivalenciasArrayData" [paginator]="true" [rows]="5" #dt1
+                    [globalFilterFields]="['insumo','userId']" [tableStyle]="{ 'min-width': '50rem' }"
+                    [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm">
+                    <ng-template pTemplate="caption">
+                        <div class="flex">
+                            <span style="color: white;">Lista de Gastos</span>
+                            <span class="ml-auto">
+                                <input class="form-control" type="text" [(ngModel)]="searchValue"
+                                    (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                    placeholder="Buscar Gasto" />
+                            </span>
+                        </div>
+                    </ng-template>
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="text-center" style="width: 3rem;">#</th>
+                            <th class="text-center" style="width: 15rem;">Unidad Base</th>
+                            <th class="text-center" style="width: 15rem;">Unidad Destino</th>
+                            <th class="text-center" style="width: 15rem;">Cantidad Unidades</th>
+                            <th class="text-center" style="width: 15rem;">Flete Unitario</th>
+                            <th class="text-center" style="width: 15rem;"></th>
+                            <th class="text-center" style="width: 15rem;"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
+                        <tr>
+                            <td class="text-center"
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
+                                <b>{{rowIndex + 1}}</b>
+                            </td>
+                            <td class="text-center"
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
+                                {{row.unidadBase }}</td>
+                            <td class="text-center"
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
+                                {{row.unidadDestino }}</td>
+                            <td class="text-center"
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
+                                {{row.cantidadObjetos}}</td>
+                            <td class="text-center"
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
+                                {{row.fleteUnitario}}</td>
+                            <td class="text-center"
+                                style="border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
+                                <button (click)="SelectItemArray(row)"
+                                    style="border-radius: 50%;background: blue; border: 1px solid bluered;color:  white;">
+                                    <li class="pi pi-pencil"></li>
+                                </button>
+                            </td>
+                            <td class="text-center"
+                                style="border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
+                                <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;"
+                                    (click)="DeleteItem(row)">
+                                    <li class="pi pi-trash"></li>
+                                </button>
+                            </td>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="7">No hay datos.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-12" style="padding: 0px;">
+                <p-divider align="center" type="dotted">
+                    <b>Datos de la Equivalencia</b>
+                </p-divider>
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 20px;">
+                <span><b>Unidad Base</b></span>
+                <p-dropdown [options]="listaUnidadMedida" [filter]="true" filterBy="unidadMedidad" [(ngModel)]="UnidadBaseSelected" appendTo="body"
+                    optionLabel="unidadMedidad" [showClear]="true" placeholder="Seleccione unidad base" />
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 20px;">
+                <span><b>Unidad Destino</b></span>
+                <p-dropdown [options]="listaUnidadMedidadestino" [filter]="true" filterBy="unidadMedidad" appendTo="body"
+                    [(ngModel)]="unidadDestinoSelect" optionLabel="unidadMedidad" [showClear]="true"
+                    placeholder="Seleccione unidad destino" />
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-2" style="padding-top: 20px;">
+                <span><b>Cant. Unid.</b></span>
+                 <input type="number" class="form-control" [(ngModel)]="cantObj">
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-2" style="padding-top: 20px;">
+                <span><b>Flete Unitario</b></span>
+                 <input type="number" class="form-control" [(ngModel)]="fleteUnit">
+            </div>
+            <div class="col-12 lg:col-6 xl:col-1" style="padding-top: 20px;">
+
+                <button class="btn btn-primary" style="width: 100%;" [hidden]="b_Insert" (click)="InsertEquivalenciaArray()">
+                    <li class="pi pi-save"></li>
+                </button>
+                <button class="btn btn-primary" style="width: 100%;" [hidden]="b_Update">
+                    <li class="pi pi-pencil"></li>
+                </button>
+
+            </div>
+            <div class="col-12 lg:col-6 xl:col-1" style="padding-top: 20px;">
+
+                <button class="btn btn-danger" style="width: 100%;">
+                    <li class="pi pi-times"></li>
+                </button>
+
+            </div>
+            <div class="col-12 lg:col-6 xl:col-12" style="padding: 0px;">
+                <p-divider align="center" type="dotted"> </p-divider>
+            </div>
+            <div class="col-12 lg:col-6 xl:col-6" style="padding-top: 35px;">
+                <button class="btn btn-info" style="width: 100%;">Guardar</button>
+            </div>
+
+
+            <div class="col-12 lg:col-6 xl:col-6" style="padding-top: 35px;">
+                <button class="btn btn-danger" style="width: 100%;" (click)="clearfiels();EquivalenciasModal = false">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</p-dialog>

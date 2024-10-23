@@ -17,6 +17,9 @@ import { ProveedoresComponent } from './Proveedores/Proveedores.component';
 import { SectorComponent } from './Sector/Sector.component';
 import { UnidadMedidaComponent } from './UnidadMedida/UnidadMedida.component';
 import { UsuariosComponent } from './Usuarios/Usuarios.component';
+import { ChipModule } from 'primeng/chip';
+import { DividerModule } from 'primeng/divider';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -27,14 +30,17 @@ import { UsuariosComponent } from './Usuarios/Usuarios.component';
         InputTextModule,
         FormsModule,
         DialogModule,
+        ChipModule,
         ReactiveFormsModule,
         DropdownModule,
         ToastModule,
+        DividerModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
         ProductosComponent,
         ClientesComponent,
+
         CuidadComponent,
         EquivalenciasComponent,
         ProveedoresComponent,

@@ -230,11 +230,9 @@ export class ConfirmarComprasComponent implements OnInit {
     }
 
     ConfirmarCompras() {
-        console.log('coomprass', this.ComprasTemp);
-        console.log('selected', this.ComprasDetalleSelected);
+
         const Data = new CompraModel();
 
-        debugger
         for (let row of this.ComprasTemp) {
             Data.compraId = row.compraId;
             Data.compraStatus = row.compraStatus;
@@ -246,7 +244,7 @@ export class ConfirmarComprasComponent implements OnInit {
             Data.totalCompra = row.totalCompra;
             Data.usuarioId = row.usuarioId;
 
-            
+
             for (let child of row.compraDetalleTabla) {
                 for (let selected of this.ComprasDetalleSelected) {
                     if (selected.compraEstado == 2) {
@@ -254,7 +252,7 @@ export class ConfirmarComprasComponent implements OnInit {
                     } else{
                         child.compraEstado = 2
                     }
-                   
+
                 }
                 Data.compraDetalleTabla.push(child);
             }
