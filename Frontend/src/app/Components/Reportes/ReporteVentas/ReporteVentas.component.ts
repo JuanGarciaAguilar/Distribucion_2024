@@ -12,7 +12,7 @@ import { VentasService } from 'src/app/Shared/Service/ventas.service';
 export class ReporteVentasComponent implements OnInit {
   items: MenuItem[] = [
     { icon: 'pi pi-home', route: '/' },
-    { label: 'Reporte de Compras' },
+    { label: 'Reporte de Ventas' },
 ];
 private _VentasService = inject(VentasService);
 private _ProductosService = inject(ProductosService);

@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
+import { DividerModule } from 'primeng/divider';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @NgModule({
     declarations: [HistorialGastosComponent, MantenimientoGastosComponent],
@@ -19,8 +21,10 @@ import { ToastModule } from 'primeng/toast';
         CommonModule,
         GastosRoutingModule,
         BreadcrumbModule,
+        ConfirmPopupModule,
         TableModule,
         ButtonModule,
+        DividerModule,
         InputTextModule,
         FormsModule,
         DialogModule,

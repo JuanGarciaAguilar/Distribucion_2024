@@ -57,7 +57,7 @@
                             </button>
                         </td>
                         <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
-                            <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;">
+                            <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;" (click)="DeleteConfirm($event,row)">
                                 <li class="pi pi-trash"></li>
                             </button>
                         </td>
@@ -73,36 +73,39 @@
 </div>
 
 
-<p-dialog [closable]="false" header="Editar gasto - Monto Total de Gasto: {{GastoTotal}}" [modal]="true" [(visible)]="UpdateGastoModal"
-    [style]="{ width: '60rem' }">
+<p-dialog [closable]="false" header="Editar gasto - Monto Total de Gasto: {{GastoTotal}}" [modal]="true"
+    [(visible)]="UpdateGastoModal" [style]="{ width: '60rem' }">
 
     <div class="container">
-        <div class="grid">
+        <div class="grid" [formGroup]="_FormGroup">
 
 
             <div class="col-12 lg:col-6 xl:col-6">
                 <b>Desde:</b>
-                <input type="date"  
-                    class="form-control" [ngModel]="fInicioModal | date:'yyyy-MM-dd'"
-                    [value]="fInicioModal | date:'yyyy-MM-dd'">
+                <input type="date" class="form-control" [ngModel]="fInicioModal | date:'yyyy-MM-dd'"
+                    formControlName="fInicioModal" [value]="fInicioModal | date:'yyyy-MM-dd'">
             </div>
 
             <div class="col-12 lg:col-6 xl:col-6">
                 <b>Hasta:</b>
-                <input type="date"  
-                    class="form-control" [ngModel]="fFinModal | date:'yyyy-MM-dd'"
-                    [value]="fFinModal | date:'yyyy-MM-dd'">
+                <input type="date" class="form-control" [ngModel]="fFinModal | date:'yyyy-MM-dd'"
+                    formControlName="fFinModal" [value]="fFinModal | date:'yyyy-MM-dd'">
             </div>
 
             <div class="col-12 lg:col-6 xl:col-12">
-                <p-table [value]="gastoDetalleArray" [paginator]="true" [rows]="5"
+                <p-table [value]="gastoDetalleArray" [paginator]="true" [rows]="5" #dt1 [globalFilterFields]="['insumo','userId']"
                     [tableStyle]="{ 'min-width': '50rem' }" [rowsPerPageOptions]="[5, 10, 20]"
                     styleClass="p-datatable-gridlines" class="p-datatable-sm">
                     <ng-template pTemplate="caption">
-                        <div class="text-center" style="color: white;">
-                            Lista de Gastos
+                        <div class="flex">
+                           <span style="color: white;">Lista de Gastos</span>
+                            <span class="ml-auto">
+                                <input class="form-control" type="text" [(ngModel)]="searchValue"
+                                (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar Gasto" />
+                            </span>
                         </div>
                     </ng-template>
+
                     <ng-template pTemplate="header">
                         <tr>
                             <th class="text-center" style="width: 3rem;">#</th>
@@ -110,35 +113,35 @@
                             <th class="text-center" style="width: 15rem;">Monto</th>
                             <th class="text-center" style="width: 15rem;">Personal</th>
                             <th class="text-center" style="width: 15rem;">Comentario</th>
-                            <th></th>
-                            <th></th>
+                            <th class="text-center" style="width: 15rem;"></th>
+                            <th class="text-center" style="width: 15rem;"></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
                         <tr>
                             <td class="text-center"
-                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
                                 <b>{{rowIndex + 1}}</b>
                             </td>
                             <td class="text-center"
-                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
                                 {{row.insumo }}</td>
                             <td class="text-center"
-                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
                                 {{row.gasto| number:'1.2-2'}}</td>
                             <td class="text-center"
-                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
                                 {{row.userId}}</td>
                             <td class="text-center"
-                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
                                 {{row.comentario}}</td>
-                            <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                            <td class="text-center" style="border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
                                 <button (click)="SelectionItemDetalle(row)"
                                     style="border-radius: 50%;background: blue; border: 1px solid bluered;color:  white;">
                                     <li class="pi pi-pencil"></li>
                                 </button>
                             </td>
-                            <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                            <td class="text-center" style="border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
                                 <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;"
                                     (click)="DeleteItem(row)">
                                     <li class="pi pi-trash"></li>
@@ -153,11 +156,15 @@
                 </p-table>
             </div>
 
-
-            <div class="col-12 lg:col-6 xl:col-2">
+            <div class="col-12 lg:col-6 xl:col-12" style="padding: 0px;">
+                <p-divider align="center" type="dotted">
+                    <b>Datos del gasto</b>
+                </p-divider>
+            </div>
+            <div class="col-12 lg:col-6 xl:col-2" style="padding-top: 0px;padding-bottom: 0px;">
                 <b>Tipo de Gasto :</b>
                 <select class="form-control" [(ngModel)]="newInsumo" (change)="CheckPersonal()"
-                    aria-placeholder="Seleccione tipo de gasto">
+                    formControlName="newInsumo" aria-placeholder="Seleccione tipo de gasto">
                     <option value="Diesel">Diesel</option>
                     <option value="Personal">Personal</option>
                     <option value="Casa">Administrador</option>
@@ -165,37 +172,47 @@
                     <option value="Otros">Otros</option>
                 </select>
             </div>
-            <div class="col-12 lg:col-6 xl:col-2">
+            <div class="col-12 lg:col-6 xl:col-2" style="padding-top: 0px;padding-bottom: 0px;">
                 <b>Monto :</b>
-                <input type="number" class="form-control" [(ngModel)]="newMonto" placeholder="Ingrese Monto">
+                <input type="number" class="form-control" [(ngModel)]="newMonto" placeholder="Ingrese Monto"
+                    formControlName="newMonto">
             </div>
 
-            <div class="col-12 lg:col-6 xl:col-3" [hidden] = "E_Personal">
+            <div class="col-12 lg:col-6 xl:col-3" [hidden]="E_Personal" style="padding-top: 0px;padding-bottom: 0px;">
                 <b>Personal :</b>
-                <select class="form-control" [(ngModel)]="tPersonal" >
+                <select class="form-control" [(ngModel)]="tPersonal" formControlName="tPersonal">
                     <option *ngFor="let usu of tempusu" value="{{usu.userID}}">{{usu.userID}}</option>
                 </select>
             </div>
 
-            <div class="col-12 lg:col-6 xl:col-3">
+            <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 0px;padding-bottom: 0px;">
                 <b>Comentario :</b>
-                <input class="form-control" type="text" [(ngModel)]="newcomme" >
-            </div>
-            <div class="col-12 lg:col-6 xl:col-2" style="padding-top: 35px;">
-                
-                <button class="btn btn-success" style="width: 100%;" [disabled]="!B_Operation" (click)="addDetalleToArrayTemp()">Añadir</button>
+                <input class="form-control" type="text" [(ngModel)]="newcomme" formControlName="newcomme">
             </div>
 
-            <div class="col-12 lg:col-6 xl:col-4" style="padding-top: 35px;">
+            <div class="col-12 lg:col-6 xl:col-1" style="padding-top: 20px;" >
+
+                <button class="btn btn-primary" style="width: 100%;" [disabled]="!_FormGroup.valid"  [hidden]="B_Insert"
+                    (click)="addDetalleToArrayTemp()"> <li class="pi pi-save"></li></button>
+                    <button class="btn btn-primary" style="width: 100%;" [disabled]="!_FormGroup.valid"  [hidden]="B_Update"
+                    (click)="UpdateGastosArray()"> <li class="pi pi-pencil"></li></button>
+
+            </div>
+            <div class="col-12 lg:col-6 xl:col-1" style="padding-top: 20px;"  >
+
+                <button class="btn btn-danger" style="width: 100%;" (click)="clearFields()"> <li class="pi pi-times"></li></button>
+
+            </div>
+            <div class="col-12 lg:col-6 xl:col-12" style="padding: 0px;">
+                <p-divider align="center" type="dotted">                 </p-divider>
+            </div>
+            <div class="col-12 lg:col-6 xl:col-6" style="padding-top: 35px;">
                 <button class="btn btn-info" style="width: 100%;" (click)="updateData()">Guardar</button>
             </div>
-            <div class="col-12 lg:col-6 xl:col-4" style="padding-top: 35px;">
-                <button class="btn btn-primary" style="width: 100%;" [disabled]="B_Operation">Actualizar</button>
-            </div>
 
 
-            <div class="col-12 lg:col-6 xl:col-4" style="padding-top: 35px;">
-                <button class="btn btn-danger" style="width: 100%;" (click)="clearFields()">Cancelar</button>
+            <div class="col-12 lg:col-6 xl:col-6" style="padding-top: 35px;">
+                <button class="btn btn-danger" style="width: 100%;" (click)="clearFields();UpdateGastoModal=false">Cancelar</button>
             </div>
         </div>
     </div>
@@ -215,3 +232,14 @@
         </div>
     </ng-template>
 </p-toast>
+<p-confirmPopup #confirmPopupRef>
+    <ng-template pTemplate="headless" let-message let-test>
+        <div class="border-round p-3">
+            <span>{{ message.message }}</span>
+            <div class="flex align-items-center gap-2 mt-3">
+                <button class="btn btn-primary" (click)="deleteGastoById()">Confirmar</button>
+                <button class="btn btn-danger" (click)="NotConfirm()">Cancelar</button>
+            </div>
+        </div>
+    </ng-template>
+</p-confirmPopup>

@@ -43,7 +43,7 @@ export class ReporteGastosComponent implements OnInit {
 
     this._ReportesService
       .getReporteGastos(this.repGastosFechaInicio, this.repGastosFechaFin).subscribe((data:any) => {
-;
+
           this.reporteGastosData = data;
             for(let row of data){
                 this.totalDiesel = this.totalDiesel + row.diesel;

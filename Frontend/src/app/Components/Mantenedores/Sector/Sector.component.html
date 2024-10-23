@@ -28,16 +28,16 @@
                 <div class="grid" style="padding-top: 10px;">
                     <div class="col-12 lg:col-6 xl:col-12">
                         <span><b>Nombres :</b></span>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" [(ngModel)]="SectorName">
                     </div>
 
-                    <div class="col-12 lg:col-6 xl:col-3">
+                    <div class="col-12 lg:col-6 xl:col-6">
                         <span><b></b></span>
-                        <button class="btn btn-primary"  style="width: 100%;">Registrar</button>
+                        <button class="btn btn-primary"  style="width: 100%;"  [disabled]="update" (click)="Insertsector()">Registrar</button>
                     </div>
-                    <div class="col-12 lg:col-6 xl:col-3">
+                    <div class="col-12 lg:col-6 xl:col-6">
                         <span><b></b></span>
-                        <button class="btn btn-danger" style="width: 100%;">Registrar</button>
+                        <button class="btn btn-danger" style="width: 100%;"  [disabled]="!update" (click)="Actualizarsector()">Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -46,17 +46,22 @@
     <div class="col-12 lg:col-6 xl:col-6">
         <div class="card">
 
-            <p-table [value]="SectorData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '100rem' }"
+            <p-table [value]="SectorData" [paginator]="true" [rows]="5" #dt1  [globalFilterFields]="['sectorName']"
                 [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm">
                 <ng-template pTemplate="caption"  >
-                    <div class="text-center" style="color: white;">
-                        Lista de proveedores
-                    </div>
+                    <div class="flex">
+                        <span style="color: white;"> Lista de proveedores</span>
+                         <span class="ml-auto">
+                             <input class="form-control" type="text" [(ngModel)]="searchValue"
+                             (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar Sector" />
+                         </span>
+                     </div>
                 </ng-template>
+
                 <ng-template pTemplate="header">
                     <tr>
                         <th class="text-center" style="width: 3rem;">#</th>
-                        <th class="text-center" style="width: 25rem;">Sector</th>
+                        <th class="text-center" style="width: 25rem;">Descripcion</th>
                         <th class="text-center" style="width: 20rem;"></th>
                     </tr>
                 </ng-template>
@@ -67,10 +72,12 @@
                         </td>
 
                         <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                            {{row.ProveedorName}}</td>
-                        <td class="text-center" style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                            {{row.ProductName}}</td>
-
+                            {{row.sectorName}}</td>
+                            <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                                <button style="border-radius: 50%;background: blueviolet; border: 1px solid blueviolet;color:  white;" (click)="seleccionsector(row)" >
+                                    <li class="pi pi-pencil"></li>
+                                </button>
+                            </td>
 
                 </ng-template>
             </p-table>
@@ -80,3 +87,17 @@
 </div>
 
 
+<p-toast position="bottom-center" key="Notificacion" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column align-items-start" style="flex: 1">
+            <div class="flex align-items-center gap-2">
+                <span class="font-bold text-900">
+                    {{ message.summary }}
+                </span>
+            </div>
+            <div class="font-medium text-lg my-3 text-900">
+                {{ message.detail }}
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
