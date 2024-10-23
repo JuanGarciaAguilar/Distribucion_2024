@@ -16,63 +16,202 @@
 
 <div style="padding-top: 5px;">
     <div class="card">
-    <div class="container">
-        <p-table [value]="HistorialGastos" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
-        [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-striped" class="p-datatable-sm">
-        <ng-template pTemplate="caption">
-            <div class="text-center" style="color: white;">
-                Historial de gastos registrados
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Fecha Inicio</th>
-                <th class="text-center">Fecha Fin</th>
-                <th class="text-center">Monto</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
-            <tr>
-                <td class="text-center"
-                    style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                    <b>{{rowIndex + 1}}</b>
-                </td>
-                <td class="text-center"
-                    style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                    {{row.fechaInicio| date:'yyyy-MM-dd' }}</td>
-                <td class="text-center"
-                    style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                    {{row.fechaFinal| date:'yyyy-MM-dd'}}</td>
-                <td class="text-center"
-                    style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
-                    {{row.gastoTotal | number:'1.2-2'}}</td>
+        <div class="container">
+            <p-table [value]="HistorialGastos" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
+                [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-striped" class="p-datatable-sm">
+                <ng-template pTemplate="caption">
+                    <div class="text-center" style="color: white;">
+                        Historial de gastos registrados
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Fecha Inicio</th>
+                        <th class="text-center">Fecha Fin</th>
+                        <th class="text-center">Monto</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
+                    <tr>
+                        <td class="text-center"
+                            style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                            <b>{{rowIndex + 1}}</b>
+                        </td>
+                        <td class="text-center"
+                            style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                            {{row.fechaInicio| date:'yyyy-MM-dd' }}</td>
+                        <td class="text-center"
+                            style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                            {{row.fechaFinal| date:'yyyy-MM-dd'}}</td>
+                        <td class="text-center"
+                            style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                            {{row.gastoTotal | number:'1.2-2'}}</td>
 
-                <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
-                    <button style="border-radius: 50%;background: blue; border: 1px solid blue;color:  white;" (click)="OpenUpdateGastosModal(row)">
-                        <li class="pi pi-pencil"></li>
-                    </button>
-                </td>
-                <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
-                    <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;"  >
-                        <li class="pi pi-trash"></li>
-                    </button>
-                </td>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-            <tr>
-                <td colspan="7">No hay datos.</td>
-            </tr>
-        </ng-template>
-    </p-table>
-    </div>
+                        <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                            <button style="border-radius: 50%;background: blue; border: 1px solid blue;color:  white;"
+                                (click)="OpenUpdateGastosModal(row)">
+                                <li class="pi pi-pencil"></li>
+                            </button>
+                        </td>
+                        <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                            <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;">
+                                <li class="pi pi-trash"></li>
+                            </button>
+                        </td>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">No hay datos.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
     </div>
 </div>
 
 
-<p-dialog [closable]="false" [modal]="true" [(visible)]="UpdateGastoModal" [style]="{ width: '40rem' }">
+<p-dialog [closable]="false" header="Editar gasto - Monto Total de Gasto: {{GastoTotal}}" [modal]="true" [(visible)]="UpdateGastoModal"
+    [style]="{ width: '60rem' }">
+
+    <div class="container">
+        <div class="grid">
 
 
+            <div class="col-12 lg:col-6 xl:col-6">
+                <b>Desde:</b>
+                <input type="date"  
+                    class="form-control" [ngModel]="fInicioModal | date:'yyyy-MM-dd'"
+                    [value]="fInicioModal | date:'yyyy-MM-dd'">
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-6">
+                <b>Hasta:</b>
+                <input type="date"  
+                    class="form-control" [ngModel]="fFinModal | date:'yyyy-MM-dd'"
+                    [value]="fFinModal | date:'yyyy-MM-dd'">
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-12">
+                <p-table [value]="gastoDetalleArray" [paginator]="true" [rows]="5"
+                    [tableStyle]="{ 'min-width': '50rem' }" [rowsPerPageOptions]="[5, 10, 20]"
+                    styleClass="p-datatable-gridlines" class="p-datatable-sm">
+                    <ng-template pTemplate="caption">
+                        <div class="text-center" style="color: white;">
+                            Lista de Gastos
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="text-center" style="width: 3rem;">#</th>
+                            <th class="text-center" style="width: 15rem;">Tipo Gasto</th>
+                            <th class="text-center" style="width: 15rem;">Monto</th>
+                            <th class="text-center" style="width: 15rem;">Personal</th>
+                            <th class="text-center" style="width: 15rem;">Comentario</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
+                        <tr>
+                            <td class="text-center"
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                                <b>{{rowIndex + 1}}</b>
+                            </td>
+                            <td class="text-center"
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                                {{row.insumo }}</td>
+                            <td class="text-center"
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                                {{row.gasto| number:'1.2-2'}}</td>
+                            <td class="text-center"
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                                {{row.userId}}</td>
+                            <td class="text-center"
+                                style="border-right: 1px solid #71c7c7;border-bottom: 1px solid #71c7c7;">
+                                {{row.comentario}}</td>
+                            <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                                <button (click)="SelectionItemDetalle(row)"
+                                    style="border-radius: 50%;background: blue; border: 1px solid bluered;color:  white;">
+                                    <li class="pi pi-pencil"></li>
+                                </button>
+                            </td>
+                            <td class="text-center" style="border-bottom: 1px solid #71c7c7;">
+                                <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;"
+                                    (click)="DeleteItem(row)">
+                                    <li class="pi pi-trash"></li>
+                                </button>
+                            </td>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="7">No hay datos.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+
+            <div class="col-12 lg:col-6 xl:col-2">
+                <b>Tipo de Gasto :</b>
+                <select class="form-control" [(ngModel)]="newInsumo" (change)="CheckPersonal()"
+                    aria-placeholder="Seleccione tipo de gasto">
+                    <option value="Diesel">Diesel</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Casa">Administrador</option>
+                    <option value="Sunat">Sunat</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
+            <div class="col-12 lg:col-6 xl:col-2">
+                <b>Monto :</b>
+                <input type="number" class="form-control" [(ngModel)]="newMonto" placeholder="Ingrese Monto">
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-3" [hidden] = "E_Personal">
+                <b>Personal :</b>
+                <select class="form-control" [(ngModel)]="tPersonal" >
+                    <option *ngFor="let usu of tempusu" value="{{usu.userID}}">{{usu.userID}}</option>
+                </select>
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-3">
+                <b>Comentario :</b>
+                <input class="form-control" type="text" [(ngModel)]="newcomme" >
+            </div>
+            <div class="col-12 lg:col-6 xl:col-2" style="padding-top: 35px;">
+                
+                <button class="btn btn-success" style="width: 100%;" [disabled]="!B_Operation" (click)="addDetalleToArrayTemp()">Añadir</button>
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-4" style="padding-top: 35px;">
+                <button class="btn btn-info" style="width: 100%;" (click)="updateData()">Guardar</button>
+            </div>
+            <div class="col-12 lg:col-6 xl:col-4" style="padding-top: 35px;">
+                <button class="btn btn-primary" style="width: 100%;" [disabled]="B_Operation">Actualizar</button>
+            </div>
+
+
+            <div class="col-12 lg:col-6 xl:col-4" style="padding-top: 35px;">
+                <button class="btn btn-danger" style="width: 100%;" (click)="clearFields()">Cancelar</button>
+            </div>
+        </div>
+    </div>
 </p-dialog>
+
+<p-toast position="bottom-center" key="Notificacion" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column align-items-start" style="flex: 1">
+            <div class="flex align-items-center gap-2">
+                <span class="font-bold text-900">
+                    {{ message.summary }}
+                </span>
+            </div>
+            <div class="font-medium text-lg my-3 text-900">
+                {{ message.detail }}
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
