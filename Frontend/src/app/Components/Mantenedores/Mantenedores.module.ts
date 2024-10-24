@@ -19,6 +19,8 @@ import { UnidadMedidaComponent } from './UnidadMedida/UnidadMedida.component';
 import { UsuariosComponent } from './Usuarios/Usuarios.component';
 import { ChipModule } from 'primeng/chip';
 import { DividerModule } from 'primeng/divider';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
     imports: [
@@ -30,7 +32,9 @@ import { DividerModule } from 'primeng/divider';
         InputTextModule,
         FormsModule,
         DialogModule,
+        ConfirmPopupModule,
         ChipModule,
+        MessagesModule,
         ReactiveFormsModule,
         DropdownModule,
         ToastModule,

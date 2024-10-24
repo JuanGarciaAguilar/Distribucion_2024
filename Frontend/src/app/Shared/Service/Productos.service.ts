@@ -49,4 +49,9 @@ export class ProductosService {
   getListaEquivalencia(): any {
     return this._http.get(GlobalConstants.Producto + 'Equivalencia');
   }
+
+  EliminarEquivalencia(EquivalenciaId:number): any {
+    return this._http.get(GlobalConstants.Producto + 'DeleteEquivalencia/' + EquivalenciaId, this._auth.getHeader());
+  }
+
 }

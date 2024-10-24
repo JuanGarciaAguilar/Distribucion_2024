@@ -1,8 +1,4 @@
 export class GlobalConstants {
-    //? -- ENTORNO IIS SERVIDOR 10.0.100.107
-    //  static API: string = 'http://10.0.100.107/Control_Interno_Api/api/';
-   // static DOMINIO : string = 'http://10.0.100.107/Control_Interno_Api/';
-    //? ---------------------------------------------
 
     //? ---------- ENTORNO IIS LOCAL -------------------
     // static API: string = 'http://localhost:9595/api/';
@@ -10,13 +6,13 @@ export class GlobalConstants {
     //? -------------------------------------------------
 
     //? -- -------ENTORNO DESARROLLO--------------------
-   // static API: string = 'https://localhost:44390/api/';
-   // static DOMINIO: string = 'https://localhost:44390/';
+    //static API: string = 'http://localhost:51628/api/';
+    //static DOMINIO: string = 'http://localhost:51628/';
     //? ------------------------------------------------
  //? -- -------ENTORNO produccion--------------------
     protected API: string = 'http://distribuye-dis-go-api.azurewebsites.net/api/';
     static API: string = 'http://distribuye-dis-go-api.azurewebsites.net/api/';
- ///? ------------------------------------------------
+ //? ------------------------------------------------
 
 
  public static Usuario: string = GlobalConstants.API + 'Usuario/';
@@ -37,7 +33,3 @@ export class GlobalConstants {
     public static UnidadMedida: string = GlobalConstants.API + 'UnidadMedida/';
 }
 
-
-
-///http://10.0.100.107/CI/#/auth/login
-///http://10.0.100.107/CI_API/swagger/index.html

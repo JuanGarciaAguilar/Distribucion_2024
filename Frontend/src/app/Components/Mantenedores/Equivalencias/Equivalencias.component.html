@@ -15,22 +15,27 @@
 </p-breadcrumb>
 <div style="padding-top: 5px;">
     <div class="card">
-        <p-table [value]="EquivalenciaData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '100rem' }"
-            [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm">
+        <p-table [value]="EquivalenciaData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
+            [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-gridlines" class="p-datatable-sm"  #dt1 [globalFilterFields]="['productName']">
             <ng-template pTemplate="caption">
-                <div class="text-center" style="color: white;">
-                    Lista de equivalencias
+
+                <div class="flex">
+                    <span style="color: white;">Lista de equivalencias</span>
+                    <span class="ml-auto">
+                        <input class="form-control" type="text" [(ngModel)]="searchValue"
+                            (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar producto" />
+                    </span>
                 </div>
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
                     <th class="text-center" style="width: 3rem;">#</th>
-                    <th class="text-center" style="width: 25rem;">Producto</th>
-                    <th class="text-center" style="width: 30rem;">Unidad Base</th>
-                    <th class="text-center" style="width: 20rem;">Unidad Destino</th>
-                    <th class="text-center" style="width: 20rem;">Cantidad</th>
-                    <th class="text-center" style="width: 20rem;">Flete</th>
-                    <th class="text-center" style="width: 20rem;"></th>
+                    <th class="text-center" style="width: 20rem;">Producto</th>
+                    <th class="text-center" style="width: 15rem;">Unidad Base</th>
+                    <th class="text-center" style="width: 15rem;">Unidad Destino</th>
+                    <th class="text-center" style="width: 10rem;">Cantidad</th>
+                    <th class="text-center" style="width: 10rem;">Flete</th>
+                    <th class="text-center" style="width: 10rem;"></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
@@ -82,9 +87,15 @@
     [style]="{ width: '60rem' }">
 
     <div class="container">
+        <div class="row">
+            <div class="col">
+                <p-messages [(value)]="ProductoDescripcion" [closable]="false" />
+            </div>
+            
+        </div>
         <div class="grid">
 
-
+           
 
             <div class="col-12 lg:col-6 xl:col-12">
                 <p-table [value]="EquivalenciasArrayData" [paginator]="true" [rows]="5" #dt1
@@ -140,7 +151,7 @@
                             <td class="text-center"
                                 style="border-bottom: 1px solid #71c7c7;padding-top: 2px;padding-bottom: 2px;">
                                 <button style="border-radius: 50%;background: red; border: 1px solid red;color:  white;"
-                                    (click)="DeleteItem(row)">
+                                (click)="DeleteConfirm($event,row)">
                                     <li class="pi pi-trash"></li>
                                 </button>
                             </td>
@@ -159,41 +170,43 @@
                 </p-divider>
             </div>
 
-            <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 20px;">
+            <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 0px;">
                 <span><b>Unidad Base</b></span>
-                <p-dropdown [options]="listaUnidadMedida" [filter]="true" filterBy="unidadMedidad" [(ngModel)]="UnidadBaseSelected" appendTo="body"
-                    optionLabel="unidadMedidad" [showClear]="true" placeholder="Seleccione unidad base" />
+                <p-dropdown [options]="listaUnidadMedida" [filter]="true" filterBy="unidadMedidad"
+                    [(ngModel)]="UnidadBaseSelected" appendTo="body" optionLabel="unidadMedidad" [showClear]="true"
+                    placeholder="Seleccione unidad base" />
             </div>
 
-            <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 20px;">
+            <div class="col-12 lg:col-6 xl:col-3" style="padding-top: 0px;">
                 <span><b>Unidad Destino</b></span>
-                <p-dropdown [options]="listaUnidadMedidadestino" [filter]="true" filterBy="unidadMedidad" appendTo="body"
-                    [(ngModel)]="unidadDestinoSelect" optionLabel="unidadMedidad" [showClear]="true"
+                <p-dropdown [options]="listaUnidadMedidadestino" [filter]="true" filterBy="unidadMedidad"
+                    appendTo="body" [(ngModel)]="unidadDestinoSelect" optionLabel="unidadMedidad" [showClear]="true"
                     placeholder="Seleccione unidad destino" />
             </div>
 
-            <div class="col-12 lg:col-6 xl:col-2" style="padding-top: 20px;">
+            <div class="col-12 lg:col-6 xl:col-2" style="padding-top: 0px;">
                 <span><b>Cant. Unid.</b></span>
-                 <input type="number" class="form-control" [(ngModel)]="cantObj">
+                <input type="number" class="form-control" [(ngModel)]="cantObj">
             </div>
 
-            <div class="col-12 lg:col-6 xl:col-2" style="padding-top: 20px;">
+            <div class="col-12 lg:col-6 xl:col-2" style="padding-top: 0px;">
                 <span><b>Flete Unitario</b></span>
-                 <input type="number" class="form-control" [(ngModel)]="fleteUnit">
+                <input type="number" class="form-control" [(ngModel)]="fleteUnit">
             </div>
             <div class="col-12 lg:col-6 xl:col-1" style="padding-top: 20px;">
 
-                <button class="btn btn-primary" style="width: 100%;" [hidden]="b_Insert" (click)="InsertEquivalenciaArray()">
+                <button class="btn btn-primary" style="width: 100%;" [hidden]="b_Insert"
+                    (click)="InsertEquivalenciaArray()">
                     <li class="pi pi-save"></li>
                 </button>
-                <button class="btn btn-primary" style="width: 100%;" [hidden]="b_Update">
+                <button class="btn btn-primary" style="width: 100%;" [hidden]="b_Update" (click)="UpdateItemArray()">
                     <li class="pi pi-pencil"></li>
                 </button>
 
             </div>
             <div class="col-12 lg:col-6 xl:col-1" style="padding-top: 20px;">
 
-                <button class="btn btn-danger" style="width: 100%;">
+                <button class="btn btn-danger" style="width: 100%;"  (click)="clearfiels()">
                     <li class="pi pi-times"></li>
                 </button>
 
@@ -202,13 +215,28 @@
                 <p-divider align="center" type="dotted"> </p-divider>
             </div>
             <div class="col-12 lg:col-6 xl:col-6" style="padding-top: 35px;">
-                <button class="btn btn-info" style="width: 100%;">Guardar</button>
+                <button class="btn btn-primary" style="width: 100%;" (click)="editarProducto()">Guardar</button>
             </div>
 
 
             <div class="col-12 lg:col-6 xl:col-6" style="padding-top: 35px;">
-                <button class="btn btn-danger" style="width: 100%;" (click)="clearfiels();EquivalenciasModal = false">Cancelar</button>
+                <button class="btn btn-danger" style="width: 100%;"
+                    (click)="clearfiels();EquivalenciasModal = false">Cancelar</button>
             </div>
         </div>
     </div>
 </p-dialog>
+
+
+
+<p-confirmPopup #confirmPopupRef>
+    <ng-template pTemplate="headless" let-message let-test>
+        <div class="border-round p-3">
+            <span>{{ message.message }}</span>
+            <div class="flex align-items-center gap-2 mt-3">
+                <button class="btn btn-primary" (click)="DeleteItem()">Confirmar</button>
+                <button class="btn btn-danger" (click)="NotConfirm()">Cancelar</button>
+            </div>
+        </div>
+    </ng-template>
+</p-confirmPopup>
